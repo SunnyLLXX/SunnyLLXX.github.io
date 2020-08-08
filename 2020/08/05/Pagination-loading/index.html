@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
   <title>微信小程序上拉分页渲染刷新 | étoile</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="问题 如何在微信小程序中实现上拉分页渲染刷新上拉加载，获取更多数据主要利用了微信官方文档API中的onReachBottom方法，它表示“页面上拉触底事件的处理函数”，就可以在这请求服务器获取新的数据并且添加到现有数据下面。 1 添加页码以及页容量pagenum代表当前页码，pagesize表示页容量（一页多少条数据），totalpages表示总的页码 &#x2F;**分页渲染的参数 *&#x2F; QueryPar">
+  <meta name="description" content="问题 如何在微信小程序中实现上拉分页渲染刷新">
 <meta property="og:type" content="article">
 <meta property="og:title" content="微信小程序上拉分页渲染刷新">
 <meta property="og:url" content="http://sunnyllxx.github.io/2020/08/05/Pagination-loading/index.html">
 <meta property="og:site_name" content="étoile">
-<meta property="og:description" content="问题 如何在微信小程序中实现上拉分页渲染刷新上拉加载，获取更多数据主要利用了微信官方文档API中的onReachBottom方法，它表示“页面上拉触底事件的处理函数”，就可以在这请求服务器获取新的数据并且添加到现有数据下面。 1 添加页码以及页容量pagenum代表当前页码，pagesize表示页容量（一页多少条数据），totalpages表示总的页码 &#x2F;**分页渲染的参数 *&#x2F; QueryPar">
+<meta property="og:description" content="问题 如何在微信小程序中实现上拉分页渲染刷新">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-05T07:14:21.000Z">
-<meta property="article:modified_time" content="2020-08-07T15:35:18.513Z">
+<meta property="article:modified_time" content="2020-08-08T01:12:14.668Z">
 <meta property="article:author" content="étoile">
 <meta name="twitter:card" content="summary">
   
@@ -197,7 +197,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="问题-如何在微信小程序中实现上拉分页渲染刷新"><a href="#问题-如何在微信小程序中实现上拉分页渲染刷新" class="headerlink" title="问题 如何在微信小程序中实现上拉分页渲染刷新"></a>问题 如何在微信小程序中实现上拉分页渲染刷新</h3><p>上拉加载，获取更多数据主要利用了微信官方文档API中的onReachBottom方法，它表示“页面上拉触底事件的处理函数”，就可以在这请求服务器获取新的数据并且添加到现有数据下面。</p>
+        <h3 id="问题-如何在微信小程序中实现上拉分页渲染刷新"><a href="#问题-如何在微信小程序中实现上拉分页渲染刷新" class="headerlink" title="问题 如何在微信小程序中实现上拉分页渲染刷新"></a>问题 如何在微信小程序中实现上拉分页渲染刷新</h3><a id="more"></a>
+
+<p>上拉加载，获取更多数据主要利用了微信官方文档API中的onReachBottom方法，它表示“页面上拉触底事件的处理函数”，就可以在这请求服务器获取新的数据并且添加到现有数据下面。</p>
 <h4 id="1-添加页码以及页容量"><a href="#1-添加页码以及页容量" class="headerlink" title="1 添加页码以及页容量"></a>1 添加页码以及页容量</h4><p>pagenum代表当前页码，pagesize表示页容量（一页多少条数据），totalpages表示总的页码</p>
 <pre><code>/**分页渲染的参数 */
 QueryParams:{
