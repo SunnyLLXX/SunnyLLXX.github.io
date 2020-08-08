@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>解决hexo博客Cannot find module&#39;chalk&#39;问题 | étoile</title>
+  <title>微信小程序上拉分页渲染刷新 | étoile</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="如何解决使用hexo命令后出现Cannot find module ‘chalk’问题">
+  <meta name="description" content="问题 如何在微信小程序中实现上拉分页渲染刷新上拉加载，获取更多数据主要利用了微信官方文档API中的onReachBottom方法，它表示“页面上拉触底事件的处理函数”，就可以在这请求服务器获取新的数据并且添加到现有数据下面。 1 添加页码以及页容量pagenum代表当前页码，pagesize表示页容量（一页多少条数据），totalpages表示总的页码 &#x2F;**分页渲染的参数 *&#x2F; QueryPar">
 <meta property="og:type" content="article">
-<meta property="og:title" content="解决hexo博客Cannot find module&#39;chalk&#39;问题">
-<meta property="og:url" content="http://sunnyllxx.github.io/2020/06/20/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2Cannot-find-module-chalk-%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="微信小程序上拉分页渲染刷新">
+<meta property="og:url" content="http://sunnyllxx.github.io/2020/08/05/Pagination-loading/index.html">
 <meta property="og:site_name" content="étoile">
-<meta property="og:description" content="如何解决使用hexo命令后出现Cannot find module ‘chalk’问题">
+<meta property="og:description" content="问题 如何在微信小程序中实现上拉分页渲染刷新上拉加载，获取更多数据主要利用了微信官方文档API中的onReachBottom方法，它表示“页面上拉触底事件的处理函数”，就可以在这请求服务器获取新的数据并且添加到现有数据下面。 1 添加页码以及页容量pagenum代表当前页码，pagesize表示页容量（一页多少条数据），totalpages表示总的页码 &#x2F;**分页渲染的参数 *&#x2F; QueryPar">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-06-20T05:45:50.000Z">
-<meta property="article:modified_time" content="2020-06-20T06:40:19.104Z">
+<meta property="article:published_time" content="2020-08-05T07:14:21.000Z">
+<meta property="article:modified_time" content="2020-08-07T15:35:18.513Z">
 <meta property="article:author" content="étoile">
 <meta name="twitter:card" content="summary">
   
@@ -165,14 +165,14 @@
           </div>
           <div id="js-content" class="content-ll">
             
-<article id="post-解决hexo博客Cannot-find-module-chalk-问题" class="article article-type-post " itemscope itemprop="blogPost">
+<article id="post-Pagination-loading" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      解决hexo博客Cannot find module&#39;chalk&#39;问题
+      微信小程序上拉分页渲染刷新
     </h1>
   
 
@@ -189,22 +189,89 @@
 <!--显示阅读次数完毕-->
   
         
-        <a href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2Cannot-find-module-chalk-%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-06-20T05:45:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-20</time>
+        <a href="/2020/08/05/Pagination-loading/" class="archive-article-date">
+  	<time datetime="2020-08-05T07:14:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="如何解决使用hexo命令后出现Cannot-find-module-‘chalk’问题"><a href="#如何解决使用hexo命令后出现Cannot-find-module-‘chalk’问题" class="headerlink" title="如何解决使用hexo命令后出现Cannot find module ‘chalk’问题"></a>如何解决使用hexo命令后出现Cannot find module ‘chalk’问题</h3><a id="more"></a>
+        <h3 id="问题-如何在微信小程序中实现上拉分页渲染刷新"><a href="#问题-如何在微信小程序中实现上拉分页渲染刷新" class="headerlink" title="问题 如何在微信小程序中实现上拉分页渲染刷新"></a>问题 如何在微信小程序中实现上拉分页渲染刷新</h3><p>上拉加载，获取更多数据主要利用了微信官方文档API中的onReachBottom方法，它表示“页面上拉触底事件的处理函数”，就可以在这请求服务器获取新的数据并且添加到现有数据下面。</p>
+<h4 id="1-添加页码以及页容量"><a href="#1-添加页码以及页容量" class="headerlink" title="1 添加页码以及页容量"></a>1 添加页码以及页容量</h4><p>pagenum代表当前页码，pagesize表示页容量（一页多少条数据），totalpages表示总的页码</p>
+<pre><code>/**分页渲染的参数 */
+QueryParams:{
+pagenum:1,
+pagesize:8,
+totalPages:1
+},</code></pre><h4 id="2-页面进行初始化数据"><a href="#2-页面进行初始化数据" class="headerlink" title="2 页面进行初始化数据"></a>2 页面进行初始化数据</h4><p>在onload函数中进行请求服务器初始化数据。</p>
+<pre><code>wx.request({
+    url: &apos;http://xxxx/&apos;+that.QueryParams.pagenum+&quot;/&quot;+that.QueryParams.pagesize, 
+    data: {
+    },
+    header: {
+        &apos;content-type&apos;: &apos;application/json&apos; // 默认值
+    },
+    success (res) {
+        console.log(res.data)    //从后端拿到所有的消息信息
+        //计算后端传递数据过来的总的页码数=（总条数/页容量）
+        that.QueryParams.totalPages=Math.ceil(res.data.data.total/that.QueryParams.pagesize);
+        console.log(that.QueryParams.totalPages);
+        that.setData({
+        messagelist:res.data.data.rows //然后修改前端页面渲染的数据，后端数据内容具体看后端传递过来的（我这里是res.data.data.rows）
+        })
+    }
+    })   </code></pre><h3 id="3-请求加载更多数据"><a href="#3-请求加载更多数据" class="headerlink" title="3 请求加载更多数据"></a>3 请求加载更多数据</h3><p>首先写一个请多更多数据的函数</p>
+<pre><code>async getMessagelistMore(){
+    var that=this;
+    wx.request({
+    url: &apos;https://xxx/&apos;+that.QueryParams.pagenum+&quot;/&quot;+that.QueryParams.pagesize, 
+    data: {
+    },
+    header: {
+        &apos;content-type&apos;: &apos;application/json&apos; // 默认值
+    },
+    success (res) {
+        console.log(res.data)    //从后端拿到所有的消息信息
+        //计算总的页数
+        that.QueryParams.totalPages=Math.ceil(res.data.data.total/that.QueryParams.pagesize);
+        console.log(that.QueryParams.totalPages);
+        /**修改数组数据，将数组进行拼接 一定要进行数组拼接*/
+        that.setData({
+        messagelist:[...that.data.messagelist,...res.data.data.rows] 
+        })
+    }
+    })   
 
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>因为一些原因，将nodejs的路径修改过了，所以执行hexo的相关命令后一直都出现</p>
-<pre><code>Error:Cannot find module &apos;chalk&apos;</code></pre><h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>在网上找了很多方法，大都是缺少哪个模块就安装哪个模块，实在不行就一直执行安装的语句</p>
-<pre><code>npm install chalk --save</code></pre><p>但是这种方法我也试过了，感觉没有多大用，这都是看个人的实际情况。</p>
-<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><p>打开电脑的git bash，直接重新安装自己的hexo版本（不必删除，当然看个人的实际情况），比如我的安装命令是这样的</p>
-<pre><code>cnpm install -g hexo-cli</code></pre><p>这样就成功了！！！</p>
+},</code></pre><p>然后在onReachBottom函数中进行填写代码，为了用户体验性，可以先显示加载图标，然后判断当前页码是否大于等于总页码，如果是，那么就意味着到底了，没有数据可以加载了，可以给出提示，如果不是，请求加载更多的数据</p>
+<pre><code>onReachBottom: function () {
+    var that=this;
+    //显示加载图标
+    // wx.showLoading({
+    //   title: &apos;拼命加载中&apos;,
+    // })
+    wx.showToast({
+    title: &apos;拼命加载中&apos;,
+    icon: &apos;loading&apos;,
+    duration: 2000
+    })
+    //发送上拉加载请求
+    if(that.QueryParams.pagenum&gt;=that.QueryParams.totalPages)
+    {
+    wx.showToast({
+        title: &apos;已经到底啦&apos;,
+    })
+    }else{
+    //页数加1
+    that.QueryParams.pagenum++;
+    that.getMessagelistMore();
+        //隐藏加载框
+        // wx.hideLoading();
 
+    }
+
+
+},</code></pre>
       
 
       <!-- 开始添加版权声明-->
@@ -217,7 +284,7 @@
   
 </li></ul>
   <ul><li><strong>本文链接：</strong>
- <a href="http://sunnyllxx.github.io/2020/06/20/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2Cannot-find-module-chalk-%E9%97%AE%E9%A2%98/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2020/06/20/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2Cannot-find-module-chalk-%E9%97%AE%E9%A2%98/</a>
+ <a href="http://sunnyllxx.github.io/2020/08/05/Pagination-loading/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2020/08/05/Pagination-loading/</a>
 </li></ul>
   <ul><li><strong>版权声明：</strong>
   本作品采用
@@ -276,7 +343,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
+        			<a href="/categories/微信小程序//" class="article-tag-list-link color1">微信小程序</a>
         		</li>
       		
 		</ul>
@@ -331,7 +398,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2020/06/20/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2Cannot-find-module-chalk-%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2020/08/05/Pagination-loading/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -345,18 +412,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo-blog%E9%83%A8%E7%BD%B2github%E4%B8%80%E7%9B%B4%E5%87%BA%E7%8E%B0404/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/08/07/jump-page/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          解决hexo blog部署github一直出现404
+          微信小程序跨页面传递参数
         
       </div>
     </a>
   
   
-    <a href="/2020/05/21/%E8%A7%A3%E5%86%B3hexo%E9%83%A8%E7%BD%B2%E6%96%87%E7%AB%A0%E5%88%B0github%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">解决hexo部署文章到github图片无法显示问题</div>
+    <a href="/2020/07/30/components/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">微信小程序自定义组件tab选项</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -383,7 +450,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何解决使用hexo命令后出现Cannot-find-module-‘chalk’问题"><span class="toc-number">1.</span> <span class="toc-text">如何解决使用hexo命令后出现Cannot find module ‘chalk’问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问题"><span class="toc-number">2.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方法"><span class="toc-number">3.</span> <span class="toc-text">解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#方法一"><span class="toc-number">3.1.</span> <span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法二"><span class="toc-number">3.2.</span> <span class="toc-text">方法二</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题-如何在微信小程序中实现上拉分页渲染刷新"><span class="toc-number">1.</span> <span class="toc-text">问题 如何在微信小程序中实现上拉分页渲染刷新</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-添加页码以及页容量"><span class="toc-number">1.1.</span> <span class="toc-text">1 添加页码以及页容量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-页面进行初始化数据"><span class="toc-number">1.2.</span> <span class="toc-text">2 页面进行初始化数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-请求加载更多数据"><span class="toc-number">2.</span> <span class="toc-text">3 请求加载更多数据</span></a></li></ol>
                     </div>
                 </span>
             </div>

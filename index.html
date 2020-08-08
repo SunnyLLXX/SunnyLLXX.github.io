@@ -162,6 +162,409 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-jump-page" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/07/jump-page/">微信小程序跨页面传递参数</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+<!--显示阅读次数完毕-->
+  
+        
+        <a href="/2020/08/07/jump-page/" class="archive-article-date">
+  	<time datetime="2020-08-07T15:17:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="问题-微信小程序如何实现跨页面传递参数呢"><a href="#问题-微信小程序如何实现跨页面传递参数呢" class="headerlink" title="问题 微信小程序如何实现跨页面传递参数呢"></a>问题 微信小程序如何实现跨页面传递参数呢</h3><p>假设需要将B页面需要的数据从A页面传过去，如何进行呢？</p>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>通过绑定事件自定义对象属性传参，也就是data-*</p>
+<p>例如，在wxml页面有这些内容</p>
+<pre><code>&lt;button bindtap=&quot;download&quot; data-index=&apos;{{item.filePropagationPlanDetailID}}&apos; &quot;&gt;点击&lt;/button&gt;
+
+/**item表示需要渲染的数组，数据需要填你自己需要的数据*/</code></pre><p>在js文件中</p>
+<p>download: function (e){</p>
+<pre><code>// 这个 index 值就是要带走到B的参数
+let index = e.currentTarget.dataset.index;
+
+// 路由跳转并带参数(跳转到 B 页面)
+wx.navigateTo({
+  url: &apos;../B/B?index =&apos; + index 
+})</code></pre><p>}</p>
+<p>然后在B页面的data中声明index，例如<br>data:{<br>    index:””<br>}</p>
+<p>接下来，在onload函数中</p>
+<pre><code>onload:function(options){
+    console.log(options.index);
+
+    wx.request({
+    url: &apos;http://xxx/&apos;, 
+    data: {
+        id:options.index
+    },
+    header: {
+    &apos;content-type&apos;: &apos;application/json&apos;
+    },
+    success (res) {
+    console.log(res.data);
+
+    }
+})
+}</code></pre>
+      
+
+      <!-- 开始添加版权声明-->
+
+
+<div class="declare" hidden="hidden"></div>
+
+<!-- 添加完成 -->
+
+
+      
+    </div>
+    <!-- 添加本文结束标记-->
+
+  <!-- 添加完成 -->
+    <div class="article-info article-info-index">
+      
+      
+      
+
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/微信小程序//" class="article-tag-list-link color1">微信小程序</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/07/jump-page/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Pagination-loading" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/05/Pagination-loading/">微信小程序上拉分页渲染刷新</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+<!--显示阅读次数完毕-->
+  
+        
+        <a href="/2020/08/05/Pagination-loading/" class="archive-article-date">
+  	<time datetime="2020-08-05T07:14:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="问题-如何在微信小程序中实现上拉分页渲染刷新"><a href="#问题-如何在微信小程序中实现上拉分页渲染刷新" class="headerlink" title="问题 如何在微信小程序中实现上拉分页渲染刷新"></a>问题 如何在微信小程序中实现上拉分页渲染刷新</h3><p>上拉加载，获取更多数据主要利用了微信官方文档API中的onReachBottom方法，它表示“页面上拉触底事件的处理函数”，就可以在这请求服务器获取新的数据并且添加到现有数据下面。</p>
+<h4 id="1-添加页码以及页容量"><a href="#1-添加页码以及页容量" class="headerlink" title="1 添加页码以及页容量"></a>1 添加页码以及页容量</h4><p>pagenum代表当前页码，pagesize表示页容量（一页多少条数据），totalpages表示总的页码</p>
+<pre><code>/**分页渲染的参数 */
+QueryParams:{
+pagenum:1,
+pagesize:8,
+totalPages:1
+},</code></pre><h4 id="2-页面进行初始化数据"><a href="#2-页面进行初始化数据" class="headerlink" title="2 页面进行初始化数据"></a>2 页面进行初始化数据</h4><p>在onload函数中进行请求服务器初始化数据。</p>
+<pre><code>wx.request({
+    url: &apos;http://xxxx/&apos;+that.QueryParams.pagenum+&quot;/&quot;+that.QueryParams.pagesize, 
+    data: {
+    },
+    header: {
+        &apos;content-type&apos;: &apos;application/json&apos; // 默认值
+    },
+    success (res) {
+        console.log(res.data)    //从后端拿到所有的消息信息
+        //计算后端传递数据过来的总的页码数=（总条数/页容量）
+        that.QueryParams.totalPages=Math.ceil(res.data.data.total/that.QueryParams.pagesize);
+        console.log(that.QueryParams.totalPages);
+        that.setData({
+        messagelist:res.data.data.rows //然后修改前端页面渲染的数据，后端数据内容具体看后端传递过来的（我这里是res.data.data.rows）
+        })
+    }
+    })   </code></pre><h3 id="3-请求加载更多数据"><a href="#3-请求加载更多数据" class="headerlink" title="3 请求加载更多数据"></a>3 请求加载更多数据</h3><p>首先写一个请多更多数据的函数</p>
+<pre><code>async getMessagelistMore(){
+    var that=this;
+    wx.request({
+    url: &apos;https://xxx/&apos;+that.QueryParams.pagenum+&quot;/&quot;+that.QueryParams.pagesize, 
+    data: {
+    },
+    header: {
+        &apos;content-type&apos;: &apos;application/json&apos; // 默认值
+    },
+    success (res) {
+        console.log(res.data)    //从后端拿到所有的消息信息
+        //计算总的页数
+        that.QueryParams.totalPages=Math.ceil(res.data.data.total/that.QueryParams.pagesize);
+        console.log(that.QueryParams.totalPages);
+        /**修改数组数据，将数组进行拼接 一定要进行数组拼接*/
+        that.setData({
+        messagelist:[...that.data.messagelist,...res.data.data.rows] 
+        })
+    }
+    })   
+
+},</code></pre><p>然后在onReachBottom函数中进行填写代码，为了用户体验性，可以先显示加载图标，然后判断当前页码是否大于等于总页码，如果是，那么就意味着到底了，没有数据可以加载了，可以给出提示，如果不是，请求加载更多的数据</p>
+<pre><code>onReachBottom: function () {
+    var that=this;
+    //显示加载图标
+    // wx.showLoading({
+    //   title: &apos;拼命加载中&apos;,
+    // })
+    wx.showToast({
+    title: &apos;拼命加载中&apos;,
+    icon: &apos;loading&apos;,
+    duration: 2000
+    })
+    //发送上拉加载请求
+    if(that.QueryParams.pagenum&gt;=that.QueryParams.totalPages)
+    {
+    wx.showToast({
+        title: &apos;已经到底啦&apos;,
+    })
+    }else{
+    //页数加1
+    that.QueryParams.pagenum++;
+    that.getMessagelistMore();
+        //隐藏加载框
+        // wx.hideLoading();
+
+    }
+
+
+},</code></pre>
+      
+
+      <!-- 开始添加版权声明-->
+
+
+<div class="declare" hidden="hidden"></div>
+
+<!-- 添加完成 -->
+
+
+      
+    </div>
+    <!-- 添加本文结束标记-->
+
+  <!-- 添加完成 -->
+    <div class="article-info article-info-index">
+      
+      
+      
+
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/微信小程序//" class="article-tag-list-link color1">微信小程序</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/05/Pagination-loading/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-components" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/30/components/">微信小程序自定义组件tab选项</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+<!--显示阅读次数完毕-->
+  
+        
+        <a href="/2020/07/30/components/" class="archive-article-date">
+  	<time datetime="2020-07-30T13:40:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id><a href="#" class="headerlink" title></a></h3><h3 id="1自定义组件添加"><a href="#1自定义组件添加" class="headerlink" title="1自定义组件添加"></a>1自定义组件添加</h3><h4 id="1-1-微信开发者工具添加comonents文件夹"><a href="#1-1-微信开发者工具添加comonents文件夹" class="headerlink" title="1.1 微信开发者工具添加comonents文件夹"></a>1.1 微信开发者工具添加comonents文件夹</h4><p>首先在小程序项目的根目录下添加components文件夹，然后再在该文件夹下再添加一个文件夹tabs（用于区分其他组件），然后右击tabs文件夹，选择”新建components”，组件创建完成，如下图所示</p>
+<p><img src="/2020/07/30/components/test03.png" alt></p>
+<h4 id="1-2引用组件"><a href="#1-2引用组件" class="headerlink" title="1.2引用组件"></a>1.2引用组件</h4><p>在pages中新建一个页面，暂命名test，然后打开test.json，在using components中引用组件路径，如下图所示</p>
+<p><img src="/2020/07/30/components/test01.png" alt></p>
+<p>接着打开test.wxml，添加标签，如下图所示</p>
+<p><img src="/2020/07/30/components/test02.png" alt></p>
+<p>结果如下图所示就成功了</p>
+<p><img src="/2020/07/30/components/test04.png" alt></p>
+<h3 id="2-修改组件"><a href="#2-修改组件" class="headerlink" title="2 修改组件"></a>2 修改组件</h3><h4 id="2-1-修改组件的wxml"><a href="#2-1-修改组件的wxml" class="headerlink" title="2.1 修改组件的wxml"></a>2.1 修改组件的wxml</h4><p><img src="/2020/07/30/components/test06.png" alt></p>
+<p>效果如图所示</p>
+<p><img src="/2020/07/30/components/test09.png" alt></p>
+<p>之后为了一些数据的更改或者其他麻烦可以使用列表渲染，将之前一些的代码注释，使用列表渲染将选项卡渲染出来（数据根据2.3的修改组件js代码）</p>
+<p><img src="/2020/07/30/components/test08.png" alt></p>
+<p>效果一模一样。</p>
+<h4 id="2-2-修改组件的样式"><a href="#2-2-修改组件的样式" class="headerlink" title="2.2 修改组件的样式"></a>2.2 修改组件的样式</h4><p><img src="/2020/07/30/components/test07.png" alt></p>
+<h4 id="2-3-修改组件的js文件"><a href="#2-3-修改组件的js文件" class="headerlink" title="2.3 修改组件的js文件"></a>2.3 修改组件的js文件</h4><p>给初始数据赋初值，如下图</p>
+<p><img src="/2020/07/30/components/test05.png" alt></p>
+<h3 id="标题激活选中"><a href="#标题激活选中" class="headerlink" title="标题激活选中"></a>标题激活选中</h3><p>注意：在页面的js文件中，存放事件回调函数时，函数是放在js文件的data同层下，但是，在组件的js文件中，存放事件回调函数时，函数是放在js文件的methods中</p>
+<p>激活标题选中以及获取样式如下代码</p>
+<p><img src="/2020/07/30/components/test11.png" alt></p>
+<p>然后点击每一个标题，效果如下图</p>
+<p><img src="/2020/07/30/components/test12.png" alt></p>
+<p><img src="/2020/07/30/components/test13.png" alt></p>
+<h3 id="3-父组件向子组件传递数据"><a href="#3-父组件向子组件传递数据" class="headerlink" title="3 父组件向子组件传递数据"></a>3 父组件向子组件传递数据</h3><h4 id="3-1"><a href="#3-1" class="headerlink" title="3.1"></a>3.1</h4><p>父组件向子组件传递数据是通过标签属性传递的<br>tabs.js文件中的properties存放的是要从父组件中接受的数据</p>
+<p>在test.wxml文件中</p>
+<p><img src="/2020/07/30/components/test14.png" alt></p>
+<p>将tabs.js文件中的data中的数据复制到test.js文件中的data中，然后把tabs.js中的data中的tabs数组删除</p>
+<p><img src="/2020/07/30/components/test15.png" alt></p>
+<p>接下来在tabs.js中添加属性</p>
+<p><img src="/2020/07/30/components/test16.png" alt></p>
+<p>然后就可以看到test.wxml中的页面内容跟之前的组件的页面内容一样</p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>经过传递数据之后，我们可以发现出现了一个问题，点击标题时外观是改变了，但是一些数据并没有改变，比如isActive，当选择私信的时候，通知的isActive应该变为false，但是，没有任何变化，如图</p>
+<p><img src="/2020/07/30/components/test17.png" alt></p>
+<p><img src="/2020/07/30/components/test18.png" alt></p>
+<p>如何解决呢</p>
+<h3 id="4-子组件向父组件传递数据"><a href="#4-子组件向父组件传递数据" class="headerlink" title="4 子组件向父组件传递数据"></a>4 子组件向父组件传递数据</h3>
+      
+
+      <!-- 开始添加版权声明-->
+
+
+<div class="declare" hidden="hidden"></div>
+
+<!-- 添加完成 -->
+
+
+      
+    </div>
+    <!-- 添加本文结束标记-->
+
+  <!-- 添加完成 -->
+    <div class="article-info article-info-index">
+      
+      
+      
+
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/30/components/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-解决layui表单提交内容到网址的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -831,100 +1234,10 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/01/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/05/01/hello-world/" class="archive-article-date">
-  	<time datetime="2020-05-01T11:19:13.667Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-        
-          <a class="article-more-a" href="/2020/05/01/hello-world/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/01/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 
 
@@ -1038,11 +1351,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
               </li>
             
             <div class="clearfix"></div>
@@ -1113,7 +1426,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">滴答滴答滴</div>
   	  	
     	</section>
     
