@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>Tag: yilia | étoile的小窝</title>
+  <title>动态创建表格 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="étoile的小窝">
-<meta property="og:url" content="http://sunnyllxx.github.io/tags/yilia/index.html">
+  <meta name="description" content="问题 如何利用数据动态创建表格以及使表格隔行变色利用静态的数据，动态创建表格，如下图所示 html代码tbody中不留任何元素 &lt;!DOCTYPE html&gt; &lt;html lang&#x3D;&quot;en&quot;&gt; &lt;head&gt;     &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;     &lt;meta name&#x3D;&quot;v">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态创建表格">
+<meta property="og:url" content="http://sunnyllxx.github.io/2020/08/09/Create-tables-dynamically/index.html">
 <meta property="og:site_name" content="étoile的小窝">
+<meta property="og:description" content="问题 如何利用数据动态创建表格以及使表格隔行变色利用静态的数据，动态创建表格，如下图所示 html代码tbody中不留任何元素 &lt;!DOCTYPE html&gt; &lt;html lang&#x3D;&quot;en&quot;&gt; &lt;head&gt;     &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;     &lt;meta name&#x3D;&quot;v">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-09T13:02:10.000Z">
+<meta property="article:modified_time" content="2020-08-09T13:32:00.675Z">
 <meta property="article:author" content="étoile">
 <meta name="twitter:card" content="summary">
   
@@ -161,76 +165,338 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-Create-tables-dynamically" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/02/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%84%9F%E6%83%B3%E5%8F%8Ayilia%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BE%8E%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2020-05-02T12:18:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-02</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/02/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%84%9F%E6%83%B3%E5%8F%8Ayilia%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BE%8E%E5%8C%96/">hexo博客搭建感想及yilia主题的一些美化</a>
+    <h1 class="article-title" itemprop="name">
+      动态创建表格
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">yilia</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        <!--显示阅读次数-->
+
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+           👁 &nbsp;<span id="busuanzi_value_page_pv"></span> &nbsp;&nbsp;
+  </span>
+  </a>
+
+<!--显示阅读次数完毕-->
+  
+        
+        <a href="/2020/08/09/Create-tables-dynamically/" class="archive-article-date">
+  	<time datetime="2020-08-09T13:02:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="问题-如何利用数据动态创建表格以及使表格隔行变色"><a href="#问题-如何利用数据动态创建表格以及使表格隔行变色" class="headerlink" title="问题 如何利用数据动态创建表格以及使表格隔行变色"></a>问题 如何利用数据动态创建表格以及使表格隔行变色</h3><p>利用静态的数据，动态创建表格，如下图所示</p>
+<h4 id="html代码"><a href="#html代码" class="headerlink" title="html代码"></a>html代码</h4><p>tbody中不留任何元素</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;动态创建表格&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;table cellspacing=&quot;0&quot;&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;姓名&lt;/th&gt;
+                &lt;th&gt;课程&lt;/th&gt;
+                &lt;th&gt;成绩&lt;/th&gt;
+                &lt;th&gt;操作&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/body&gt;</code></pre><h4 id="css代码"><a href="#css代码" class="headerlink" title="css代码"></a>css代码</h4><p>事先将需要添加的tr td,th以及其他标签css代码写上</p>
+<pre><code>table {
+            width: 500px;
+            margin: 100px auto;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        td,
+        th {
+            border: 1px solid #333;
+        }
+
+        thead tr {
+            height: 40px;
+            background-color: #ccc;
+        }
+        a {
+            text-decoration: none;
+        }</code></pre><h4 id="js代码"><a href="#js代码" class="headerlink" title="js代码"></a>js代码</h4><p>根据逻辑步骤，首先创建tr元素，然后创建td元素，元素个数根据给的静态数据实现</p>
+<pre><code>&lt;script&gt;
+        // 1.准备好学生的数据
+        var data = [{
+            name: &apos;xiaobai&apos;,
+            subject: &apos;C语言&apos;,
+            score: 99
+        }, {
+            name: &apos;xiaohei&apos;,
+            subject: &apos;JavaScript&apos;,
+            score: 98
+        }, {
+            name: &apos;xiaohong&apos;,
+            subject: &apos;操作系统&apos;,
+            score: 97
+        }, {
+            name: &apos;xiaoxiao&apos;,
+            subject: &apos;Java&apos;,
+            score: 96
+        }, {
+            name: &apos;xiaolv&apos;,
+            subject: &apos;软件工程与原理&apos;,
+            score: 0
+        }];
+        // 2. 往tbody 里面创建行：元素个数根据静态数据长度
+        var tbody = document.querySelector(&apos;tbody&apos;);
+        for (var i = 0; i &lt; data.length; i++) { 
+            // 1. 创建 tr行
+            var tr = document.createElement(&apos;tr&apos;);
+            tbody.appendChild(tr);
+            /* 2. 行里面创建td单元格 单元格的数量取决于每个对象里面的属性个数  for循环遍历对象 data[i]*/
+            for (var k in data[i]) {
+                // 创建单元格 
+                var td = document.createElement(&apos;td&apos;);
+                // 把对象里面的属性值 data[i][k] 给 td  
+                td.innerHTML = data[i][k];
+                tr.appendChild(td);
+            }
+            // 3. 创建有删除功能的单元格 
+            var td = document.createElement(&apos;td&apos;);
+            td.innerHTML = &apos;&lt;a href=&quot;javascript:;&quot;&gt;删除 &lt;/a&gt;&apos;;
+            tr.appendChild(td);
+
+        }
+        // 4. 删除操作 开始 
+        var a = document.querySelectorAll(&apos;a&apos;);
+        for (var i = 0; i &lt; a.length; i++) {
+            a[i].onclick = function() {
+                // 点击删除 当前a 所在的行node.removeChild(child)  
+
+                tbody.removeChild(this.parentNode.parentNode);
+            }
+        }
+    &lt;/script&gt;</code></pre><p>如果为了表格用户体验性较高，还可以为表格设置隔行变色</p>
+<p>css中添加如下代码</p>
+<pre><code>.change {
+    background-color: #ff9933;
+}</code></pre><p>js最后中添加如下代码</p>
+<pre><code>var trs=tbody.querySelectorAll(&apos;tr&apos;);
+        for(var j=0;j&lt;trs.length;j++){
+            trs[j].onmouseover=function(){
+                this.className=&apos;change&apos;;
+            }
+
+            trs[j].onmouseout=function(){
+                this.className=&apos;&apos;;
+            }
+
+        }</code></pre>
+      
+
+      <!-- 开始添加版权声明-->
 
 
+<div class="declare">
+  <ul><li><strong>本文作者：</strong>
+  
+    étoile
+  
+</li></ul>
+  <ul><li><strong>本文链接：</strong>
+ <a href="http://sunnyllxx.github.io/2020/08/09/Create-tables-dynamically/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2020/08/09/Create-tables-dynamically/</a>
+</li></ul>
+  <ul><li><strong>版权声明：</strong>
+  本作品采用
+  <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+  进行许可。转载请注明出处！
+  
+</div>
 
-          
+<!-- 添加完成 -->
+
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/zhifubaopicture.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <!-- 添加本文结束标记-->
+
+  <div style="text-align:center;color: #00BFFF;font-size:14px;">
+       -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
+       </div>
+  
+  <!-- 添加完成 -->
+    <div class="article-info article-info-index">
+      
+      
+      
+
+
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
+        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2020/08/09/Create-tables-dynamically/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/08/07/jump-page/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">微信小程序跨页面传递参数</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题-如何利用数据动态创建表格以及使表格隔行变色"><span class="toc-number">1.</span> <span class="toc-text">问题 如何利用数据动态创建表格以及使表格隔行变色</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#html代码"><span class="toc-number">1.1.</span> <span class="toc-text">html代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#css代码"><span class="toc-number">1.2.</span> <span class="toc-text">css代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#js代码"><span class="toc-number">1.3.</span> <span class="toc-text">js代码</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
 
- 
+  
 
-
+  
 
 
           </div>
@@ -268,9 +534,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

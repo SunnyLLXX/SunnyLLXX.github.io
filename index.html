@@ -162,6 +162,207 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Create-tables-dynamically" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/09/Create-tables-dynamically/">动态创建表格</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+<!--显示阅读次数完毕-->
+  
+        
+        <a href="/2020/08/09/Create-tables-dynamically/" class="archive-article-date">
+  	<time datetime="2020-08-09T13:02:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="问题-如何利用数据动态创建表格以及使表格隔行变色"><a href="#问题-如何利用数据动态创建表格以及使表格隔行变色" class="headerlink" title="问题 如何利用数据动态创建表格以及使表格隔行变色"></a>问题 如何利用数据动态创建表格以及使表格隔行变色</h3><p>利用静态的数据，动态创建表格，如下图所示</p>
+<h4 id="html代码"><a href="#html代码" class="headerlink" title="html代码"></a>html代码</h4><p>tbody中不留任何元素</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;动态创建表格&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;table cellspacing=&quot;0&quot;&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;姓名&lt;/th&gt;
+                &lt;th&gt;课程&lt;/th&gt;
+                &lt;th&gt;成绩&lt;/th&gt;
+                &lt;th&gt;操作&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/body&gt;</code></pre><h4 id="css代码"><a href="#css代码" class="headerlink" title="css代码"></a>css代码</h4><p>事先将需要添加的tr td,th以及其他标签css代码写上</p>
+<pre><code>table {
+            width: 500px;
+            margin: 100px auto;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        td,
+        th {
+            border: 1px solid #333;
+        }
+
+        thead tr {
+            height: 40px;
+            background-color: #ccc;
+        }
+        a {
+            text-decoration: none;
+        }</code></pre><h4 id="js代码"><a href="#js代码" class="headerlink" title="js代码"></a>js代码</h4><p>根据逻辑步骤，首先创建tr元素，然后创建td元素，元素个数根据给的静态数据实现</p>
+<pre><code>&lt;script&gt;
+        // 1.准备好学生的数据
+        var data = [{
+            name: &apos;xiaobai&apos;,
+            subject: &apos;C语言&apos;,
+            score: 99
+        }, {
+            name: &apos;xiaohei&apos;,
+            subject: &apos;JavaScript&apos;,
+            score: 98
+        }, {
+            name: &apos;xiaohong&apos;,
+            subject: &apos;操作系统&apos;,
+            score: 97
+        }, {
+            name: &apos;xiaoxiao&apos;,
+            subject: &apos;Java&apos;,
+            score: 96
+        }, {
+            name: &apos;xiaolv&apos;,
+            subject: &apos;软件工程与原理&apos;,
+            score: 0
+        }];
+        // 2. 往tbody 里面创建行：元素个数根据静态数据长度
+        var tbody = document.querySelector(&apos;tbody&apos;);
+        for (var i = 0; i &lt; data.length; i++) { 
+            // 1. 创建 tr行
+            var tr = document.createElement(&apos;tr&apos;);
+            tbody.appendChild(tr);
+            /* 2. 行里面创建td单元格 单元格的数量取决于每个对象里面的属性个数  for循环遍历对象 data[i]*/
+            for (var k in data[i]) {
+                // 创建单元格 
+                var td = document.createElement(&apos;td&apos;);
+                // 把对象里面的属性值 data[i][k] 给 td  
+                td.innerHTML = data[i][k];
+                tr.appendChild(td);
+            }
+            // 3. 创建有删除功能的单元格 
+            var td = document.createElement(&apos;td&apos;);
+            td.innerHTML = &apos;&lt;a href=&quot;javascript:;&quot;&gt;删除 &lt;/a&gt;&apos;;
+            tr.appendChild(td);
+
+        }
+        // 4. 删除操作 开始 
+        var a = document.querySelectorAll(&apos;a&apos;);
+        for (var i = 0; i &lt; a.length; i++) {
+            a[i].onclick = function() {
+                // 点击删除 当前a 所在的行node.removeChild(child)  
+
+                tbody.removeChild(this.parentNode.parentNode);
+            }
+        }
+    &lt;/script&gt;</code></pre><p>如果为了表格用户体验性较高，还可以为表格设置隔行变色</p>
+<p>css中添加如下代码</p>
+<pre><code>.change {
+    background-color: #ff9933;
+}</code></pre><p>js最后中添加如下代码</p>
+<pre><code>var trs=tbody.querySelectorAll(&apos;tr&apos;);
+        for(var j=0;j&lt;trs.length;j++){
+            trs[j].onmouseover=function(){
+                this.className=&apos;change&apos;;
+            }
+
+            trs[j].onmouseout=function(){
+                this.className=&apos;&apos;;
+            }
+
+        }</code></pre>
+      
+
+      <!-- 开始添加版权声明-->
+
+
+<div class="declare" hidden="hidden"></div>
+
+<!-- 添加完成 -->
+
+
+      
+    </div>
+    <!-- 添加本文结束标记-->
+
+  <!-- 添加完成 -->
+    <div class="article-info article-info-index">
+      
+      
+      
+
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/09/Create-tables-dynamically/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-jump-page" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1008,111 +1209,6 @@
 
 
   
-    <article id="post-hexo博客搭建感想及yilia主题的一些美化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/02/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%84%9F%E6%83%B3%E5%8F%8Ayilia%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BE%8E%E5%8C%96/">hexo博客搭建感想及yilia主题的一些美化</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/05/02/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%84%9F%E6%83%B3%E5%8F%8Ayilia%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BE%8E%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2020-05-02T12:18:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="这篇文章主要列举了利用hexo搭建博客遇到的问题和解决方法以及yilia主题的一些美化功能的添加"><a href="#这篇文章主要列举了利用hexo搭建博客遇到的问题和解决方法以及yilia主题的一些美化功能的添加" class="headerlink" title="这篇文章主要列举了利用hexo搭建博客遇到的问题和解决方法以及yilia主题的一些美化功能的添加"></a>这篇文章主要列举了利用hexo搭建博客遇到的问题和解决方法以及yilia主题的一些美化功能的添加</h4>
-        
-          <a class="article-more-a" href="/2020/05/02/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%84%9F%E6%83%B3%E5%8F%8Ayilia%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BE%8E%E5%8C%96/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">yilia</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/02/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%84%9F%E6%83%B3%E5%8F%8Ayilia%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BE%8E%E5%8C%96/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1226,11 +1322,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
