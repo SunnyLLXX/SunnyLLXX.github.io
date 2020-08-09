@@ -187,6 +187,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="问题-如何利用数据动态创建表格以及使表格隔行变色"><a href="#问题-如何利用数据动态创建表格以及使表格隔行变色" class="headerlink" title="问题 如何利用数据动态创建表格以及使表格隔行变色"></a>问题 如何利用数据动态创建表格以及使表格隔行变色</h3><p>利用静态的数据，动态创建表格，如下图所示</p>
+<p><img src="/2020/08/09/Create-tables-dynamically/pic.png" alt></p>
 <h4 id="html代码"><a href="#html代码" class="headerlink" title="html代码"></a>html代码</h4><p>tbody中不留任何元素</p>
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
@@ -250,7 +251,7 @@
         }, {
             name: &apos;xiaolv&apos;,
             subject: &apos;软件工程与原理&apos;,
-            score: 0
+            score: 95
         }];
         // 2. 往tbody 里面创建行：元素个数根据静态数据长度
         var tbody = document.querySelector(&apos;tbody&apos;);
