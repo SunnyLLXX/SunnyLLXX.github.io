@@ -17,7 +17,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://sunnyllxx.github.io/2020/08/11/Shopping-spike/pic.png">
 <meta property="article:published_time" content="2020-08-11T05:39:03.000Z">
-<meta property="article:modified_time" content="2020-08-11T05:49:54.970Z">
+<meta property="article:modified_time" content="2020-08-11T06:04:38.744Z">
 <meta property="article:author" content="étoile">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://sunnyllxx.github.io/2020/08/11/Shopping-spike/pic.png">
@@ -260,6 +260,8 @@
         var min=document.querySelector(&apos;.min&apos;);
         var second=document.querySelector(&apos;.second&apos;);
         var inputTime = +new Date(&apos;2020-8-11 24:00:00&apos;); //获取用户输入的时间总的毫秒数
+
+         countDown();//先调用一次这个函数，防止刷新页面出现空白
         setInterval(countDown,1000);
 
         function countDown(time){
