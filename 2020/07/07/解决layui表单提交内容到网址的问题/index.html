@@ -178,6 +178,8 @@
 
         <!--显示阅读次数-->
 
+
+
   <br/>
   <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
   <span class="icon-sort"></span>
@@ -440,6 +442,40 @@ return false; //阻止表单跳转。如果需要表单跳转，去掉这段即�
 </aside>
 
 
+
+
+
+   <!-- valine评论系统开始 -->
+
+   
+    <section id="comments" class="comments">
+      <style>
+        .comments{margin:30px;padding:10px;background:#fff}
+        @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+      </style>
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'true' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "SqWqnmUuTCilnupzDVQgFhrE-gzGzoHsz",
+            app_key: "EuNlMDzK61IRiansuSobGwsH",
+            placeholder: "留下你的评论吧",
+            avatar:"retro"
+        });
+    }
+</script>
+
+  </section>
+
+
+<!-- valine评论系统结束 -->
 
   
   
