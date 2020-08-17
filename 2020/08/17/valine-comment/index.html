@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>Tag: yilia | étoile的小窝</title>
+  <title>hexo yilia主题添加valine评论系统 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="étoile的小窝">
-<meta property="og:url" content="http://sunnyllxx.github.io/tags/yilia/index.html">
+  <meta name="description" content="如何给hexo yilia主题添加valine评论系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo yilia主题添加valine评论系统">
+<meta property="og:url" content="http://sunnyllxx.github.io/2020/08/17/valine-comment/index.html">
 <meta property="og:site_name" content="étoile的小窝">
+<meta property="og:description" content="如何给hexo yilia主题添加valine评论系统">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://sunnyllxx.github.io/2020/08/17/valine-comment/pic.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2020/08/17/valine-comment/pic01.png">
+<meta property="article:published_time" content="2020-08-17T09:10:03.000Z">
+<meta property="article:modified_time" content="2020-08-17T09:43:32.544Z">
 <meta property="article:author" content="étoile">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sunnyllxx.github.io/2020/08/17/valine-comment/pic.png">
   
     <link rel="alternative" href="/atom.xml" title="étoile的小窝" type="application/atom+xml">
   
@@ -161,49 +168,187 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-valine-comment" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/02/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%84%9F%E6%83%B3%E5%8F%8Ayilia%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BE%8E%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2020-05-02T12:18:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-02</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/02/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%84%9F%E6%83%B3%E5%8F%8Ayilia%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BE%8E%E5%8C%96/">hexo博客搭建感想及yilia主题的一些美化</a>
+    <h1 class="article-title" itemprop="name">
+      hexo yilia主题添加valine评论系统
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">yilia</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        <!--显示阅读次数-->
 
 
 
-          
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+           👁 &nbsp;<span id="busuanzi_value_page_pv"></span> &nbsp;&nbsp;
+  </span>
+  </a>
+
+<!--显示阅读次数完毕-->
+  
+        
+        <a href="/2020/08/17/valine-comment/" class="archive-article-date">
+  	<time datetime="2020-08-17T09:10:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="如何给hexo-yilia主题添加valine评论系统"><a href="#如何给hexo-yilia主题添加valine评论系统" class="headerlink" title="如何给hexo yilia主题添加valine评论系统"></a>如何给hexo yilia主题添加valine评论系统</h3><a id="more"></a>
+
+
+<h4 id="1-注册leancloud账户"><a href="#1-注册leancloud账户" class="headerlink" title="1 注册leancloud账户"></a>1 注册leancloud账户</h4><p>首先，需要到<a href="https://leancloud.cn" target="_blank" rel="noopener">leancloud官网</a>，然后进行实名验证，之后进行创建应用，得到app id和 app key，这两个可以到设置——&gt;应用key查看，这一步之后，就已经完成大半啦。</p>
+<h4 id="2-修改主题文件"><a href="#2-修改主题文件" class="headerlink" title="2 修改主题文件"></a>2 修改主题文件</h4><p>在yilia/_config.yml文件中，在#5、Gitment后面添加如下代码，进行valine设置。app id以及app key中填写刚创建应用的app id和app key。notify处可以是false，看个人的需求。</p>
+<pre><code>#6、Valine https://valine.js.org
+valine: 
+appid: &apos;app id&apos;  #Leancloud应用的appId
+appkey: &apos;app key&apos;  #Leancloud应用的appKey
+verify: false #验证码
+notify: true #评论回复提醒
+avatar: retro #评论列表头像样式：&apos;&apos;/mm/identicon/monsterid/wavatar/retro/hide
+#头像类型可见： https://valine.js.org/avatar.html
+placeholder: 留下你的评论吧 #评论框占位符，随便填</code></pre><h4 id="2-修改article-ejs文件"><a href="#2-修改article-ejs文件" class="headerlink" title="2 修改article.ejs文件"></a>2 修改article.ejs文件</h4><p>在layout_partial\article.ejs文件中，搜索这些代码&lt;% if (!index &amp;&amp; post.comments){ %&gt;，在这个代码的其他评论前面或者后面添加如下代码</p>
+<pre><code>&lt;% if (theme.valine &amp;&amp; theme.valine.appid &amp;&amp; theme.valine.appkey){ %&gt;
+    &lt;section id=&quot;comments&quot; class=&quot;comments&quot;&gt;
+    &lt;style&gt;
+        .comments{margin:30px;padding:10px;background:#fff}
+        @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+    &lt;/style&gt;
+    &lt;%- partial(&apos;post/valine&apos;, {
+        key: post.slug,
+        title: post.title,
+        url: config.url+url_for(post.path)
+        }) %&gt;
+&lt;/section&gt;
+&lt;% } %&gt;</code></pre><h4 id="3-新建文件valine-ejs"><a href="#3-新建文件valine-ejs" class="headerlink" title="3 新建文件valine.ejs"></a>3 新建文件valine.ejs</h4><p>在yilia\layout_partial\post文件夹下面新建文件valine.ejs，添加如下代码</p>
+<pre><code>&lt;div id=&quot;vcomment&quot; class=&quot;comment&quot;&gt;&lt;/div&gt; 
+&lt;script src=&quot;//cdn1.lncld.net/static/js/3.0.4/av-min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;//unpkg.com/valine/dist/Valine.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+var notify = &apos;&lt;%= theme.valine.notify %&gt;&apos; == true ? true : false;
+var verify = &apos;&lt;%= theme.valine.verify %&gt;&apos; == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: &apos;.comment&apos;,
+            notify: notify,
+            verify: verify,
+            app_id: &quot;&lt;%= theme.valine.appid %&gt;&quot;,
+            app_key: &quot;&lt;%= theme.valine.appkey %&gt;&quot;,
+            placeholder: &quot;&lt;%= theme.valine.placeholder %&gt;&quot;,
+            avatar:&quot;&lt;%= theme.valine.avatar %&gt;&quot;
+        });
+    }
+&lt;/script&gt;</code></pre><p>最后进行部署，长如下样子就完成了（昵称、邮箱、网址是测试时填上去的）</p>
+<p><img src="/2020/08/17/valine-comment/pic.png" alt></p>
+<h4 id="4-头像设置"><a href="#4-头像设置" class="headerlink" title="4 头像设置"></a>4 头像设置</h4><p>Valine 部署完成后使用的是 Gravatar作为评论列表头像，评论时提供 Gravatar 注册的邮箱即可显示设置的头像。</p>
+<h4 id="4-1-注册Gravatar账号"><a href="#4-1-注册Gravatar账号" class="headerlink" title="4.1 注册Gravatar账号"></a>4.1 注册Gravatar账号</h4><p>登录<a href="https://cn.gravatar.com/" target="_blank" rel="noopener">Gravatar</a>，接下来就是跟着流程走就可以了，他要什么你给什么，成功后如图</p>
+<p><img src="/2020/08/17/valine-comment/pic01.png" alt></p>
+<h4 id="4-2-修改主题配置文件"><a href="#4-2-修改主题配置文件" class="headerlink" title="4.2 修改主题配置文件"></a>4.2 修改主题配置文件</h4><p>在代码后面添加avatar_cdn</p>
+<pre><code>#6、Valine https://valine.js.org
+valine: 
+enable: true 
+appid: SqWqnmUuTCilnupzDVQgFhrE-gzGzoHsz  #Leancloud应用的appId
+appkey: EuNlMDzK61IRiansuSobGwsH  #Leancloud应用的appKey
+verify: false #验证码
+notify: true #评论回复提醒
+avatar: retro #评论列表头像样式：&apos;&apos;/mm/identicon/monsterid/wavatar/retro/hide
+#头像类型可见： https://valine.js.org/avatar.html
+placeholder: 留下你的评论吧 #评论框占位符
+avatar_cdn: https://www.gravatar.com/avatar/</code></pre><h4 id="4-3-修改valine-ejs文件"><a href="#4-3-修改valine-ejs文件" class="headerlink" title="4.3 修改valine.ejs文件"></a>4.3 修改valine.ejs文件</h4><p>修改文件如下代码</p>
+<pre><code>&lt;div id=&quot;vcomment&quot; class=&quot;comment&quot;&gt;&lt;/div&gt; 
+&lt;script src=&quot;//cdn1.lncld.net/static/js/3.0.4/av-min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;//unpkg.com/valine/dist/Valine.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+var notify = &apos;&lt;%= theme.valine.notify %&gt;&apos; == true ? true : false;
+var verify = &apos;&lt;%= theme.valine.verify %&gt;&apos; == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: &apos;.comment&apos;,
+            notify: notify,
+            verify: verify,
+            app_id: &quot;&lt;%= theme.valine.appid %&gt;&quot;,
+            app_key: &quot;&lt;%= theme.valine.appkey %&gt;&quot;,
+            placeholder: &quot;&lt;%= theme.valine.placeholder %&gt;&quot;,
+            avatar:&quot;&lt;%= theme.valine.avatar %&gt;&quot;,
+            avatar_cdn:&apos;{{ theme.valine.avatar_cdn }}&apos;,
+        });
+    }
+&lt;/script&gt;</code></pre><p>最后，完成啦。</p>
+
+      
+
+      <!-- 开始添加版权声明-->
+
+
+<div class="declare">
+  <ul><li><strong>本文作者：</strong>
+  
+    étoile
+  
+</li></ul>
+  <ul><li><strong>本文链接：</strong>
+ <a href="http://sunnyllxx.github.io/2020/08/17/valine-comment/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2020/08/17/valine-comment/</a>
+</li></ul>
+  <ul><li><strong>版权声明：</strong>
+  本作品采用
+  <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+  进行许可。转载请注明出处！
+  
+</div>
+
+<!-- 添加完成 -->
+
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/zhifubaopicture.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <!-- 添加本文结束标记-->
+
+  <div style="text-align:center;color: #00BFFF;font-size:14px;">
+       -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
+       </div>
+  
+  <!-- 添加完成 -->
+    <div class="article-info article-info-index">
+      
+      
+      
+
+
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -216,21 +361,152 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2020/08/17/valine-comment/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/08/14/download-file/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">微信小程序下载并预览excel,ppt,pdf等文件</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何给hexo-yilia主题添加valine评论系统"><span class="toc-number">1.</span> <span class="toc-text">如何给hexo yilia主题添加valine评论系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-注册leancloud账户"><span class="toc-number">1.1.</span> <span class="toc-text">1 注册leancloud账户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-修改主题文件"><span class="toc-number">1.2.</span> <span class="toc-text">2 修改主题文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-修改article-ejs文件"><span class="toc-number">1.3.</span> <span class="toc-text">2 修改article.ejs文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-新建文件valine-ejs"><span class="toc-number">1.4.</span> <span class="toc-text">3 新建文件valine.ejs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-头像设置"><span class="toc-number">1.5.</span> <span class="toc-text">4 头像设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-注册Gravatar账号"><span class="toc-number">1.6.</span> <span class="toc-text">4.1 注册Gravatar账号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-修改主题配置文件"><span class="toc-number">1.7.</span> <span class="toc-text">4.2 修改主题配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-修改valine-ejs文件"><span class="toc-number">1.8.</span> <span class="toc-text">4.3 修改valine.ejs文件</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+
+
+   <!-- valine评论系统开始 -->
+
+   
+    <section id="comments" class="comments">
+      <style>
+        .comments{margin:30px;padding:10px;background:#fff}
+        @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+      </style>
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'true' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "SqWqnmUuTCilnupzDVQgFhrE-gzGzoHsz",
+            app_key: "EuNlMDzK61IRiansuSobGwsH",
+            placeholder: "留下你的评论吧",
+            avatar:"retro",
+            avatar_cdn:'{{ theme.valine.avatar_cdn }}',
+        });
+    }
+</script>
+
+  </section>
+
+
+<!-- valine评论系统结束 -->
+
+  
+  
   
 
-    
+  
 
- 
+  
 
-
+  
 
 
           </div>
@@ -268,9 +544,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
