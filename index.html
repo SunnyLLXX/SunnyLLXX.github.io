@@ -162,6 +162,190 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-activity-event" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/19/activity-event/">Activity创建、点击事件使用以及真机调试</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+<!--显示阅读次数完毕-->
+  
+        
+        <a href="/2020/09/19/activity-event/" class="archive-article-date">
+  	<time datetime="2020-09-19T02:53:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="如何进行创建活动呢"><a href="#如何进行创建活动呢" class="headerlink" title="如何进行创建活动呢"></a>如何进行创建活动呢</h3><p>本文主要讲解如何创建Activity以及如何使用一些基本控件和事件</p>
+<h4 id="1-创建项目"><a href="#1-创建项目" class="headerlink" title="1 创建项目"></a>1 创建项目</h4><p>首先点击Start a new Android Studio project,创建一个项目，项目名称之类的根据个人喜好填写（我这里取名为Test03），然后点击finish，创建成功。</p>
+<h4 id="2-创建一个Empty-Activity"><a href="#2-创建一个Empty-Activity" class="headerlink" title="2 创建一个Empty Activity"></a>2 创建一个Empty Activity</h4><p>为了方便查看，我们将Android模式改为Project，如下图</p>
+<p><img src="/2020/09/19/activity-event/pic01.png" alt></p>
+<p>目录就变成了如下的样子</p>
+<p><img src="/2020/09/19/activity-event/pic02.png" alt></p>
+<p>接下来，在app-&gt;src-&gt;main-&gt;layout中，右击layout，选择New-&gt;Activity-&gt;Empty Activity，新建一个空的活动，这里命名看个人喜好。</p>
+<p><img src="/2020/09/19/activity-event/pic03.png" alt></p>
+<p><img src="/2020/09/19/activity-event/pic04.png" alt></p>
+<h4 id="3-修改布局文件"><a href="#3-修改布局文件" class="headerlink" title="3 修改布局文件"></a>3 修改布局文件</h4><p>在activity_main.xml中，修改布局为LinearLayout，然后添加按钮代码。android:id用于区分具体标签。</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    tools:context=&quot;.MainActivity&quot;&gt;
+
+&lt;Button android:layout_height=&quot;wrap_content&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:id=&quot;@+id/btn1&quot;
+        android:text=&quot;点击跳转1&quot;&gt;
+
+&lt;/Button&gt;
+
+&lt;/LinearLayout&gt;</code></pre><p>在activity_main2.xml中同样修改布局为LinearLayout，然后添加TextView控件代码</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    tools:context=&quot;.MainActivity2&quot;&gt;
+
+    &lt;TextView android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:text=&quot;欢迎来到第二个界面&quot;&gt;
+
+    &lt;/TextView&gt;
+&lt;/LinearLayout&gt;</code></pre><h4 id="4-点击事件使用"><a href="#4-点击事件使用" class="headerlink" title="4 点击事件使用"></a>4 点击事件使用</h4><h4 id="4-1-匿名内部类"><a href="#4-1-匿名内部类" class="headerlink" title="4.1 匿名内部类"></a>4.1 匿名内部类</h4><p>以匿名内部类的方式，适合按钮比较少的情况下使用。这种方式可以直接创建OnClickListener的匿名内部类传入按钮的setOnClickListener()参数中。</p>
+<p>在app-&gt;src-&gt;main-&gt;java-&gt;com.example.test03文件夹中，选择MainActivity，进入修改代码。</p>
+<pre><code>package com.example.test03;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // 加载布局文件
+        setContentView(R.layout.activity_main);
+        // 通过findViewById()找到按钮，因为该方法返回的是View类型，所以需要进行强制转换为Button
+        Button btn = (Button)findViewById(R.id.btn1);
+        // 使用setOnClickListener()方法创建匿名内部类OnClickListener()当做参数传入，该方法适合按钮较少的情况
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 从主界面跳转到第二个界面
+                Intent intent1 = new Intent(MainActivity.this,MainActivity2.class);
+                startActivity(intent1);
+            }
+        });
+    }
+}</code></pre><h4 id="4-2-使用OnClick属性"><a href="#4-2-使用OnClick属性" class="headerlink" title="4.2 使用OnClick属性"></a>4.2 使用OnClick属性</h4><p>在布局文件中设置按钮onClick属性为其指定Activity中的方法。</p>
+<p>在activity_main.xml文件中，新增一个Button标签</p>
+<pre><code>&lt;Button android:layout_height=&quot;wrap_content&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:id=&quot;@+id/btn2&quot; android:text=&quot;点击2&quot;
+        android:onClick=&quot;btn2Click&quot;&gt;
+&lt;/Button&gt;</code></pre><p>在btn2Click事件属性的最前面可以看到有一个红色的小灯泡，点击选择Create ‘btn2Click(View)’ in ‘MainActivity’，点击进入，填写Toast代码</p>
+<pre><code>public void btn2Click(View view) {
+        Toast.makeText(MainActivity.this,&quot;点击啦&quot;,Toast.LENGTH_LONG).show();
+    }</code></pre><p>Toast是Android系统中特有的提醒方式，在界面上以一个短小的消息通知给用户，并在一段时间内自行消失。</p>
+<pre><code>Toast.makeText(Activity.this, &quot;Notice In Toast&quot;,
+   Toast.LENGTH_SHORT).show();</code></pre><p>参数1：Toast显示的Avtivity名<br>参数2：消息内容字符串<br>参数3：消息显示的时间长度<br>可选值：Toast.LENGTH_SHORT、 Toast.LENGTH_LONG</p>
+<h4 id="5-真机调试"><a href="#5-真机调试" class="headerlink" title="5 真机调试"></a>5 真机调试</h4><p>我的手机是oppo的，所以一下所有操作都将在本手机进行。</p>
+<p>在手机设置-&gt;关于手机找到版本号，轻轻点击几下，知道出现处于开发者模式，然后在其他设置中，找到开发者选项，将USB调试开启，然后将数据线与手机连接，然后进行安装该软件。</p>
+<p>点击绿色小三角进行启动</p>
+<p><img src="/2020/09/19/activity-event/pic08.png" alt></p>
+<p>安装成功后，应该显示如下主界面</p>
+<p><img src="/2020/09/19/activity-event/pic05.jpg" alt></p>
+<p>现在点击“点击跳转1”按钮，跳转到界面2</p>
+<p><img src="/2020/09/19/activity-event/pic06.jpg" alt></p>
+<p>手机返回，重新来到主界面之后，选择“点击2”按钮，出现Toast消息提示。</p>
+<p><img src="/2020/09/19/activity-event/pic07.jpg" alt></p>
+<p>成功啦！！！</p>
+
+      
+
+      <!-- 开始添加版权声明-->
+
+
+<div class="declare" hidden="hidden"></div>
+
+<!-- 添加完成 -->
+
+
+      
+    </div>
+    <!-- 添加本文结束标记-->
+
+  <!-- 添加完成 -->
+    <div class="article-info article-info-index">
+      
+      
+      
+
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Android//" class="article-tag-list-link color3">Android</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/19/activity-event/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-webpack" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1030,100 +1214,6 @@
 
 
   
-    <article id="post-解决layui表单提交内容到网址的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/07/%E8%A7%A3%E5%86%B3layui%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4%E5%86%85%E5%AE%B9%E5%88%B0%E7%BD%91%E5%9D%80%E7%9A%84%E9%97%AE%E9%A2%98/">解决layui表单提交内容到网址的问题</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/07/07/%E8%A7%A3%E5%86%B3layui%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4%E5%86%85%E5%AE%B9%E5%88%B0%E7%BD%91%E5%9D%80%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-07-07T13:34:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="如何解决layui表单提交后内容出现在网址上的问题"><a href="#如何解决layui表单提交后内容出现在网址上的问题" class="headerlink" title="如何解决layui表单提交后内容出现在网址上的问题"></a>如何解决layui表单提交后内容出现在网址上的问题</h3>
-        
-          <a class="article-more-a" href="/2020/07/07/%E8%A7%A3%E5%86%B3layui%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4%E5%86%85%E5%AE%B9%E5%88%B0%E7%BD%91%E5%9D%80%E7%9A%84%E9%97%AE%E9%A2%98/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/layui//" class="article-tag-list-link color1">layui</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/07/%E8%A7%A3%E5%86%B3layui%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4%E5%86%85%E5%AE%B9%E5%88%B0%E7%BD%91%E5%9D%80%E7%9A%84%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1237,15 +1327,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1253,7 +1343,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
               </li>
             
             <div class="clearfix"></div>

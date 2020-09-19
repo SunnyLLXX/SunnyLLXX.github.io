@@ -6,17 +6,13 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>微信小程序上拉分页渲染刷新 | étoile的小窝</title>
+  <title>Category: Android | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="问题 如何在微信小程序中实现上拉分页渲染刷新">
-<meta property="og:type" content="article">
-<meta property="og:title" content="微信小程序上拉分页渲染刷新">
-<meta property="og:url" content="http://sunnyllxx.github.io/2020/08/05/Pagination-loading/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="étoile的小窝">
+<meta property="og:url" content="http://sunnyllxx.github.io/categories/Android/index.html">
 <meta property="og:site_name" content="étoile的小窝">
-<meta property="og:description" content="问题 如何在微信小程序中实现上拉分页渲染刷新">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-08-05T07:14:21.000Z">
-<meta property="article:modified_time" content="2020-08-08T01:12:14.668Z">
 <meta property="article:author" content="étoile">
 <meta name="twitter:card" content="summary">
   
@@ -165,350 +161,61 @@
           </div>
           <div id="js-content" class="content-ll">
             
-<article id="post-Pagination-loading" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 class="article-title" itemprop="name">
-      微信小程序上拉分页渲染刷新
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/09/19/activity-event/" class="archive-article-date">
+  	<time datetime="2020-09-19T02:53:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-19</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/09/19/activity-event/">Activity创建、点击事件使用以及真机调试</a>
     </h1>
   
 
-        <!--显示阅读次数-->
+        <div class="article-info info-on-right">
+          
 
 
-
-  <br/>
-  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
-  <span class="icon-sort"></span>
-  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
-           👁 &nbsp;<span id="busuanzi_value_page_pv"></span> &nbsp;&nbsp;
-  </span>
-  </a>
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/08/05/Pagination-loading/" class="archive-article-date">
-  	<time datetime="2020-08-05T07:14:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="问题-如何在微信小程序中实现上拉分页渲染刷新"><a href="#问题-如何在微信小程序中实现上拉分页渲染刷新" class="headerlink" title="问题 如何在微信小程序中实现上拉分页渲染刷新"></a>问题 如何在微信小程序中实现上拉分页渲染刷新</h3><a id="more"></a>
-
-<p>上拉加载，获取更多数据主要利用了微信官方文档API中的onReachBottom方法，它表示“页面上拉触底事件的处理函数”，就可以在这请求服务器获取新的数据并且添加到现有数据下面。</p>
-<h4 id="1-添加页码以及页容量"><a href="#1-添加页码以及页容量" class="headerlink" title="1 添加页码以及页容量"></a>1 添加页码以及页容量</h4><p>pagenum代表当前页码，pagesize表示页容量（一页多少条数据），totalpages表示总的页码</p>
-<pre><code>/**分页渲染的参数 */
-QueryParams:{
-pagenum:1,
-pagesize:8,
-totalPages:1
-},</code></pre><h4 id="2-页面进行初始化数据"><a href="#2-页面进行初始化数据" class="headerlink" title="2 页面进行初始化数据"></a>2 页面进行初始化数据</h4><p>在onload函数中进行请求服务器初始化数据。</p>
-<pre><code>wx.request({
-    url: &apos;http://xxxx/&apos;+that.QueryParams.pagenum+&quot;/&quot;+that.QueryParams.pagesize, 
-    data: {
-    },
-    header: {
-        &apos;content-type&apos;: &apos;application/json&apos; // 默认值
-    },
-    success (res) {
-        console.log(res.data)    //从后端拿到所有的消息信息
-        //计算后端传递数据过来的总的页码数=（总条数/页容量）
-        that.QueryParams.totalPages=Math.ceil(res.data.data.total/that.QueryParams.pagesize);
-        console.log(that.QueryParams.totalPages);
-        that.setData({
-        messagelist:res.data.data.rows //然后修改前端页面渲染的数据，后端数据内容具体看后端传递过来的（我这里是res.data.data.rows）
-        })
-    }
-    })   </code></pre><h3 id="3-请求加载更多数据"><a href="#3-请求加载更多数据" class="headerlink" title="3 请求加载更多数据"></a>3 请求加载更多数据</h3><p>首先写一个请多更多数据的函数</p>
-<pre><code>async getMessagelistMore(){
-    var that=this;
-    wx.request({
-    url: &apos;https://xxx/&apos;+that.QueryParams.pagenum+&quot;/&quot;+that.QueryParams.pagesize, 
-    data: {
-    },
-    header: {
-        &apos;content-type&apos;: &apos;application/json&apos; // 默认值
-    },
-    success (res) {
-        console.log(res.data)    //从后端拿到所有的消息信息
-        //计算总的页数
-        that.QueryParams.totalPages=Math.ceil(res.data.data.total/that.QueryParams.pagesize);
-        console.log(that.QueryParams.totalPages);
-        /**修改数组数据，将数组进行拼接 一定要进行数组拼接*/
-        that.setData({
-        messagelist:[...that.data.messagelist,...res.data.data.rows] 
-        })
-    }
-    })   
-
-},</code></pre><p>然后在onReachBottom函数中进行填写代码，为了用户体验性，可以先显示加载图标，然后判断当前页码是否大于等于总页码，如果是，那么就意味着到底了，没有数据可以加载了，可以给出提示，如果不是，请求加载更多的数据</p>
-<pre><code>onReachBottom: function () {
-    var that=this;
-    //显示加载图标
-    // wx.showLoading({
-    //   title: &apos;拼命加载中&apos;,
-    // })
-    wx.showToast({
-    title: &apos;拼命加载中&apos;,
-    icon: &apos;loading&apos;,
-    duration: 2000
-    })
-    //发送上拉加载请求
-    if(that.QueryParams.pagenum&gt;=that.QueryParams.totalPages)
-    {
-    wx.showToast({
-        title: &apos;已经到底啦&apos;,
-    })
-    }else{
-    //页数加1
-    that.QueryParams.pagenum++;
-    that.getMessagelistMore();
-        //隐藏加载框
-        // wx.hideLoading();
-
-    }
-
-
-},</code></pre>
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare">
-  <ul><li><strong>本文作者：</strong>
-  
-    étoile
-  
-</li></ul>
-  <ul><li><strong>本文链接：</strong>
- <a href="http://sunnyllxx.github.io/2020/08/05/Pagination-loading/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2020/08/05/Pagination-loading/</a>
-</li></ul>
-  <ul><li><strong>版权声明：</strong>
-  本作品采用
-  <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
-  进行许可。转载请注明出处！
-  
-</div>
-
-<!-- 添加完成 -->
-
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/zhifubaopicture.jpg">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <div style="text-align:center;color: #00BFFF;font-size:14px;">
-       -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
-       </div>
-  
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/微信小程序//" class="article-tag-list-link color1">微信小程序</a>
+        			<a href="/categories/Android//" class="article-tag-list-link color3">Android</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2020/08/05/Pagination-loading/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/08/07/jump-page/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          微信小程序跨页面传递参数
-        
-      </div>
-    </a>
   
   
-    <a href="/2020/07/30/components/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">微信小程序自定义组件tab选项</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题-如何在微信小程序中实现上拉分页渲染刷新"><span class="toc-number">1.</span> <span class="toc-text">问题 如何在微信小程序中实现上拉分页渲染刷新</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-添加页码以及页容量"><span class="toc-number">1.1.</span> <span class="toc-text">1 添加页码以及页容量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-页面进行初始化数据"><span class="toc-number">1.2.</span> <span class="toc-text">2 页面进行初始化数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-请求加载更多数据"><span class="toc-number">2.</span> <span class="toc-text">3 请求加载更多数据</span></a></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-
-
-   <!-- valine评论系统开始 -->
-
-   
-    <section id="comments" class="comments">
-      <style>
-        .comments{margin:30px;padding:10px;background:#fff}
-        @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
-      </style>
-      <div id="vcomment" class="comment"></div> 
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script>
-   var notify = 'true' == true ? true : false;
-   var verify = 'false' == true ? true : false;
-    window.onload = function() {
-        new Valine({
-            el: '.comment',
-            notify: notify,
-            verify: verify,
-            app_id: "SqWqnmUuTCilnupzDVQgFhrE-gzGzoHsz",
-            app_key: "EuNlMDzK61IRiansuSobGwsH",
-            placeholder: "留下你的评论吧",
-            avatar:"retro",
-            avatar_cdn:'{{ theme.valine.avatar_cdn }}',
-        });
-    }
-</script>
-
-  </section>
-
-
-<!-- valine评论系统结束 -->
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -546,10 +253,10 @@ totalPages:1
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
-		isCategory: false,
+		isCategory: true,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
