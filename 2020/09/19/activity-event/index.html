@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
   <title>Activity创建、点击事件使用以及真机调试 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="如何进行创建活动呢本文主要讲解如何创建Activity以及如何使用一些基本控件和事件 1 创建项目首先点击Start a new Android Studio project,创建一个项目，项目名称之类的根据个人喜好填写（我这里取名为Test03），然后点击finish，创建成功。 2 创建一个Empty Activity为了方便查看，我们将Android模式改为Project，如下图  目录就变">
+  <meta name="description" content="如何进行创建活动呢本文主要讲解如何创建Activity以及如何使用一些基本控件和事件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Activity创建、点击事件使用以及真机调试">
 <meta property="og:url" content="http://sunnyllxx.github.io/2020/09/19/activity-event/index.html">
 <meta property="og:site_name" content="étoile的小窝">
-<meta property="og:description" content="如何进行创建活动呢本文主要讲解如何创建Activity以及如何使用一些基本控件和事件 1 创建项目首先点击Start a new Android Studio project,创建一个项目，项目名称之类的根据个人喜好填写（我这里取名为Test03），然后点击finish，创建成功。 2 创建一个Empty Activity为了方便查看，我们将Android模式改为Project，如下图  目录就变">
+<meta property="og:description" content="如何进行创建活动呢本文主要讲解如何创建Activity以及如何使用一些基本控件和事件">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://sunnyllxx.github.io/2020/09/19/activity-event/pic01.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2020/09/19/activity-event/pic02.png">
@@ -24,7 +24,7 @@
 <meta property="og:image" content="http://sunnyllxx.github.io/2020/09/19/activity-event/pic06.jpg">
 <meta property="og:image" content="http://sunnyllxx.github.io/2020/09/19/activity-event/pic07.jpg">
 <meta property="article:published_time" content="2020-09-19T02:53:29.000Z">
-<meta property="article:modified_time" content="2020-09-19T10:15:16.676Z">
+<meta property="article:modified_time" content="2020-09-19T10:20:49.541Z">
 <meta property="article:author" content="étoile">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://sunnyllxx.github.io/2020/09/19/activity-event/pic01.png">
@@ -209,6 +209,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="如何进行创建活动呢"><a href="#如何进行创建活动呢" class="headerlink" title="如何进行创建活动呢"></a>如何进行创建活动呢</h3><p>本文主要讲解如何创建Activity以及如何使用一些基本控件和事件</p>
+<a id="more"></a>
+
 <h4 id="1-创建项目"><a href="#1-创建项目" class="headerlink" title="1 创建项目"></a>1 创建项目</h4><p>首先点击Start a new Android Studio project,创建一个项目，项目名称之类的根据个人喜好填写（我这里取名为Test03），然后点击finish，创建成功。</p>
 <h4 id="2-创建一个Empty-Activity"><a href="#2-创建一个Empty-Activity" class="headerlink" title="2 创建一个Empty Activity"></a>2 创建一个Empty Activity</h4><p>为了方便查看，我们将Android模式改为Project，如下图</p>
 <p><img src="/2020/09/19/activity-event/pic01.png" alt></p>
@@ -290,7 +292,7 @@ public class MainActivity extends AppCompatActivity {
     }</code></pre><p>Toast是Android系统中特有的提醒方式，在界面上以一个短小的消息通知给用户，并在一段时间内自行消失。</p>
 <pre><code>Toast.makeText(Activity.this, &quot;Notice In Toast&quot;,
    Toast.LENGTH_SHORT).show();</code></pre><p>参数1：Toast显示的Avtivity名<br>参数2：消息内容字符串<br>参数3：消息显示的时间长度<br>可选值：Toast.LENGTH_SHORT、 Toast.LENGTH_LONG</p>
-<h4 id="5-真机调试"><a href="#5-真机调试" class="headerlink" title="5 真机调试"></a>5 真机调试</h4><p>我的手机是oppo的，所以一下所有操作都将在本手机进行。</p>
+<h4 id="5-真机调试"><a href="#5-真机调试" class="headerlink" title="5 真机调试"></a>5 真机调试</h4><p>我的手机是oppo的，所以以下所有操作都将在本手机进行。</p>
 <p>在手机设置-&gt;关于手机找到版本号，轻轻点击几下，知道出现处于开发者模式，然后在其他设置中，找到开发者选项，将USB调试开启，然后将数据线与手机连接，然后进行安装该软件。</p>
 <p>点击绿色小三角进行启动</p>
 <p><img src="/2020/09/19/activity-event/pic08.png" alt></p>
