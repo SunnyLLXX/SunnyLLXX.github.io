@@ -6,15 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>étoile的小窝</title>
+  <title>Activity之间的跳转 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="étoile的小窝">
-<meta property="og:url" content="http://sunnyllxx.github.io/index.html">
+  <meta name="description" content="Activity之间是如何进行跳转以及数据传递的呢activity之间是通过intent进行activity之间的跳转的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Activity之间的跳转">
+<meta property="og:url" content="http://sunnyllxx.github.io/2020/09/19/activity-jump/index.html">
 <meta property="og:site_name" content="étoile的小窝">
+<meta property="og:description" content="Activity之间是如何进行跳转以及数据传递的呢activity之间是通过intent进行activity之间的跳转的。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://sunnyllxx.github.io/2020/09/19/activity-jump/pic01.jpg">
+<meta property="og:image" content="http://sunnyllxx.github.io/2020/09/19/activity-jump/pic02.jpg">
+<meta property="og:image" content="http://sunnyllxx.github.io/2020/09/19/activity-jump/pic03.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2020/09/19/activity-jump/pic04.png">
+<meta property="article:published_time" content="2020-09-19T10:58:44.000Z">
+<meta property="article:modified_time" content="2020-09-28T07:21:48.270Z">
 <meta property="article:author" content="étoile">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sunnyllxx.github.io/2020/09/19/activity-jump/pic01.jpg">
   
     <link rel="alternative" href="/atom.xml" title="étoile的小窝" type="application/atom+xml">
   
@@ -161,19 +170,28 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-    <article id="post-activity-jump" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+<article id="post-activity-jump" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/19/activity-jump/">Activity之间的跳转</a>
+    <h1 class="article-title" itemprop="name">
+      Activity之间的跳转
     </h1>
   
 
         <!--显示阅读次数-->
+
+
+
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+           👁 &nbsp;<span id="busuanzi_value_page_pv"></span> &nbsp;&nbsp;
+  </span>
+  </a>
 
 <!--显示阅读次数完毕-->
   
@@ -187,23 +205,193 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="Activity之间是如何进行跳转以及数据传递的呢"><a href="#Activity之间是如何进行跳转以及数据传递的呢" class="headerlink" title="Activity之间是如何进行跳转以及数据传递的呢"></a>Activity之间是如何进行跳转以及数据传递的呢</h3><p>activity之间是通过intent进行activity之间的跳转的。</p>
-        
-          <a class="article-more-a" href="/2020/09/19/activity-jump/#more">more >></a>
-        
+<a id="more"></a>
+<p>本文是在<a href="http://sunnyllxx.github.io/2020/09/19/activity-event/">Activity创建、点击事件使用以及真机调试 </a>  基础上面进行补充添加的（所有的界面样式看个人喜欢自己添加）</p>
+<h4 id="1-Intent-介绍"><a href="#1-Intent-介绍" class="headerlink" title="1 Intent 介绍"></a>1 Intent 介绍</h4><p>Intent被称为意图，是程序中各组件进行交互的一种重要方式，它不仅可以指定当前组件要执行的动作，还可以在不同组件之间进行数据传递。<br>一般用于启动Activity、Service以及发送广播等。根据开启目标组件的方式不同，Intent被分为两种类型显示意图和隐式意图。</p>
+<p>显式意图可以直接通过名称开启指定的目标组件。</p>
+<p>隐式意图通过指定action和category等属性，系统根据这些信息进行分析后寻找目标Activity。</p>
+<h4 id="1-1-显示意图"><a href="#1-1-显示意图" class="headerlink" title="1.1 显示意图"></a>1.1 显示意图</h4><pre><code>Intent intent = new Intent(this, Activity02.class); 
+
+// 创建一个Intent对象，其中第1个参数为Context表示当前的Activity对象，第2个参数表示要启动的目标Activity。
+
+startActivity(intent);
+
+// 调用Activity的startActivity方法启动目标组件</code></pre><p>在Test03项目中的MainActivity.java中的按钮的代码就是显示意图，代码如下。</p>
+<pre><code>Button btn = (Button)findViewById(R.id.btn1);
+        // 使用setOnClickListener()方法创建匿名内部类OnClickListener()当做参数传入，该方法适合按钮较少的情况
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 从主界面跳转到第二个界面
+                Intent intent1 = new Intent(MainActivity.this,MainActivity2.class);
+                startActivity(intent1);
+            }
+        });</code></pre><p>显示意图可以通过三种方法创建</p>
+<pre><code>1.通过类名
+    Intent intent = new Intent(FirstActivity.this,SecondActivity.class);                                                startActivity(intent);
+
+2.通过类名
+    Intent intent = new Intent(); 
+    intent.setClass(FirstActivity.this, cn.itcast.SecondActivity.class);
+    startActivity(intent);
+
+3.通过字符串调用——解耦
+    Intent intent = new Intent(); 
+    intent.setClassName(FirstActivity.this,&quot;cn.itcast.SecondActivity&quot;);
+    startActivity(intent);</code></pre><h4 id="1-2-隐式意图"><a href="#1-2-隐式意图" class="headerlink" title="1.2 隐式意图"></a>1.2 隐式意图</h4><p>首先在AndroidManifest.xml文件中给MainActivity2活动添加intent-filter标签。action标签设置action动作，当与代码中的action与该action相匹配时启动该组件（action名字自己随意取）。</p>
+<p>在目标活动注册时，将其接受的Intent的action和category一并记录下来，<br>Action定义当前intent的动作，这里相当于将cn.itcast.ACTION_START action与本App的MainActivity2绑定了，任何App只要报上这个action都能将其打开。<br>系统中也定义了一些类似的action，如，ACTION_DIAL拨打电话界面<br>Category定义当前动作（Action）被执行的环境，如果不符合这个环境将无法激活，如，CATEGORY_DEFAULT ，默认环境，所有intent都能激活.</p>
+<pre><code>&lt;activity android:name=&quot;.MainActivity2&quot;&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;cn.itcast.ACTION_START&quot; /&gt;
+
+                &lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;
+            &lt;/intent-filter&gt;
+&lt;/activity&gt;</code></pre><p>在activity_main.xml文件中再添加一个按钮3用于测试隐式意图。</p>
+<pre><code>&lt;Button android:layout_height=&quot;wrap_content&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:id=&quot;@+id/btn3&quot; android:text=&quot;点击3&quot;
+        android:onClick=&quot;btn3Click&quot;
+        android:layout_marginLeft=&quot;140dp&quot;
+        android:layout_marginRight=&quot;140dp&quot;
+        android:layout_marginBottom=&quot;30dp&quot;
+        android:layout_marginTop=&quot;30dp&quot;&gt;
+&lt;/Button&gt;</code></pre><p>在MainActivity.java中，添加隐式意图代码</p>
+<pre><code>public void btn3Click(View view) {
+        Intent intent = new Intent();
+        // 设置action动作，当与清单文件中的action相匹配时启动目标组件。
+        intent.setAction(&quot;cn.itcast.START_ACTIVITY&quot;);
+        intent.addCategory(&quot;android.intent.category.DEFAULT&quot;);
+        // 使用隐式Intent时，注意action与category必须都匹配，否则程序会报错。
+        startActivity(intent);
+    }</code></pre><p>另外，可使用隐式intent打开很多系统应用界面，如：系统浏览器、短信界面、拨号界面、联系人界面、各种系统设置界面。</p>
+<p>既然Activity之间可以发生跳转，那么页面之间也是需要进行数据传递的，如何进行数据传递呢？</p>
+<h4 id="2-数据传递"><a href="#2-数据传递" class="headerlink" title="2 数据传递"></a>2 数据传递</h4><h4 id="2-1-使用putExtra-方法"><a href="#2-1-使用putExtra-方法" class="headerlink" title="2.1 使用putExtra()方法"></a>2.1 使用putExtra()方法</h4><p>Activity之间传递数据需要用到Intent提供的putExtra()方法。一个Activity进行传递数据，一个Activity进行数据接收。</p>
+<p>在activity_main.xml文件中添加两个按钮，用于接收activity_main传递过来的数据</p>
+<pre><code>&lt;Button
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:text=&quot;点击接收按钮1数据&quot;
+        android:onClick=&quot;btn&quot;
+        android:layout_marginLeft=&quot;140dp&quot;
+        android:layout_marginRight=&quot;140dp&quot;
+        android:layout_marginBottom=&quot;30dp&quot;
+        android:layout_marginTop=&quot;30dp&quot;&gt;
+
+&lt;/Button&gt;
+&lt;Button
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:text=&quot;点击接收按钮2数据&quot;
+        android:onClick=&quot;btn2Click&quot;
+        android:layout_marginLeft=&quot;140dp&quot;
+        android:layout_marginRight=&quot;140dp&quot;
+        android:layout_marginBottom=&quot;30dp&quot;
+        android:layout_marginTop=&quot;30dp&quot;&gt;
+
+&lt;/Button&gt;</code></pre><p>在MainActivity.java文件中的第一个按钮的setOnClickListener中补充如下代码</p>
+<pre><code>protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // 加载布局文件
+        setContentView(R.layout.activity_main);
+        // 通过findViewById()找到按钮，因为该方法返回的是View类型，所以需要进行强制转换为Button
+        Button btn = (Button)findViewById(R.id.btn1);
+        // 使用setOnClickListener()方法创建匿名内部类OnClickListener()当做参数传入，该方法适合按钮较少的情况
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 从主界面跳转到第二个界面
+                Intent intent1 = new Intent(MainActivity.this,MainActivity2.class);
+                intent1.putExtra(&quot;username&quot;,&quot;hello&quot;); // putExtra()方法进行传递数据，注意这里传的是字符串，注意选择
+                intent1.putExtra(&quot;age&quot;,20); // 这里传的是数值，若是需要传递多个数据，就写多个putExtra()
+                startActivity(intent1);
+            }
+        });
+    }</code></pre><p>在MainActivity2.java中补充如下代码，用于接收MainActivity的数据</p>
+<pre><code>public void btn(View view) {
+        Intent intent1 = getIntent();
+        // getIntent()用于接收数据，这里接收按钮1的传递数据
+        String username = intent1.getStringExtra(&quot;username&quot;);
+        Log.d(&quot;username&quot;,username);
+        // 将数据进行打印
+        int age = intent1.getIntExtra(&quot;age&quot;,0); // 后面的0是该方法的默认值，随意写
+        Log.d(&quot;age&quot;,String.valueOf(age)); // 这里因为接收的字符串，所以需要将数值转化成字符串
+
+
+    }</code></pre><h4 id="2-2-使用Bundle"><a href="#2-2-使用Bundle" class="headerlink" title="2.2 使用Bundle"></a>2.2 使用Bundle</h4><p>在MainActivity2.java中添加如下代码</p>
+<pre><code>public void btn2Click(View view) {
+    //这里接收按钮3传递的数据
+    Bundle bundle = this.getIntent().getExtras();
+    String sex = bundle.getString(&quot;sex&quot;);
+    int score = bundle.getInt(&quot;score&quot;,0);
+    Log.d(&quot;sex&quot;,sex);
+    Log.d(&quot;score&quot;,String.valueOf(score));
+}</code></pre><h4 id="2-3-真机调试"><a href="#2-3-真机调试" class="headerlink" title="2.3 真机调试"></a>2.3 真机调试</h4><p>在Android Studio中点击运行，手机出现如下界面</p>
+<p><img src="/2020/09/19/activity-jump/pic01.jpg" alt></p>
+<p>接着点击“点击跳转1”按钮，跳转到第二个界面，如下图所示</p>
+<p><img src="/2020/09/19/activity-jump/pic02.jpg" alt></p>
+<p>然后点击“点击接收按钮1的数据”，在Android Studio的Logcat中可以看到打印出了第一个界面中的第一个按钮传递给第二个界面的数据，如下图所示</p>
+<p><img src="/2020/09/19/activity-jump/pic03.png" alt></p>
+<p>手机返回，点击“点击3”按钮，同样跳转到第二个界面，点击“点击接收按钮2的数据”，在Android Studio的Logcat中可以看到打印出了第一个界面中的第一个按钮传递给第二个界面的数据，如下图所示</p>
+<p><img src="/2020/09/19/activity-jump/pic04.png" alt></p>
+
       
 
       <!-- 开始添加版权声明-->
 
 
-<div class="declare" hidden="hidden"></div>
+<div class="declare">
+  <ul><li><strong>本文作者：</strong>
+  
+    étoile
+  
+</li></ul>
+  <ul><li><strong>本文链接：</strong>
+ <a href="http://sunnyllxx.github.io/2020/09/19/activity-jump/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2020/09/19/activity-jump/</a>
+</li></ul>
+  <ul><li><strong>版权声明：</strong>
+  本作品采用
+  <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+  进行许可。转载请注明出处！
+  
+</div>
 
 <!-- 添加完成 -->
 
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/zhifubaopicture.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <!-- 添加本文结束标记-->
 
+  <div style="text-align:center;color: #00BFFF;font-size:14px;">
+       -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
+       </div>
+  
   <!-- 添加完成 -->
     <div class="article-info article-info-index">
       
@@ -225,16 +413,75 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/19/activity-jump/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2020/09/19/activity-jump/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/09/19/activity-event/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Activity创建、点击事件使用以及真机调试</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -249,885 +496,67 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-activity-event" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/19/activity-event/">Activity创建、点击事件使用以及真机调试</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/09/19/activity-event/" class="archive-article-date">
-  	<time datetime="2020-09-19T02:53:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="如何进行创建活动呢"><a href="#如何进行创建活动呢" class="headerlink" title="如何进行创建活动呢"></a>如何进行创建活动呢</h3><p>本文主要讲解如何创建Activity以及如何使用一些基本控件和事件</p>
-        
-          <a class="article-more-a" href="/2020/09/19/activity-event/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Android//" class="article-tag-list-link color3">Android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/19/activity-event/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Activity之间是如何进行跳转以及数据传递的呢"><span class="toc-number">1.</span> <span class="toc-text">Activity之间是如何进行跳转以及数据传递的呢</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Intent-介绍"><span class="toc-number">1.1.</span> <span class="toc-text">1 Intent 介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-显示意图"><span class="toc-number">1.2.</span> <span class="toc-text">1.1 显示意图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-隐式意图"><span class="toc-number">1.3.</span> <span class="toc-text">1.2 隐式意图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-数据传递"><span class="toc-number">1.4.</span> <span class="toc-text">2 数据传递</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-使用putExtra-方法"><span class="toc-number">1.5.</span> <span class="toc-text">2.1 使用putExtra()方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-使用Bundle"><span class="toc-number">1.6.</span> <span class="toc-text">2.2 使用Bundle</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-真机调试"><span class="toc-number">1.7.</span> <span class="toc-text">2.3 真机调试</span></a></li></ol></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
 
-  
-    <article id="post-webpack" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/24/webpack/">webpack的使用</a>
-    </h1>
-  
 
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/08/24/webpack/" class="archive-article-date">
-  	<time datetime="2020-08-24T05:08:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="如何使用webpack呢"><a href="#如何使用webpack呢" class="headerlink" title="如何使用webpack呢"></a>如何使用webpack呢</h3>
-        
-          <a class="article-more-a" href="/2020/08/24/webpack/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">webpack</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/24/webpack/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Shopping-cart-case" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/22/Shopping-cart-case/">Vue购物车小案例</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/08/22/Shopping-cart-case/" class="archive-article-date">
-  	<time datetime="2020-08-22T02:25:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="利用vue-js写一个简易的购物车小案例"><a href="#利用vue-js写一个简易的购物车小案例" class="headerlink" title="利用vue.js写一个简易的购物车小案例"></a>利用vue.js写一个简易的购物车小案例</h3>
-        
-          <a class="article-more-a" href="/2020/08/22/Shopping-cart-case/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/22/Shopping-cart-case/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-valine-comment" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/17/valine-comment/">hexo yilia主题添加valine评论系统</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/08/17/valine-comment/" class="archive-article-date">
-  	<time datetime="2020-08-17T09:10:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="如何给hexo-yilia主题添加valine评论系统"><a href="#如何给hexo-yilia主题添加valine评论系统" class="headerlink" title="如何给hexo yilia主题添加valine评论系统"></a>如何给hexo yilia主题添加valine评论系统</h3>
-        
-          <a class="article-more-a" href="/2020/08/17/valine-comment/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/17/valine-comment/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-download-file" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/14/download-file/">微信小程序下载并预览excel,ppt,pdf等文件</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/08/14/download-file/" class="archive-article-date">
-  	<time datetime="2020-08-14T09:44:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="问题-如何在微信小程序中进行下载并预览文件呢"><a href="#问题-如何在微信小程序中进行下载并预览文件呢" class="headerlink" title="问题 如何在微信小程序中进行下载并预览文件呢"></a>问题 如何在微信小程序中进行下载并预览文件呢</h3>
-        
-          <a class="article-more-a" href="/2020/08/14/download-file/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/微信小程序//" class="article-tag-list-link color1">微信小程序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/14/download-file/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Shopping-spike" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/11/Shopping-spike/">购物倒计时秒杀小案例页面</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/08/11/Shopping-spike/" class="archive-article-date">
-  	<time datetime="2020-08-11T05:39:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="问题-如何写一个购物时的倒计时秒杀小案例"><a href="#问题-如何写一个购物时的倒计时秒杀小案例" class="headerlink" title="问题 如何写一个购物时的倒计时秒杀小案例"></a>问题 如何写一个购物时的倒计时秒杀小案例</h3>
-        
-          <a class="article-more-a" href="/2020/08/11/Shopping-spike/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/11/Shopping-spike/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Create-tables-dynamically" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/09/Create-tables-dynamically/">动态创建表格</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/08/09/Create-tables-dynamically/" class="archive-article-date">
-  	<time datetime="2020-08-09T13:02:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="问题-如何利用数据动态创建表格以及使表格隔行变色"><a href="#问题-如何利用数据动态创建表格以及使表格隔行变色" class="headerlink" title="问题 如何利用数据动态创建表格以及使表格隔行变色"></a>问题 如何利用数据动态创建表格以及使表格隔行变色</h3>
-        
-          <a class="article-more-a" href="/2020/08/09/Create-tables-dynamically/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/09/Create-tables-dynamically/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-jump-page" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/07/jump-page/">微信小程序跨页面传递参数</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/08/07/jump-page/" class="archive-article-date">
-  	<time datetime="2020-08-07T15:17:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="问题-微信小程序如何实现跨页面传递参数呢"><a href="#问题-微信小程序如何实现跨页面传递参数呢" class="headerlink" title="问题 微信小程序如何实现跨页面传递参数呢"></a>问题 微信小程序如何实现跨页面传递参数呢</h3>
-        
-          <a class="article-more-a" href="/2020/08/07/jump-page/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/微信小程序//" class="article-tag-list-link color1">微信小程序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/07/jump-page/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Pagination-loading" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/05/Pagination-loading/">微信小程序上拉分页渲染刷新</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/08/05/Pagination-loading/" class="archive-article-date">
-  	<time datetime="2020-08-05T07:14:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="问题-如何在微信小程序中实现上拉分页渲染刷新"><a href="#问题-如何在微信小程序中实现上拉分页渲染刷新" class="headerlink" title="问题 如何在微信小程序中实现上拉分页渲染刷新"></a>问题 如何在微信小程序中实现上拉分页渲染刷新</h3>
-        
-          <a class="article-more-a" href="/2020/08/05/Pagination-loading/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/微信小程序//" class="article-tag-list-link color1">微信小程序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/05/Pagination-loading/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
+   <!-- valine评论系统开始 -->
+
+   
+    <section id="comments" class="comments">
+      <style>
+        .comments{margin:30px;padding:10px;background:#fff}
+        @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+      </style>
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'true' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "SqWqnmUuTCilnupzDVQgFhrE-gzGzoHsz",
+            app_key: "EuNlMDzK61IRiansuSobGwsH",
+            placeholder: "留下你的评论吧",
+            avatar:"retro",
+            avatar_cdn:'{{ theme.valine.avatar_cdn }}',
+        });
+    }
+</script>
+
+  </section>
+
+
+<!-- valine评论系统结束 -->
 
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -1165,8 +594,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
