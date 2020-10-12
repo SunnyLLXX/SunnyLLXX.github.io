@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>Archives: 2020 | étoile的小窝</title>
+  <title>最常用和最难用的控件——ListView | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="étoile的小窝">
-<meta property="og:url" content="http://sunnyllxx.github.io/archives/2020/page/2/index.html">
+  <meta name="description" content="ListView的简单介绍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最常用和最难用的控件——ListView">
+<meta property="og:url" content="http://sunnyllxx.github.io/2020/10/12/ListView/index.html">
 <meta property="og:site_name" content="étoile的小窝">
+<meta property="og:description" content="ListView的简单介绍">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://sunnyllxx.github.io/2020/10/12/ListView/pic01.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2020/10/12/ListView/pic02.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2020/10/12/ListView/pic03.png">
+<meta property="article:published_time" content="2020-10-12T00:36:46.000Z">
+<meta property="article:modified_time" content="2020-10-12T00:58:02.797Z">
 <meta property="article:author" content="étoile">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sunnyllxx.github.io/2020/10/12/ListView/pic01.png">
   
     <link rel="alternative" href="/atom.xml" title="étoile的小窝" type="application/atom+xml">
   
@@ -161,435 +169,446 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-ListView" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      最常用和最难用的控件——ListView
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+
+
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+           👁 &nbsp;<span id="busuanzi_value_page_pv"></span> &nbsp;&nbsp;
+  </span>
+  </a>
+
+<!--显示阅读次数完毕-->
+  
+        
+        <a href="/2020/10/12/ListView/" class="archive-article-date">
+  	<time datetime="2020-10-12T00:36:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-12</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="ListView的简单介绍"><a href="#ListView的简单介绍" class="headerlink" title="ListView的简单介绍"></a>ListView的简单介绍</h3><a id="more"></a>
+
+
+
+<p>ListView绝对可以称得上是Android中最常用的控件之一，几乎所有的应用程序都会用到它。由 于手机屏幕空间都比较有限，能够一次性在屏幕上显示的内容并不多，当我们的程序中有大量 的数据需要展示的时候，就可以借助ListView来实现。ListView允许用户通过手指上下滑动的方 式将屏幕外的数据滚动到屏幕内，同时屏幕上原有的数据则会滚动出屏幕。</p>
+<h4 id="定制的ListView的界面"><a href="#定制的ListView的界面" class="headerlink" title="定制的ListView的界面"></a>定制的ListView的界面</h4><h4 id="1-创建新的项目"><a href="#1-创建新的项目" class="headerlink" title="1 创建新的项目"></a>1 创建新的项目</h4><p>首先创建一个新的项目，命名为ListVIewTest。</p>
+<h4 id="2-修改activity-main-xml的代码"><a href="#2-修改activity-main-xml的代码" class="headerlink" title="2 修改activity_main.xml的代码"></a>2 修改activity_main.xml的代码</h4><p>添加ListView控件，并且给ListView一个id</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    tools:context=&quot;.MainActivity&quot;&gt;
+    &lt;ListView android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:id=&quot;@+id/listView&quot;&gt;
+
+    &lt;/ListView&gt;
+
+
+&lt;/LinearLayout&gt;</code></pre><h4 id="3-新建一个news类"><a href="#3-新建一个news类" class="headerlink" title="3 新建一个news类"></a>3 新建一个news类</h4><p>新建一个news类，命名为news，添加如下代码。</p>
+<p><img src="/2020/10/12/ListView/pic01.png" alt></p>
+<pre><code>package com.example.listviewtest;
+
+public class news {
+    private int image;
+    private String title;
+    private String origin;
+    private String date;
+    public news(String title,int image,String origin,String date){
+        this.title = title;
+        this.image = image;
+        this.date = date;
+        this.origin = origin;
+    }
+    public int getImage(){
+        return image;
+    }
+    public  String getOrigin(){
+        return origin;
+    }
+    public String getTitle(){
+        return title;
+    }
+    public String getDate(){
+        return date;
+    }
+}</code></pre><h4 id="4-为ListView的子项指定一个自定义的news-item-xml文件"><a href="#4-为ListView的子项指定一个自定义的news-item-xml文件" class="headerlink" title="4 为ListView的子项指定一个自定义的news_item.xml文件"></a>4 为ListView的子项指定一个自定义的news_item.xml文件</h4><p>新建一个xml文件，并且命名为news_item，然后添加如下代码。该界面就是ListView的具体样子，样式之类的看个人喜欢，注意每个控件的id都需要添上。</p>
+<p><img src="/2020/10/12/ListView/pic02.png" alt></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:orientation=&quot;vertical&quot;&gt;
+    &lt;LinearLayout
+        android:layout_width=&quot;390dp&quot;
+        android:layout_height=&quot;140dp&quot;&gt;
+        &lt;LinearLayout
+            android:layout_width=&quot;0dp&quot;
+            android:layout_height=&quot;100dp&quot;
+            android:layout_weight=&quot;1&quot;
+            android:layout_marginTop=&quot;20dp&quot;&gt;
+            &lt;ImageView
+                android:layout_width=&quot;100dp&quot;
+                android:layout_height=&quot;100dp&quot;
+                android:id=&quot;@+id/img&quot;
+                android:paddingTop=&quot;20dp&quot;&gt;
+
+            &lt;/ImageView&gt;
+        &lt;/LinearLayout&gt;
+        &lt;LinearLayout
+            android:layout_width=&quot;0dp&quot;
+            android:layout_height=&quot;match_parent&quot;
+            android:layout_weight=&quot;1&quot;
+            android:orientation=&quot;vertical&quot;
+            android:layout_marginLeft=&quot;30dp&quot;&gt;
+            &lt;TextView
+                android:layout_width=&quot;wrap_content&quot;
+                android:layout_height=&quot;wrap_content&quot;
+                android:id=&quot;@+id/title&quot;
+                android:textColor=&quot;#000000&quot;
+                android:textSize=&quot;20dp&quot;
+                android:layout_marginTop=&quot;40dp&quot;
+                &gt;
+
+            &lt;/TextView&gt;
+            &lt;TextView
+                android:layout_width=&quot;wrap_content&quot;
+                android:layout_height=&quot;wrap_content&quot;
+                android:id=&quot;@+id/origin&quot;
+                android:layout_marginTop=&quot;35dp&quot;
+                android:textColor=&quot;#999999&quot;
+                android:textSize=&quot;16sp&quot;&gt;
+
+            &lt;/TextView&gt;
+        &lt;/LinearLayout&gt;
+        &lt;LinearLayout
+            android:layout_width=&quot;0dp&quot;
+            android:layout_height=&quot;match_parent&quot;
+            android:layout_weight=&quot;1&quot;&gt;
+            &lt;TextView
+                android:layout_width=&quot;wrap_content&quot;
+                android:layout_height=&quot;wrap_content&quot;
+                android:layout_marginTop=&quot;100dp&quot;
+                android:id=&quot;@+id/date&quot;
+                android:textColor=&quot;#e6e6e6&quot;&gt;
+
+            &lt;/TextView&gt;
+        &lt;/LinearLayout&gt;
+    &lt;/LinearLayout&gt;
+
+
+&lt;/LinearLayout&gt;</code></pre><h4 id="5-创建一个自定义的适配器-newsAdapter，这个适配器继承自-ArrayAdapter。重写构造方法和-getView-方法。"><a href="#5-创建一个自定义的适配器-newsAdapter，这个适配器继承自-ArrayAdapter。重写构造方法和-getView-方法。" class="headerlink" title="5 创建一个自定义的适配器 newsAdapter，这个适配器继承自 ArrayAdapter。重写构造方法和 getView 方法。"></a>5 创建一个自定义的适配器 newsAdapter，这个适配器继承自 ArrayAdapter。重写构造方法和 getView 方法。</h4><pre><code>package com.example.listviewtest;
+
+import android.content.Context;
+import android.widget.ArrayAdapter;
+
+import java.util.List;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+
+public class newsAdapter extends ArrayAdapter{
+    private final int resourceId;
+
+    public newsAdapter(Context context, int textViewResourceId, List&lt;news&gt; objects) {
+        super(context, textViewResourceId, objects);
+        resourceId = textViewResourceId;
+    }
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        news news = (news) getItem(position); // 获取当前项的news实例
+        View view = LayoutInflater.from(getContext()).inflate(resourceId, null);//实例化一个对象。使用Inflater对象来将布局文件解析成一个View
+        ImageView Image = (ImageView) view.findViewById(R.id.img);//获取该布局内的图片视图
+        TextView title = (TextView) view.findViewById(R.id.title);//获取该布局内的文本视图
+        TextView origin = (TextView) view.findViewById(R.id.origin);//获取该布局内的文本视图
+        TextView date = (TextView) view.findViewById(R.id.date);//获取该布局内的文本视图
+        Image.setImageResource(news.getImage());//为图片视图设置图片资源
+        title.setText(news.getTitle());//为文本视图设置文本内容
+        origin.setText(news.getOrigin());
+        date.setText(news.getDate());
+        return view;
+    }
+}</code></pre><h4 id="6-修改MainActivity-java代码"><a href="#6-修改MainActivity-java代码" class="headerlink" title="6 修改MainActivity.java代码"></a>6 修改MainActivity.java代码</h4><p>initNews()放是用于初始化news数据的（具体内容看个人需要）。</p>
+<pre><code>package com.example.listviewtest;
+
+import android.app.Activity;
+
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.solver.ArrayLinkedVariables;
+import java.util.ArrayList;
+import java.util.List;
+
+import android.os.Bundle;
+
+public class MainActivity extends AppCompatActivity {
+
+    private List&lt;news&gt; newsList = new ArrayList&lt;news&gt;();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        initNews(); // 初始化数据
+        newsAdapter adapter = new newsAdapter(MainActivity.this, R.layout.news_item, newsList);
+        ListView listView = (ListView) findViewById(R.id.listView);
+        listView.setAdapter(adapter);
+    }
+    private void initNews() {
+        news list1 = new news(&quot;标题一&quot;, R.drawable.dong,&quot;来源：新华网&quot;,&quot;2020-10-11&quot;);
+        newsList.add(list1);
+        news list2 = new news(&quot;标题二&quot;, R.drawable.butterfly,&quot;来源：人民日报&quot;,&quot;2020-10-09&quot;);
+        newsList.add(list2);
+    }
+
+}</code></pre><h4 id="7-运行效果"><a href="#7-运行效果" class="headerlink" title="7 运行效果"></a>7 运行效果</h4><p><img src="/2020/10/12/ListView/pic03.png" alt></p>
+
+      
+
+      <!-- 开始添加版权声明-->
+
+
+<div class="declare">
+  <ul><li><strong>本文作者：</strong>
+  
+    étoile
+  
+</li></ul>
+  <ul><li><strong>本文链接：</strong>
+ <a href="http://sunnyllxx.github.io/2020/10/12/ListView/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2020/10/12/ListView/</a>
+</li></ul>
+  <ul><li><strong>版权声明：</strong>
+  本作品采用
+  <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+  进行许可。转载请注明出处！
+  
+</div>
+
+<!-- 添加完成 -->
+
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/zhifubaopicture.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <!-- 添加本文结束标记-->
+
+  <div style="text-align:center;color: #00BFFF;font-size:14px;">
+       -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
+       </div>
+  
+  <!-- 添加完成 -->
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/05/Pagination-loading/" class="archive-article-date">
-  	<time datetime="2020-08-05T07:14:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/05/Pagination-loading/">微信小程序上拉分页渲染刷新</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
+      
 
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/微信小程序//" class="article-tag-list-link color1">微信小程序</a>
+        			<a href="/categories/Android//" class="article-tag-list-link color3">Android</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2020/10/12/ListView/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/30/components/" class="archive-article-date">
-  	<time datetime="2020-07-30T13:40:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-30</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/09/19/activity-jump/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Activity之间的跳转</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/30/components/">微信小程序自定义组件tab选项</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/微信小程序//" class="article-tag-list-link color1">微信小程序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ListView的简单介绍"><span class="toc-number">1.</span> <span class="toc-text">ListView的简单介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定制的ListView的界面"><span class="toc-number">1.1.</span> <span class="toc-text">定制的ListView的界面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-创建新的项目"><span class="toc-number">1.2.</span> <span class="toc-text">1 创建新的项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-修改activity-main-xml的代码"><span class="toc-number">1.3.</span> <span class="toc-text">2 修改activity_main.xml的代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-新建一个news类"><span class="toc-number">1.4.</span> <span class="toc-text">3 新建一个news类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-为ListView的子项指定一个自定义的news-item-xml文件"><span class="toc-number">1.5.</span> <span class="toc-text">4 为ListView的子项指定一个自定义的news_item.xml文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-创建一个自定义的适配器-newsAdapter，这个适配器继承自-ArrayAdapter。重写构造方法和-getView-方法。"><span class="toc-number">1.6.</span> <span class="toc-text">5 创建一个自定义的适配器 newsAdapter，这个适配器继承自 ArrayAdapter。重写构造方法和 getView 方法。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-修改MainActivity-java代码"><span class="toc-number">1.7.</span> <span class="toc-text">6 修改MainActivity.java代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-运行效果"><span class="toc-number">1.8.</span> <span class="toc-text">7 运行效果</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/07/%E8%A7%A3%E5%86%B3layui%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4%E5%86%85%E5%AE%B9%E5%88%B0%E7%BD%91%E5%9D%80%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-07-07T13:34:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/07/%E8%A7%A3%E5%86%B3layui%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4%E5%86%85%E5%AE%B9%E5%88%B0%E7%BD%91%E5%9D%80%E7%9A%84%E9%97%AE%E9%A2%98/">解决layui表单提交内容到网址的问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/layui//" class="article-tag-list-link color1">layui</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/23/README/" class="archive-article-date">
-  	<time datetime="2020-06-23T03:25:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/23/README/">README</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo-blog%E9%83%A8%E7%BD%B2github%E4%B8%80%E7%9B%B4%E5%87%BA%E7%8E%B0404/" class="archive-article-date">
-  	<time datetime="2020-06-20T05:57:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo-blog%E9%83%A8%E7%BD%B2github%E4%B8%80%E7%9B%B4%E5%87%BA%E7%8E%B0404/">解决hexo blog部署github一直出现404</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2Cannot-find-module-chalk-%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-06-20T05:45:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2Cannot-find-module-chalk-%E9%97%AE%E9%A2%98/">解决hexo博客Cannot find module&#39;chalk&#39;问题</a>
-    </h1>
-  
+   <!-- valine评论系统开始 -->
 
-        <div class="article-info info-on-right">
-          
+   
+    <section id="comments" class="comments">
+      <style>
+        .comments{margin:30px;padding:10px;background:#fff}
+        @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+      </style>
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'true' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "SqWqnmUuTCilnupzDVQgFhrE-gzGzoHsz",
+            app_key: "EuNlMDzK61IRiansuSobGwsH",
+            placeholder: "留下你的评论吧",
+            avatar:"retro",
+            avatar_cdn:'{{ theme.valine.avatar_cdn }}',
+        });
+    }
+</script>
 
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
+  </section>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/21/%E8%A7%A3%E5%86%B3hexo%E9%83%A8%E7%BD%B2%E6%96%87%E7%AB%A0%E5%88%B0github%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-05-21T08:10:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/21/%E8%A7%A3%E5%86%B3hexo%E9%83%A8%E7%BD%B2%E6%96%87%E7%AB%A0%E5%88%B0github%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/">解决hexo部署文章到github图片无法显示问题</a>
-    </h1>
-  
+<!-- valine评论系统结束 -->
 
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/21/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E6%8F%90%E4%BA%A4%E5%88%B0github/" class="archive-article-date">
-  	<time datetime="2020-05-21T07:54:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/21/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E6%8F%90%E4%BA%A4%E5%88%B0github/">将本地项目提交到github</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/github//" class="article-tag-list-link color2">github</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/02/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%84%9F%E6%83%B3%E5%8F%8Ayilia%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BE%8E%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2020-05-02T12:18:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/02/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%84%9F%E6%83%B3%E5%8F%8Ayilia%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BE%8E%E5%8C%96/">hexo博客搭建感想及yilia主题的一些美化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">yilia</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/01/hello-world/" class="archive-article-date">
-  	<time datetime="2020-05-01T11:19:13.667Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/01/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2020/">&amp;laquo; Prev</a><a class="page-number" href="/archives/2020/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
   
 
 
@@ -628,8 +647,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
