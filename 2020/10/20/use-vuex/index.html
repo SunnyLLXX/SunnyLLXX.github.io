@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://sunnyllxx.github.io/2020/10/20/use-vuex/pic01.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2020/10/20/use-vuex/pic02.png">
 <meta property="article:published_time" content="2020-10-20T06:20:10.000Z">
-<meta property="article:modified_time" content="2020-10-20T07:18:37.796Z">
+<meta property="article:modified_time" content="2020-10-20T07:22:10.211Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="Vuex">
 <meta name="twitter:card" content="summary">
@@ -372,8 +372,18 @@ methods: {
     this.$store.dispatch(&apos;addAsync&apos;)
     }
 }</code></pre><p>同样如果需要一次增加n，那么可以进行传参。</p>
-<p>actions: {<br>    // 在actions中不能够直接修改state中的数据，如果需要修改则需要通过context.commit()来触发mutations中的函数，只有mutations才能这样<br>    addAsync: function (context) {<br>      setTimeout(() =&gt; {<br>        context.commit(‘add’)<br>      }, 2000)<br>    },<br>    subAsync: function (context, step) {<br>      setTimeout(() =&gt; {<br>        context.commit(‘sub’, step)<br>      }, 2000)<br>    }</p>
-<p>在Sub.vue中添加按钮</p>
+<pre><code>actions: {
+    // 在actions中不能够直接修改state中的数据，如果需要修改则需要通过context.commit()来触发mutations中的函数，只有mutations才能这样
+    addAsync: function (context) {
+    setTimeout(() =&gt; {
+        context.commit(&apos;add&apos;)
+    }, 2000)
+    },
+    subAsync: function (context, step) {
+    setTimeout(() =&gt; {
+        context.commit(&apos;sub&apos;, step)
+    }, 2000)
+    }</code></pre><p>在Sub.vue中添加按钮</p>
 <pre><code>&lt;template&gt;
     &lt;div&gt;
         &lt;h3&gt;当前最新的count值为：{{count}}&lt;/h3&gt;
@@ -762,15 +772,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Vuex</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
               </li>
             
             <div class="clearfix"></div>
