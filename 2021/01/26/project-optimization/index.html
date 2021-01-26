@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>Hello World | étoile的小窝</title>
+  <title>vue-cli项目的简单优化 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+  <meta name="description" content="有关vue-cli项目的简单优化策略">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://sunnyllxx.github.io/2020/05/01/hello-world/index.html">
+<meta property="og:title" content="vue-cli项目的简单优化">
+<meta property="og:url" content="http://sunnyllxx.github.io/2021/01/26/project-optimization/index.html">
 <meta property="og:site_name" content="étoile的小窝">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="有关vue-cli项目的简单优化策略">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-05-01T11:19:13.667Z">
-<meta property="article:modified_time" content="2020-05-02T15:04:26.787Z">
+<meta property="article:published_time" content="2021-01-26T11:50:28.000Z">
+<meta property="article:modified_time" content="2021-01-26T13:25:32.351Z">
 <meta property="article:author" content="étoile">
-<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="étoile的小窝" type="application/atom+xml">
@@ -166,14 +166,14 @@
           </div>
           <div id="js-content" class="content-ll">
             
-<article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+<article id="post-project-optimization" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      vue-cli项目的简单优化
     </h1>
   
 
@@ -192,30 +192,101 @@
 <!--显示阅读次数完毕-->
   
         
-        <a href="/2020/05/01/hello-world/" class="archive-article-date">
-  	<time datetime="2020-05-01T11:19:13.667Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-01</time>
+        <a href="/2021/01/26/project-optimization/" class="archive-article-date">
+  	<time datetime="2021-01-26T11:50:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<a id="more"></a>
+        <h3 id="有关vue-cli项目的简单优化策略"><a href="#有关vue-cli项目的简单优化策略" class="headerlink" title="有关vue-cli项目的简单优化策略"></a>有关vue-cli项目的简单优化策略</h3><a id="more"></a>
 
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>在项目上线之前，通常都会对项目进行优化，以便提高运行效率。该篇文章将会在一下几个方面对vue项目进行简单优化。</p>
+<h3 id="1-安装移除项目中console语句"><a href="#1-安装移除项目中console语句" class="headerlink" title="1 安装移除项目中console语句"></a>1 安装移除项目中console语句</h3><p>该策略是进行移除项目中的console命令，为了更好的方便开发者，使得在开发阶段能够显示控制台的信息，发布阶段控制台不显示信息，进行一些改动</p>
+<p>1.安装bable-plugin-transform-remove-console</p>
+<pre><code>npm install bable-plugin-transform-remove-console --save-dev</code></pre><p>2.在babel.config.js进行配置</p>
+<pre><code>//项目发布阶段需要用的插件
+const productionPlugins = []
+if(process.env.NPDE_ENV === &apos;production&apos;){
+productionPlugins.push(&apos;transform-remove-console&apos;)
+}
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+plugins: [
+    [
+    &apos;component&apos;,
+    {
+        libraryName: &apos;element-ui&apos;,
+        styleLibraryName: &apos;theme-chalk&apos;
+    }
+    ],
+    // 发布产品时的插件数组
+    ...productionPlugins,
+]</code></pre><p>在根目录下新建vue.config.js，利用vue.config.js修改webpack默认的配置，为开发模式与发布模式指定不同的打包入口。</p>
+<h3 id="2-通过chainWebpack自定义打包入口"><a href="#2-通过chainWebpack自定义打包入口" class="headerlink" title="2 通过chainWebpack自定义打包入口"></a>2 通过chainWebpack自定义打包入口</h3><p>因为项目分为开发模式和发布模式，需要通过自定义打包入口进行分辨。<br>将main.js重命名为main-dev.js，复制文件的内容，新建main-prod.js，将复制的内容粘贴。<br>在vue.config.js文件中添加如下代码</p>
+<pre><code>//修改webpack默认配置
+module.exports = {
+chainWebpack:config =&gt;{
+    config.when(process.env.NODE_ENV === &apos;production&apos;,config =&gt; {
+        config.entry(&apos;app&apos;).clear().add(&apos;./src/main-prod.js&apos;)
+        })
+    config.when(process.env.NODE_ENV === &apos;development&apos;,config =&gt; {
+        config.entry(&apos;app&apos;).clear().add(&apos;./src/main-dev.js&apos;)
+    })
+}
+}</code></pre><h3 id="3-通过externals加载外部CDN资源"><a href="#3-通过externals加载外部CDN资源" class="headerlink" title="3 通过externals加载外部CDN资源"></a>3 通过externals加载外部CDN资源</h3><p>默认情况下，通过import语法导入的第三方依赖包，最终会被打包合并到同一个文件中，从而导致打包成功后，单文件体积过大的问题。<br>为了解决上述问题，可以通过webpack的externals节点，来配置并加载外部的CDN资源。凡是声明在externals 中的第三方依赖包，都不会被打包。<br>在vue.config.js配置如下代码，须是在发布模式中。</p>
+<pre><code>config.when(process.env.NODE_ENV === &apos;production&apos;,config =&gt; {
+        config.entry(&apos;app&apos;).clear().add(&apos;./src/main-prod.js&apos;)
+        config.set(&apos;externals&apos;,{
+            vue:&apos;Vue&apos;,
+            &apos;vue-router&apos;:&apos;VueRouter&apos;,
+            axios:&apos;axios&apos;,
+            loadsh:&apos;_&apos;,
+            echarts: &apos;echarts&apos;,
+            nprogress:&apos;Nrogress&apos;,
+            &apos;vue-quill-editor&apos;:&apos;VueQuillEditor&apos;
+        })
+        config.plugin(&apos;html&apos;).tap(args =&gt; {
+            args[0].isProd = true
+            return args
+        })
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+    })</code></pre><p>然后就可以在main-prod.js中注释掉import导入的css,js代码，在public/index.html添加外部cdn资源。</p>
+<h3 id="4-首页内容定制"><a href="#4-首页内容定制" class="headerlink" title="4 首页内容定制"></a>4 首页内容定制</h3><p>不同的打包环境下，首页内容可能会有所不同。我们可以通过插件的方式进行定制，插件配置如下;</p>
+<pre><code>config.when(process.env.NODE_ENV === &apos;production&apos;,config =&gt; {
+        config.entry(&apos;app&apos;).clear().add(&apos;./src/main-prod.js&apos;)
+        config.plugin(&apos;html&apos;).tap(args =&gt; {
+            args[0].isProd = true
+            return args
+        })
 
+    })
+    config.when(process.env.NODE_ENV === &apos;development&apos;,config =&gt; {
+        config.entry(&apos;app&apos;).clear().add(&apos;./src/main-dev.js&apos;)
+        config.plugin(&apos;html&apos;).tap(args =&gt; {
+            args[0].isProd = false
+            return args
+        })
+    })</code></pre><p>在public/index.html首页中，可以根据isProd 的值，来决定如何渲染页面结构:</p>
+<pre><code>&lt;title&gt;&lt;%= htmlWebpackPlugin.options.isProd ? &apos;&apos;: &apos;dev-&apos;%&gt;站点标题&lt;/title&gt;
+
+
+&lt;!--按需加载外部的CDN资源--&gt;
+&lt;% if (htmlwebpackPlugin.options.isProd){%>
+    <!--通过externals加口载的外部CDN资源-->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css">
+        <scrip src="https://cdn.staticfile.org/nprogress/o.2.0/nprogress.min.js">
+    <%}%&gt;< code></%}%&gt;<></scrip></code></pre><h3 id="5-路由懒加载"><a href="#5-路由懒加载" class="headerlink" title="5 路由懒加载"></a>5 路由懒加载</h3><p>当打包构建项目时，JavaScript包会变得非常大，影响页面加载。如果我们能把不同路由对应的组件分割成不同的代码块，然后当路由被访问的时候才加载对应组件，提高效率。<br>具体需要3步:<br>1.安装@babel/plugin-syntax-dynamic-import包<br>2.在babel.config.js配置文件中声明该插件</p>
+<pre><code>// 发布产品时的插件数组
+    ...productionPlugins,
+    &quot;@babel/plugin-syntax-dynamic-import&quot;</code></pre><p>3.将路由改为按需加载的形式，示例代码如下</p>
+<p>在router文件中，将import导入的自己注释掉，换成如下代码</p>
+<pre><code>// import Users from &apos;../components/Users.vue&apos;
+const Users = () =&gt; import(/* webpackChunkName: &quot;users-rights-roles&quot; */ &apos;../components/Users.vue&apos;)
+const Rights = () =&gt; import(/* webpackChunkName: &quot;users-rights-roles&quot; */ &apos;../components/Rights.vue&apos;)
+const Roles = () =&gt; import(/* webpackChunkName: &quot;users-rights-roles&quot; */ &apos;../components/Roles.vue&apos;)</code></pre>
       
 
       <!-- 开始添加版权声明-->
@@ -228,7 +299,7 @@
   
 </li></ul>
   <ul><li><strong>本文链接：</strong>
- <a href="http://sunnyllxx.github.io/2020/05/01/hello-world/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2020/05/01/hello-world/</a>
+ <a href="http://sunnyllxx.github.io/2021/01/26/project-optimization/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2021/01/26/project-optimization/</a>
 </li></ul>
   <ul><li><strong>版权声明：</strong>
   本作品采用
@@ -289,7 +360,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
         		</li>
       		
 		</ul>
@@ -298,6 +369,17 @@
 
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -347,7 +429,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2020/05/01/hello-world/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2021/01/26/project-optimization/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -361,15 +443,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/05/02/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%84%9F%E6%83%B3%E5%8F%8Ayilia%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BE%8E%E5%8C%96/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          hexo博客搭建感想及yilia主题的一些美化
-        
-      </div>
-    </a>
   
+    <a href="/2020/10/20/use-vuex/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Vuex的使用</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -394,7 +472,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#有关vue-cli项目的简单优化策略"><span class="toc-number">1.</span> <span class="toc-text">有关vue-cli项目的简单优化策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-安装移除项目中console语句"><span class="toc-number">2.</span> <span class="toc-text">1 安装移除项目中console语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-通过chainWebpack自定义打包入口"><span class="toc-number">3.</span> <span class="toc-text">2 通过chainWebpack自定义打包入口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-通过externals加载外部CDN资源"><span class="toc-number">4.</span> <span class="toc-text">3 通过externals加载外部CDN资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-首页内容定制"><span class="toc-number">5.</span> <span class="toc-text">4 首页内容定制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-路由懒加载"><span class="toc-number">6.</span> <span class="toc-text">5 路由懒加载</span></a></li></ol>
                     </div>
                 </span>
             </div>
