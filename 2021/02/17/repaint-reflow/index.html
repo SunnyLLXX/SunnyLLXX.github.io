@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>文章分类 | étoile的小窝</title>
+  <title>重绘与重排 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="文章分类">
-<meta property="og:url" content="http://sunnyllxx.github.io/categories/index.html">
+  <meta name="description" content="html之重绘与重排">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重绘与重排">
+<meta property="og:url" content="http://sunnyllxx.github.io/2021/02/17/repaint-reflow/index.html">
 <meta property="og:site_name" content="étoile的小窝">
+<meta property="og:description" content="html之重绘与重排">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-05-02T01:48:12.000Z">
-<meta property="article:modified_time" content="2020-05-02T01:50:43.492Z">
+<meta property="article:published_time" content="2021-02-17T05:23:10.000Z">
+<meta property="article:modified_time" content="2021-02-17T05:40:07.439Z">
 <meta property="article:author" content="étoile">
+<meta property="article:tag" content="常见题">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="étoile的小窝" type="application/atom+xml">
@@ -162,121 +165,323 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article class="article article-type-post show">
-  <header class="article-header" style="border-bottom: 1px solid #ccc">
-   <h1 class="article-title" itemprop="name" align=center>
-    文章分类
-  </h1>
-
-  <div align=center>
-       	<nav>
-    			<font size="3" color="#dd00dd">
-			文章 27 &emsp;&emsp;
-			分类 6 &emsp;&emsp;
-			标签 8
-			</font>
-       	</nav>
-  </div>
-  </header>
-
-<br /> 
-
- <center><strong><font size="4" color="#228B22">&emsp;&emsp;分类 </font> </strong></center>
-
-<br /> 
-<br /> 
-
+            
+<article id="post-repaint-reflow" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
-  <ul class="category-list">
-    
-      
-        <li class="category-list-item">
-          <a href="/categories/Android/" class="category-list-link" title="Android">
-            Android
-            <span class="category-list-count">3</span>
-          </a>
-        </li>
-      
-    
-      
-        <li class="category-list-item">
-          <a href="/categories/github/" class="category-list-link" title="github">
-            github
-            <span class="category-list-count">1</span>
-          </a>
-        </li>
-      
-    
-      
-        <li class="category-list-item">
-          <a href="/categories/hexo/" class="category-list-link" title="hexo">
-            hexo
-            <span class="category-list-count">5</span>
-          </a>
-        </li>
-      
-    
-      
-        <li class="category-list-item">
-          <a href="/categories/layui/" class="category-list-link" title="layui">
-            layui
-            <span class="category-list-count">1</span>
-          </a>
-        </li>
-      
-    
-      
-        <li class="category-list-item">
-          <a href="/categories/前端/" class="category-list-link" title="前端">
-            前端
-            <span class="category-list-count">11</span>
-          </a>
-        </li>
-      
-    
-      
-        <li class="category-list-item">
-          <a href="/categories/微信小程序/" class="category-list-link" title="微信小程序">
-            微信小程序
-            <span class="category-list-count">4</span>
-          </a>
-        </li>
-      
-    
-  </ul>
+    <h1 class="article-title" itemprop="name">
+      重绘与重排
+    </h1>
   
 
-
-<br /> 
-<br /> 
+        <!--显示阅读次数-->
 
 
- <center><strong><font size="4" color="#228B22">&emsp;&emsp;标签云 </font> </strong></center>
 
-<div align=center>
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+           👁 &nbsp;<span id="busuanzi_value_page_pv"></span> &nbsp;&nbsp;
+  </span>
+  </a>
 
-  <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
-  <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
-  <div class="widget-wrap">
-    <div id="myCanvasContainer" class="widget tagcloud">
-      <canvas width="300" height="300" id="resCanvas" style="width=100%">
-        <a href="/tags/React/" style="font-size: 15px;">React</a> <a href="/tags/Vue/" style="font-size: 15px;">Vue</a> <a href="/tags/Vuex/" style="font-size: 10px;">Vuex</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/yilia/" style="font-size: 10px;">yilia</a> <a href="/tags/%E5%B8%B8%E8%A7%81%E9%A2%98/" style="font-size: 20px;">常见题</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a>
-      </canvas>
+<!--显示阅读次数完毕-->
+  
+        
+        <a href="/2021/02/17/repaint-reflow/" class="archive-article-date">
+  	<time datetime="2021-02-17T05:23:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="html之重绘与重排"><a href="#html之重绘与重排" class="headerlink" title="html之重绘与重排"></a>html之重绘与重排</h3><a id="more"></a>
+
+<p>此题涉及到html的性能，首先了解一下浏览器的运行机制</p>
+<h4 id="1-浏览器运行机制"><a href="#1-浏览器运行机制" class="headerlink" title="1 浏览器运行机制"></a>1 浏览器运行机制</h4><p>1.构建DOM树：渲染引擎解析HTML文档。首先将标签转换成DOM树中的DOM node（包括js生成的标签）生成内容树。</p>
+<p>2.构建渲染树：解析对应的CSS样式文件信息（包括js生成的样式和外部css文件），这些文件信息以及HTML中可见的指令，构建渲染树。渲染树中每个node都有自己的stylee，并且渲染树不包含隐藏的节点（比如display:none，还有head节点），因为这些节点不会用于呈现。</p>
+<p>3.布局渲染树：从根节点递归调用，计算每一个元素的大小，位置等，给出每个节点所应该在屏幕上面显示的精确坐标。</p>
+<p>4.绘制渲染树：遍历渲染树，使用UI层绘制每个节点。</p>
+<h4 id="2-何为重绘"><a href="#2-何为重绘" class="headerlink" title="2 何为重绘"></a>2 何为重绘</h4><p>当盒子的位置、大小以及其他属性，例如颜色、字体大小等都确定下来后，浏览器便把这些原色都按照各自的特性绘制一遍，将内容呈现在页面。</p>
+<p>重绘（repaint）：指一个元素外观的改变所触发的浏览器的行为，浏览器会根据元素的新属性重新绘制，使元素呈现新的外观。</p>
+<p>触发重绘条件：改变元素外观，如：color,font-size等</p>
+<p>注意: table及其内部元素可能需要多次计算才能确定好其在渲染树中节点的属性值，比同等元素要多花两倍时间，这就是我们尽量避免使用table布局页面的原因之一。</p>
+<h4 id="3-何为重排"><a href="#3-何为重排" class="headerlink" title="3 何为重排"></a>3 何为重排</h4><p>重排（重构/回流/reflow):当渲染树中的一部分(或全部)因为元素的规模尺寸，布局，隐藏等改变而需要重新构建,这就称为回流(reflow)。每个页面至少需要一次回流，就是在页面第一次加载的时候。</p>
+<p>触发重排的条件:任何页面布局和几何属性的改变都会触发重排,如：</p>
+<p>1、页面渲染初始化;(无法避免)</p>
+<p>2、添加或删除可见的DOM元素;</p>
+<p>3、元素位置的改变，或者使用动画;</p>
+<p>4、元素尺寸的改变―—大小，外边距,边框;</p>
+<p>5、浏览器窗口尺寸的变化（resize事件发生时）;</p>
+<p>6、填充内容的改变，比如文本的改变或图片大小改变而引起的计算值宽度和高度的改变;</p>
+<p>7、读取某些元素属性: (offsetLeft/Top/Height/Width，clientTop/Left/width/Height,scrollTop/Left/Width/Height，width/height，getComputedstyle(), currentStyle(IE) )</p>
+<p>重绘重排的代价:耗时，导致浏览器卡慢。</p>
+<p>重绘和重排的关系:在回流的时候，浏览器会使渲染树中受到影响的部分失效，并重新构造这部分渲染树，完成回流后，浏览器会重新绘制受影响的部分到屏幕中，该过程称为重绘。</p>
+<p>所以，重排必定会引发重绘，但重绘不一定会引发重排。</p>
+<h4 id="4-优化"><a href="#4-优化" class="headerlink" title="4 优化"></a>4 优化</h4><p>1、浏览器自己的优化:浏览器会维护1个队列，把所有会引起回流、重绘的操作放入这个队列，等队列中的操作到了一定的数量或者到了一定的时间间隔，浏览器就会flush队列，进行一个批处理。这样就会让多次的回流、重绘变成一次回流重绘。</p>
+<p>2、我们要注意的优化:我们要减少重绘和重排就是要减少对渲染树的操作，则我们可以合并多次的DOM和样式的修改。并减少对style样式的请求。</p>
+<p>(1）直接改变元素的className</p>
+<p>(2) display: none;先设置元素为display: none;然后进行页面布局等操作;设置完成后将元素设置为display: block:这样的话就只引发两次重绘和重排;</p>
+<p>(3）使用cloneNode(true or false)和l replaceChild技术，引发一次回流和重绘;</p>
+<p>(4)将需要多次重排的元素，position属性设为absolute或fixed，元素脱离了文档流，它的变化不会影响到其他元素:|</p>
+<p>(5）如果需要创建多个DOM节点，可以使用DocumentFragment创建完后一次性的加入document;</p>
+
+      
+
+      <!-- 开始添加版权声明-->
+
+
+<div class="declare">
+  <ul><li><strong>本文作者：</strong>
+  
+    étoile
+  
+</li></ul>
+  <ul><li><strong>本文链接：</strong>
+ <a href="http://sunnyllxx.github.io/2021/02/17/repaint-reflow/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2021/02/17/repaint-reflow/</a>
+</li></ul>
+  <ul><li><strong>版权声明：</strong>
+  本作品采用
+  <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+  进行许可。转载请注明出处！
+  
+</div>
+
+<!-- 添加完成 -->
+
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/zhifubaopicture.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixinAccept.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
+    <!-- 添加本文结束标记-->
+
+  <div style="text-align:center;color: #00BFFF;font-size:14px;">
+       -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
+       </div>
+  
+  <!-- 添加完成 -->
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
   </div>
 </div>
 
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2021/02/17/repaint-reflow/" alt="微信分享二维码">
+    </div>
+</div>
 
-
-  <div class="tag-cloud">
-    <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/Vue/" style="font-size: 20px;">Vue</a> <a href="/tags/Vuex/" style="font-size: 15px;">Vuex</a> <a href="/tags/github/" style="font-size: 15px;">github</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/yilia/" style="font-size: 15px;">yilia</a> <a href="/tags/%E5%B8%B8%E8%A7%81%E9%A2%98/" style="font-size: 25px;">常见题</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 15px;">随笔</a>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
-
-
-<br /> 
-<br /> 
-
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2021/02/17/conprehention-of-async-await/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          对async、await的理解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/02/16/nest-react-routing/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">React 嵌套路由</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#html之重绘与重排"><span class="toc-number">1.</span> <span class="toc-text">html之重绘与重排</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-浏览器运行机制"><span class="toc-number">1.1.</span> <span class="toc-text">1 浏览器运行机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-何为重绘"><span class="toc-number">1.2.</span> <span class="toc-text">2 何为重绘</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-何为重排"><span class="toc-number">1.3.</span> <span class="toc-text">3 何为重排</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-优化"><span class="toc-number">1.4.</span> <span class="toc-text">4 优化</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+
+
+   <!-- valine评论系统开始 -->
+
+   
+    <section id="comments" class="comments">
+      <style>
+        .comments{margin:30px;padding:10px;background:#fff}
+        @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+      </style>
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'true' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "SqWqnmUuTCilnupzDVQgFhrE-gzGzoHsz",
+            app_key: "EuNlMDzK61IRiansuSobGwsH",
+            placeholder: "留下你的评论吧",
+            avatar:"retro",
+            avatar_cdn:'{{ theme.valine.avatar_cdn }}',
+        });
+    }
+</script>
+
+  </section>
+
+
+<!-- valine评论系统结束 -->
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+
           </div>
         </div>
       </div>
@@ -312,7 +517,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
