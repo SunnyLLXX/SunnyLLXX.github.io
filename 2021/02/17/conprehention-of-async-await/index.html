@@ -16,7 +16,7 @@
 <meta property="og:description" content="对async、await的理解，内部原理">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-17T05:42:56.000Z">
-<meta property="article:modified_time" content="2021-02-17T06:28:46.644Z">
+<meta property="article:modified_time" content="2021-02-17T07:39:48.778Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta name="twitter:card" content="summary">
@@ -202,15 +202,24 @@
       
         <h3 id="对async、await的理解，内部原理"><a href="#对async、await的理解，内部原理" class="headerlink" title="对async、await的理解，内部原理"></a>对async、await的理解，内部原理</h3><a id="more"></a>
 <p>此题主要考察地狱回调，Promise，async，await</p>
-<p>首先需要了解什么是同步，异步</p>
-<h4 id="1-同步，异步"><a href="#1-同步，异步" class="headerlink" title="1 同步，异步"></a>1 同步，异步</h4><p>javascript是一门“单线程”语言，所有任务可以分成两种，一种是同步任务(synchronous)，另一种是异步任务(asynchronous)。同步任务指的是，在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务;异步任务指的是，不进入主线程、而进入”任务队列”(task<br>queue)的任务，只有等主线程任务执行完毕，”任务队列”开始通知主线程，请求执行任务，该任务才会进入主线程执行。</p>
-<p>异步任务有：定时器，ajax，事件处理，node js，文件读取也有异步。</p>
+<p>首先需要了解什么是js代码执行机制</p>
+<h4 id="1-js代码执行机制"><a href="#1-js代码执行机制" class="headerlink" title="1 js代码执行机制"></a>1 js代码执行机制</h4><p>javascript是一门“单线程”语言，所有任务可以分成两种，一种是同步任务(synchronous)，另一种是异步任务(asynchronous)。同步任务指的是，在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务;异步任务指的是，不进入主线程、而进入”任务队列”(task queue)的任务，只有等主线程任务执行完毕，”任务队列”开始通知主线程，请求执行任务，该任务才会进入主线程执行。</p>
+<p>异步任务有：定时器，延时器，ajax，事件处理，node js，文件读取也有异步。</p>
+<h4 id="1-1-宏任务和微任务"><a href="#1-1-宏任务和微任务" class="headerlink" title="1.1 宏任务和微任务"></a>1.1 宏任务和微任务</h4><p>宏任务：定时器，延时器，requestAnimationFrame，I/O<br>微任务：process.nextTick，Promise，Object.observe，MutationObserver</p>
+<p>先执行同步任务，再取出第一个宏任务执行所有的相关微任务总会在下一个宏任务之前全部执行完毕，如果遇见异步任务就先微后宏</p>
 <p>一个小案例，可以思考如下代码输出顺序。</p>
 <pre><code>console.log(1)
 setTimeout(function(){
     console.log(3)
 },0)
-console.log(5)</code></pre><h4 id="2-地狱回调如何形成的"><a href="#2-地狱回调如何形成的" class="headerlink" title="2 地狱回调如何形成的"></a>2 地狱回调如何形成的</h4><p>假设有一个ajax请求，在第一个请求成功后，执行第二个请求……..</p>
+new Promise(function(resolve,reject){
+    console.log(4)
+    resolve()
+}).then((response)=&gt;{
+    console.log(7)
+})
+console.log(5)</code></pre><p>new Promise会立刻执行，then事件会放在微任务里面</p>
+<h4 id="2-地狱回调如何形成的"><a href="#2-地狱回调如何形成的" class="headerlink" title="2 地狱回调如何形成的"></a>2 地狱回调如何形成的</h4><p>假设有一个ajax请求，在第一个请求成功后，执行第二个请求……..</p>
 <pre><code>$.ajax({
     url: &quot;xxxxxx&quot;,
     type: &quot;post&quot;,
@@ -482,7 +491,7 @@ btn.onClick = async function(){
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#对async、await的理解，内部原理"><span class="toc-number">1.</span> <span class="toc-text">对async、await的理解，内部原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-同步，异步"><span class="toc-number">1.1.</span> <span class="toc-text">1 同步，异步</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-地狱回调如何形成的"><span class="toc-number">1.2.</span> <span class="toc-text">2 地狱回调如何形成的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-内部原理"><span class="toc-number">1.3.</span> <span class="toc-text">3 内部原理</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#对async、await的理解，内部原理"><span class="toc-number">1.</span> <span class="toc-text">对async、await的理解，内部原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-js代码执行机制"><span class="toc-number">1.1.</span> <span class="toc-text">1 js代码执行机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-宏任务和微任务"><span class="toc-number">1.2.</span> <span class="toc-text">1.1 宏任务和微任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-地狱回调如何形成的"><span class="toc-number">1.3.</span> <span class="toc-text">2 地狱回调如何形成的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-内部原理"><span class="toc-number">1.4.</span> <span class="toc-text">3 内部原理</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -645,15 +654,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">React</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">常见题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -665,7 +670,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Vuex</a>
+                <a href="javascript:void(0)" class="js-tag color1">React</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -674,6 +679,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Vuex</a>
               </li>
             
             <div class="clearfix"></div>
