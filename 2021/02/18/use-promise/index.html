@@ -16,7 +16,7 @@
 <meta property="og:description" content="Promise的基本使用以及需要注意的问题">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-18T11:46:24.000Z">
-<meta property="article:modified_time" content="2021-02-18T12:03:07.059Z">
+<meta property="article:modified_time" content="2021-02-18T12:28:52.747Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="Promise">
 <meta name="twitter:card" content="summary">
@@ -213,7 +213,7 @@
 </ol>
 <p>回调地狱的缺点?  不便于阅读 / 不便于异常处理</p>
 <p>解决方案? promise链式调用</p>
-<p>终极解决方案? async/await</p>
+<p>终极解决方案? async+await</p>
 <h4 id="3-Promise基本使用"><a href="#3-Promise基本使用" class="headerlink" title="3 Promise基本使用"></a>3 Promise基本使用</h4><pre><code>//创建一个promise对象
     const p = new Promise((resolve,reject)=&gt;{ //执行器函数
         //执行异步操作
@@ -275,9 +275,10 @@
 <p>如果抛出异常，新promise变为rejected,reason为抛出的异常</p>
 <p>如果返回的是非promise的任意值，新promise变为resolved,value为返回的值</p>
 <p>如果返回的是另一个新promise，此promise的结果就会成为新promise的结果</p>
-<p>6.promise异常传透?</p>
+<p>2.promise异常传透?</p>
 <p>(1)当使用promise的then链式调用时，可以在最后指定失败的回调</p>
-<p>(2)前面任何操作出了异常，都会传到最后失败的回调中处理<br>7.中断promise链?</p>
+<p>(2)前面任何操作出了异常，都会传到最后失败的回调中处理</p>
+<p>3.中断promise链?</p>
 <p>(1)当使用promise的then链式调用时，在中间中断，不再调用后面的回调函数</p>
 <p>(2)办法:在回调函数中返回一个pendding状态的promise对象</p>
 <pre><code>new Promise((resolve, reject) =&gt; {
@@ -674,11 +675,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">React</a>
+                <a href="javascript:void(0)" class="js-tag color4">常见题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">常见题</a>
+                <a href="javascript:void(0)" class="js-tag color1">React</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -694,11 +695,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Vuex</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color5">Vuex</a>
               </li>
              
               <li class="article-tag-list-item">
