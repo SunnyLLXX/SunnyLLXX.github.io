@@ -6,20 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>移动端 rem 适配 | étoile的小窝</title>
+  <title>Ajax 的基本使用 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="如何为移动端进行rem适配">
+  <meta name="description" content="了解Ajax的基本使用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="移动端 rem 适配">
-<meta property="og:url" content="http://sunnyllxx.github.io/2021/02/17/rem-adapter/index.html">
+<meta property="og:title" content="Ajax 的基本使用">
+<meta property="og:url" content="http://sunnyllxx.github.io/2021/02/19/Ajax/index.html">
 <meta property="og:site_name" content="étoile的小窝">
-<meta property="og:description" content="如何为移动端进行rem适配">
+<meta property="og:description" content="了解Ajax的基本使用">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-02-17T07:46:21.000Z">
-<meta property="article:modified_time" content="2021-02-17T08:37:33.891Z">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/02/19/Ajax/pic01.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/02/19/Ajax/pic02.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/02/19/Ajax/pic03.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/02/19/Ajax/pic04.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/02/19/Ajax/pic05.png">
+<meta property="article:published_time" content="2021-02-19T07:16:04.000Z">
+<meta property="article:modified_time" content="2021-02-19T08:37:14.397Z">
 <meta property="article:author" content="étoile">
-<meta property="article:tag" content="常见题">
+<meta property="article:tag" content="Ajax">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sunnyllxx.github.io/2021/02/19/Ajax/pic01.png">
   
     <link rel="alternative" href="/atom.xml" title="étoile的小窝" type="application/atom+xml">
   
@@ -166,14 +172,14 @@
           </div>
           <div id="js-content" class="content-ll">
             
-<article id="post-rem-adapter" class="article article-type-post " itemscope itemprop="blogPost">
+<article id="post-Ajax" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      移动端 rem 适配
+      Ajax 的基本使用
     </h1>
   
 
@@ -192,47 +198,376 @@
 <!--显示阅读次数完毕-->
   
         
-        <a href="/2021/02/17/rem-adapter/" class="archive-article-date">
-  	<time datetime="2021-02-17T07:46:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-17</time>
+        <a href="/2021/02/19/Ajax/" class="archive-article-date">
+  	<time datetime="2021-02-19T07:16:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="如何为移动端进行rem适配"><a href="#如何为移动端进行rem适配" class="headerlink" title="如何为移动端进行rem适配"></a>如何为移动端进行rem适配</h3><a id="more"></a>
-<p>以下方法是简单版的</p>
-<p>通过对html根元素字体大小设置屏幕的宽</p>
-<p>最初css</p>
-<pre><code>&lt;style&gt;
-    .box {
-        width: 200px;
-        height: 200px;
-        background-color: purple;
-    }
-&lt;/style&gt;</code></pre><p>js代码</p>
-<pre><code>&lt;body&gt;
+        <h3 id="了解Ajax的基本使用"><a href="#了解Ajax的基本使用" class="headerlink" title="了解Ajax的基本使用"></a>了解Ajax的基本使用</h3><a id="more"></a>
+<p>本篇文章将会讲述有关Ajax的信息，最初了解http，XML，会通过express作为服务端编写小案例进行描述</p>
+<h4 id="1-什么是Ajax"><a href="#1-什么是Ajax" class="headerlink" title="1 什么是Ajax"></a>1 什么是Ajax</h4><p>AJAX 全称为Asynchronous JavaScript And XML，就是异步的JS和XML。</p>
+<p>通过AJAX可以在浏览器中向服务器发送异步请求，最大的优势:无刷新获取数据。</p>
+<p>AJAX不是新的编程语言，而是一种将现有的标准组合在一起使用的新方式。</p>
+<h4 id="1-1-Ajax特点"><a href="#1-1-Ajax特点" class="headerlink" title="1.1 Ajax特点"></a>1.1 Ajax特点</h4><p>1.AJAX的优点</p>
+<p>1)可以无需刷新页面而与服务器端进行通信。</p>
+<p>2)允许你根据用户事件来更新部分页面内容。</p>
+<p>2.AJAX的缺点</p>
+<p>1)没有浏览历史，不能回退</p>
+<p>2)存在跨域问题</p>
+<p>3)SEO不友好</p>
+<h4 id="2-什么是XML"><a href="#2-什么是XML" class="headerlink" title="2 什么是XML"></a>2 什么是XML</h4><p>XML可扩展标记语言，XML被设计用来传输和存储数据。</p>
+<p>XML和HTML类似，不同的是HTML中都是预定义标签，而XML中没有预定义标签，全都是自定义标签，用来表示一些数据。</p>
+<pre><code>&lt;note&gt;
+    &lt;name&gt;lx&lt;/name&gt;
+    &lt;from&gt;四川&lt;/from&gt;
+    &lt;age&gt;18&lt;/age&gt;
+&lt;/note&gt;</code></pre><p>现在已经被 JSON 取代了，用 JSON 表示：</p>
+<pre><code>{&quot;name&quot;:&quot;lx&quot;,&quot;from&quot;:&quot;四川&quot;,&quot;age&quot;:18}</code></pre><h4 id="3-http"><a href="#3-http" class="headerlink" title="3 http"></a>3 http</h4><p>HTTP (hypertext transport protocol)协议『超文本传输协议』﹐协议详细规定了浏览器和万维网服务器之间互相通信的规则。HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件, 查询结果等）。</p>
+<p>HTTP协议工作于客户端-服务端架构上。浏览器作为HTTP客户端通过URL向HTTP服务端即WEB服务器发送所有请求。服务端接收请求后响应。</p>
+<h4 id="3-1-HTTP消息结构"><a href="#3-1-HTTP消息结构" class="headerlink" title="3.1 HTTP消息结构"></a>3.1 HTTP消息结构</h4><p>1.http消息结构分为客户端请求消息（请求报文），服务端响应消息（响应报文）</p>
+<p>2.请求报文：</p>
+<p>请求行：请求方式  参数  http版本号</p>
+<p>请求头</p>
+<pre><code>Host: baidu.com
+Cookie: name=ll
+Content-Type: application/x-www-form-urlencoded</code></pre><p>空行</p>
+<p>请求体：数据，类似 name=ll&amp;age=18</p>
+<p>3.响应报文：</p>
+<p>响应行：http版本号  状态码  状态文本值</p>
+<p>响应头：</p>
+<pre><code>Content-Type: text/html; charset=utf-8
+Content-length:2048
+Content-encoding: gzip</code></pre><p>空行</p>
+<p>响应体：数据</p>
+<h4 id="4-使用espress"><a href="#4-使用espress" class="headerlink" title="4 使用espress"></a>4 使用espress</h4><p>在一个根目录下使用命令如下 </p>
+<pre><code>npm innit --yes
+npm i express</code></pre><p>新建一个test文件夹，文件夹下新建express，再创建express_use.js</p>
+<pre><code>//1.引入express
+const express = require(&apos;express&apos;)
+
+//2创建应用对象
+const app = express()
+
+//3 创建路由规则
+app.get(&apos;/&apos;,(request,response)=&gt;{
+    //设置响应
+    response.send(&quot;hello express&quot;)
+})
+
+//4监听端口启动服务
+app.listen(8000,function(){
+    console.log(&quot;服务已经启动，8000端口监听中,请访问 http://localhost:8000&quot;)
+})</code></pre><p>运行文件，直接在文件目录执行指令</p>
+<pre><code>node express_use.js</code></pre><h4 id="5-Ajax基本使用"><a href="#5-Ajax基本使用" class="headerlink" title="5 Ajax基本使用"></a>5 Ajax基本使用</h4><p>1.ajax get请求</p>
+<p>小案例，点击按钮从服务端请求数据，盒子显示服务端返回的数据</p>
+<p>前端代码</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;ajax原生get请求&lt;/title&gt;
+    &lt;style&gt;
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+            color: #fff;
+            margin-top: 20px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;button id=&quot;btn&quot;&gt;获取数据&lt;/button&gt;
     &lt;div class=&quot;box&quot;&gt;&lt;/div&gt;
-    &lt;!-- html根元素字体大小设置屏幕的宽 --&gt;
     &lt;script type=&quot;text/javascript&quot;&gt;
-        window.onload = function () {
-            //获取屏幕的宽
-            var width = document.documentElement.clientWidth
-            console.log(width)
-            //获取html根元素
-            var htmlNode = document.querySelector(&apos;html&apos;)
-            //设置字体大小
-            htmlNode.style.fontSize = width+&apos;px&apos;
+        //获取btn
+        var btn = document.getElementById(&apos;btn&apos;)
+        var box = document.getElementsByClassName(&apos;box&apos;)[0]
+
+        btn.onclick = function(){
+            //创建xhr对象
+            var xhr = new XMLHttpRequest()
+
+            //初始化对象，设置请求的方式与url
+            xhr.open(&apos;GET&apos;,&apos;http://127.0.0.1:8000/server&apos;)
+            //设置参数
+            //xhr.open(&apos;GET&apos;,&apos;http://127.0.0.1:8000/server?a=1&amp;b=2&amp;c=3&apos;)
+            //发送
+            xhr.send()
+            //事件处理，处理服务端返回的数据
+            /*readyState是xhr对象的属性，表示状态，0代表未初始化，1代表open方法调用完毕，2代表send方法调用完毕，
+            3表示服务端返回部分结果，4代表服务端返回所有的结果*/
+            xhr.onreadystatechange = function () { 
+                //判断服务端返回所有的结果
+                if(xhr.readyState == 4){
+                    //判断响应状态码
+                    if(xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300){
+                        //成功
+                        //处理结果 响应行，头，空行，体
+                        console.log(xhr.status)  //状态码
+                        console.log(xhr.statusText)  //状态字符串
+                        console.log(xhr.getAllResponseHeaders())   //所有的响应头
+                        console.log(xhr.response)   //响应体
+                        box.innerHTML = xhr.response
+                    }else {
+
+                    }
+                }
+            }
         }
     &lt;/script&gt;
-&lt;/body&gt;</code></pre><p>这样1rem就是整个屏幕的宽，之后将css样式中的px修改为rem</p>
-<pre><code>&lt;style&gt;
-    .box {
-        width: 0.5rem;
-        height: 0.5rem;
-        background-color: purple;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>服务端路由</p>
+<pre><code>//3 创建路由规则
+app.get(&apos;/server&apos;,(request,response)=&gt;{
+
+    //设置响应头 允许跨域
+    response.setHeader(&apos;Access-Control-Allow-Origin&apos;,&apos;*&apos;)
+    //设置响应
+    response.send(&quot;hello ajax&quot;)
+})</code></pre><p><img src="/2021/02/19/Ajax/pic01.png" alt></p>
+<p>2.ajax post请求</p>
+<p>小案例，鼠标移动到盒子上面是请求数据并显示服务端返回的数据</p>
+<p>前端代码</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;ajax原生post请求&lt;/title&gt;
+    &lt;style&gt;
+        #box {
+            width: 300px;
+            height: 200px;
+            background-color: yellow;
+            color: #fff;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 40px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=&quot;box&quot;&gt;&lt;/div&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+
+        var box = document.getElementById(&apos;box&apos;)
+        console.log(box)
+        box.addEventListener(&apos;mouseover&apos;,function(){
+            //创建xhr对象
+            var xhr = new XMLHttpRequest()
+
+            //初始化对象，设置请求的方式与url
+            xhr.open(&apos;POST&apos;,&apos;http://127.0.0.1:8000/server&apos;)
+            //设置请求头  Content-Type用来设置请求体内容数据类型
+            //xhr.setRequestHeader(&apos;Content-Type&apos;,&apos;application/x-www-form-urlencoded&apos;)
+            //自定义请求头
+            //xhr.setRequestHeader(&apos;Name&apos;,&apos;lllxxx&apos;)  //服务端需要设置
+            //发送
+            xhr.send()
+            //设置请求体数据
+            //xhr.send(&apos;a=1&amp;b=2&amp;c=3&apos;)
+            //事件处理，处理服务端返回的数据
+            xhr.onreadystatechange = function () { 
+                //判断服务端返回所有的结果
+                if(xhr.readyState == 4){
+                    //判断响应状态码
+                    if(xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300){
+                        //成功
+                        box.innerHTML = xhr.response
+                    }
+                }
+            }
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>服务端路由</p>
+<pre><code>//可以将post改为all，表示可以相应任何请求类型
+app.post(&apos;/server&apos;,(request,response)=&gt;{
+
+    //设置响应头 允许跨域
+    response.setHeader(&apos;Access-Control-Allow-Origin&apos;,&apos;*&apos;)
+    //response.setHeader(&apos;Access-Control-Allow-Head&apos;,&apos;*&apos;)  //所有的请求头都可以接受
+    //设置响应
+    response.send(&quot;hello ajax post&quot;)
+})</code></pre><p><img src="/2021/02/19/Ajax/pic02.png" alt></p>
+<p>3.服务端响应json数据</p>
+<p>前端代码</p>
+<pre><code>&lt;body&gt;
+    &lt;!-- 键盘按下字符，就响应事件 --&gt;
+    &lt;div id=&quot;box&quot;&gt;&lt;/div&gt;
+    &lt;script&gt;
+        let box = document.getElementById(&apos;box&apos;)
+        window.onkeyup = function(){
+            let xhr = new XMLHttpRequest()
+            //设置响应体类型
+            xhr.responseType =&apos;json&apos;
+            xhr.open(&apos;POST&apos;,&apos;http://127.0.0.1:8000/json-server&apos;)
+            xhr.send()
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4){
+                    if(xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300){
+                        //手动转换
+                        // let data = JSON.parse(xhr.response)
+                        // console.log(data)
+                        // box.innerHTML = data.name
+                        console.log(xhr.response)
+                        box.innerHTML = xhr.response.name
+                    }
+                }
+            }
+        }
+
+        &lt;/script&gt;
+&lt;/body&gt;</code></pre><p>服务端路由</p>
+<pre><code>app.post(&apos;/json-server&apos;,(request,response)=&gt;{
+
+    //设置响应头 允许跨域
+    response.setHeader(&apos;Access-Control-Allow-Origin&apos;,&apos;*&apos;)
+    //response.setHeader(&apos;Access-Control-Allow-Head&apos;,&apos;*&apos;)  //所有的请求头都可以接受
+    const data = {
+        name:&apos;lllxxx&apos;,
+        age: 18
     }
-&lt;/style&gt;</code></pre>
+    //设置响应
+    response.send(JSON.stringify(data))
+})</code></pre><h4 id="6-请求超时与网络异常处理"><a href="#6-请求超时与网络异常处理" class="headerlink" title="6 请求超时与网络异常处理"></a>6 请求超时与网络异常处理</h4><p>小案例，设置超时的秒数，当请求超过这个时间，就会调用超市回调函数<br>设置网络异常回调，在谷歌调试器中，在Network里面的online改为offline进行调试</p>
+<p>前端代码</p>
+<pre><code>&lt;body&gt;
+    &lt;button id=&quot;btn&quot;&gt;获取数据&lt;/button&gt;
+    &lt;div id=&quot;box&quot;&gt;&lt;/div&gt;
+
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        //获取btn
+        var btn = document.getElementById(&apos;btn&apos;)
+        var box = document.getElementById(&apos;box&apos;)
+
+        btn.onclick = function(){
+            //创建xhr对象
+            var xhr = new XMLHttpRequest()
+            //超时设置
+            xhr.timeout =2000
+            //超时回调
+            xhr.ontimeout = function () { 
+                alert(&quot;超时请求，请之后再尝试&quot;)
+            }
+            //网络异常设置
+            xhr.onerror = function(){
+                alert(&quot;你的网络异常，请稍后再尝试&quot;)
+            }
+            //初始化对象，设置请求的方式与url
+            xhr.open(&apos;GET&apos;,&apos;http://127.0.0.1:8000/server-delay&apos;)
+            //发送
+            xhr.send()
+            //事件处理，处理服务端返回的数据
+            xhr.onreadystatechange = function () { 
+                //判断服务端返回所有的结果
+                if(xhr.readyState == 4){
+                    //判断响应状态码
+                    if(xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300){
+                        box.innerHTML = xhr.response
+                    }else {
+
+                    }
+                }
+            }
+        }
+    &lt;/script&gt;
+&lt;/body&gt;</code></pre><p>后端路由</p>
+<p>app.get(‘/server-delay’,(request,response)=&gt;{</p>
+<pre><code>//设置响应头 允许跨域
+response.setHeader(&apos;Access-Control-Allow-Origin&apos;,&apos;*&apos;)
+//设置响应
+setTimeout(function(){
+    response.send(&quot;延迟响应&quot;)
+},3000)</code></pre><p>})</p>
+<p><img src="/2021/02/19/Ajax/pic03.png" alt></p>
+<p><img src="/2021/02/19/Ajax/pic04.png" alt></p>
+<p><img src="/2021/02/19/Ajax/pic05.png" alt></p>
+<h4 id="7-取消请求"><a href="#7-取消请求" class="headerlink" title="7 取消请求"></a>7 取消请求</h4><p>小案例，页面设置两个按钮，分别实现发送请求与取消请求功能</p>
+<p>前端代码</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;取消请求&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;button id=&quot;btnSubmit&quot;&gt;点击请求&lt;/button&gt;
+    &lt;button id=&quot;cancel&quot;&gt;点击取消&lt;/button&gt;
+    &lt;script&gt;
+        let btnSubmit = document.getElementById(&apos;btnSubmit&apos;)
+        let cancel = document.getElementById(&apos;cancel&apos;)
+        let xhr = null
+        btnSubmit.onclick = function(){
+            xhr = new XMLHttpRequest()
+            xhr.open(&apos;GET&apos;,&apos;http://127.0.0.1:8000/server-delay&apos;)
+            xhr.send()
+            xhr.onreadystatechange = function () { 
+                //判断服务端返回所有的结果
+                if(xhr.readyState == 4){
+
+                    //判断响应状态码
+                    if(xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300){
+                    console.log(xhr.response)
+                    }
+                }
+            }
+        }
+        cancel.onclick = function(){
+            xhr.abort()
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+服务端路由
+
+    app.get(&apos;/server-delay&apos;,(request,response)=&gt;{
+
+    //设置响应头 允许跨域
+    response.setHeader(&apos;Access-Control-Allow-Origin&apos;,&apos;*&apos;)
+    //设置响应
+    setTimeout(function(){
+        response.send(&quot;延迟响应&quot;)
+    },3000)
+})</code></pre><h4 id="8-解决重复发送请求问题"><a href="#8-解决重复发送请求问题" class="headerlink" title="8 解决重复发送请求问题"></a>8 解决重复发送请求问题</h4><p>在实际场景中，可能会出现用户重复一直点击按钮发送请求的情况，这样就会对服务的造成较大的压力，为了避免这种情况，可以编写代码进行约束</p>
+<pre><code>&lt;script&gt;
+        let btnSubmit = document.getElementById(&apos;btnSubmit&apos;)
+        let cancel = document.getElementById(&apos;cancel&apos;)
+        let xhr = null
+        let isSending = false  //是否重复发送请求
+        btnSubmit.onclick = function(){
+            if(isSending){
+                xhr.abort()  //如果一直重复发送请求，就取消请求
+            }
+            xhr = new XMLHttpRequest()
+            isSending = true
+            xhr.open(&apos;GET&apos;,&apos;http://127.0.0.1:8000/server-delay&apos;)
+            xhr.send()
+            xhr.onreadystatechange = function () { 
+                //判断服务端返回所有的结果
+                if(xhr.readyState == 4){
+                    isSending = false
+                    //判断响应状态码
+                    if(xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300){
+                    console.log(xhr.response)
+                    }
+                }
+            }
+        }
+        cancel.onclick = function(){
+            xhr.abort()
+        }
+    &lt;/script&gt;</code></pre>
       
 
       <!-- 开始添加版权声明-->
@@ -245,7 +580,7 @@
   
 </li></ul>
   <ul><li><strong>本文链接：</strong>
- <a href="http://sunnyllxx.github.io/2021/02/17/rem-adapter/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2021/02/17/rem-adapter/</a>
+ <a href="http://sunnyllxx.github.io/2021/02/19/Ajax/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2021/02/19/Ajax/</a>
 </li></ul>
   <ul><li><strong>版权声明：</strong>
   本作品采用
@@ -306,7 +641,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Ajax</a>
         		</li>
       		
 		</ul>
@@ -375,7 +710,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2021/02/17/rem-adapter/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2021/02/19/Ajax/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -389,18 +724,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/02/17/anti-shake-throttle/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          JS 函数节流和防抖
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/02/17/react-compare-with-vue/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">React与Vue的区别</div>
+    <a href="/2021/02/18/js-cross-domain/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript 跨域问题</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -427,7 +753,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何为移动端进行rem适配"><span class="toc-number">1.</span> <span class="toc-text">如何为移动端进行rem适配</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#了解Ajax的基本使用"><span class="toc-number">1.</span> <span class="toc-text">了解Ajax的基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-什么是Ajax"><span class="toc-number">1.1.</span> <span class="toc-text">1 什么是Ajax</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-Ajax特点"><span class="toc-number">1.2.</span> <span class="toc-text">1.1 Ajax特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-什么是XML"><span class="toc-number">1.3.</span> <span class="toc-text">2 什么是XML</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-http"><span class="toc-number">1.4.</span> <span class="toc-text">3 http</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-HTTP消息结构"><span class="toc-number">1.5.</span> <span class="toc-text">3.1 HTTP消息结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-使用espress"><span class="toc-number">1.6.</span> <span class="toc-text">4 使用espress</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Ajax基本使用"><span class="toc-number">1.7.</span> <span class="toc-text">5 Ajax基本使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-请求超时与网络异常处理"><span class="toc-number">1.8.</span> <span class="toc-text">6 请求超时与网络异常处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-取消请求"><span class="toc-number">1.9.</span> <span class="toc-text">7 取消请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-解决重复发送请求问题"><span class="toc-number">1.10.</span> <span class="toc-text">8 解决重复发送请求问题</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
