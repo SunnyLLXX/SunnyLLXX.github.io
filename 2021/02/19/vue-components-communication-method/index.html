@@ -6,22 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>React 嵌套路由 | étoile的小窝</title>
+  <title>Vue组件间通信方式 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="如何使用React 嵌套路由">
+  <meta name="description" content="了解Vue组件间的通信方式有哪些">
 <meta property="og:type" content="article">
-<meta property="og:title" content="React 嵌套路由">
-<meta property="og:url" content="http://sunnyllxx.github.io/2021/02/16/nest-react-routing/index.html">
+<meta property="og:title" content="Vue组件间通信方式">
+<meta property="og:url" content="http://sunnyllxx.github.io/2021/02/19/vue-components-communication-method/index.html">
 <meta property="og:site_name" content="étoile的小窝">
-<meta property="og:description" content="如何使用React 嵌套路由">
+<meta property="og:description" content="了解Vue组件间的通信方式有哪些">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://sunnyllxx.github.io/2021/02/16/nest-react-routing/pic01.png">
-<meta property="article:published_time" content="2021-02-16T13:52:31.000Z">
-<meta property="article:modified_time" content="2021-02-18T12:21:44.859Z">
+<meta property="article:published_time" content="2021-02-19T11:13:30.000Z">
+<meta property="article:modified_time" content="2021-02-19T11:23:39.433Z">
 <meta property="article:author" content="étoile">
-<meta property="article:tag" content="React">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="常见题">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://sunnyllxx.github.io/2021/02/16/nest-react-routing/pic01.png">
   
     <link rel="alternative" href="/atom.xml" title="étoile的小窝" type="application/atom+xml">
   
@@ -168,14 +167,14 @@
           </div>
           <div id="js-content" class="content-ll">
             
-<article id="post-nest-react-routing" class="article article-type-post " itemscope itemprop="blogPost">
+<article id="post-vue-components-communication-method" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      React 嵌套路由
+      Vue组件间通信方式
     </h1>
   
 
@@ -194,81 +193,36 @@
 <!--显示阅读次数完毕-->
   
         
-        <a href="/2021/02/16/nest-react-routing/" class="archive-article-date">
-  	<time datetime="2021-02-16T13:52:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-16</time>
+        <a href="/2021/02/19/vue-components-communication-method/" class="archive-article-date">
+  	<time datetime="2021-02-19T11:13:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="如何使用React-嵌套路由"><a href="#如何使用React-嵌套路由" class="headerlink" title="如何使用React 嵌套路由"></a>如何使用React 嵌套路由</h3><a id="more"></a>
-<p>本片文章将使用如下小案例进行讲解使用嵌套路由</p>
-<p><img src="/2021/02/16/nest-react-routing/pic01.png" alt></p>
-<h4 id="1-创建News-Message组件"><a href="#1-创建News-Message组件" class="headerlink" title="1 创建News,Message组件"></a>1 创建News,Message组件</h4><p>分析页面可以发现，在Home组件中含有另外的路由，可以分为News,Message</p>
-<p>Message组件，则在Home组件中创建这两个组件。</p>
-<pre><code>import React, { Component } from &apos;react&apos;;
+        <h3 id="了解Vue组件间的通信方式有哪些"><a href="#了解Vue组件间的通信方式有哪些" class="headerlink" title="了解Vue组件间的通信方式有哪些"></a>了解Vue组件间的通信方式有哪些</h3><a id="more"></a>
 
-class Message extends Component {
-    render() {
-        return (
-            &lt;div&gt;
-                &lt;ul&gt;
-                    &lt;li&gt;me1&lt;/li&gt;
-                    &lt;li&gt;me2&lt;/li&gt;
-                    &lt;li&gt;me3&lt;/li&gt;
-                &lt;/ul&gt;
-            &lt;/div&gt;
-        );
-    }
-}
-
-export default Message;</code></pre><p>News组件</p>
-<pre><code>import React, { Component } from &apos;react&apos;;
-
-class News extends Component {
-    render() {
-        return (
-            &lt;div&gt;
-                &lt;ul&gt;
-                    &lt;li&gt;new1&lt;/li&gt;
-                    &lt;li&gt;new2&lt;/li&gt;
-                    &lt;li&gt;new3&lt;/li&gt;
-                &lt;/ul&gt;
-            &lt;/div&gt;
-        );
-    }
-}
-
-export default News;</code></pre><h4 id="2-修改Home组件"><a href="#2-修改Home组件" class="headerlink" title="2 修改Home组件"></a>2 修改Home组件</h4><pre><code>import React, { Component } from &apos;react&apos;;
-import {Route,Redirect} from &apos;react-router-dom&apos;
-import MyNavLink from &apos;../../components/MyNavLink/MyNavLink&apos;
-import News from &apos;./News/News&apos;
-import Message from &apos;./Message/Message&apos;
-class Home extends Component {
-    render() {
-        return (
-            &lt;div&gt;
-                &lt;h1&gt;home&lt;/h1&gt;
-                &lt;div&gt;
-                    &lt;div className=&quot;top&quot;&gt;
-                        &lt;MyNavLink to=&quot;/home/news&quot;&gt;News&lt;/MyNavLink&gt;
-                        &lt;MyNavLink to=&quot;/home/message&quot;&gt;Message&lt;/MyNavLink&gt;
-                    &lt;/div&gt;
-                    &lt;div className=&quot;bottome&quot;&gt;
-                        &lt;Route path=&quot;/home/news&quot; component={News}&gt;&lt;/Route&gt;
-                        &lt;Route path=&quot;/home/message&quot; component={Message}&gt;&lt;/Route&gt;
-                        &lt;Redirect to=&quot;/home/news&quot;&gt;&lt;/Redirect&gt;
-                        {/* 如果开启严格模式则不会匹配 */}
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        );
-    }
-}
-
-export default Home;</code></pre><p>注册子路由时要写上父路由的path值</p>
-<p>路由的匹配是按照注册路由的顺序进行的</p>
+<h4 id="1-通信种类"><a href="#1-通信种类" class="headerlink" title="1 通信种类"></a>1 通信种类</h4><p>1)父组件向子组件通信</p>
+<p>2)子组件向父组件通信</p>
+<p>3)隔代组件间通信</p>
+<p>4)兄弟组件间通信</p>
+<h4 id="2-实现通信方式"><a href="#2-实现通信方式" class="headerlink" title="2 实现通信方式"></a>2 实现通信方式</h4><p>1)props</p>
+<p>2)vue自定义事件</p>
+<p>3)消息订阅与发布</p>
+<p>4)vuex</p>
+<p>5)slot</p>
+<h4 id="2-1-props"><a href="#2-1-props" class="headerlink" title="2.1 props"></a>2.1 props</h4><p>1)通过一般属性实现父向子通信</p>
+<p>2)通过函数属性实现子向父通信</p>
+<p>3)缺点:隔代组件和兄弟组件间通信比较麻烦</p>
+<h4 id="2-2-vue自定义事件"><a href="#2-2-vue自定义事件" class="headerlink" title="2.2 vue自定义事件"></a>2.2 vue自定义事件</h4><p>1)vue内置实现，可以代潜函数类型的props</p>
+<pre><code>a.绑定监听:&lt;MyComp eventName=&quot;callback&quot;
+b.触发(分发)事件: this.$emit(&quot;eventName&quot;, data)</code></pre><p>2)缺点:只适合于子向父通信</p>
+<h4 id="2-3消息订阅与发布"><a href="#2-3消息订阅与发布" class="headerlink" title="2.3消息订阅与发布"></a>2.3消息订阅与发布</h4><p>1)需要引入消息订阅与发布的实现库，如: pubsub-js</p>
+<pre><code>a.订阅消息:PubSub.subscribe( &apos;msg&apos; , function(msg, data))
+b.发布消息: PubSub.publish(&apos;msg&apos;, data)</code></pre><p>2)优点:此方式可实现任意关系组件间通信</p>
+<h4 id="2-4-Vuex"><a href="#2-4-Vuex" class="headerlink" title="2.4 Vuex"></a>2.4 Vuex</h4><p>1)vuex是vue官方提供的集中式管理vue多组件共享状态数据的vue插件</p>
+<p>2)优点:对组件间关系没有限制，且相比于pubsub库管理更集中，更方便</p>
 
       
 
@@ -282,7 +236,7 @@ export default Home;</code></pre><p>注册子路由时要写上父路由的path�
   
 </li></ul>
   <ul><li><strong>本文链接：</strong>
- <a href="http://sunnyllxx.github.io/2021/02/16/nest-react-routing/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2021/02/16/nest-react-routing/</a>
+ <a href="http://sunnyllxx.github.io/2021/02/19/vue-components-communication-method/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2021/02/19/vue-components-communication-method/</a>
 </li></ul>
   <ul><li><strong>版权声明：</strong>
   本作品采用
@@ -343,7 +297,11 @@ export default Home;</code></pre><p>注册子路由时要写上父路由的path�
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
         		</li>
       		
 		</ul>
@@ -412,7 +370,7 @@ export default Home;</code></pre><p>注册子路由时要写上父路由的path�
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2021/02/16/nest-react-routing/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2021/02/19/vue-components-communication-method/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -426,18 +384,9 @@ export default Home;</code></pre><p>注册子路由时要写上父路由的path�
   
 <nav id="article-nav">
   
-    <a href="/2021/02/17/repaint-reflow/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          重绘与重排
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/02/16/basic-use-of-react-routing/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">React 路由的基本使用</div>
+    <a href="/2021/02/19/Ajax/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Ajax 的基本使用</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -464,7 +413,7 @@ export default Home;</code></pre><p>注册子路由时要写上父路由的path�
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何使用React-嵌套路由"><span class="toc-number">1.</span> <span class="toc-text">如何使用React 嵌套路由</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-创建News-Message组件"><span class="toc-number">1.1.</span> <span class="toc-text">1 创建News,Message组件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-修改Home组件"><span class="toc-number">1.2.</span> <span class="toc-text">2 修改Home组件</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#了解Vue组件间的通信方式有哪些"><span class="toc-number">1.</span> <span class="toc-text">了解Vue组件间的通信方式有哪些</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-通信种类"><span class="toc-number">1.1.</span> <span class="toc-text">1 通信种类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-实现通信方式"><span class="toc-number">1.2.</span> <span class="toc-text">2 实现通信方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-props"><span class="toc-number">1.3.</span> <span class="toc-text">2.1 props</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-vue自定义事件"><span class="toc-number">1.4.</span> <span class="toc-text">2.2 vue自定义事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3消息订阅与发布"><span class="toc-number">1.5.</span> <span class="toc-text">2.3消息订阅与发布</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-Vuex"><span class="toc-number">1.6.</span> <span class="toc-text">2.4 Vuex</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
