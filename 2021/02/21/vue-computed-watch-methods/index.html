@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>Category: Android | étoile的小窝</title>
+  <title>Vue 计算属性与监听器、方法的比较 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="étoile的小窝">
-<meta property="og:url" content="http://sunnyllxx.github.io/categories/Android/index.html">
+  <meta name="description" content="Vue computed vs watch vs methods">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 计算属性与监听器、方法的比较">
+<meta property="og:url" content="http://sunnyllxx.github.io/2021/02/21/vue-computed-watch-methods/index.html">
 <meta property="og:site_name" content="étoile的小窝">
+<meta property="og:description" content="Vue computed vs watch vs methods">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-21T02:09:01.000Z">
+<meta property="article:modified_time" content="2021-02-21T02:49:06.544Z">
 <meta property="article:author" content="étoile">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="常见题">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="étoile的小窝" type="application/atom+xml">
@@ -161,141 +167,367 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-vue-computed-watch-methods" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vue 计算属性与监听器、方法的比较
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+
+
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+           👁 &nbsp;<span id="busuanzi_value_page_pv"></span> &nbsp;&nbsp;
+  </span>
+  </a>
+
+<!--显示阅读次数完毕-->
+  
+        
+        <a href="/2021/02/21/vue-computed-watch-methods/" class="archive-article-date">
+  	<time datetime="2021-02-21T02:09:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-21</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Vue-computed-vs-watch-vs-methods"><a href="#Vue-computed-vs-watch-vs-methods" class="headerlink" title="Vue computed vs watch vs methods"></a>Vue computed vs watch vs methods</h3><a id="more"></a>
+
+<p>在开发vue项目中，可能会经常遇见实现某种功能具体使用哪种方法更好呢？接下来通过一些小案例进行分析（通过在浏览器控制台修改vm.firstName或者vm.lastName得到效果）。</p>
+<h4 id="1-计算属性-VS-侦听器"><a href="#1-计算属性-VS-侦听器" class="headerlink" title="1 计算属性 VS 侦听器"></a>1 计算属性 VS 侦听器</h4><p>computed：计算属性是用来声明式的描述一个值依赖了其它的值，当所依赖的值或者变量改变时，计算属性也会跟着改变。</p>
+<p>watch：Vue 提供了一种更通用的方式来观察和响应 Vue 实例上的数据变动。监听的是已经在 data 中定义的变量，当该变量变化时，会触发 watch 中的方法。</p>
+<p>使用计算属性(不需要在data中声明)</p>
+<pre><code>&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;p&gt;{{fullName}}&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;script src=&quot;./js/vue.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;./js/axios.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        var vm = new Vue({
+            el: &apos;#app&apos;,
+            data:{
+                firstName: &apos;Liao&apos;,
+                lastName: &apos;Xin&apos;,               
+            },
+            computed: {
+                fullName: function(){
+                    return this.firstName + &apos; &apos; + this.lastName
+                }
+            }
+        })
+    &lt;/script&gt;
+&lt;/body&gt;</code></pre><p>使用侦听器</p>
+<pre><code>&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;p&gt;{{fullName}}&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;script src=&quot;./js/vue.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;./js/axios.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        var vm = new Vue({
+            el: &apos;#app&apos;,
+            data:{
+                firstName: &apos;Liao&apos;,
+                lastName: &apos;Xin&apos;,
+                fullName: &apos;Liao Xin&apos;
+            },
+            watch: {
+                firstName: function(val){
+                    this.fullName = val + &apos; &apos; + this.lastName
+                },
+                lastName: function(val){
+                    this.fullName = this.firstName + &apos; &apos; + val
+                }
+            }
+        })
+    &lt;/script&gt;
+&lt;/body&gt;</code></pre><p>但是，当需要在数据变化时执行异步或开销较大的操作时，推荐使用侦听器。<br>使用 watch 选项允许我们执行异步操作 (访问一个 API)，限制我们执行该操作的频率，并在得到最终结果前，设置中间状态。这些都是计算属性无法做到的。</p>
+<p>在计算属性与侦听器都能够实现同一功能时，推荐使用计算属性，因为代码更加简洁。</p>
+<h4 id="2-计算属性-VS-方法"><a href="#2-计算属性-VS-方法" class="headerlink" title="2 计算属性 VS 方法"></a>2 计算属性 VS 方法</h4><p>通过表达式调用方法也可以实现同样的效果</p>
+<pre><code>&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;p&gt;{{fullName()}}&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;script src=&quot;./js/vue.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;./js/axios.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        var vm = new Vue({
+            el: &apos;#app&apos;,
+            data:{
+                firstName: &apos;Liao&apos;,
+                lastName: &apos;Xin&apos;,
+
+            },
+            methods: {
+                fullName:function(){
+                    return this.firstName + &apos; &apos; + this.lastName
+                }
+            }
+        })
+    &lt;/script&gt;
+&lt;/body&gt;</code></pre><p>不同的是计算属性是基于它们的响应式依赖进行缓存的。只在相关响应式依赖发生改变时它们才会重新求值。这就意味着只要 fullName 还没有发生改变，多次访问计算属性会立即返回之前的计算结果，而不必再次执行函数。</p>
+<p>所以在下面的代码中，fullName将不会更新，因为Date.now()不是响应式依赖</p>
+<pre><code>computed: {
+            fullName: function(){
+                return Date.now()
+            }
+        }</code></pre><p>在计算属性与方法都能够实现同一功能时，推荐使用计算属性，因为计算属性具有缓存。</p>
+
+      
+
+      <!-- 开始添加版权声明-->
+
+
+<div class="declare">
+  <ul><li><strong>本文作者：</strong>
+  
+    étoile
+  
+</li></ul>
+  <ul><li><strong>本文链接：</strong>
+ <a href="http://sunnyllxx.github.io/2021/02/21/vue-computed-watch-methods/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2021/02/21/vue-computed-watch-methods/</a>
+</li></ul>
+  <ul><li><strong>版权声明：</strong>
+  本作品采用
+  <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+  进行许可。转载请注明出处！
+  
+</div>
+
+<!-- 添加完成 -->
+
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/zhifubaopicture.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixinAccept.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <!-- 添加本文结束标记-->
+
+  <div style="text-align:center;color: #00BFFF;font-size:14px;">
+       -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
+       </div>
+  
+  <!-- 添加完成 -->
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/10/12/ListView/" class="archive-article-date">
-  	<time datetime="2020-10-12T00:36:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/12/ListView/">最常用和最难用的控件——ListView</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Android//" class="article-tag-list-link color3">Android</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/19/activity-jump/" class="archive-article-date">
-  	<time datetime="2020-09-19T10:58:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/19/activity-jump/">Activity之间的跳转</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-
-
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Android//" class="article-tag-list-link color3">Android</a>
+        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2021/02/21/vue-computed-watch-methods/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/19/activity-event/" class="archive-article-date">
-  	<time datetime="2020-09-19T02:53:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-19</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/02/21/miniprogram-subscribe-message/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">miniprogram subscribe message</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/19/activity-event/">Activity创建、点击事件使用以及真机调试</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Android//" class="article-tag-list-link color3">Android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue-computed-vs-watch-vs-methods"><span class="toc-number">1.</span> <span class="toc-text">Vue computed vs watch vs methods</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-计算属性-VS-侦听器"><span class="toc-number">1.1.</span> <span class="toc-text">1 计算属性 VS 侦听器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-计算属性-VS-方法"><span class="toc-number">1.2.</span> <span class="toc-text">2 计算属性 VS 方法</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
+
+
+   <!-- valine评论系统开始 -->
+
+   
+    <section id="comments" class="comments">
+      <style>
+        .comments{margin:30px;padding:10px;background:#fff}
+        @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+      </style>
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'true' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "SqWqnmUuTCilnupzDVQgFhrE-gzGzoHsz",
+            app_key: "EuNlMDzK61IRiansuSobGwsH",
+            placeholder: "留下你的评论吧",
+            avatar:"retro",
+            avatar_cdn:'{{ theme.valine.avatar_cdn }}',
+        });
+    }
+</script>
+
+  </section>
+
+
+<!-- valine评论系统结束 -->
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -333,10 +565,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
