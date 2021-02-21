@@ -16,7 +16,7 @@
 <meta property="og:description" content="如何实现小程序的订阅消息功能">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-21T02:07:33.000Z">
-<meta property="article:modified_time" content="2021-02-21T03:08:18.492Z">
+<meta property="article:modified_time" content="2021-02-21T03:18:25.294Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="微信小程序">
 <meta name="twitter:card" content="summary">
@@ -230,15 +230,15 @@
             content: &apos;请允许我们向您发送订阅消息，请打开设置勾选订阅消息，这样能够随时接收到提醒&apos;,
             showCancel: false,
             success (res2) {
-            console.log(res2);
-            wx.openSetting({
-                withSubscriptions: true,
-                success(res3) {
-                console.log(res3);
-                    // 调用后端订阅消息接口
-                    that.acceptMessage();     
-                }
-            })
+                console.log(res2);
+                wx.openSetting({
+                    withSubscriptions: true,
+                    success(res3) {
+                    console.log(res3);
+                        // 调用后端订阅消息接口
+                        that.acceptMessage();     
+                    }
+                })
             }
         })
 
@@ -264,32 +264,32 @@ acceptMessage: function () {
         console.log(&apos;openid：&apos;+ openId);
         // 调用后端订阅消息接口
         wx.request({
-        url: &apos;https:xxxxxx&apos; + openId, 
-        header: {
-        &apos;content-type&apos;: &apos;application/json&apos;
-        },
-        success (res) {
-        console.log(&apos;调用后端返回的订阅消息结果&apos;);
-        console.log(res.data)
-        wx.showToast({
-            title: &apos;订阅成功&apos;,
-            icon: &apos;success&apos;,
-            duration: 3000
-        })
-        },
-        fail(res){
-        console.log(&apos;调用后端接口失败&apos;)
-        console.log(res)
-        wx.showToast({
-            title: &apos;订阅失败&apos;,
-            duration: 3000
-        })   
-        }
+            url: &apos;https:xxxxxx&apos; + openId, 
+            header: {
+            &apos;content-type&apos;: &apos;application/json&apos;
+            },
+            success (res) {
+                console.log(&apos;调用后端返回的订阅消息结果&apos;);
+                console.log(res.data)
+                wx.showToast({
+                    title: &apos;订阅成功&apos;,
+                    icon: &apos;success&apos;,
+                    duration: 3000
+                })
+            },
+            fail(res){
+                console.log(&apos;调用后端接口失败&apos;)
+                console.log(res)
+                wx.showToast({
+                    title: &apos;订阅失败&apos;,
+                    duration: 3000
+                })   
+            }
     })
     }
 })       
 
-},</code></pre>
+}</code></pre>
       
 
       <!-- 开始添加版权声明-->
@@ -651,15 +651,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">常见题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color4">常见题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -667,11 +663,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">微信小程序</a>
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">微信小程序</a>
               </li>
              
               <li class="article-tag-list-item">
