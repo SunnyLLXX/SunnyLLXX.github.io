@@ -6,23 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>Vuex的使用 | étoile的小窝</title>
+  <title>Vue v-for与v-if的执行 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="如何使用Vuex接下来就通过一个简单的计数器小案例进行阐述">
+  <meta name="description" content="Vue中v-for和v-if为何不能连用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vuex的使用">
-<meta property="og:url" content="http://sunnyllxx.github.io/2020/10/20/use-vuex/index.html">
+<meta property="og:title" content="Vue v-for与v-if的执行">
+<meta property="og:url" content="http://sunnyllxx.github.io/2021/02/21/vue-for-if-priority/index.html">
 <meta property="og:site_name" content="étoile的小窝">
-<meta property="og:description" content="如何使用Vuex接下来就通过一个简单的计数器小案例进行阐述">
+<meta property="og:description" content="Vue中v-for和v-if为何不能连用">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://sunnyllxx.github.io/2020/10/20/use-vuex/pic01.png">
-<meta property="og:image" content="http://sunnyllxx.github.io/2020/10/20/use-vuex/pic02.png">
-<meta property="article:published_time" content="2020-10-20T06:20:10.000Z">
-<meta property="article:modified_time" content="2020-10-20T07:22:10.211Z">
+<meta property="article:published_time" content="2021-02-21T08:22:01.000Z">
+<meta property="article:modified_time" content="2021-02-21T09:00:47.995Z">
 <meta property="article:author" content="étoile">
-<meta property="article:tag" content="Vuex">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="常见题">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://sunnyllxx.github.io/2020/10/20/use-vuex/pic01.png">
   
     <link rel="alternative" href="/atom.xml" title="étoile的小窝" type="application/atom+xml">
   
@@ -169,14 +167,14 @@
           </div>
           <div id="js-content" class="content-ll">
             
-<article id="post-use-vuex" class="article article-type-post " itemscope itemprop="blogPost">
+<article id="post-vue-for-if-priority" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Vuex的使用
+      Vue v-for与v-if的执行
     </h1>
   
 
@@ -195,228 +193,56 @@
 <!--显示阅读次数完毕-->
   
         
-        <a href="/2020/10/20/use-vuex/" class="archive-article-date">
-  	<time datetime="2020-10-20T06:20:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-20</time>
+        <a href="/2021/02/21/vue-for-if-priority/" class="archive-article-date">
+  	<time datetime="2021-02-21T08:22:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="如何使用Vuex"><a href="#如何使用Vuex" class="headerlink" title="如何使用Vuex"></a>如何使用Vuex</h3><p>接下来就通过一个简单的计数器小案例进行阐述</p>
-<a id="more"></a>
+        <h3 id="Vue中v-for和v-if为何不能连用"><a href="#Vue中v-for和v-if为何不能连用" class="headerlink" title="Vue中v-for和v-if为何不能连用"></a>Vue中v-for和v-if为何不能连用</h3><a id="more"></a>
 
-<h4 id="1-了解组件之间共享数据的方式"><a href="#1-了解组件之间共享数据的方式" class="headerlink" title="1 了解组件之间共享数据的方式"></a>1 了解组件之间共享数据的方式</h4><p>父向子传值：通过v-bind 属性绑定</p>
-<p>子向父传值：通过v-on事件绑定</p>
-<p>兄弟组件之间共享数据： 通过EventBus</p>
-<p>使用 $on 接收数据的组件 ，使用 $emit 发送数据的组件</p>
-<h4 id="2-Vuex概述"><a href="#2-Vuex概述" class="headerlink" title="2 Vuex概述"></a>2 Vuex概述</h4><h4 id="2-1-Vuex-是什么"><a href="#2-1-Vuex-是什么" class="headerlink" title="2.1  Vuex 是什么"></a>2.1  Vuex 是什么</h4><p>Vuex 是实现组件全局状态（数据）管理的一种机制，可以方便的实现组件之间数据的共享。 </p>
-<h4 id="2-2-使用-Vuex-统一管理状态的好处"><a href="#2-2-使用-Vuex-统一管理状态的好处" class="headerlink" title="2.2 使用 Vuex 统一管理状态的好处"></a>2.2 使用 Vuex 统一管理状态的好处</h4><p>（1）能够在 vuex 中集中管理共享的数据，易于开发和后期维护 </p>
-<p>（2）能够高效地实现组件之间的数据共享，提高开发效率 </p>
-<p>（3）存储在 vuex 中的数据都是响应式的，能够实时保持数据与页面的同步 </p>
-<h4 id="2-3-什么样的数据适合存储到-Vuex-中"><a href="#2-3-什么样的数据适合存储到-Vuex-中" class="headerlink" title="2.3  什么样的数据适合存储到 Vuex 中"></a>2.3  什么样的数据适合存储到 Vuex 中</h4><p>一般情况下，只有组件之间共享的数据，才有必要存储到 vuex 中；对于组件中的私有数据，依旧存储在组件自身的 data 中即可。 </p>
-<h4 id="3-Vuex-的核心概念"><a href="#3-Vuex-的核心概念" class="headerlink" title="3  Vuex 的核心概念"></a>3  Vuex 的核心概念</h4><h4 id="3-1-State"><a href="#3-1-State" class="headerlink" title="3.1 State"></a>3.1 State</h4><p>State 提供唯一的公共数据源，所有共享的数据都要统一放到 Store 的 State 中进行存储。 </p>
-<pre><code>// 创建store数据源，提供唯一公共数据 
-const store = new Vuex.Store({ 
-    state: { count: 0 } 
-}) </code></pre><p>组件访问 State 中数据的一种方式： </p>
-<pre><code>this.$store.state.全局数据名称 </code></pre><p>组件访问 State 中数据的第二种方式：<br>通过刚才导入的 mapState 函数，将当前组件需要的全局数据，映射为当前组件的 computed 计算属性： </p>
-<p>1.从 vuex 中按需导入 mapState 函数 </p>
-<pre><code>import { mapState } from &apos;vuex&apos; </code></pre><p>2.将全局数据，映射为当前组件的计算属性 </p>
-<pre><code>computed: { 
-...mapState([&apos;count&apos;]) 
-} </code></pre><h4 id="3-2-Mutation"><a href="#3-2-Mutation" class="headerlink" title="3.2 Mutation"></a>3.2 Mutation</h4><p>Mutation用于变更 Store中 的数据。<br>(1)只能通过 mutation 变更 Store 数据，不可以直接操作 Store 中的数据。</p>
-<p>(2)通过这种方式虽然操作起来稍微繁琐一些，但是可以集中监控所有数据的变化。 </p>
-<h4 id="3-4-Action"><a href="#3-4-Action" class="headerlink" title="3.4 Action"></a>3.4 Action</h4><p>Action 用于处理异步任务。<br>如果通过异步操作变更数据，必须通过 Action，而不能使用 Mutation，但是在 Action 中还是要通过触发 Mutation 的方式间接变更数据。 </p>
-<h4 id="3-5-Getter"><a href="#3-5-Getter" class="headerlink" title="3.5 Getter"></a>3.5 Getter</h4><p>Getter 用于对 Store 中的数据进行加工处理形成新的数据。</p>
-<p>(1)Getter 可以对 Store 中已有的数据加工处理之后形成新的数据，类似 Vue 的计算属性。</p>
-<p>（2）Store 中数据发生变化，Getter 的数据也会跟着变化。 </p>
-<p>在了解一些基本信息之后就开始小案例吧。</p>
-<h4 id="4-计数器小案例"><a href="#4-计数器小案例" class="headerlink" title="4 计数器小案例"></a>4 计数器小案例</h4><p>使用vue ui新创建一个Vue项目，注意，项目中需要的一定要包括Vuex。<br>在store目录下的index.js文件中的state中添加count:0字段</p>
-<pre><code>import { createStore } from &apos;vuex&apos;
-
-export default createStore({
-state: {
-    count: 0
-},
-mutations: {
-},
-actions: {
-},
-getters: {},
-modules: {
-}
-})</code></pre><p>然后在components目录下新建Add.vue，Sub.vue组件，添加如下代码。使用$store.state.count访问state中的数据。</p>
-<pre><code>Add.vue
-&lt;template&gt;
-    &lt;div&gt;
-        &lt;h3&gt;当前最新的count值为：{{$store.state.count}}&lt;/h3&gt;
-        &lt;button @click=&quot;btnAdd&quot;&gt;+1&lt;/button&gt;
+<p>如果二者在同一个标签中，v-for会比v-if优先执行。</p>
+<p>因为首先需要循环数组，然后看每个循环出来的标签中是否含有v-if，如果有值为true就会显示，如果没有或者值为false就不会显示。</p>
+<p>如果每一次都需要遍历整个数组，将会影响速度，尤其是当之需要渲染很小一部分的时候。</p>
+<p>如果连用的话会把 v-if 给每个元素都添加一下,会造成性能浪费。</p>
+<p>v-for和v-if在同一个标签中</p>
+<pre><code>&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;div&gt;
+            &lt;ul v-for=&quot;item in colors&quot; :key=&quot;item&quot; v-if=&quot;isShow&quot;&gt;
+                &lt;li&gt;{{item}}&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
     &lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-export default {
-data () {
-    return {}
-},
-methods: {
-}
-}
-&lt;/script&gt;
-
-&lt;style scoped&gt;
-
-&lt;/style&gt;
-
-Sub.vue
-&lt;template&gt;
-    &lt;div&gt;
-        &lt;h3&gt;当前最新的count值为：{{count}}&lt;/h3&gt;
-        &lt;button @click=&quot;btnSub&quot;&gt;-1&lt;/button&gt;
+    &lt;script src=&quot;./js/vue.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        var vm = new Vue({
+            el:&apos;#app&apos;,
+            data: {
+                colors: [&apos;red&apos;,&apos;yellow&apos;,&apos;bule&apos;,&apos;purple&apos;],
+                isShow: true
+            }
+        })
+    &lt;/script&gt;
+&lt;/body&gt;</code></pre><p>解决的办法：可以将v-for与v-if进行嵌套</p>
+<pre><code>&lt;div id=&quot;app&quot;&gt;
+    &lt;div v-if=&quot;isShow&quot;&gt;
+        &lt;ul v-for=&quot;item in colors&quot; :key=&quot;item&quot;&gt;
+            &lt;li &gt;{{item}}&lt;/li&gt;
+        &lt;/ul&gt;
     &lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-import { mapState } from &apos;vuex&apos;
-export default {
-data () {
-    return {}
-},
-methods: {
-},
-computed: {
-    ...mapState([&apos;count&apos;])
-}
-}
-&lt;/script&gt;
-
-&lt;style scoped&gt;
-
-&lt;/style&gt;</code></pre><p>在App.vue中引入Add.vue以及Sub.vue组件</p>
-<pre><code>&lt;template&gt;
-&lt;div&gt;
-    &lt;my-add&gt;&lt;/my-add&gt;
-    &lt;p&gt;-----------------------------------------&lt;/p&gt;
-    &lt;my-sub&gt;&lt;/my-sub&gt;
-    &lt;p&gt;--------------------------------------------&lt;/p&gt;
 &lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-import Add from &apos;./components/Add.vue&apos;
-import Sub from &apos;./components/Sub.vue&apos;
-export default {
-data () {
-    return {}
-},
-components: {
-    &apos;my-add&apos;: Add,
-    &apos;my-sub&apos;: Sub
-}
-}
-&lt;/script&gt;
-
-&lt;style scoped&gt;
-
-&lt;/style&gt;</code></pre><p>接下来就编译运行。</p>
-<p>对于数据增加操作，添加btnAdd事件，要想使count发生变化，应该利用Mutation。在Mutation中添加add方法</p>
-<pre><code>mutations: {
-    add: function (state) {
-    state.count++
-    }
-},
-
-然后在btnAdd中触发该方法。
-methods: {
-    btnAdd: function () {
-    this.$store.commit(&apos;add&apos;)
-    }
-}</code></pre><p>方法中还可以传参，如果不想一次只增加1，那么就进行传参赋值。<br>在Sub组件中增加btnSub方法，然后在mutations中添加sub方法</p>
-<pre><code>mutations: {
-    add: function (state) {
-    state.count++
-    },
-    sub: function (state, step) {
-    state.count -= step
-    }
-},
 
 
-methods: {
-    btnSub: function () {
-    this.$store.commit(&apos;sub&apos;, 3)
-    },
-},</code></pre><p>如果想要在add中添加setTimeOut方法进行每隔两秒修改数据，即使页面数据的确增加了，但是打开控制台会发现count依然没有任何变化，这是因为mutations中的方法是同步的，而setTimeOut是异步方法，而异步方法我们需要放在actions中进行操作。</p>
-<p>在Add.vue中添加一个按钮</p>
-<pre><code>&lt;template&gt;
-    &lt;div&gt;
-        &lt;h3&gt;当前最新的count值为：{{$store.state.count}}&lt;/h3&gt;
-        &lt;button @click=&quot;btnAdd&quot;&gt;+1&lt;/button&gt;
-        &lt;button @click=&quot;btnAddAsync&quot;&gt;异步+1&lt;/button&gt;
+&lt;div id=&quot;app&quot;&gt;
+    &lt;div &gt;
+        &lt;ul v-for=&quot;item in colors&quot; :key=&quot;item&quot;&gt;
+            &lt;li v-if=&quot;isShow&quot;&gt;{{item}}&lt;/li&gt;
+        &lt;/ul&gt;
     &lt;/div&gt;
-&lt;/template&gt;</code></pre><p>在actions中添加addAsync方法。</p>
-<pre><code>actions: {
-    // 在actions中不能够直接修改state中的数据，如果需要修改则需要通过context.commit()来触发mutations中的函数，只有mutations才能这样
-    addAsync: function (context) {
-    setTimeout(() =&gt; {
-        context.commit(&apos;add&apos;)
-    }, 2000)
-    },
-    }</code></pre><p>在Add.vue中添加方法btnAddAsync。<br>this.$store.dispatch() 是触发 actions 的一种方式，</p>
-<pre><code>methods: {
-    btnAdd: function () {
-    this.$store.commit(&apos;add&apos;)
-    },
-    btnAddAsync: function () {
-    this.$store.dispatch(&apos;addAsync&apos;)
-    }
-}</code></pre><p>同样如果需要一次增加n，那么可以进行传参。</p>
-<pre><code>actions: {
-    // 在actions中不能够直接修改state中的数据，如果需要修改则需要通过context.commit()来触发mutations中的函数，只有mutations才能这样
-    addAsync: function (context) {
-    setTimeout(() =&gt; {
-        context.commit(&apos;add&apos;)
-    }, 2000)
-    },
-    subAsync: function (context, step) {
-    setTimeout(() =&gt; {
-        context.commit(&apos;sub&apos;, step)
-    }, 2000)
-    }</code></pre><p>在Sub.vue中添加按钮</p>
-<pre><code>&lt;template&gt;
-    &lt;div&gt;
-        &lt;h3&gt;当前最新的count值为：{{count}}&lt;/h3&gt;
-        &lt;button @click=&quot;btnSub&quot;&gt;-1&lt;/button&gt;
-        &lt;button @click=&quot;btnSubAsync&quot;&gt;-n异步&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/template&gt;</code></pre><p>添加btnSubAsync方法</p>
-<pre><code>methods: {
-btnSub: function () {
-  this.$store.commit(&apos;sub&apos;, 3)
-},
-btnSubAsync: function () {
-  this.$store.dispatch(&apos;subAsync&apos;, 4)
-}</code></pre><p>  },</p>
-<p>使用getters，在getters中添加showNum方法</p>
-<pre><code>getters: {
-    showNum: function (state) {
-    return &apos;当前最新的数量是&apos; + state.count
-    }
-},</code></pre><p>在Add.vue中注释掉第一句话，然后添加</p>
-<pre><code>&lt;template&gt;
-    &lt;div&gt;
-        &lt;!-- &lt;h3&gt;当前最新的count值为：{{$store.state.count}}&lt;/h3&gt; --&gt;
-        &lt;h3&gt;{{$store.getters.showNum}}&lt;/h3&gt;
-        &lt;button @click=&quot;btnAdd&quot;&gt;+1&lt;/button&gt;
-        &lt;button @click=&quot;btnAddAsync&quot;&gt;异步+1&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/template&gt;</code></pre><p>使用getters中的方法this.$store.getters.名称</p>
-<h4 id="5-运行结果"><a href="#5-运行结果" class="headerlink" title="5 运行结果"></a>5 运行结果</h4><p>进行加加减减操作后，最后的运行结果如图</p>
-<p><img src="/2020/10/20/use-vuex/pic01.png" alt></p>
-<p>使用getters之后的变化</p>
-<p><img src="/2020/10/20/use-vuex/pic02.png" alt></p>
-
+&lt;/div&gt;</code></pre>
       
 
       <!-- 开始添加版权声明-->
@@ -429,7 +255,7 @@ btnSubAsync: function () {
   
 </li></ul>
   <ul><li><strong>本文链接：</strong>
- <a href="http://sunnyllxx.github.io/2020/10/20/use-vuex/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2020/10/20/use-vuex/</a>
+ <a href="http://sunnyllxx.github.io/2021/02/21/vue-for-if-priority/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2021/02/21/vue-for-if-priority/</a>
 </li></ul>
   <ul><li><strong>版权声明：</strong>
   本作品采用
@@ -490,7 +316,11 @@ btnSubAsync: function () {
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Vuex</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
         		</li>
       		
 		</ul>
@@ -559,7 +389,7 @@ btnSubAsync: function () {
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2020/10/20/use-vuex/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2021/02/21/vue-for-if-priority/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -573,18 +403,9 @@ btnSubAsync: function () {
   
 <nav id="article-nav">
   
-    <a href="/2021/01/26/project-optimization/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          vue-cli项目的简单优化
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/10/12/ListView/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">最常用和最难用的控件——ListView</div>
+    <a href="/2021/02/21/vue-keep-alive-component/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Vue keep-alive组件的使用</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -611,7 +432,7 @@ btnSubAsync: function () {
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何使用Vuex"><span class="toc-number">1.</span> <span class="toc-text">如何使用Vuex</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-了解组件之间共享数据的方式"><span class="toc-number">1.1.</span> <span class="toc-text">1 了解组件之间共享数据的方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Vuex概述"><span class="toc-number">1.2.</span> <span class="toc-text">2 Vuex概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-Vuex-是什么"><span class="toc-number">1.3.</span> <span class="toc-text">2.1  Vuex 是什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-使用-Vuex-统一管理状态的好处"><span class="toc-number">1.4.</span> <span class="toc-text">2.2 使用 Vuex 统一管理状态的好处</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-什么样的数据适合存储到-Vuex-中"><span class="toc-number">1.5.</span> <span class="toc-text">2.3  什么样的数据适合存储到 Vuex 中</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Vuex-的核心概念"><span class="toc-number">1.6.</span> <span class="toc-text">3  Vuex 的核心概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-State"><span class="toc-number">1.7.</span> <span class="toc-text">3.1 State</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-Mutation"><span class="toc-number">1.8.</span> <span class="toc-text">3.2 Mutation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-Action"><span class="toc-number">1.9.</span> <span class="toc-text">3.4 Action</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-Getter"><span class="toc-number">1.10.</span> <span class="toc-text">3.5 Getter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-计数器小案例"><span class="toc-number">1.11.</span> <span class="toc-text">4 计数器小案例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-运行结果"><span class="toc-number">1.12.</span> <span class="toc-text">5 运行结果</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue中v-for和v-if为何不能连用"><span class="toc-number">1.</span> <span class="toc-text">Vue中v-for和v-if为何不能连用</span></a></li></ol>
                     </div>
                 </span>
             </div>
