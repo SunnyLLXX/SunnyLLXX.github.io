@@ -6,14 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>Category: hexo | étoile的小窝</title>
+  <title>自定义 Promise 方法 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="étoile的小窝">
-<meta property="og:url" content="http://sunnyllxx.github.io/categories/hexo/index.html">
+  <meta name="description" content="使用es5实现Promise方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义 Promise 方法">
+<meta property="og:url" content="http://sunnyllxx.github.io/2021/02/23/customize-promise/index.html">
 <meta property="og:site_name" content="étoile的小窝">
+<meta property="og:description" content="使用es5实现Promise方法">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-23T05:56:49.000Z">
+<meta property="article:modified_time" content="2021-02-23T06:14:14.742Z">
 <meta property="article:author" content="étoile">
+<meta property="article:tag" content="常见题">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Promise">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="étoile的小窝" type="application/atom+xml">
@@ -161,81 +168,423 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-customize-promise" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/17/valine-comment/" class="archive-article-date">
-  	<time datetime="2020-08-17T09:10:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/17/valine-comment/">hexo yilia主题添加valine评论系统</a>
+    <h1 class="article-title" itemprop="name">
+      自定义 Promise 方法
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        <!--显示阅读次数-->
 
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+           👁 &nbsp;<span id="busuanzi_value_page_pv"></span> &nbsp;&nbsp;
+  </span>
+  </a>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+<!--显示阅读次数完毕-->
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo-blog%E9%83%A8%E7%BD%B2github%E4%B8%80%E7%9B%B4%E5%87%BA%E7%8E%B0404/" class="archive-article-date">
-  	<time datetime="2020-06-20T05:57:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-20</time>
+        
+        <a href="/2021/02/23/customize-promise/" class="archive-article-date">
+  	<time datetime="2021-02-23T05:56:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-23</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo-blog%E9%83%A8%E7%BD%B2github%E4%B8%80%E7%9B%B4%E5%87%BA%E7%8E%B0404/">解决hexo blog部署github一直出现404</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="使用es5实现Promise方法"><a href="#使用es5实现Promise方法" class="headerlink" title="使用es5实现Promise方法"></a>使用es5实现Promise方法</h3><a id="more"></a>
+<p>本篇主要讲解实现then(),catch(),Promise.resolve(),Promise.reject(),Promise.all(),Promise.race()</p>
+<h4 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h4><p>1.首先将整体结构罗列出来，包括Promise构造函数，执行器，Promise原型对象then,catch方法，函数对象resolve，reject，all，race方法</p>
+<p>2.实现内部函数reslove，reject方法，捕获执行器异常</p>
+<p>3.实现各种方法</p>
+<p>新建一个Promise.js文件</p>
+<pre><code>(function (window) {
 
-        <div class="article-info info-on-right">
-          
+    //三种状态
+    const PENDING = &quot;pending&quot;
+    const RESOLVED = &quot;resolved&quot;
+    const REJECTED = &quot;rejected&quot;
+
+    function Promise (excutor){//构造器
+
+        const that = this
+        //声明Promise状态，数据，回调方法
+        that.status = PENDING   //给promise对象指定状态，初始值为pending
+        that.data = undefined    //给promise对象给定一个用于存储结果数据的属性
+        that.callbacks = []   //用于存储回调函数{onResolved(){},onRejected(){}}
+        //成功执行
+        function resolve(value){
+            //判断状态是否为pending，不是则修改状态，传递数据
+            if(that.status !== PENDING){
+                return
+            }
+            that.status = RESOLVED
+            that.data = value
+            //如果有待完成的callback，立即异步执行回调onResolved
+            if(that.callbacks.length &gt; 0){
+                setTimeout(function(){ //放入队列执行所有的成功回调
+                    that.callbacks.forEach((callbacksObj)=&gt;{
+                        callbacksObj.onResolved(value)
+                    })
+                })
+
+            }
+
+        }
+
+        //失败执行
+        function reject(reason){
+            if(that.status !== PENDING){
+                return
+            }
+            that.status = REJECTED
+            that.data = reason
+
+            //如果有待完成的callback，立即异步执行回调onRejected
+            if(that.callbacks.length &gt; 0){
+                setTimeout(function(){ //放入队列执行所有的成功回调
+                    that.callbacks.forEach((callbacksObj)=&gt;{
+                        callbacksObj.onRejected(reason)
+                    })
+                })
+
+            }
+
+        }
+        // 同步执行excutor
+        try {
+            //捕获异常
+            excutor(resolve,reject)
+        } catch (error) {
+            reject(error)
+        }
+
+    }
+
+
+    /**Promise原型对象的then()
+    * 指定成功和失败的回调函数
+    * 返回一个新的promise对象
+    * 返回promise的结果由onResolved/onRejected执行结果决定
+    */
+    Promise.prototype.then = function(onResolved,onRejected){
+        //最简单实现，假设当前还是pending状态
+        const that = this
+        //this.callbacks.push({onResolved,onRejected})
+
+        //要求参数是函数
+        onResolved = typeof onResolved === &quot;function&quot; ? onResolved : value =&gt; value
+        //异常传透关键点
+        onRejected = typeof onRejected === &quot;function&quot; ? onRejected : reason =&gt; { throw reason }
+
+        /* 
+        执行指定的回调函数
+        根据执行的结果改变return的promise的状态/数据
+        */
+        return new Promise(function(resolve,reject){
+
+            /* 
+            封装复用函数
+            返回promise的结果由onResolved/onRejected执行结果决定
+            1. 抛出异常, 返回promise的结果为失败, reason为异常
+            2. 返回的是promise, 返回promise的结果就是这个结果
+            3. 返回的不是promise, 返回promise为成功, value就是返回值
+            */
+            function handle(callback){
+
+                try {
+                    const result = callback(that.data)
+                    //判断是否为Promise实例
+                    if(result instanceof Promise){
+                        //返回的是promise, 返回promise的结果就是这个结果
+                        result.then(resolve,reject)
+                    }else{
+                        //返回的不是promise, 返回promise为成功, value就是返回值
+                        resolve(result)
+                    }
+                } catch (error) {
+                    //抛出异常, 返回promise的结果为失败, reason为异常
+                    reject(error)
+                }
+
+            }
+            if(that.status === RESOLVED){
+                //异步执行
+                setTimeout(function(){
+                    handle(onResolved)
+                })
+            }else if(that.status === REJECTED){
+                //异步执行
+                setTimeout(function(){
+                    handle(onRejected)
+                })
+            }else {
+                that.callbacks.push({
+                    onResolved(value){
+                        handle(onResolved)
+                    },
+                    onRejected(reason){
+                        handle(onRejected)
+                    }
+                })
+            }
+        }) 
+    }
+
+
+    /**Promise原型对象的catch() 
+    * 执行失败的回调函数
+    * 返回promise对象
+    */
+    Promise.prototype.catch = function(onRejected){
+        const that = this
+        return this.then(undefined,onRejected)
+    }
+
+    /**Promise函数对象resolve() 
+    * 返回指定value结果的成功promise
+    */
+    Promise.resolve = function(value){
+        // 返回一个成功/失败的promise
+        return new Promise((resolve, reject) =&gt; {
+            // value是promise
+            if (value instanceof Promise) { // 使用value的结果作为promise的结果
+                value.then(resolve, reject)
+            } else { // value不是promise  =&gt; promise变为成功, 数据是value
+                resolve(value)
+            }
+        })
+    }
+
+    /**Promise函数对象reject() 
+    * 返回指定reason结果失败的promise
+    */
+    Promise.reject = function(reason){
+        return new Promise((resolve, reject) =&gt; {
+            reject(reason)
+        })
+    }
+
+    /**Promise函数对象all方法
+    * 只有当所有promise都返回成功才会成功，否则（只要有一个失败就失败）失败
+    */
+    Promise.all = function(promises){
+        //用于保存当前所有成功的数组
+        const values = new Array(promises.length)
+        //用于记录成功promise数组个数
+        let resolvedCount = 0
+        //返回新的promise
+        return new Promise(function(resolve,reject){
+            //遍历数组
+            promises.forEach((p,index)=&gt;{
+                Promise.resolve(p).then(function(value){
+                    //成功promise数量++
+                    resolvedCount++
+                    //保存成功promise返回数据
+                    values[index] = value
+                    //如果全部成功
+                    if(resolvedCount === promises.length){
+                        resolve(values)
+                    }
+                },function(reason){
+                    //只要有一个失败那就失败
+                    reject(reason)
+                })
+            })
+        })
+    }
+
+    /**Promsie函数对象的race方法
+    * 其结果由第一个完成promise决定
+    */
+    Promise.race = function(promises){
+        return new Promise(function(resolve,reject){
+            //遍历数组
+            promises.forEach((p)=&gt;{
+                Promise.resolve(p).then(function(value){
+                    //一旦有成功了，就返回
+                    resolve(value)
+                },function(reason){
+                    reject(reson)
+                })
+            })
+        })
+    }
+
+    /* 
+    返回一个promise对象, 它在指定的时间后才确定结果，延时请求
+    */
+    Promise.resolveDelay = function (value, time) {
+        // 返回一个成功/失败的promise
+        return new Promise((resolve, reject) =&gt; {
+            setTimeout(() =&gt; {
+                // value是promise
+                if (value instanceof Promise) { // 使用value的结果作为promise的结果
+                    value.then(resolve, reject)
+                } else { // value不是promise  =&gt; promise变为成功, 数据是value
+                    resolve(value)
+                }
+            }, time)
+            })
+    }
+
+    /* 
+    返回一个promise对象, 它在指定的时间后才失败，延时请求
+    */
+    Promise.rejectDelay = function (reason, time) {
+        // 返回一个失败的promise
+        return new Promise((resolve, reject) =&gt; {
+            setTimeout(() =&gt; {
+                reject(reason)
+            }, time)
+        })
+    }
+
+
+    //将Promise暴露出去
+    window.Promise = Promise
+})(window)</code></pre><p>实现案例：引入所写的Promise.js文件</p>
+<pre><code>const p = new Promise(function(resolve,reject){
+    setTimeout(function(){
+        reject(1)
+    },2000)
+})
+const p1 =Promise.resolve(2)
+const p2 = Promise.resolve(3)
+const p3 = Promise.resolveDelay(4,4000)
+const p4 = Promise.rejectDelay(5,6000)
+p.then(function(value){
+    console.log(&quot;请求成功&quot;,value)
+},function(reason){
+    console.log(&quot;请求失败&quot;,reason)
+})
+// p.catch(function(reason){
+//     console.log(&quot;请求失败&quot;,reason)
+// })
+p1.then(function(value){
+    console.log(&quot;请求成功&quot;,value)
+},function(reason){
+    console.log(&quot;请求失败&quot;,reason)
+})
+p2.then(function(value){
+    console.log(&quot;请求成功&quot;,value)
+},function(reason){
+    console.log(&quot;请求失败&quot;,reason)
+})
+p3.then(function(value){
+    console.log(&quot;请求成功&quot;,value)
+},function(reason){
+    console.log(&quot;请求失败&quot;,reason)
+})
+p4.then(function(value){
+    console.log(&quot;请求成功&quot;,value)
+},function(reason){
+    console.log(&quot;请求失败&quot;,reason)
+})
+const pall = Promise.all([p,p1,p2])
+pall.then(function(value){
+    console.log(&apos;all成功&apos;,value)
+},function(reason){
+    console.log(&apos;all失败&apos;,reason)
+})
+const prace = Promise.race([p,p1,p2])
+prace.then(function(value){
+    console.log(&apos;race成功&apos;,value)
+},function(reason){
+    console.log(&apos;race失败&apos;,reason)
+})</code></pre>
+      
+
+      <!-- 开始添加版权声明-->
+
+
+<div class="declare">
+  <ul><li><strong>本文作者：</strong>
+  
+    étoile
+  
+</li></ul>
+  <ul><li><strong>本文链接：</strong>
+ <a href="http://sunnyllxx.github.io/2021/02/23/customize-promise/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2021/02/23/customize-promise/</a>
+</li></ul>
+  <ul><li><strong>版权声明：</strong>
+  本作品采用
+  <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+  进行许可。转载请注明出处！
+  
+</div>
+
+<!-- 添加完成 -->
+
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/zhifubaopicture.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixinAccept.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <!-- 添加本文结束标记-->
+
+  <div style="text-align:center;color: #00BFFF;font-size:14px;">
+       -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
+       </div>
+  
+  <!-- 添加完成 -->
+    <div class="article-info article-info-index">
+      
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Promise</a>
         		</li>
       		
 		</ul>
@@ -243,161 +592,165 @@
 
 
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
+        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2021/02/23/customize-promise/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2Cannot-find-module-chalk-%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-06-20T05:45:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-20</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/02/23/js-array-flatten/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript 数组扁平化</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2Cannot-find-module-chalk-%E9%97%AE%E9%A2%98/">解决hexo博客Cannot find module&#39;chalk&#39;问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用es5实现Promise方法"><span class="toc-number">1.</span> <span class="toc-text">使用es5实现Promise方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实现步骤"><span class="toc-number">1.1.</span> <span class="toc-text">实现步骤</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/21/%E8%A7%A3%E5%86%B3hexo%E9%83%A8%E7%BD%B2%E6%96%87%E7%AB%A0%E5%88%B0github%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-05-21T08:10:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/21/%E8%A7%A3%E5%86%B3hexo%E9%83%A8%E7%BD%B2%E6%96%87%E7%AB%A0%E5%88%B0github%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/">解决hexo部署文章到github图片无法显示问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/02/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%84%9F%E6%83%B3%E5%8F%8Ayilia%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BE%8E%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2020-05-02T12:18:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/02/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%84%9F%E6%83%B3%E5%8F%8Ayilia%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BE%8E%E5%8C%96/">hexo博客搭建感想及yilia主题的一些美化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">yilia</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+   <!-- valine评论系统开始 -->
+
+   
+    <section id="comments" class="comments">
+      <style>
+        .comments{margin:30px;padding:10px;background:#fff}
+        @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+      </style>
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'true' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "SqWqnmUuTCilnupzDVQgFhrE-gzGzoHsz",
+            app_key: "EuNlMDzK61IRiansuSobGwsH",
+            placeholder: "留下你的评论吧",
+            avatar:"retro",
+            avatar_cdn:'{{ theme.valine.avatar_cdn }}',
+        });
+    }
+</script>
+
+  </section>
+
+
+<!-- valine评论系统结束 -->
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -435,10 +788,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
