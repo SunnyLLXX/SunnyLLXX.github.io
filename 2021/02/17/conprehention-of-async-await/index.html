@@ -16,9 +16,10 @@
 <meta property="og:description" content="对async、await的理解，内部原理">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-17T05:42:56.000Z">
-<meta property="article:modified_time" content="2021-02-17T07:39:48.778Z">
+<meta property="article:modified_time" content="2021-03-01T09:34:12.574Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
+<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="étoile的小窝" type="application/atom+xml">
@@ -203,10 +204,24 @@
         <h3 id="对async、await的理解，内部原理"><a href="#对async、await的理解，内部原理" class="headerlink" title="对async、await的理解，内部原理"></a>对async、await的理解，内部原理</h3><a id="more"></a>
 <p>此题主要考察地狱回调，Promise，async，await</p>
 <p>首先需要了解什么是js代码执行机制</p>
-<h4 id="1-js代码执行机制"><a href="#1-js代码执行机制" class="headerlink" title="1 js代码执行机制"></a>1 js代码执行机制</h4><p>javascript是一门“单线程”语言，所有任务可以分成两种，一种是同步任务(synchronous)，另一种是异步任务(asynchronous)。同步任务指的是，在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务;异步任务指的是，不进入主线程、而进入”任务队列”(task queue)的任务，只有等主线程任务执行完毕，”任务队列”开始通知主线程，请求执行任务，该任务才会进入主线程执行。</p>
+<h4 id="1-js代码执行机制"><a href="#1-js代码执行机制" class="headerlink" title="1 js代码执行机制"></a>1 js代码执行机制</h4><p>javascript是一门“单线程”语言。</p>
+<p>JS为什么是单线程的？</p>
+<p>最初设计JS是用来在浏览器验证表单操控DOM元素的是一门脚本语言，如果js是多线程的，那么两个线程同时对一个DOM元素进行了相互冲突的操作，那么浏览器的解析器是无法执行的。</p>
+<p>JS为什么需要异步？</p>
+<p>如果js中不存在异步，只能自上而下执行，如果上一行解析时间很长，那么下面的代码就会被阻塞。 对于用户而言，阻塞就以为着“卡死”，这样就导致了很差的用户体验。</p>
+<p>JS异步的执行机制其实就是事件循环（eventloop）。</p>
+<p>所有任务可以分成两种，一种是同步任务(synchronous)，另一种是异步任务(asynchronous)。同步任务指的是，在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务;异步任务指的是，不进入主线程、而进入”任务队列”(task queue)的任务，只有等主线程任务执行完毕，”任务队列”开始通知主线程，请求执行任务，该任务才会进入主线程执行。</p>
 <p>异步任务有：定时器，延时器，ajax，事件处理，node js，文件读取也有异步。</p>
+<p>参考链接</p>
+<p><a href="https://www.jianshu.com/p/1368d375aa66" target="_blank" rel="noopener">js执行机制</a></p>
 <h4 id="1-1-宏任务和微任务"><a href="#1-1-宏任务和微任务" class="headerlink" title="1.1 宏任务和微任务"></a>1.1 宏任务和微任务</h4><p>宏任务：定时器，延时器，requestAnimationFrame，I/O<br>微任务：process.nextTick，Promise，Object.observe，MutationObserver</p>
-<p>先执行同步任务，再取出第一个宏任务执行所有的相关微任务总会在下一个宏任务之前全部执行完毕，如果遇见异步任务就先微后宏</p>
+<p>先执行同步任务，再取出第一个宏任务执行所有的相关微任务总会在下一个宏任务之前全部执行完毕，如果遇见异步任务就先微后宏。</p>
+<p>1.进行第一轮事件循环的时候会把全部的js脚本当成一个宏任务来运行。</p>
+<p>2.如果执行中遇到setTimeout之类的宏任务，那么就把这个setTimeout内部的函数推入宏任务的队列中，下一轮宏任务执行时调用。</p>
+<p>3.如果执行中遇到promise.then()之类的微任务，就会推入到当前宏任务的微任务队列中， 在本轮宏任务的同步代码都执行完成后，依次执行所有的微任务。</p>
+<p>4.第一轮事件循环中，当全部的同步脚本以及微任务队列中的事件执行完成后，这一轮事件循环就结束了， 开始第二轮事件循环。</p>
+<p>5.第二轮事件循环同理先执行同步脚本，遇到其他宏任务代码块继续追加到宏任务的队列中，遇到微任务，就会推入到当前宏任务的微任务队列中，在本轮宏任务的同步代码执行都完成后， 依次执行当前所有的微任务。</p>
+<p>6.开始第三轮循环往复..</p>
 <p>一个小案例，可以思考如下代码输出顺序。</p>
 <pre><code>console.log(1)
 setTimeout(function(){
@@ -371,6 +386,10 @@ btn.onClick = async function(){
 			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
         		</li>
       		
 		</ul>
