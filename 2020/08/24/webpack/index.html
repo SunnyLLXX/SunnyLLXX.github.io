@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://sunnyllxx.github.io/2020/08/24/webpack/pic01.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2020/08/24/webpack/pic02.png">
 <meta property="article:published_time" content="2020-08-24T05:08:55.000Z">
-<meta property="article:modified_time" content="2020-08-24T13:51:43.759Z">
+<meta property="article:modified_time" content="2021-03-02T07:50:32.434Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="webpack">
 <meta name="twitter:card" content="summary">
@@ -247,7 +247,7 @@ module.exports = {
         filename: &apos;bundle.js&apos;
     }
 }</code></pre><p>_dirname表示当前文件夹的目录，之后就可以看到dist文件夹中多了bundle.js文件。然后在index.html中手动修改script标签中引入的js文件，修改为bundle.js。</p>
-<h4 id="5-配置Webpack自动打包功能"><a href="#5-配置Webpack自动打包功能" class="headerlink" title="5 配置Webpack自动打包功能"></a>5 配置Webpack自动打包功能</h4><p>为什么需要自动打包功能，如果直接去修改index.js中的代码，然后在浏览器中查看，会发现，没有任何变化，是因为index.html中引入的js文件是手动打包好的，并不是index.j.s文件。若是想要有效果，需要重新执行npm run dev进行打包。</p>
+<h4 id="5-配置Webpack自动打包功能"><a href="#5-配置Webpack自动打包功能" class="headerlink" title="5 配置Webpack自动打包功能"></a>5 配置Webpack自动打包功能</h4><p>为什么需要自动打包功能，如果直接去修改index.js中的代码，然后在浏览器中查看，会发现，没有任何变化，是因为index.html中引入的js文件是手动打包好的，并不是index.js文件。若是想要有效果，需要重新执行npm run dev进行打包。</p>
 <p>1.运行npm install webpack-dev-server -D，安装支持项目自动打包的工具</p>
 <p>2.修改package.json中scripts中的dev命令</p>
 <p>“scripts”:{<br>    “dev”:”webpack-dev-server”<br>}</p>
@@ -808,6 +808,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CSS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">计算机网络基础</a>
               </li>
             
             <div class="clearfix"></div>
