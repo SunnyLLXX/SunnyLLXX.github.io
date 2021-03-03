@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/02/25/vue-data-bidirectional-binding/pic01.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/02/25/vue-data-bidirectional-binding/pic02.png">
 <meta property="article:published_time" content="2021-02-25T07:43:02.000Z">
-<meta property="article:modified_time" content="2021-02-25T08:08:35.628Z">
+<meta property="article:modified_time" content="2021-03-03T07:30:52.760Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="Vue">
 <meta property="article:tag" content="常见题">
@@ -312,6 +312,14 @@
         obj.name = this.value
     }
 &lt;/script&gt;</code></pre><p>执行结果相同。</p>
+<h4 id="4-Object-defineProperty与Proxy的区别"><a href="#4-Object-defineProperty与Proxy的区别" class="headerlink" title="4 Object.defineProperty与Proxy的区别"></a>4 Object.defineProperty与Proxy的区别</h4><p>1.Object.defineProperty() 的问题主要有三个：</p>
+<p>不能监听数组的变化</p>
+<p>必须遍历对象的每个属性</p>
+<p>必须深层遍历嵌套的对象</p>
+<p>2.Proxy</p>
+<p>可以直接监听对象而非属性</p>
+<p>可以直接监听数组的变化</p>
+<p>可以嵌套。</p>
 
       
 
@@ -511,7 +519,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue的双向数据绑定是如何实现的呢"><span class="toc-number">1.</span> <span class="toc-text">Vue的双向数据绑定是如何实现的呢</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Object-defineProperty"><span class="toc-number">1.1.</span> <span class="toc-text">1 Object.defineProperty</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-基本使用"><span class="toc-number">1.2.</span> <span class="toc-text">1.1 基本使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-利用Object-defineProperty实现双向数据绑定"><span class="toc-number">1.3.</span> <span class="toc-text">2 利用Object.defineProperty实现双向数据绑定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-利用Proxy实现双向数据绑定"><span class="toc-number">1.4.</span> <span class="toc-text">3 利用Proxy实现双向数据绑定</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue的双向数据绑定是如何实现的呢"><span class="toc-number">1.</span> <span class="toc-text">Vue的双向数据绑定是如何实现的呢</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Object-defineProperty"><span class="toc-number">1.1.</span> <span class="toc-text">1 Object.defineProperty</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-基本使用"><span class="toc-number">1.2.</span> <span class="toc-text">1.1 基本使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-利用Object-defineProperty实现双向数据绑定"><span class="toc-number">1.3.</span> <span class="toc-text">2 利用Object.defineProperty实现双向数据绑定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-利用Proxy实现双向数据绑定"><span class="toc-number">1.4.</span> <span class="toc-text">3 利用Proxy实现双向数据绑定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Object-defineProperty与Proxy的区别"><span class="toc-number">1.5.</span> <span class="toc-text">4 Object.defineProperty与Proxy的区别</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
