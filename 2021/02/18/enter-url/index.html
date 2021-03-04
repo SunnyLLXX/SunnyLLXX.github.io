@@ -16,7 +16,7 @@
 <meta property="og:description" content="从网址输入url将会发生什么">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-18T11:29:13.000Z">
-<meta property="article:modified_time" content="2021-02-18T11:45:32.038Z">
+<meta property="article:modified_time" content="2021-03-04T07:44:51.350Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta name="twitter:card" content="summary">
@@ -212,6 +212,11 @@
 <h4 id="2-TCP连接：三次握手"><a href="#2-TCP连接：三次握手" class="headerlink" title="2 TCP连接：三次握手"></a>2 TCP连接：三次握手</h4><p>第一次握手是浏览器发起的，告诉服务器浏览器发起请求了</p>
 <p>第二次握手是服务器发起的，告诉浏览器服务器准备接受了，你赶紧发送吧</p>
 <p>第三次握手是是浏览器发起的，告诉服务器，我马上发送了，你准备接收吧</p>
+<p>TCP为什么会进行三次握手？</p>
+<p>为了保证服务端能收接受到客户端的信息并能做出正确的应答而进行前两次(第一次和第二次)握手，</p>
+<p>为了保证客户端能够接收到服务端的信息并能做出正确的应答而进行后两次(第二次和第三次)握手。</p>
+<p>参考链接</p>
+<p><a href="https://www.cnblogs.com/yuilin/archive/2012/11/05/2755298.html" target="_blank" rel="noopener">理解TCP为什么需要进行三次握手(白话)</a></p>
 <h4 id="3-发送请求"><a href="#3-发送请求" class="headerlink" title="3 发送请求"></a>3 发送请求</h4><p>请求报文</p>
 <h4 id="4-接收响应"><a href="#4-接收响应" class="headerlink" title="4 接收响应"></a>4 接收响应</h4><p>响应报文</p>
 <h4 id="5-渲染页面"><a href="#5-渲染页面" class="headerlink" title="5 渲染页面"></a>5 渲染页面</h4><p>1.遇见HTML标签，调用HTML解析器解析成Token构成DOM树</p>
