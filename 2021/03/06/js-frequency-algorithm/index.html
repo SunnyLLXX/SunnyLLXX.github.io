@@ -16,7 +16,7 @@
 <meta property="og:description" content="一些有关JS常见的算法实现题">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-06T03:01:11.000Z">
-<meta property="article:modified_time" content="2021-03-06T03:25:26.040Z">
+<meta property="article:modified_time" content="2021-03-06T03:36:54.172Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta property="article:tag" content="JavaScript">
@@ -227,13 +227,16 @@ console.log(reverseArr([2,6,5,3,8,9,0,1]))</code></pre><h4 id="4-实现字符串
         let arr = str.split(&apos;&apos;)
         return arr.reverse().join(&quot;&quot;)
     }
-    console.log(reverseString(&apos;ffgudrew&apos;))</code></pre><h4 id="5-数组扁平化"><a href="#5-数组扁平化" class="headerlink" title="5 数组扁平化"></a>5 <a href="http://sunnyllxx.github.io/2021/02/23/js-array-flatten/">数组扁平化</a></h4><h4 id="6-数组去重"><a href="#6-数组去重" class="headerlink" title="6 数组去重"></a>6 <a href="http://sunnyllxx.github.io/2021/02/25/js-array-de-duplication/">数组去重</a></h4><h4 id="7-斐波那锲数列"><a href="#7-斐波那锲数列" class="headerlink" title="7 斐波那锲数列"></a>7 斐波那锲数列</h4><pre><code>function fib(n){
+    console.log(reverseString(&apos;ffgudrew&apos;))</code></pre><h4 id="5-判断字符串是否回文"><a href="#5-判断字符串是否回文" class="headerlink" title="5 判断字符串是否回文"></a>5 判断字符串是否回文</h4><pre><code>function strHui(str){
+        return str == str.split(&apos;&apos;).reverse().join(&apos;&apos;)
+    }
+    console.log(strHui(&apos;hellooleh&apos;))</code></pre><h4 id="6-数组扁平化"><a href="#6-数组扁平化" class="headerlink" title="6 数组扁平化"></a>6 <a href="http://sunnyllxx.github.io/2021/02/23/js-array-flatten/">数组扁平化</a></h4><h4 id="7-数组去重"><a href="#7-数组去重" class="headerlink" title="7 数组去重"></a>7 <a href="http://sunnyllxx.github.io/2021/02/25/js-array-de-duplication/">数组去重</a></h4><h4 id="8-斐波那锲数列"><a href="#8-斐波那锲数列" class="headerlink" title="8 斐波那锲数列"></a>8 斐波那锲数列</h4><pre><code>function fib(n){
     if(n == 0 || n == 1){
         return 1
     }
     return fib(n-1)+fib(n-2)
 }
-console.log(fib(4))</code></pre><h4 id="8-JS实现继承"><a href="#8-JS实现继承" class="headerlink" title="8 JS实现继承"></a>8 <a href="http://sunnyllxx.github.io/2021/03/01/js-frequently-asked-questions/">JS实现继承</a></h4><h4 id="9-统计字符串中出现频率最高的十个单词以及次数"><a href="#9-统计字符串中出现频率最高的十个单词以及次数" class="headerlink" title="9 统计字符串中出现频率最高的十个单词以及次数"></a>9 统计字符串中出现频率最高的十个单词以及次数</h4><pre><code>function maxFrequency(str){
+console.log(fib(4))</code></pre><h4 id="9-JS实现继承"><a href="#9-JS实现继承" class="headerlink" title="9 JS实现继承"></a>9 <a href="http://sunnyllxx.github.io/2021/03/01/js-frequently-asked-questions/">JS实现继承</a></h4><h4 id="10-统计字符串中出现频率最高的十个单词以及次数"><a href="#10-统计字符串中出现频率最高的十个单词以及次数" class="headerlink" title="10 统计字符串中出现频率最高的十个单词以及次数"></a>10 统计字符串中出现频率最高的十个单词以及次数</h4><pre><code>function maxFrequency(str){
     let arr = [],obj = {}
     //将字符串以空格分割成数组
     let arrstr = str.split(&quot; &quot;)
@@ -272,7 +275,7 @@ console.log(fib(4))</code></pre><h4 id="8-JS实现继承"><a href="#8-JS实现�
 }
 let str = &quot;world hello go boy world hi lll my i you him you me world go boy you i me to lo hi gr de y u i ovds swq dcr aqw hi go fp back vh back wo mi me you&quot;
 
-console.log(maxFrequency(str))</code></pre><h4 id="10-时间格式化"><a href="#10-时间格式化" class="headerlink" title="10 时间格式化"></a>10 时间格式化</h4><pre><code>function formatDate(time){
+console.log(maxFrequency(str))</code></pre><h4 id="11-时间格式化"><a href="#11-时间格式化" class="headerlink" title="11 时间格式化"></a>11 时间格式化</h4><pre><code>function formatDate(time){
     console.log(time)
     let datetime = new Date(time)
     console.log(datetime)
@@ -287,7 +290,7 @@ console.log(maxFrequency(str))</code></pre><h4 id="10-时间格式化"><a href="
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds} ${arr[zhou]}`
 
 }
-console.log(formatDate(Date.now()))</code></pre><h4 id="11-统计每个字符出现的频率"><a href="#11-统计每个字符出现的频率" class="headerlink" title="11 统计每个字符出现的频率"></a>11 统计每个字符出现的频率</h4><pre><code>function count(str) {
+console.log(formatDate(Date.now()))</code></pre><h4 id="12-统计每个字符出现的频率"><a href="#12-统计每个字符出现的频率" class="headerlink" title="12 统计每个字符出现的频率"></a>12 统计每个字符出现的频率</h4><pre><code>function count(str) {
         let obj = {}
         str = str.replace(/\s/g,&apos;&apos;)
         for(let i = 0;i &lt; str.length; i++){
@@ -300,7 +303,7 @@ console.log(formatDate(Date.now()))</code></pre><h4 id="11-统计每个字符出
         }
         return obj
     }
-    console.log(count(&apos;hello world&apos;))</code></pre><h4 id="12-字符串大小写转换"><a href="#12-字符串大小写转换" class="headerlink" title="12 字符串大小写转换"></a>12 <a href="http://sunnyllxx.github.io/2021/02/27/js-string-conversion-case/">字符串大小写转换</a></h4><h4 id="13-深克隆和浅克隆"><a href="#13-深克隆和浅克隆" class="headerlink" title="13 深克隆和浅克隆"></a>13 <a href="http://sunnyllxx.github.io/2021/02/26/js-deepclone/">深克隆和浅克隆</a></h4>
+    console.log(count(&apos;hello world&apos;))</code></pre><h4 id="13-字符串大小写转换"><a href="#13-字符串大小写转换" class="headerlink" title="13 字符串大小写转换"></a>13 <a href="http://sunnyllxx.github.io/2021/02/27/js-string-conversion-case/">字符串大小写转换</a></h4><h4 id="14-深克隆和浅克隆"><a href="#14-深克隆和浅克隆" class="headerlink" title="14 深克隆和浅克隆"></a>14 <a href="http://sunnyllxx.github.io/2021/02/26/js-deepclone/">深克隆和浅克隆</a></h4>
       
 
       <!-- 开始添加版权声明-->
@@ -490,7 +493,7 @@ console.log(formatDate(Date.now()))</code></pre><h4 id="11-统计每个字符出
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一些有关JS常见的算法实现题"><span class="toc-number">1.</span> <span class="toc-text">一些有关JS常见的算法实现题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-排序算法"><span class="toc-number">1.1.</span> <span class="toc-text">1 排序算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-封装函数实现驼峰命名"><span class="toc-number">1.2.</span> <span class="toc-text">2 封装函数实现驼峰命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-实现数组翻转"><span class="toc-number">1.3.</span> <span class="toc-text">3 实现数组翻转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-实现字符串翻转"><span class="toc-number">1.4.</span> <span class="toc-text">4 实现字符串翻转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-数组扁平化"><span class="toc-number">1.5.</span> <span class="toc-text">5 数组扁平化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-数组去重"><span class="toc-number">1.6.</span> <span class="toc-text">6 数组去重</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-斐波那锲数列"><span class="toc-number">1.7.</span> <span class="toc-text">7 斐波那锲数列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-JS实现继承"><span class="toc-number">1.8.</span> <span class="toc-text">8 JS实现继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-统计字符串中出现频率最高的十个单词以及次数"><span class="toc-number">1.9.</span> <span class="toc-text">9 统计字符串中出现频率最高的十个单词以及次数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-时间格式化"><span class="toc-number">1.10.</span> <span class="toc-text">10 时间格式化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-统计每个字符出现的频率"><span class="toc-number">1.11.</span> <span class="toc-text">11 统计每个字符出现的频率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-字符串大小写转换"><span class="toc-number">1.12.</span> <span class="toc-text">12 字符串大小写转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-深克隆和浅克隆"><span class="toc-number">1.13.</span> <span class="toc-text">13 深克隆和浅克隆</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一些有关JS常见的算法实现题"><span class="toc-number">1.</span> <span class="toc-text">一些有关JS常见的算法实现题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-排序算法"><span class="toc-number">1.1.</span> <span class="toc-text">1 排序算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-封装函数实现驼峰命名"><span class="toc-number">1.2.</span> <span class="toc-text">2 封装函数实现驼峰命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-实现数组翻转"><span class="toc-number">1.3.</span> <span class="toc-text">3 实现数组翻转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-实现字符串翻转"><span class="toc-number">1.4.</span> <span class="toc-text">4 实现字符串翻转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-判断字符串是否回文"><span class="toc-number">1.5.</span> <span class="toc-text">5 判断字符串是否回文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-数组扁平化"><span class="toc-number">1.6.</span> <span class="toc-text">6 数组扁平化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-数组去重"><span class="toc-number">1.7.</span> <span class="toc-text">7 数组去重</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-斐波那锲数列"><span class="toc-number">1.8.</span> <span class="toc-text">8 斐波那锲数列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-JS实现继承"><span class="toc-number">1.9.</span> <span class="toc-text">9 JS实现继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-统计字符串中出现频率最高的十个单词以及次数"><span class="toc-number">1.10.</span> <span class="toc-text">10 统计字符串中出现频率最高的十个单词以及次数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-时间格式化"><span class="toc-number">1.11.</span> <span class="toc-text">11 时间格式化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-统计每个字符出现的频率"><span class="toc-number">1.12.</span> <span class="toc-text">12 统计每个字符出现的频率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-字符串大小写转换"><span class="toc-number">1.13.</span> <span class="toc-text">13 字符串大小写转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-深克隆和浅克隆"><span class="toc-number">1.14.</span> <span class="toc-text">14 深克隆和浅克隆</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
