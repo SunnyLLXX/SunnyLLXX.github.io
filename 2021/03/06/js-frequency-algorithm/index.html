@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>Archives: 2021 | étoile的小窝</title>
+  <title>JS 常见的算法实现题 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="étoile的小窝">
-<meta property="og:url" content="http://sunnyllxx.github.io/archives/2021/page/5/index.html">
+  <meta name="description" content="一些有关JS常见的算法实现题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 常见的算法实现题">
+<meta property="og:url" content="http://sunnyllxx.github.io/2021/03/06/js-frequency-algorithm/index.html">
 <meta property="og:site_name" content="étoile的小窝">
+<meta property="og:description" content="一些有关JS常见的算法实现题">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-06T03:01:11.000Z">
+<meta property="article:modified_time" content="2021-03-06T03:25:26.040Z">
 <meta property="article:author" content="étoile">
+<meta property="article:tag" content="常见题">
+<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="étoile的小窝" type="application/atom+xml">
@@ -161,94 +167,208 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-js-frequency-algorithm" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/02/17/react-compare-with-vue/" class="archive-article-date">
-  	<time datetime="2021-02-17T06:19:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/02/17/react-compare-with-vue/">React与Vue的区别</a>
+    <h1 class="article-title" itemprop="name">
+      JS 常见的算法实现题
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        <!--显示阅读次数-->
 
 
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+           👁 &nbsp;<span id="busuanzi_value_page_pv"></span> &nbsp;&nbsp;
+  </span>
+  </a>
 
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+<!--显示阅读次数完毕-->
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/02/17/conprehention-of-async-await/" class="archive-article-date">
-  	<time datetime="2021-02-17T05:42:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-17</time>
+        
+        <a href="/2021/03/06/js-frequency-algorithm/" class="archive-article-date">
+  	<time datetime="2021-03-06T03:01:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-06</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/02/17/conprehention-of-async-await/">对async、await的理解</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一些有关JS常见的算法实现题"><a href="#一些有关JS常见的算法实现题" class="headerlink" title="一些有关JS常见的算法实现题"></a>一些有关JS常见的算法实现题</h3><a id="more"></a>
 
-        <div class="article-info info-on-right">
-          
+
+<h4 id="1-排序算法"><a href="#1-排序算法" class="headerlink" title="1 排序算法"></a>1 <a href>排序算法</a></h4><h4 id="2-封装函数实现驼峰命名"><a href="#2-封装函数实现驼峰命名" class="headerlink" title="2 封装函数实现驼峰命名"></a>2 封装函数实现驼峰命名</h4><pre><code>function toCamString(sName) {
+    let arr = sName.split(&apos;-&apos;)
+    if(arr[0] == &quot;&quot;){  //判断数组第一个元数是否为空，是就截取之后的元素
+        arr = arr.splice(1,arr.length)
+    }
+    for(let i = 1; i &lt; arr.length; i++){
+        arr[i] = arr[i].charAt(0).toUpperCase()+arr[i].substr(1,arr[i].length - 1)
+    }
+    return arr.join(&quot;&quot;)
+}
+console.log(toCamString(&apos;-webkit-background-composite&apos;))</code></pre><h4 id="3-实现数组翻转"><a href="#3-实现数组翻转" class="headerlink" title="3 实现数组翻转"></a>3 实现数组翻转</h4><pre><code>function reverseArr(arr){
+    for(let i = 0;i&lt;arr.length/2;i++){
+        let temp=arr[i]
+        arr[i]=arr[arr.length-1-i]
+        arr[arr.length-1-i]=temp
+    }
+    return arr
+}
+
+console.log(reverseArr([2,6,5,3,8,9,0,1]))</code></pre><h4 id="4-实现字符串翻转"><a href="#4-实现字符串翻转" class="headerlink" title="4 实现字符串翻转"></a>4 实现字符串翻转</h4><pre><code>function reverseString(str){
+        let arr = str.split(&apos;&apos;)
+        return arr.reverse().join(&quot;&quot;)
+    }
+    console.log(reverseString(&apos;ffgudrew&apos;))</code></pre><h4 id="5-数组扁平化"><a href="#5-数组扁平化" class="headerlink" title="5 数组扁平化"></a>5 <a href="http://sunnyllxx.github.io/2021/02/23/js-array-flatten/">数组扁平化</a></h4><h4 id="6-数组去重"><a href="#6-数组去重" class="headerlink" title="6 数组去重"></a>6 <a href="http://sunnyllxx.github.io/2021/02/25/js-array-de-duplication/">数组去重</a></h4><h4 id="7-斐波那锲数列"><a href="#7-斐波那锲数列" class="headerlink" title="7 斐波那锲数列"></a>7 斐波那锲数列</h4><pre><code>function fib(n){
+    if(n == 0 || n == 1){
+        return 1
+    }
+    return fib(n-1)+fib(n-2)
+}
+console.log(fib(4))</code></pre><h4 id="8-JS实现继承"><a href="#8-JS实现继承" class="headerlink" title="8 JS实现继承"></a>8 <a href="http://sunnyllxx.github.io/2021/03/01/js-frequently-asked-questions/">JS实现继承</a></h4><h4 id="9-统计字符串中出现频率最高的十个单词以及次数"><a href="#9-统计字符串中出现频率最高的十个单词以及次数" class="headerlink" title="9 统计字符串中出现频率最高的十个单词以及次数"></a>9 统计字符串中出现频率最高的十个单词以及次数</h4><pre><code>function maxFrequency(str){
+    let arr = [],obj = {}
+    //将字符串以空格分割成数组
+    let arrstr = str.split(&quot; &quot;)
+    console.log(arrstr)
+    //查找所有的单词以及单词数量
+    for(let i = 0; i&lt; arrstr.length; i++){
+        if(obj.hasOwnProperty(arrstr[i])){
+            obj[arrstr[i]]++
+        }else {
+            obj[arrstr[i]] = 1
+        }
+    }
+
+    console.log(obj)
+    //将每个单词对象push进一个数组中
+    for(let key in obj){
+        let temp = {}
+        temp.name = key
+        temp.count = obj[key] 
+        arr.push(temp)
+    }
+    //给数组进行排序
+    for(let i = 0; i&lt;arr.length - 1; i++){
+        for(let j = 0; j&lt; arr.length - i - 1; j++){
+            if(arr[j].count&lt;arr[j+1].count){
+                let temp = arr[j]
+                arr[j] = arr[j+1]
+                arr[j+1] = temp
+            }
+
+        }
+    }
+    console.log(arr)
+    //截取前十个高频单词
+    return arr.slice(0,10)
+}
+let str = &quot;world hello go boy world hi lll my i you him you me world go boy you i me to lo hi gr de y u i ovds swq dcr aqw hi go fp back vh back wo mi me you&quot;
+
+console.log(maxFrequency(str))</code></pre><h4 id="10-时间格式化"><a href="#10-时间格式化" class="headerlink" title="10 时间格式化"></a>10 时间格式化</h4><pre><code>function formatDate(time){
+    console.log(time)
+    let datetime = new Date(time)
+    console.log(datetime)
+    var year = datetime.getFullYear()
+    var month = (datetime.getMonth() + 1) &lt; 10 ? &apos;0&apos;+ (datetime.getMonth() + 1) : (datetime.getMonth() + 1)
+    var day = datetime.getDate() &lt; 10 ? &apos;0&apos; + datetime.getDate() : datetime.getDate()
+    var hours = datetime.getHours()
+    var minutes = datetime.getMinutes() &lt; 10 ? &apos;0&apos;+ datetime.getMinutes() : datetime.getMinutes()
+    var seconds = datetime.getSeconds()
+    let arr = [&apos;星期天&apos;,&apos;星期一&apos;,&apos;星期二&apos;,&apos;星期三&apos;,&apos;星期四&apos;,&apos;星期五&apos;,&apos;星期六&apos;]
+    var zhou = datetime.getDay()
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds} ${arr[zhou]}`
+
+}
+console.log(formatDate(Date.now()))</code></pre><h4 id="11-统计每个字符出现的频率"><a href="#11-统计每个字符出现的频率" class="headerlink" title="11 统计每个字符出现的频率"></a>11 统计每个字符出现的频率</h4><pre><code>function count(str) {
+        let obj = {}
+        str = str.replace(/\s/g,&apos;&apos;)
+        for(let i = 0;i &lt; str.length; i++){
+            console.log(str[i])
+            if(obj.hasOwnProperty(str[i])){
+                    obj[str[i]]++
+                }else{
+                    obj[str[i]] = 1
+                }
+        }
+        return obj
+    }
+    console.log(count(&apos;hello world&apos;))</code></pre><h4 id="12-字符串大小写转换"><a href="#12-字符串大小写转换" class="headerlink" title="12 字符串大小写转换"></a>12 <a href="http://sunnyllxx.github.io/2021/02/27/js-string-conversion-case/">字符串大小写转换</a></h4><h4 id="13-深克隆和浅克隆"><a href="#13-深克隆和浅克隆" class="headerlink" title="13 深克隆和浅克隆"></a>13 <a href="http://sunnyllxx.github.io/2021/02/26/js-deepclone/">深克隆和浅克隆</a></h4>
+      
+
+      <!-- 开始添加版权声明-->
+
+
+<div class="declare">
+  <ul><li><strong>本文作者：</strong>
+  
+    étoile
+  
+</li></ul>
+  <ul><li><strong>本文链接：</strong>
+ <a href="http://sunnyllxx.github.io/2021/03/06/js-frequency-algorithm/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2021/03/06/js-frequency-algorithm/</a>
+</li></ul>
+  <ul><li><strong>版权声明：</strong>
+  本作品采用
+  <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+  进行许可。转载请注明出处！
+  
+</div>
+
+<!-- 添加完成 -->
+
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/zhifubaopicture.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechatcollection.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <!-- 添加本文结束标记-->
+
+  <div style="text-align:center;color: #00BFFF;font-size:14px;">
+       -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
+       </div>
+  
+  <!-- 添加完成 -->
+    <div class="article-info article-info-index">
+      
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -266,7 +386,7 @@
 
 
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -279,228 +399,151 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2021/03/06/js-frequency-algorithm/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/02/17/repaint-reflow/" class="archive-article-date">
-  	<time datetime="2021-02-17T05:23:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-17</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/03/06/js-sort-algorithm/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JS 实现排序算法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/02/17/repaint-reflow/">重绘与重排</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一些有关JS常见的算法实现题"><span class="toc-number">1.</span> <span class="toc-text">一些有关JS常见的算法实现题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-排序算法"><span class="toc-number">1.1.</span> <span class="toc-text">1 排序算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-封装函数实现驼峰命名"><span class="toc-number">1.2.</span> <span class="toc-text">2 封装函数实现驼峰命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-实现数组翻转"><span class="toc-number">1.3.</span> <span class="toc-text">3 实现数组翻转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-实现字符串翻转"><span class="toc-number">1.4.</span> <span class="toc-text">4 实现字符串翻转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-数组扁平化"><span class="toc-number">1.5.</span> <span class="toc-text">5 数组扁平化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-数组去重"><span class="toc-number">1.6.</span> <span class="toc-text">6 数组去重</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-斐波那锲数列"><span class="toc-number">1.7.</span> <span class="toc-text">7 斐波那锲数列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-JS实现继承"><span class="toc-number">1.8.</span> <span class="toc-text">8 JS实现继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-统计字符串中出现频率最高的十个单词以及次数"><span class="toc-number">1.9.</span> <span class="toc-text">9 统计字符串中出现频率最高的十个单词以及次数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-时间格式化"><span class="toc-number">1.10.</span> <span class="toc-text">10 时间格式化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-统计每个字符出现的频率"><span class="toc-number">1.11.</span> <span class="toc-text">11 统计每个字符出现的频率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-字符串大小写转换"><span class="toc-number">1.12.</span> <span class="toc-text">12 字符串大小写转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-深克隆和浅克隆"><span class="toc-number">1.13.</span> <span class="toc-text">13 深克隆和浅克隆</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/02/16/nest-react-routing/" class="archive-article-date">
-  	<time datetime="2021-02-16T13:52:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/02/16/nest-react-routing/">React 嵌套路由</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/02/16/basic-use-of-react-routing/" class="archive-article-date">
-  	<time datetime="2021-02-16T13:08:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/02/16/basic-use-of-react-routing/">React 路由的基本使用</a>
-    </h1>
-  
+   <!-- valine评论系统开始 -->
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
-        		</li>
-      		
-		</ul>
-	</div>
+   
+    <section id="comments" class="comments">
+      <style>
+        .comments{margin:30px;padding:10px;background:#fff}
+        @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+      </style>
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'true' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "SqWqnmUuTCilnupzDVQgFhrE-gzGzoHsz",
+            app_key: "EuNlMDzK61IRiansuSobGwsH",
+            placeholder: "留下你的评论吧",
+            avatar:"retro",
+            avatar_cdn:'{{ theme.valine.avatar_cdn }}',
+        });
+    }
+</script>
+
+  </section>
 
 
+<!-- valine评论系统结束 -->
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/26/project-optimization/" class="archive-article-date">
-  	<time datetime="2021-01-26T11:50:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/26/project-optimization/">vue-cli项目的简单优化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2021/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/archives/2021/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2021/page/3/">3</a><a class="page-number" href="/archives/2021/page/4/">4</a><span class="page-number current">5</span>
-    </nav>
+  
+
+  
+
   
 
 
@@ -539,8 +582,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
