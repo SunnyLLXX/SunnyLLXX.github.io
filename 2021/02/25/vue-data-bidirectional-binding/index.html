@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/02/25/vue-data-bidirectional-binding/pic01.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/02/25/vue-data-bidirectional-binding/pic02.png">
 <meta property="article:published_time" content="2021-02-25T07:43:02.000Z">
-<meta property="article:modified_time" content="2021-03-03T07:30:52.760Z">
+<meta property="article:modified_time" content="2021-03-08T10:19:02.989Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="Vue">
 <meta property="article:tag" content="常见题">
@@ -313,12 +313,12 @@
     }
 &lt;/script&gt;</code></pre><p>执行结果相同。</p>
 <h4 id="4-Object-defineProperty与Proxy的区别"><a href="#4-Object-defineProperty与Proxy的区别" class="headerlink" title="4 Object.defineProperty与Proxy的区别"></a>4 Object.defineProperty与Proxy的区别</h4><p>1.Object.defineProperty() 的问题主要有三个：</p>
-<p>不能监听数组的变化</p>
-<p>必须遍历对象的每个属性</p>
-<p>必须深层遍历嵌套的对象</p>
+<p>不能监听数组的变化，需要重写数组方法，利用Array.prototype。</p>
+<p>必须遍历对象的每个属性，无法监听到对象删除属性或者新增属性。</p>
+<p>必须深层遍历嵌套的对象。</p>
 <p>2.Proxy</p>
-<p>可以直接监听对象而非属性</p>
-<p>可以直接监听数组的变化</p>
+<p>可以直接监听对象而非属性。</p>
+<p>可以直接监听数组的变化。</p>
 <p>可以嵌套。</p>
 
       
