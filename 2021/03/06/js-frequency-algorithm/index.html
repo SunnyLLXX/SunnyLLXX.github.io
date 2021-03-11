@@ -16,7 +16,7 @@
 <meta property="og:description" content="一些有关JS常见的算法实现题">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-06T03:01:11.000Z">
-<meta property="article:modified_time" content="2021-03-07T06:52:58.659Z">
+<meta property="article:modified_time" content="2021-03-11T02:50:19.146Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta property="article:tag" content="JavaScript">
@@ -303,7 +303,46 @@ console.log(formatDate(Date.now()))</code></pre><h4 id="12-统计每个字符出
         }
         return obj
     }
-    console.log(count(&apos;hello world&apos;))</code></pre><h4 id="13-字符串大小写转换"><a href="#13-字符串大小写转换" class="headerlink" title="13 字符串大小写转换"></a>13 <a href="http://sunnyllxx.github.io/2021/02/27/js-string-conversion-case/">字符串大小写转换</a></h4><h4 id="14-深克隆和浅克隆"><a href="#14-深克隆和浅克隆" class="headerlink" title="14 深克隆和浅克隆"></a>14 <a href="http://sunnyllxx.github.io/2021/02/26/js-deepclone/">深克隆和浅克隆</a></h4>
+    console.log(count(&apos;hello world&apos;))</code></pre><h4 id="13-字符串大小写转换"><a href="#13-字符串大小写转换" class="headerlink" title="13 字符串大小写转换"></a>13 <a href="http://sunnyllxx.github.io/2021/02/27/js-string-conversion-case/">字符串大小写转换</a></h4><h4 id="14-深克隆和浅克隆"><a href="#14-深克隆和浅克隆" class="headerlink" title="14 深克隆和浅克隆"></a>14 <a href="http://sunnyllxx.github.io/2021/02/26/js-deepclone/">深克隆和浅克隆</a></h4><h4 id="15-实现千位分隔符"><a href="#15-实现千位分隔符" class="headerlink" title="15 实现千位分隔符"></a>15 实现千位分隔符</h4><p>将数字12345673456.78分割成12,345,673,456.78</p>
+<pre><code>function toThousands(num) {
+    num = (num || 0).toString()  //先将数字转换成字符串
+    let first = num,result = &apos;&apos;,last = &apos;&apos;
+
+    if(num.indexOf(&apos;.&apos;)){   //判断是否存在小数点
+        first = num.split(&quot;.&quot;)[0]
+        last = &apos;.&apos;+num.split(&quot;.&quot;)[1]  //存在就进行分割
+        result = last
+    }
+
+    while (first.length &gt; 3) {
+        result = &apos;,&apos; + first.slice(-3) + result;  //对整数字符串从后向前进行截取三位
+        first = first.slice(0, first.length - 3);   //对剩余整数字符串截取
+    }
+
+    if(first){ 
+        result = first + result; 
+    }
+
+    return result;
+
+}
+
+console.log(toThousands(12345673456.78))</code></pre><h4 id="16-比较版本号"><a href="#16-比较版本号" class="headerlink" title="16 比较版本号"></a>16 比较版本号</h4><pre><code>function compareVersion(v1,v2){
+    v1 = v1.split(&apos;.&apos;)  //将字符串分割数组
+    v2 = v2.split(&apos;.&apos;)
+    let len1 = v1.length
+    let len2 = v2.length
+    let minLen = Math.min(len1,len2)
+    for(let i = 0; i &lt; minLen; i++){
+        if(parseInt(v1[i])&gt;parseInt(v2[i])){
+            return v1.join(&apos;.&apos;)
+        }else if(parseInt(v1[i]) &lt; parseInt(v2[i])){
+            return v2.join(&apos;.&apos;)
+        }
+    }
+
+}
+console.log(compareVersion(&apos;2.4.1.4&apos;,&apos;0.8.7&apos;))</code></pre>
       
 
       <!-- 开始添加版权声明-->
@@ -502,7 +541,7 @@ console.log(formatDate(Date.now()))</code></pre><h4 id="12-统计每个字符出
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一些有关JS常见的算法实现题"><span class="toc-number">1.</span> <span class="toc-text">一些有关JS常见的算法实现题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-排序算法"><span class="toc-number">1.1.</span> <span class="toc-text">1 排序算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-封装函数实现驼峰命名"><span class="toc-number">1.2.</span> <span class="toc-text">2 封装函数实现驼峰命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-实现数组翻转"><span class="toc-number">1.3.</span> <span class="toc-text">3 实现数组翻转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-实现字符串翻转"><span class="toc-number">1.4.</span> <span class="toc-text">4 实现字符串翻转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-判断字符串是否回文"><span class="toc-number">1.5.</span> <span class="toc-text">5 判断字符串是否回文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-数组扁平化"><span class="toc-number">1.6.</span> <span class="toc-text">6 数组扁平化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-数组去重"><span class="toc-number">1.7.</span> <span class="toc-text">7 数组去重</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-斐波那锲数列"><span class="toc-number">1.8.</span> <span class="toc-text">8 斐波那锲数列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-JS实现继承"><span class="toc-number">1.9.</span> <span class="toc-text">9 JS实现继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-统计字符串中出现频率最高的十个单词以及次数"><span class="toc-number">1.10.</span> <span class="toc-text">10 统计字符串中出现频率最高的十个单词以及次数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-时间格式化"><span class="toc-number">1.11.</span> <span class="toc-text">11 时间格式化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-统计每个字符出现的频率"><span class="toc-number">1.12.</span> <span class="toc-text">12 统计每个字符出现的频率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-字符串大小写转换"><span class="toc-number">1.13.</span> <span class="toc-text">13 字符串大小写转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-深克隆和浅克隆"><span class="toc-number">1.14.</span> <span class="toc-text">14 深克隆和浅克隆</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一些有关JS常见的算法实现题"><span class="toc-number">1.</span> <span class="toc-text">一些有关JS常见的算法实现题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-排序算法"><span class="toc-number">1.1.</span> <span class="toc-text">1 排序算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-封装函数实现驼峰命名"><span class="toc-number">1.2.</span> <span class="toc-text">2 封装函数实现驼峰命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-实现数组翻转"><span class="toc-number">1.3.</span> <span class="toc-text">3 实现数组翻转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-实现字符串翻转"><span class="toc-number">1.4.</span> <span class="toc-text">4 实现字符串翻转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-判断字符串是否回文"><span class="toc-number">1.5.</span> <span class="toc-text">5 判断字符串是否回文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-数组扁平化"><span class="toc-number">1.6.</span> <span class="toc-text">6 数组扁平化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-数组去重"><span class="toc-number">1.7.</span> <span class="toc-text">7 数组去重</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-斐波那锲数列"><span class="toc-number">1.8.</span> <span class="toc-text">8 斐波那锲数列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-JS实现继承"><span class="toc-number">1.9.</span> <span class="toc-text">9 JS实现继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-统计字符串中出现频率最高的十个单词以及次数"><span class="toc-number">1.10.</span> <span class="toc-text">10 统计字符串中出现频率最高的十个单词以及次数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-时间格式化"><span class="toc-number">1.11.</span> <span class="toc-text">11 时间格式化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-统计每个字符出现的频率"><span class="toc-number">1.12.</span> <span class="toc-text">12 统计每个字符出现的频率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-字符串大小写转换"><span class="toc-number">1.13.</span> <span class="toc-text">13 字符串大小写转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-深克隆和浅克隆"><span class="toc-number">1.14.</span> <span class="toc-text">14 深克隆和浅克隆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15-实现千位分隔符"><span class="toc-number">1.15.</span> <span class="toc-text">15 实现千位分隔符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-比较版本号"><span class="toc-number">1.16.</span> <span class="toc-text">16 比较版本号</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -722,10 +761,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">计算机网络基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JavaScript，常见题</a>
               </li>
             
             <div class="clearfix"></div>
