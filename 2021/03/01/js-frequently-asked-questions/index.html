@@ -16,7 +16,7 @@
 <meta property="og:description" content="熟悉有关JS的内容">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-01T01:38:15.000Z">
-<meta property="article:modified_time" content="2021-03-05T00:31:14.867Z">
+<meta property="article:modified_time" content="2021-03-13T02:31:02.405Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta property="article:tag" content="JavaScript">
@@ -203,7 +203,11 @@
       
         <h3 id="熟悉有关JS的内容"><a href="#熟悉有关JS的内容" class="headerlink" title="熟悉有关JS的内容"></a>熟悉有关JS的内容</h3><a id="more"></a>
 
-<h4 id="1-JS-数据类型"><a href="#1-JS-数据类型" class="headerlink" title="1 JS 数据类型"></a>1 JS 数据类型</h4><p>值类型(基本类型)：字符串（String）、数字(Number)、布尔(Boolean)、对空（Null）、未定义（Undefined）、Symbol。</p>
+<p>JavaScript是一种高级的、解释型的编程语言，它支持面向对象编程。</p>
+<p>JavaScript语言中采用的是弱类型的变量类型，对使用的数据类型未做出严格的要求。</p>
+<p>JavaScript是一种采用事件驱动的脚本语言，它不需要经过Web服务器就可以对用户的输入做出响应。</p>
+<p>JavaScript脚本语言不依赖于操作系统，仅需要浏览器的支持。</p>
+<h4 id="1-JS-数据类型"><a href="#1-JS-数据类型" class="headerlink" title="1 JS 数据类型"></a>1 JS 数据类型</h4><p>值类型(基本类型)：字符串（String）、数字(Number)、布尔(Boolean)、null、undefined、Symbol。</p>
 <p>引用数据类型：对象(Object)、数组(Array)、函数(Function)。</p>
 <p>注：Symbol 是 ES6 引入了一种新的原始数据类型，表示独一无二的值。</p>
 <p>1.可以利用typeof 查看数据类型</p>
@@ -229,6 +233,19 @@ console.log(Number(a),parseInt(a),parseFloat(a))   //123,123,123
 console.log(Number(b),parseInt(b),parseFloat(b))   // 12.34,12,12.34
 console.log(Number(true),Number(false))   //  1,0
 console.log(Number(c),c.getTime())</code></pre><p>（3）自动转换为字符串，当尝试输出一个对象或一个变量时 JavaScript 会自动调用变量的 toString() 方法</p>
+<p>3.==与===区别</p>
+<p>两个等号==：</p>
+<p>如果两个值类型相同，再进行三个等号(===)的比较</p>
+<p>如果两个值类型不同，也有可能相等，需根据以下规则进行类型转换在比较：</p>
+<pre><code>（1）如果一个是null，一个是undefined，那么相等
+（2）如果一个是字符串，一个是数值，把字符串转换成数值之后再进行比较
+
+    == 数据类型不同，转换规则
+    对象==字符串，是将对象.toString()之后，转变为字符串
+    null == undefined 相等，但是和其他值比较就不在相等了
+    NaN == NaN不相等
+    剩下的都是转换成数字</code></pre><p>三个等号===：</p>
+<p>如果类型不同，就一定不相等</p>
 <h4 id="2-null与undefined区别"><a href="#2-null与undefined区别" class="headerlink" title="2 null与undefined区别"></a>2 null与undefined区别</h4><p>1.null是一个表示”无”的对象，转为数值时为0；undefined是一个表示”无”的原始值，转为数值时为NaN。</p>
 <p>2.null 和 undefined 的值相等，但类型不等。</p>
 <p>null表示”没有对象”，即该处不应该有值。用法是：</p>
@@ -371,7 +388,44 @@ console.log(res)   // fasle</code></pre><p>indexOf()：搜索数组中的元素�
 <p>reverse()：反转数组的元素顺序。</p>
 <p>shift()：删除并返回数组的第一个元素。</p>
 <p>slice()：选取数组的一部分，并返回一个新数组。</p>
-<p>some()：检测数组元素中是否有元素符合指定条件。</p>
+<p>array.splice(index,howmany,item1,…..,itemX)</p>
+<table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">index</td>
+<td align="center">必需。规定从何处添加/删除元素。该参数是开始插入和（或）删除的数组元素的下标，必须是数字。</td>
+</tr>
+<tr>
+<td align="center">howmany</td>
+<td align="center">可选。规定应该删除多少元素。必须是数字，但可以是 “0”。如果未规定此参数，则删除从 index 开始到原数组结尾的所有元素。</td>
+</tr>
+<tr>
+<td align="center">item1, …,itemX</td>
+<td align="center">可选。要添加到数组的新元素</td>
+</tr>
+</tbody></table>
+<pre><code>移除数组的第三个元素，并在数组第三个位置添加新元素:
+
+var fruits = [&quot;Banana&quot;, &quot;Orange&quot;, &quot;Apple&quot;, &quot;Mango&quot;];
+fruits.splice(2,1,&quot;Lemon&quot;,&quot;Kiwi&quot;);   //  Banana,Orange,Lemon,Kiwi,Mango
+
+
+在数组中第三个元素位置处添加新元素：
+
+var fruits = [&quot;Banana&quot;, &quot;Orange&quot;, &quot;Apple&quot;, &quot;Mango&quot;];
+fruits.splice(2,0,&quot;Lemon&quot;,&quot;Kiwi&quot;);   // Banana,Orange,Lemon,Kiwi,Apple,Mango
+
+
+//删除数组中下标为i的元素
+arr.splice(i,1)
+
+//删除数组中从下标为i元素开始的两个元素
+arr.splice(i,2)</code></pre><p>some()：检测数组元素中是否有元素符合指定条件。</p>
 <pre><code>// 检测数组中是否还有大于7的元素
 var arr =[1,3,4,6,7,89,875]
 var res = arr.some((item)=&gt;{
