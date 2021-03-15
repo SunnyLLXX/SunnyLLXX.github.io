@@ -16,7 +16,7 @@
 <meta property="og:description" content="一些有关JS常见的算法实现题">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-06T03:01:11.000Z">
-<meta property="article:modified_time" content="2021-03-14T07:07:54.824Z">
+<meta property="article:modified_time" content="2021-03-15T02:20:03.594Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta property="article:tag" content="JavaScript">
@@ -354,33 +354,33 @@ console.log(compareVersion(&apos;2.4.1.4&apos;,&apos;0.8.7&apos;))</code></pre><
 }
 console.log(findZero([-1,0,1,-2,2,3,2,-2]))</code></pre><h4 id="18-当a等于和值时，条件为真"><a href="#18-当a等于和值时，条件为真" class="headerlink" title="18 当a等于和值时，条件为真"></a>18 当a等于和值时，条件为真</h4><p>1.第一种，重写toString()方法</p>
 <pre><code>var a = {
-        i:0,
-        //重写toString()
-        toString(){
-
-        }
-        /*也可以使用
-        valueOf(){
-            return ++this.i
-        }*/
+    i:0,
+    //重写toString()
+    toString(){
+        return ++this.i
     }
+    /*也可以使用
+    valueOf(){
+        return ++this.i
+    }*/
+}
 if(a == 1 &amp;&amp; a == 2 &amp;&amp; a == 3){
-        console.log(1)
-    }</code></pre><p>2.利用Object.defineProperty进行数据劫持</p>
+    console.log(1)
+}</code></pre><p>2.利用Object.defineProperty进行数据劫持</p>
 <pre><code>var i = 0 
-    Object.defineProperty(window,&apos;a&apos;,{//全局var a，相当于在window声明了属性a
-        get(){
-            return ++i  //getter拦截器中不能够再次调用当前值，否则会无法进行下去
-        }
-    })
+Object.defineProperty(window,&apos;a&apos;,{//全局var a，相当于在window声明了属性a
+    get(){
+        return ++i  //getter拦截器中不能够再次调用当前值，否则会无法进行下去
+    }
+})
 if(a == 1 &amp;&amp; a == 2 &amp;&amp; a == 3){
-        console.log(1)
-    }</code></pre><p>3.利用数组方法</p>
+    console.log(1)
+}</code></pre><p>3.利用数组方法</p>
 <pre><code>var a = [1,2,3]
-    a.toString = a.shift
-    if(a == 1 &amp;&amp; a == 2 &amp;&amp; a == 3){
-        console.log(1)
-    }</code></pre><h4 id="19-找到字符串中最长无重复子串"><a href="#19-找到字符串中最长无重复子串" class="headerlink" title="19 找到字符串中最长无重复子串"></a>19 找到字符串中最长无重复子串</h4><p>给定一个数组arr，返回arr的最长无的重复子串的长度(无重复指的是所有数字都不相同)。</p>
+a.toString = a.shift
+if(a == 1 &amp;&amp; a == 2 &amp;&amp; a == 3){
+    console.log(1)
+}</code></pre><h4 id="19-找到字符串中最长无重复子串"><a href="#19-找到字符串中最长无重复子串" class="headerlink" title="19 找到字符串中最长无重复子串"></a>19 找到字符串中最长无重复子串</h4><p>给定一个数组arr，返回arr的最长无的重复子串的长度(无重复指的是所有数字都不相同)。</p>
 <pre><code>示例1
 输入[2,3,4,5]
 返回值4
@@ -447,8 +447,8 @@ console.log(search([1,2,4,3,2],2))</code></pre><h4 id="21-数组中只出现一�
     return res
 }
 
-console.log(FindNumsAppearOnce([1,3,5,2,1,6,4]))</code></pre><h4 id="22-买股票的好时机"><a href="#22-买股票的好时机" class="headerlink" title="22 买股票的好时机"></a>22 买股票的好时机</h4><p>题目描述</p>
-<p>假设你有一个数组，其中第\ i i 个元素是股票在第\ i i 天的价格。<br>你有一次买入和卖出的机会。（只有买入了股票以后才能卖出）。请你设计一个算法来计算可以获得的最大收益。</p>
+console.log(FindNumsAppearOnce([1,3,5,2,1,6,4]))</code></pre><h4 id="22-买股票的好时机（一次交易）"><a href="#22-买股票的好时机（一次交易）" class="headerlink" title="22 买股票的好时机（一次交易）"></a>22 买股票的好时机（一次交易）</h4><p>题目描述</p>
+<p>假设你有一个数组，其中第i个元素是股票在第i天的价格。<br>你有一次买入和卖出的机会。（只有买入了股票以后才能卖出）。请你设计一个算法来计算可以获得的最大收益。</p>
 <pre><code>示例
 输入[1,4,2]
 返回值3
@@ -466,7 +466,17 @@ function maxProfit( prices ) {
         }
     }
     return sub
-}</code></pre><h4 id="23-两个栈实现队列"><a href="#23-两个栈实现队列" class="headerlink" title="23 两个栈实现队列"></a>23 两个栈实现队列</h4><p>用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。</p>
+}</code></pre><h4 id="23-买股票（无限次交易）"><a href="#23-买股票（无限次交易）" class="headerlink" title="23 买股票（无限次交易）"></a>23 买股票（无限次交易）</h4><p>题目描述</p>
+<p>假定你知道某只股票每一天价格的变动。你最多可以同时持有一只股票。但你可以无限次的交易（买进和卖出均无手续费）。</p>
+<p>请设计一个函数，计算你所能获得的最大收益。</p>
+<pre><code>function maxProfit( prices ) {
+    let res = 0
+    for(let i = 1; i &lt; prices.length; i++){
+        res += Math.max(0,prices[i] - prices[i-1])
+    }
+    return res
+}
+console.log(maxProfit([1,2,3,4,5]))</code></pre><h4 id="24-两个栈实现队列"><a href="#24-两个栈实现队列" class="headerlink" title="24 两个栈实现队列"></a>24 两个栈实现队列</h4><p>用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。</p>
 <pre><code>var inStack = []
 var outStack = []
 function push(node)
@@ -481,7 +491,7 @@ function pop()
         }
     }
     return outStack.pop()  //outStack出栈
-}</code></pre><h4 id="24-求平方根"><a href="#24-求平方根" class="headerlink" title="24 求平方根"></a>24 求平方根</h4><pre><code>function sqrt( x ) {
+}</code></pre><h4 id="25-求平方根"><a href="#25-求平方根" class="headerlink" title="25 求平方根"></a>25 求平方根</h4><pre><code>function sqrt( x ) {
     let left = 0,right = x,res = -1
     while(left &lt;= right) {
         let mid = Math.floor(left + (right - left) / 2);
@@ -495,16 +505,16 @@ function pop()
 
     return res;
 }
-console.log(sqrt(5))</code></pre><h4 id="25-最长公共子串"><a href="#25-最长公共子串" class="headerlink" title="25 最长公共子串"></a>25 最长公共子串</h4><pre><code>function LCS( str1 ,  str2 ) {
+console.log(sqrt(5))</code></pre><h4 id="26-最长公共子串"><a href="#26-最长公共子串" class="headerlink" title="26 最长公共子串"></a>26 最长公共子串</h4><pre><code>function LCS( str1 ,  str2 ) {
     if(str1.length&gt;str2.length) {
         let temp = str1
-        str1 = str2   //让str1是小字符串，str2时大字符串
+        str1 = str2   //让str1是小字符串，str2是大字符串
         str2 = temp
     }
 
     let len = 0,res = &apos;&apos;
     for(let i=0; i&lt;str1.length; i++){
-        //遍历小字符串，因为找的是最大字串，所以len不会减少，像一个框从左向右移动搜寻即可
+        //遍历长度小的字符串，因为找的是最大字串，所以len不会减少，像一个框从左向右移动搜寻即可
         let str=str1.slice(i-len, i+1)
         if(str2.indexOf(str) !== -1){
             res=str; //更新结果
@@ -517,7 +527,89 @@ console.log(sqrt(5))</code></pre><h4 id="25-最长公共子串"><a href="#25-最
         return -1
     }
 }
-console.log(LCS(&quot;1AB2345CD&quot;,&quot;12345EF&quot;))</code></pre>
+console.log(LCS(&quot;1AB2345CD&quot;,&quot;12345EF&quot;))</code></pre><h4 id="27-发布订阅模式"><a href="#27-发布订阅模式" class="headerlink" title="27 发布订阅模式"></a>27 发布订阅模式</h4><pre><code>class EventBus{
+    constructor(){
+        this.events = this.events || new Map()   
+        /*
+        {key:[fn,fn,fn]}
+        */
+    }
+    //监听事件
+    on(key,fn){
+        //获取对应的事件名称事件清单
+        let handle = this.events.get(key)
+        if(!handle){
+            this.events.set(key,fn)
+        }else if (handl &amp;&amp; typeof handle == &apos;function&apos;){
+            // 如果handle类型为函数，说明目前只有一个事件，则以数组形式进行存储fn和handle
+            thi.events.set(key,[handle,fn])
+        }else {
+          //直接push
+          handle.push(fn)
+        }
+    }
+    //触发事件
+    emit(key,...arg){
+        //获取对应的事件名称事件清单
+        let handle = this.events.get(key)
+        if(!handle){
+            return false
+        }
+        if(Array.isArray(handle)){
+            //如果是数组，则一次触发事件
+            for(let i = 0; i &lt; handle.length; i++){
+                handle[i].call(this,...arg)
+            }
+        }else {
+            handle.call(this,...arg)
+        }
+        return true
+    }
+    //移除事件
+    remove(key,fn){
+        //获取对应的事件名称事件清单
+        let handle = this.events.get(key)
+
+        if(Array.isArray(handle)){
+            //如果是数组，判断事件是否和fn相等，相等就进行删除
+            for(let i = 0; i &lt; handle.length; i++ ){
+                if(handle[i] == fn){
+                    handle.splice(i,1)
+                }
+            }
+        }else{
+            //只有一个事件
+            this.events.delete(key,fn)
+        }
+
+    }
+    //只触发一次就移除
+    once(key,fn){
+        //获取对应的事件名称事件清单
+        let handle = this.events.get(key)
+        if(Array.isArray(handle)){
+            for(let i = 0; i &lt; handle.length; i++ ){
+                if(handle[i] == fn){
+                    handle[i].call(this)
+                    handle.splice(i,1)
+                }
+            }
+        }
+    }
+}
+let event = new EventBus()
+event.on(&apos;click&apos;,function(){
+    console.log(&apos;click 1&apos;)
+})
+event.on(&apos;keyup&apos;,function(){
+    console.log(&apos;keyup 1&apos;)
+})
+event.emit(&apos;click&apos;)
+event.emit(&apos;keyup&apos;)
+event.remove(&apos;click&apos;)
+console.log(event.events)
+event.remove(&apos;keyup&apos;)
+console.log(event.events)</code></pre>
       
 
       <!-- 开始添加版权声明-->
@@ -716,7 +808,7 @@ console.log(LCS(&quot;1AB2345CD&quot;,&quot;12345EF&quot;))</code></pre>
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一些有关JS常见的算法实现题"><span class="toc-number">1.</span> <span class="toc-text">一些有关JS常见的算法实现题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-排序算法"><span class="toc-number">1.1.</span> <span class="toc-text">1 排序算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-封装函数实现驼峰命名"><span class="toc-number">1.2.</span> <span class="toc-text">2 封装函数实现驼峰命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-实现数组翻转"><span class="toc-number">1.3.</span> <span class="toc-text">3 实现数组翻转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-实现字符串翻转"><span class="toc-number">1.4.</span> <span class="toc-text">4 实现字符串翻转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-判断字符串是否回文"><span class="toc-number">1.5.</span> <span class="toc-text">5 判断字符串是否回文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-数组扁平化"><span class="toc-number">1.6.</span> <span class="toc-text">6 数组扁平化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-数组去重"><span class="toc-number">1.7.</span> <span class="toc-text">7 数组去重</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-斐波那锲数列"><span class="toc-number">1.8.</span> <span class="toc-text">8 斐波那锲数列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-JS实现继承"><span class="toc-number">1.9.</span> <span class="toc-text">9 JS实现继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-统计字符串中出现频率最高的十个单词以及次数"><span class="toc-number">1.10.</span> <span class="toc-text">10 统计字符串中出现频率最高的十个单词以及次数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-时间格式化"><span class="toc-number">1.11.</span> <span class="toc-text">11 时间格式化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-统计每个字符出现的频率"><span class="toc-number">1.12.</span> <span class="toc-text">12 统计每个字符出现的频率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-字符串大小写转换"><span class="toc-number">1.13.</span> <span class="toc-text">13 字符串大小写转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-深克隆和浅克隆"><span class="toc-number">1.14.</span> <span class="toc-text">14 深克隆和浅克隆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15-实现千位分隔符"><span class="toc-number">1.15.</span> <span class="toc-text">15 实现千位分隔符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-比较版本号"><span class="toc-number">1.16.</span> <span class="toc-text">16 比较版本号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#17-找出数组元素中和为0的所有元素，并且使用过一次的元素不能够再次使用"><span class="toc-number">1.17.</span> <span class="toc-text">17 找出数组元素中和为0的所有元素，并且使用过一次的元素不能够再次使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-当a等于和值时，条件为真"><span class="toc-number">1.18.</span> <span class="toc-text">18 当a等于和值时，条件为真</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#19-找到字符串中最长无重复子串"><span class="toc-number">1.19.</span> <span class="toc-text">19 找到字符串中最长无重复子串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#20-二分查找"><span class="toc-number">1.20.</span> <span class="toc-text">20 二分查找</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#21-数组中只出现一次的数字"><span class="toc-number">1.21.</span> <span class="toc-text">21 数组中只出现一次的数字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#22-买股票的好时机"><span class="toc-number">1.22.</span> <span class="toc-text">22 买股票的好时机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#23-两个栈实现队列"><span class="toc-number">1.23.</span> <span class="toc-text">23 两个栈实现队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#24-求平方根"><span class="toc-number">1.24.</span> <span class="toc-text">24 求平方根</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#25-最长公共子串"><span class="toc-number">1.25.</span> <span class="toc-text">25 最长公共子串</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一些有关JS常见的算法实现题"><span class="toc-number">1.</span> <span class="toc-text">一些有关JS常见的算法实现题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-排序算法"><span class="toc-number">1.1.</span> <span class="toc-text">1 排序算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-封装函数实现驼峰命名"><span class="toc-number">1.2.</span> <span class="toc-text">2 封装函数实现驼峰命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-实现数组翻转"><span class="toc-number">1.3.</span> <span class="toc-text">3 实现数组翻转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-实现字符串翻转"><span class="toc-number">1.4.</span> <span class="toc-text">4 实现字符串翻转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-判断字符串是否回文"><span class="toc-number">1.5.</span> <span class="toc-text">5 判断字符串是否回文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-数组扁平化"><span class="toc-number">1.6.</span> <span class="toc-text">6 数组扁平化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-数组去重"><span class="toc-number">1.7.</span> <span class="toc-text">7 数组去重</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-斐波那锲数列"><span class="toc-number">1.8.</span> <span class="toc-text">8 斐波那锲数列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-JS实现继承"><span class="toc-number">1.9.</span> <span class="toc-text">9 JS实现继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-统计字符串中出现频率最高的十个单词以及次数"><span class="toc-number">1.10.</span> <span class="toc-text">10 统计字符串中出现频率最高的十个单词以及次数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-时间格式化"><span class="toc-number">1.11.</span> <span class="toc-text">11 时间格式化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-统计每个字符出现的频率"><span class="toc-number">1.12.</span> <span class="toc-text">12 统计每个字符出现的频率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-字符串大小写转换"><span class="toc-number">1.13.</span> <span class="toc-text">13 字符串大小写转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-深克隆和浅克隆"><span class="toc-number">1.14.</span> <span class="toc-text">14 深克隆和浅克隆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15-实现千位分隔符"><span class="toc-number">1.15.</span> <span class="toc-text">15 实现千位分隔符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-比较版本号"><span class="toc-number">1.16.</span> <span class="toc-text">16 比较版本号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#17-找出数组元素中和为0的所有元素，并且使用过一次的元素不能够再次使用"><span class="toc-number">1.17.</span> <span class="toc-text">17 找出数组元素中和为0的所有元素，并且使用过一次的元素不能够再次使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-当a等于和值时，条件为真"><span class="toc-number">1.18.</span> <span class="toc-text">18 当a等于和值时，条件为真</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#19-找到字符串中最长无重复子串"><span class="toc-number">1.19.</span> <span class="toc-text">19 找到字符串中最长无重复子串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#20-二分查找"><span class="toc-number">1.20.</span> <span class="toc-text">20 二分查找</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#21-数组中只出现一次的数字"><span class="toc-number">1.21.</span> <span class="toc-text">21 数组中只出现一次的数字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#22-买股票的好时机（一次交易）"><span class="toc-number">1.22.</span> <span class="toc-text">22 买股票的好时机（一次交易）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#23-买股票（无限次交易）"><span class="toc-number">1.23.</span> <span class="toc-text">23 买股票（无限次交易）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#24-两个栈实现队列"><span class="toc-number">1.24.</span> <span class="toc-text">24 两个栈实现队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#25-求平方根"><span class="toc-number">1.25.</span> <span class="toc-text">25 求平方根</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#26-最长公共子串"><span class="toc-number">1.26.</span> <span class="toc-text">26 最长公共子串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#27-发布订阅模式"><span class="toc-number">1.27.</span> <span class="toc-text">27 发布订阅模式</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

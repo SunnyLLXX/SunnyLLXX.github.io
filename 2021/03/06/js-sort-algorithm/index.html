@@ -16,7 +16,7 @@
 <meta property="og:description" content="利用JS实现常见的三种排序算法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-06T02:17:14.000Z">
-<meta property="article:modified_time" content="2021-03-13T01:23:37.507Z">
+<meta property="article:modified_time" content="2021-03-15T01:24:17.961Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta property="article:tag" content="JavaScript">
@@ -250,7 +250,26 @@ console.log(quickSort([2,5,4,1,7,8,9,0,4,3]))</code></pre><h4 id="3-选择排序
     }
     return arr
 }
-console.log(selectSort([2,5,4,7,8,1,0,6]))</code></pre>
+console.log(selectSort([2,5,4,7,8,1,0,6]))</code></pre><h4 id="4-插入排序"><a href="#4-插入排序" class="headerlink" title="4 插入排序"></a>4 插入排序</h4><p>将未排序数据，对已排序数据序列从后向前扫描，找到对应的位置并插入。</p>
+<p>算法描述：</p>
+<p>（1）从第一个元素开始，该元素可以被认为已经被排序</p>
+<p>（2）取出下一个元素，在已经排好序的序列中从后往前扫描</p>
+<p>（3）直到找到小于或者等于该元素的位置</p>
+<p>（4）将该位置后面的所有已排序的元素从后往前依次移一位</p>
+<p>（5）将该元素插入到该位置</p>
+<p>（6）重复步骤2~5</p>
+<pre><code>function insertSort(arr){
+    for(let i = 1; i &lt; arr.length; i++){
+        let pre = i - 1,currentNum = arr[i]
+        while(pre &gt;= 0 &amp;&amp; currentNum &lt; arr[pre]){
+            arr[pre+1] = arr[pre]
+            pre--
+        }
+        arr[pre+1] = currentNum
+    }
+    return arr
+}
+console.log(insertSort([3,2,5,1,7,9,0]))</code></pre>
       
 
       <!-- 开始添加版权声明-->
@@ -449,7 +468,7 @@ console.log(selectSort([2,5,4,7,8,1,0,6]))</code></pre>
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#利用JS实现常见的三种排序算法"><span class="toc-number">1.</span> <span class="toc-text">利用JS实现常见的三种排序算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-冒泡排序"><span class="toc-number">1.1.</span> <span class="toc-text">1 冒泡排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-快速排序"><span class="toc-number">1.2.</span> <span class="toc-text">2 快速排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-选择排序"><span class="toc-number">1.3.</span> <span class="toc-text">3 选择排序</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#利用JS实现常见的三种排序算法"><span class="toc-number">1.</span> <span class="toc-text">利用JS实现常见的三种排序算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-冒泡排序"><span class="toc-number">1.1.</span> <span class="toc-text">1 冒泡排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-快速排序"><span class="toc-number">1.2.</span> <span class="toc-text">2 快速排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-选择排序"><span class="toc-number">1.3.</span> <span class="toc-text">3 选择排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-插入排序"><span class="toc-number">1.4.</span> <span class="toc-text">4 插入排序</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
