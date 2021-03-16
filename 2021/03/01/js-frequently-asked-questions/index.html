@@ -16,7 +16,7 @@
 <meta property="og:description" content="熟悉有关JS的内容">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-01T01:38:15.000Z">
-<meta property="article:modified_time" content="2021-03-16T00:52:13.122Z">
+<meta property="article:modified_time" content="2021-03-16T09:30:39.597Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta property="article:tag" content="JavaScript">
@@ -374,7 +374,27 @@ var arr =[1,3,4,6,7,89,875]
 var arr = arr.filter((item)=&gt;{
     return item &lt;=5
 })
-console.log(arr)   // [1,3,4]</code></pre><p>find()：返回符合传入测试（函数）条件的数组元素。</p>
+console.log(arr)   // [1,3,4]
+
+
+
+
+//手写实现filter
+
+Array.prototype.myFilter = function (callback) { 
+    let newArr = []
+    for(let i = 0; i &lt; this.length; i++){
+        if(callback(this[i])){
+            newArr.push(this[i])
+        }
+    }
+    return newArr
+ }
+ let arr = [1,2,5,7,8,90,0,4]
+ arr = arr.myFilter((item)=&gt;{
+     return item &gt; 4
+ })
+ console.log(arr)</code></pre><p>find()：返回符合传入测试（函数）条件的数组元素。</p>
 <pre><code>//返回数组中第一个大于7的元素
 var arr =[1,3,4,6,7,89,875]
 var res = arr.find((item)=&gt;{
@@ -521,7 +541,7 @@ console.log(c)
 let a = 1
 let a = 2   // 报错
 const b = 1
-const b = 2 // 报错</code></pre><h4 id="12-自定义实现new"><a href="#12-自定义实现new" class="headerlink" title="12 自定义实现new"></a>12 <a href="http://sunnyllxx.github.io/2021/02/25/js-customize-new/">自定义实现new</a></h4><h4 id="13-函数防抖和节流"><a href="#13-函数防抖和节流" class="headerlink" title="13 函数防抖和节流"></a>13 <a href="http://sunnyllxx.github.io/2021/02/17/anti-shake-throttle/">函数防抖和节流</a></h4><h4 id="14-箭头函数与普通函数区别"><a href="#14-箭头函数与普通函数区别" class="headerlink" title="14 箭头函数与普通函数区别"></a>14 <a href="http://sunnyllxx.github.io/2021/02/25/js-difference-between-arrow-and-ordinary/">箭头函数与普通函数区别</a></h4><h4 id="15-手写实现Promise"><a href="#15-手写实现Promise" class="headerlink" title="15 手写实现Promise"></a>15 <a href="http://sunnyllxx.github.io/2021/02/23/customize-promise/">手写实现Promise</a></h4><h4 id="16-async与await的理解"><a href="#16-async与await的理解" class="headerlink" title="16 async与await的理解"></a>16 <a href="http://sunnyllxx.github.io/2021/02/17/conprehention-of-async-await/">async与await的理解</a></h4><h4 id="17-this的指向问题"><a href="#17-this的指向问题" class="headerlink" title="17 this的指向问题"></a>17 this的指向问题</h4><p>函数的 this 关键字在 JavaScript 中的表现略有不同，此外，在严格模式和非严格模式之间也会有一些差别。</p>
+const b = 2 // 报错</code></pre><h4 id="12-自定义实现new"><a href="#12-自定义实现new" class="headerlink" title="12 自定义实现new"></a>12 <a href="http://sunnyllxx.github.io/2021/02/25/js-customize-new/">自定义实现new</a></h4><h4 id="13-函数防抖和节流"><a href="#13-函数防抖和节流" class="headerlink" title="13 函数防抖和节流"></a>13 <a href="http://sunnyllxx.github.io/2021/02/17/anti-shake-throttle/">函数防抖和节流</a></h4><h4 id="14-箭头函数与普通函数区别"><a href="#14-箭头函数与普通函数区别" class="headerlink" title="14 箭头函数与普通函数区别"></a>14 <a href="http://sunnyllxx.github.io/2021/02/25/js-difference-between-arrow-and-ordinary/">箭头函数与普通函数区别</a></h4><h4 id="15-手写实现Promise"><a href="#15-手写实现Promise" class="headerlink" title="15 手写实现Promise"></a>15 <a href="http://sunnyllxx.github.io/2021/02/23/customize-promise/">手写实现Promise</a></h4><h4 id="16-async与await的理解"><a href="#16-async与await的理解" class="headerlink" title="16 async与await的理解"></a>16 <a href="http://sunnyllxx.github.io/2021/02/17/conprehention-of-async-await/">async与await的理解</a></h4><h4 id="17-this的指向问题"><a href="#17-this的指向问题" class="headerlink" title="17 this的指向问题"></a>17 this的指向问题</h4><p>函数的 this 关键字在 JavaScript 中的表现略有不同，此外，在严格模式和非严格模式之间也会有一些差别。this是在运行的时候绑定的！！！！</p>
 <p>1.在全局环境中（在任何函数体外部），this都是指向全局对象。在浏览器中，window对象即是全局对象。</p>
 <pre><code>console.log(this)   // window</code></pre><p>2.在普通函数环境中，this指向取决于函数调用的方式</p>
 <pre><code>function fn(){
@@ -556,7 +576,7 @@ console.log(person.name)</code></pre><p>8.可以利用call，apply，bind修改t
 <p>引用计数，就是记录每个对象被引用的次数，每次新建对象、赋值引用和删除引用的同时更新计数器，如果计数器值为0则直接回收内存。 </p>
 <p>参考链接</p>
 <p><a href="https://www.cnblogs.com/sunhuahuaa/p/7655587.html" target="_blank" rel="noopener">JS垃圾回收机制</a></p>
-<h4 id="20-JS-内存泄漏"><a href="#20-JS-内存泄漏" class="headerlink" title="20 JS 内存泄漏"></a>20 JS 内存泄漏</h4><p>不在使用的内存没有及时释放，就叫做内存泄漏。内存泄漏可能会导致应用程序卡顿或者崩溃。</p>
+<h4 id="20-JS-内存泄漏"><a href="#20-JS-内存泄漏" class="headerlink" title="20 JS 内存泄漏"></a>20 JS 内存泄漏</h4><p>不再使用的内存没有及时释放，就叫做内存泄漏。内存泄漏可能会导致应用程序卡顿或者崩溃。</p>
 <p>哪些问题可能会导致内存泄漏？</p>
 <p>1.意外的全局变量</p>
 <pre><code>function fn(){
