@@ -16,7 +16,7 @@
 <meta property="og:description" content="Promise的基本使用以及需要注意的问题">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-18T11:46:24.000Z">
-<meta property="article:modified_time" content="2021-02-18T12:32:58.169Z">
+<meta property="article:modified_time" content="2021-03-16T05:22:27.936Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="Promise">
 <meta name="twitter:card" content="summary">
@@ -201,6 +201,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="Promise的基本使用以及需要注意的问题"><a href="#Promise的基本使用以及需要注意的问题" class="headerlink" title="Promise的基本使用以及需要注意的问题"></a>Promise的基本使用以及需要注意的问题</h3><a id="more"></a>
+
 <p>接下来就了解一下有关Promise的使用</p>
 <h4 id="1-什么是Promise"><a href="#1-什么是Promise" class="headerlink" title="1 什么是Promise"></a>1 什么是Promise</h4><p>Promise 是异步编程的一种解决方案：从语法上讲，promise是一个对象，从它可以获取异步操作的消息；从本意上讲，它是承诺，承诺它过一段时间会给你一个结果。promise有三种状态： pending(等待态)，fulfiled(成功态)，rejected(失败态)；状态一旦改变，就不会再变。</p>
 <h4 id="2-为什么使用Promise"><a href="#2-为什么使用Promise" class="headerlink" title="2 为什么使用Promise"></a>2 为什么使用Promise</h4><ol>
@@ -209,8 +210,9 @@
 <p>旧的: 必须在启动异步任务前指定</p>
 <p>promise: 启动异步任务 =&gt; 返回promie对象 =&gt; 给promise对象绑定回调函数(甚至可以在异步任务结束后指定)</p>
 <ol start="2">
-<li>支持链式调用, 可以解决回调地狱问题<br>什么是回调地狱? 回调函数嵌套调用, 外部回调函数异步执行的结果是嵌套的回调函数执行的条件</li>
+<li>支持链式调用, 可以解决回调地狱问题</li>
 </ol>
+<p>什么是回调地狱? 回调函数嵌套调用, 外部回调函数异步执行的结果是嵌套的回调函数执行的条件</p>
 <p>回调地狱的缺点?  不便于阅读、不便于异常处理</p>
 <p>解决方案? promise链式调用</p>
 <p>终极解决方案? async+await</p>
@@ -313,7 +315,10 @@
     reason =&gt; {
         console.log(&apos;onReejected2()&apos;, reason)
     }
-)</code></pre>
+)</code></pre><h4 id="6-Promise的缺点"><a href="#6-Promise的缺点" class="headerlink" title="6 Promise的缺点"></a>6 Promise的缺点</h4><p>1.无法取消promise，一旦新建它就会立即执行，无法中途取消</p>
+<p>2.如果不设置回调函数，promise内部抛出的错误无法反应到外部</p>
+<p>3.当处于pending状态时，无法得知目前的进展到哪一个阶段（是刚刚开始还是即将完成）</p>
+
       
 
       <!-- 开始添加版权声明-->
@@ -508,7 +513,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise的基本使用以及需要注意的问题"><span class="toc-number">1.</span> <span class="toc-text">Promise的基本使用以及需要注意的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-什么是Promise"><span class="toc-number">1.1.</span> <span class="toc-text">1 什么是Promise</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-为什么使用Promise"><span class="toc-number">1.2.</span> <span class="toc-text">2 为什么使用Promise</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Promise基本使用"><span class="toc-number">1.3.</span> <span class="toc-text">3 Promise基本使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Promise-API使用"><span class="toc-number">1.4.</span> <span class="toc-text">4 Promise API使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Promise关键问题"><span class="toc-number">1.5.</span> <span class="toc-text">5 Promise关键问题</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise的基本使用以及需要注意的问题"><span class="toc-number">1.</span> <span class="toc-text">Promise的基本使用以及需要注意的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-什么是Promise"><span class="toc-number">1.1.</span> <span class="toc-text">1 什么是Promise</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-为什么使用Promise"><span class="toc-number">1.2.</span> <span class="toc-text">2 为什么使用Promise</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Promise基本使用"><span class="toc-number">1.3.</span> <span class="toc-text">3 Promise基本使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Promise-API使用"><span class="toc-number">1.4.</span> <span class="toc-text">4 Promise API使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Promise关键问题"><span class="toc-number">1.5.</span> <span class="toc-text">5 Promise关键问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-Promise的缺点"><span class="toc-number">1.6.</span> <span class="toc-text">6 Promise的缺点</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

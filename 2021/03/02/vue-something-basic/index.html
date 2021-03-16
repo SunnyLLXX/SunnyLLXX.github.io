@@ -16,7 +16,7 @@
 <meta property="og:description" content="熟悉有关Vue的内容">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-02T08:40:23.000Z">
-<meta property="article:modified_time" content="2021-03-10T11:31:18.355Z">
+<meta property="article:modified_time" content="2021-03-15T13:11:09.417Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="Vue">
 <meta property="article:tag" content="常见题">
@@ -203,11 +203,8 @@
       
         <h3 id="熟悉有关Vue的内容"><a href="#熟悉有关Vue的内容" class="headerlink" title="熟悉有关Vue的内容"></a>熟悉有关Vue的内容</h3><a id="more"></a>
 
-<h4 id="1-单页面应用"><a href="#1-单页面应用" class="headerlink" title="1 单页面应用"></a>1 单页面应用</h4><h4 id="2-MVVM与MVC的区别"><a href="#2-MVVM与MVC的区别" class="headerlink" title="2 MVVM与MVC的区别"></a>2 MVVM与MVC的区别</h4><p>MVVM包括view视图层、model数据层、viewmodel层。各部分通信都是双向的。采用双向数据绑定，View的变动，自动反映在 ViewModel，反之亦然。</p>
-<p>MVC是包括view视图层、controller控制层、model数据层。各部分之间的通信都是单向的。View 传送指令到 Controller 完成业务逻辑后，要求 Model 改变状态，Model 将新的数据发送到 View，用户得到反馈。</p>
-<p>MVVM与MVC的区别有：</p>
-<p>1.MVVM各部分的通信是双向的，而MVC各部分通信是单向的。</p>
-<p>2.MVVM是真正将页面与数据逻辑分离放到js里去实现，而MVC里面未分离。</p>
+<h4 id="1-单页面应用"><a href="#1-单页面应用" class="headerlink" title="1 单页面应用"></a>1 单页面应用</h4><h4 id="2-MVVM与MVC的区别"><a href="#2-MVVM与MVC的区别" class="headerlink" title="2 MVVM与MVC的区别"></a>2 MVVM与MVC的区别</h4><p>MVVM包括view视图层、model数据层、viewmodel层。ViewModel通过实现一套数据响应式机制自动响应Model中数据变化，同时Viewmodel会实现一套更新策略自动将数据变化转换为视图更新，通过事件监听响应View中用户交互修改Model中数据。这样在ViewModel中就减少了大量DOM操作代码。MVVM在保持View和Model松耦合的同时，还减少了维护它们关系的代码，使用户专注于业务逻辑，兼顾开发效率和可维护性。在提高开发效率、可读性同时还保持了优越的性能表现。</p>
+<p>MVC是包括view视图层、controller控制层、model数据层。View 传送指令到 Controller 完成业务逻辑后，要求 Model 改变状态，Model 将新的数据发送到 View，用户得到反馈。它的优点是分层清晰，缺点是数据流混乱，灵活性带来的维护性问题。</p>
 <h4 id="3-Vue的响应式原理"><a href="#3-Vue的响应式原理" class="headerlink" title="3 Vue的响应式原理"></a>3 <a href="http://sunnyllxx.github.io/2021/02/25/vue-response-principle/">Vue的响应式原理</a></h4><h4 id="4-Vue双向数据绑定"><a href="#4-Vue双向数据绑定" class="headerlink" title="4 Vue双向数据绑定"></a>4 <a href="http://sunnyllxx.github.io/2021/02/25/vue-data-bidirectional-binding/">Vue双向数据绑定</a></h4><h4 id="5-Vue组件间通信的方式"><a href="#5-Vue组件间通信的方式" class="headerlink" title="5 Vue组件间通信的方式"></a>5 <a href="http://sunnyllxx.github.io/2021/02/19/vue-components-communication-method/">Vue组件间通信的方式</a></h4><p><a href="http://sunnyllxx.github.io/2021/02/22/vue-brother-component-pass-data/">兄弟组件通信方式</a></p>
 <h4 id="6-Vue-组件的data为什么是一个函数"><a href="#6-Vue-组件的data为什么是一个函数" class="headerlink" title="6 Vue 组件的data为什么是一个函数"></a>6 <a href="http://sunnyllxx.github.io/2021/02/21/vue-data-is-a-function/">Vue 组件的data为什么是一个函数</a></h4><h4 id="7-Vue中v-for和v-if为何不能连用"><a href="#7-Vue中v-for和v-if为何不能连用" class="headerlink" title="7 Vue中v-for和v-if为何不能连用"></a>7 <a href="http://sunnyllxx.github.io/2021/02/21/vue-for-if-priority/">Vue中v-for和v-if为何不能连用</a></h4><h4 id="8-Vue父子组件挂载的顺序"><a href="#8-Vue父子组件挂载的顺序" class="headerlink" title="8 Vue父子组件挂载的顺序"></a>8 <a href="http://sunnyllxx.github.io/2021/02/22/vue-parent-child-component-mount-order/">Vue父子组件挂载的顺序</a></h4><h4 id="9-keep-alive组件的使用"><a href="#9-keep-alive组件的使用" class="headerlink" title="9 keep-alive组件的使用"></a>9 <a href="http://sunnyllxx.github.io/2021/02/21/vue-keep-alive-component/">keep-alive组件的使用</a></h4><h4 id="10-Vue-计算属性与监听器、方法的比较"><a href="#10-Vue-计算属性与监听器、方法的比较" class="headerlink" title="10 Vue 计算属性与监听器、方法的比较"></a>10 <a href="http://sunnyllxx.github.io/2021/02/21/vue-computed-watch-methods/">Vue 计算属性与监听器、方法的比较</a></h4><h4 id="11-React与Vue的区别"><a href="#11-React与Vue的区别" class="headerlink" title="11 React与Vue的区别"></a>11 <a href="http://sunnyllxx.github.io/2021/02/17/react-compare-with-vue/">React与Vue的区别</a></h4><h4 id="12-v-if与v-show的区别"><a href="#12-v-if与v-show的区别" class="headerlink" title="12 v-if与v-show的区别"></a>12 v-if与v-show的区别</h4><p>详细信息请看<a href="https://cn.vuejs.org/v2/guide/conditional.html#v-if-vs-v-show" target="_blank" rel="noopener">官方文档</a></p>
 <p>1.v-if 是“真正”的条件渲染，因为它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。</p>
@@ -249,7 +246,8 @@
 <p>只比较同一层级，不跨级比较。标签名不同，直接删除，不继续进行深度比较。标签名相同，key相同认为是相同节点，不继续深度比较。</p>
 <p>参考链接</p>
 <p><a href="https://www.cnblogs.com/mufc/p/11131203.html" target="_blank" rel="noopener">Vue 中的 Virtual Dom</a></p>
-<h4 id="18-nextTick的原理"><a href="#18-nextTick的原理" class="headerlink" title="18 nextTick的原理"></a>18 nextTick的原理</h4><p>详细查看<a href="https://cn.vuejs.org/v2/api/#Vue-nextTick" target="_blank" rel="noopener">官方文档</a></p>
+<h4 id="18-nextTick的原理"><a href="#18-nextTick的原理" class="headerlink" title="18 nextTick的原理"></a>18 nextTick的原理</h4><p>在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。</p>
+<p>详细查看<a href="https://cn.vuejs.org/v2/api/#Vue-nextTick" target="_blank" rel="noopener">官方文档</a></p>
 <p>1.什么时候会用到vue.nextTick()</p>
 <p>（1）created()钩子函数中，进行dom操作，要放在vue.nextTick()回调函数中。</p>
 <p>原因：created()钩子函数执行的时候,dom其实并未进行任何渲染。</p>
@@ -293,7 +291,40 @@ export default MyPlugin</code></pre><p>3.为插件暴露一个install方法，�
 }</code></pre><p>4.main.js中引入MyPlugin.js，然后通过全局方法 Vue.use() 使用插件</p>
 <pre><code>import MyPlugin from &apos;./libs/MyPlugin.js&apos;
 
-Vue.use(MyPlugin)</code></pre>
+Vue.use(MyPlugin)</code></pre><h4 id="20-vue-loader是什么"><a href="#20-vue-loader是什么" class="headerlink" title="20 vue-loader是什么"></a>20 vue-loader是什么</h4><p>vue-loader 是 webpack 的一个 loader，用于处理 .vue 文件，是解析.vue文件的一个加载器。</p>
+<p>js可以写es6,style样式可以scss或less,template 可以加jade.</p>
+<h4 id="21-对Vue-js的template编译的理解"><a href="#21-对Vue-js的template编译的理解" class="headerlink" title="21 对Vue.js的template编译的理解"></a>21 对Vue.js的template编译的理解</h4><p>参考链接</p>
+<p><a href="https://blog.csdn.net/LuckyandLucky/article/details/111301185" target="_blank" rel="noopener">对Vue.js的template编译的理解</a></p>
+<h4 id="22-对vue的性能优化方法"><a href="#22-对vue的性能优化方法" class="headerlink" title="22 对vue的性能优化方法"></a>22 对vue的性能优化方法</h4><p>1.路由懒加载</p>
+<p>2.keep-alive组件缓存</p>
+<p>3.在进行频繁切换时使用v-show</p>
+<p>4.图片懒加载</p>
+<p>5.使用第三方插件如element-ui进行按需加载，避免体积过大</p>
+<h4 id="23-对Vue3-0新特性的了解"><a href="#23-对Vue3-0新特性的了解" class="headerlink" title="23 对Vue3.0新特性的了解"></a>23 对Vue3.0新特性的了解</h4><p>根据尤大的PPT总结，Vue3.0改进主要在以下几点:</p>
+<p>1.更快<br>虚拟DOM重写、优化slots的生成、静态树提升、静态属性提升、基于Proxy的响应式系统</p>
+<p>2.更小:通过摇树优化核心库体积</p>
+<p>3.更容易维护:TypeScript+模块化</p>
+<p>4.更加友好</p>
+<p>跨平台:编译器核心和运行时核心与平台无关，使得Vue更容易与任何平台(Web、Android、iOS)一起使用</p>
+<p>5.更容易使用</p>
+<p>改进的TypeScript支持，编辑器能提供强有力的类型检查和错误及警告</p>
+<p>更好的调试支持独立的响应化模块</p>
+<p>Composition API</p>
+<p>参考链接</p>
+<p><a href="https://www.bilibili.com/video/BV127411P7zi" target="_blank" rel="noopener">有关vue的视频</a></p>
+<h4 id="24-对Vue的理解"><a href="#24-对Vue的理解" class="headerlink" title="24 对Vue的理解"></a>24 对Vue的理解</h4><p>详细请看<a href="https://cn.vuejs.org/v2/guide/index.html" target="_blank" rel="noopener">官方文档</a></p>
+<p>1.渐进式JavaScript框架</p>
+<p>2.易用、灵活和高效</p>
+<p>（1）渐进式JavaScript框架:</p>
+<p>与其它大型框架不同的是，Vue被设计为可以自底向上逐层应用。Vue的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动。</p>
+<p>（2）易用性</p>
+<p>vue提供数据响应式、声明式模板语法和基于配置的组件系统等核心特性。这些使我们只需要关注应用的核心业务即可，只要会写js、html和css就能轻松编写vue应用。</p>
+<p>（3）灵活性</p>
+<p>渐进式框架的最大优点就是灵活性，如果应用足够小，我们可能仅需要vue核心特性即可完成功能;随着应用规模不断扩大，我们才可能逐渐引入路由、状态管理、vue-cli等库和工具，不管是应用体积还是学习难度都是一个逐渐增加的平和曲线。</p>
+<p>（4）高效性</p>
+<p>超快的虚拟DOM和diff 算法使我们的应用拥有最佳的性能表现。</p>
+<p>追求高效的过程还在继续，vue3中引入Proxy对数据响应式改进以及编译器中对于静态内容编译的改进都会让vue更加高效。</p>
+
       
 
       <!-- 开始添加版权声明-->
@@ -481,7 +512,7 @@ Vue.use(MyPlugin)</code></pre>
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#熟悉有关Vue的内容"><span class="toc-number">1.</span> <span class="toc-text">熟悉有关Vue的内容</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-单页面应用"><span class="toc-number">1.1.</span> <span class="toc-text">1 单页面应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-MVVM与MVC的区别"><span class="toc-number">1.2.</span> <span class="toc-text">2 MVVM与MVC的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Vue的响应式原理"><span class="toc-number">1.3.</span> <span class="toc-text">3 Vue的响应式原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Vue双向数据绑定"><span class="toc-number">1.4.</span> <span class="toc-text">4 Vue双向数据绑定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Vue组件间通信的方式"><span class="toc-number">1.5.</span> <span class="toc-text">5 Vue组件间通信的方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-Vue-组件的data为什么是一个函数"><span class="toc-number">1.6.</span> <span class="toc-text">6 Vue 组件的data为什么是一个函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-Vue中v-for和v-if为何不能连用"><span class="toc-number">1.7.</span> <span class="toc-text">7 Vue中v-for和v-if为何不能连用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-Vue父子组件挂载的顺序"><span class="toc-number">1.8.</span> <span class="toc-text">8 Vue父子组件挂载的顺序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-keep-alive组件的使用"><span class="toc-number">1.9.</span> <span class="toc-text">9 keep-alive组件的使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-Vue-计算属性与监听器、方法的比较"><span class="toc-number">1.10.</span> <span class="toc-text">10 Vue 计算属性与监听器、方法的比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-React与Vue的区别"><span class="toc-number">1.11.</span> <span class="toc-text">11 React与Vue的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-v-if与v-show的区别"><span class="toc-number">1.12.</span> <span class="toc-text">12 v-if与v-show的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-Vue中的key的作用"><span class="toc-number">1.13.</span> <span class="toc-text">13 Vue中的key的作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-Vuex的使用"><span class="toc-number">1.14.</span> <span class="toc-text">14 Vuex的使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15-Vue的单向数据流"><span class="toc-number">1.15.</span> <span class="toc-text">15 Vue的单向数据流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-Vue的生命周期"><span class="toc-number">1.16.</span> <span class="toc-text">16 Vue的生命周期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#17-vue-router的两种模式"><span class="toc-number">1.17.</span> <span class="toc-text">17 vue-router的两种模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-Vue-虚拟DOM"><span class="toc-number">1.18.</span> <span class="toc-text">18 Vue 虚拟DOM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-nextTick的原理"><span class="toc-number">1.19.</span> <span class="toc-text">18 nextTick的原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#19-Vue-插件的使用"><span class="toc-number">1.20.</span> <span class="toc-text">19 Vue 插件的使用</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#熟悉有关Vue的内容"><span class="toc-number">1.</span> <span class="toc-text">熟悉有关Vue的内容</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-单页面应用"><span class="toc-number">1.1.</span> <span class="toc-text">1 单页面应用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-MVVM与MVC的区别"><span class="toc-number">1.2.</span> <span class="toc-text">2 MVVM与MVC的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Vue的响应式原理"><span class="toc-number">1.3.</span> <span class="toc-text">3 Vue的响应式原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Vue双向数据绑定"><span class="toc-number">1.4.</span> <span class="toc-text">4 Vue双向数据绑定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Vue组件间通信的方式"><span class="toc-number">1.5.</span> <span class="toc-text">5 Vue组件间通信的方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-Vue-组件的data为什么是一个函数"><span class="toc-number">1.6.</span> <span class="toc-text">6 Vue 组件的data为什么是一个函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-Vue中v-for和v-if为何不能连用"><span class="toc-number">1.7.</span> <span class="toc-text">7 Vue中v-for和v-if为何不能连用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-Vue父子组件挂载的顺序"><span class="toc-number">1.8.</span> <span class="toc-text">8 Vue父子组件挂载的顺序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-keep-alive组件的使用"><span class="toc-number">1.9.</span> <span class="toc-text">9 keep-alive组件的使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-Vue-计算属性与监听器、方法的比较"><span class="toc-number">1.10.</span> <span class="toc-text">10 Vue 计算属性与监听器、方法的比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-React与Vue的区别"><span class="toc-number">1.11.</span> <span class="toc-text">11 React与Vue的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-v-if与v-show的区别"><span class="toc-number">1.12.</span> <span class="toc-text">12 v-if与v-show的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-Vue中的key的作用"><span class="toc-number">1.13.</span> <span class="toc-text">13 Vue中的key的作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-Vuex的使用"><span class="toc-number">1.14.</span> <span class="toc-text">14 Vuex的使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15-Vue的单向数据流"><span class="toc-number">1.15.</span> <span class="toc-text">15 Vue的单向数据流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-Vue的生命周期"><span class="toc-number">1.16.</span> <span class="toc-text">16 Vue的生命周期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#17-vue-router的两种模式"><span class="toc-number">1.17.</span> <span class="toc-text">17 vue-router的两种模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-Vue-虚拟DOM"><span class="toc-number">1.18.</span> <span class="toc-text">18 Vue 虚拟DOM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-nextTick的原理"><span class="toc-number">1.19.</span> <span class="toc-text">18 nextTick的原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#19-Vue-插件的使用"><span class="toc-number">1.20.</span> <span class="toc-text">19 Vue 插件的使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#20-vue-loader是什么"><span class="toc-number">1.21.</span> <span class="toc-text">20 vue-loader是什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#21-对Vue-js的template编译的理解"><span class="toc-number">1.22.</span> <span class="toc-text">21 对Vue.js的template编译的理解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#22-对vue的性能优化方法"><span class="toc-number">1.23.</span> <span class="toc-text">22 对vue的性能优化方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#23-对Vue3-0新特性的了解"><span class="toc-number">1.24.</span> <span class="toc-text">23 对Vue3.0新特性的了解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#24-对Vue的理解"><span class="toc-number">1.25.</span> <span class="toc-text">24 对Vue的理解</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
