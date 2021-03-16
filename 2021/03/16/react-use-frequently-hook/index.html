@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>étoile的小窝</title>
+  <title>React 经常使用的 Hook | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="étoile的小窝">
-<meta property="og:url" content="http://sunnyllxx.github.io/page/2/index.html">
+  <meta name="description" content="有关使用 React Hook的一些知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React 经常使用的 Hook">
+<meta property="og:url" content="http://sunnyllxx.github.io/2021/03/16/react-use-frequently-hook/index.html">
 <meta property="og:site_name" content="étoile的小窝">
+<meta property="og:description" content="有关使用 React Hook的一些知识">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-16T13:22:01.000Z">
+<meta property="article:modified_time" content="2021-03-16T13:41:32.725Z">
 <meta property="article:author" content="étoile">
+<meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="étoile的小窝" type="application/atom+xml">
@@ -161,154 +166,230 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-    <article id="post-deadlock-formation-conditions" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+<article id="post-react-use-frequently-hook" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/27/deadlock-formation-conditions/">死锁的形成条件</a>
+    <h1 class="article-title" itemprop="name">
+      React 经常使用的 Hook
     </h1>
   
 
         <!--显示阅读次数-->
 
+
+
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+           👁 &nbsp;<span id="busuanzi_value_page_pv"></span> &nbsp;&nbsp;
+  </span>
+  </a>
+
 <!--显示阅读次数完毕-->
   
         
-        <a href="/2021/02/27/deadlock-formation-conditions/" class="archive-article-date">
-  	<time datetime="2021-02-27T11:11:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-27</time>
+        <a href="/2021/03/16/react-use-frequently-hook/" class="archive-article-date">
+  	<time datetime="2021-03-16T13:22:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="了解有关死锁的相关概念"><a href="#了解有关死锁的相关概念" class="headerlink" title="了解有关死锁的相关概念"></a>了解有关死锁的相关概念</h3>
-        
-          <a class="article-more-a" href="/2021/02/27/deadlock-formation-conditions/#more">more >></a>
-        
+        <h3 id="有关使用-React-Hook的一些知识"><a href="#有关使用-React-Hook的一些知识" class="headerlink" title="有关使用 React Hook的一些知识"></a>有关使用 React Hook的一些知识</h3><a id="more"></a>
+<p>Hook 是什么？ Hook 是一个特殊的函数，它可以让你“钩入” React 的特性。</p>
+<h4 id="1-State-Hook"><a href="#1-State-Hook" class="headerlink" title="1 State Hook"></a>1 State Hook</h4><p>详细请看<a href="https://zh-hans.reactjs.org/docs/hooks-state.html" target="_blank" rel="noopener">官方文档</a></p>
+<p>State Hook 可以让函数组件也可以有state状态, 并进行状态数据的读写操作。</p>
+<p>语法: </p>
+<pre><code>const [xxx, setXxx] = React.useState(initValue)  </code></pre><p>React.useState()的说明：</p>
+<pre><code>参数initValue: 第一次初始化指定的值在内部作缓存
+返回值[xxx, setXxx]: 包含2个元素的数组, 第1个为内部当前状态值, 第2个为更新状态值的函数
+
+setXxx()2种写法:
+
+setXxx(newValue): 参数为非函数值, 直接指定新的状态值, 内部用其覆盖原来的状态值
+setXxx(value =&gt; newValue): 参数为函数, 接收原本的状态值, 返回新的状态值, 内部用其覆盖原来的状态值</code></pre><p>实现小案例如下：</p>
+<pre><code>import React from &apos;react&apos;
+import ReactDOM from &apos;react-dom&apos;
+
+export default function Count() {
+
+    const [count,setCount] = React.useState(0)
+    const [name,setName] = React.useState(&apos;lxlx&apos;)
+
+    function add(){
+        setCount((count) =&gt; {
+                return ++count
+            })    
+    }
+
+    function modifyName(){
+        setName((name) =&gt; {
+            return name+=&apos; xinxin&apos;
+        })
+    }
+    return (
+        &lt;div&gt;
+            &lt;h1&gt;当前数值：{count}&lt;/h1&gt;
+            &lt;h1&gt;我是：{name}&lt;/h1&gt;
+            &lt;button onClick={add}&gt;点击+&lt;/button&gt;
+            &lt;button onClick={modifyName}&gt;点击修改姓名&lt;/button&gt;
+        &lt;/div&gt;
+    )
+}</code></pre><h4 id="2-Effect-Hook"><a href="#2-Effect-Hook" class="headerlink" title="2 Effect Hook"></a>2 Effect Hook</h4><p>详细请看<a href="https://zh-hans.reactjs.org/docs/hooks-overview.html#effect-hook" target="_blank" rel="noopener">官方文档</a></p>
+<p>Effect Hook，给函数组件增加了操作副作用的能力。它跟 class 组件中的 componentDidMount、componentDidUpdate 和 componentWillUnmount 具有相同的用途，只不过被合并成了一个 API。</p>
+<p>语法：</p>
+<pre><code>React.useEffect(() =&gt; { 
+  // 在此可以执行任何带副作用操作
+
+  // 返回值类似于componentWillUnmount生命周期
+  return () =&gt; { 
+    // 在此做一些收尾工作, 比如清除定时器/取消订阅等
+  }
+}, [stateValue]) // 如果指定的是[], 回调函数只会在第一次render()后执行</code></pre><p>小案例如下：</p>
+<p>import React from ‘react’<br>import ReactDOM from ‘react-dom’</p>
+<p>export default function Count() {</p>
+<pre><code>const [count,setCount] = React.useState(0)
+const [name,setName] = React.useState(&apos;lxlx&apos;)
+const myRef = React.useRef()
+
+// React.useEffect(()=&gt;{
+//     let timer = setInterval(function(){
+//         setCount((count) =&gt; {
+//             return ++count
+//         }) 
+//     },1000)
+//     // 返回值类似于componentWillUnmount生命周期
+//     return ()=&gt;{
+//         clearInterval(timer)
+//     }
+// },[])
+
+
+// React.useEffect(()=&gt;{
+//     console.log(&apos;监听中&apos;)    
+// },[count])  //如果指定的是[], 回调函数只会在第一次render()后执行
+
+function add(){
+    setCount((count) =&gt; {
+            return ++count
+        })    
+}
+
+function modifyName(){
+    setName((name) =&gt; {
+        return name+=&apos; xinxin&apos;
+    })
+}
+function unLoad(){
+    ReactDOM.unmountComponentAtNode(document.getElementById(&apos;root&apos;))
+}
+return (
+    &lt;div&gt;
+        &lt;h1&gt;当前数值：{count}&lt;/h1&gt;
+        &lt;h1&gt;我是：{name}&lt;/h1&gt;
+        &lt;button onClick={add}&gt;点击+&lt;/button&gt;
+        &lt;button onClick={modifyName}&gt;点击修改姓名&lt;/button&gt;
+        &lt;button onClick={unLoad}&gt;卸载组件&lt;/button&gt;
+    &lt;/div&gt;
+)</code></pre><p>}</p>
+<h4 id="3-Ref-Hook"><a href="#3-Ref-Hook" class="headerlink" title="3 Ref Hook"></a>3 Ref Hook</h4><p>详细请看<a href="https://zh-hans.reactjs.org/docs/hooks-reference.html#useref" target="_blank" rel="noopener">官方文档</a></p>
+<p>Ref Hook可以在函数组件中存储/查找组件内的标签或任意其它数据。useRef 返回一个可变的 ref 对象，其 .current 属性被初始化为传入的参数（initialValue）。返回的 ref 对象在组件的整个生命周期内保持不变。</p>
+<p>语法: </p>
+<pre><code>const refContainer = useRef()</code></pre><p>小案例如下：</p>
+<pre><code>import React from &apos;react&apos;
+import ReactDOM from &apos;react-dom&apos;
+
+export default function Count() {
+
+    const [count,setCount] = React.useState(0)
+    const myRef = React.useRef()
+
+    function add(){
+        setCount((count) =&gt; {
+                return ++count
+            })    
+    }
+
+    function show(){
+        alert(myRef.current.value)
+    }
+    return (
+        &lt;div&gt;
+            &lt;h1&gt;当前数值：{count}&lt;/h1&gt;
+            &lt;input type=&quot;text&quot; ref={myRef}/&gt;
+            &lt;button onClick={add}&gt;点击+&lt;/button&gt;
+            &lt;button onClick={show}&gt;显示信息&lt;/button&gt;
+        &lt;/div&gt;
+    )
+}</code></pre>
       
 
       <!-- 开始添加版权声明-->
 
 
-<div class="declare" hidden="hidden"></div>
+<div class="declare">
+  <ul><li><strong>本文作者：</strong>
+  
+    étoile
+  
+</li></ul>
+  <ul><li><strong>本文链接：</strong>
+ <a href="http://sunnyllxx.github.io/2021/03/16/react-use-frequently-hook/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2021/03/16/react-use-frequently-hook/</a>
+</li></ul>
+  <ul><li><strong>版权声明：</strong>
+  本作品采用
+  <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+  进行许可。转载请注明出处！
+  
+</div>
 
 <!-- 添加完成 -->
 
 
       
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/操作系统//" class="article-tag-list-link color5">操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/27/deadlock-formation-conditions/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/zhifubaopicture.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechatcollection.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-processes-and-threads" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/27/processes-and-threads/">进程与线程的区别</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2021/02/27/processes-and-threads/" class="archive-article-date">
-  	<time datetime="2021-02-27T11:02:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="了解进程与线程的区别"><a href="#了解进程与线程的区别" class="headerlink" title="了解进程与线程的区别"></a>了解进程与线程的区别</h3>
-        
-          <a class="article-more-a" href="/2021/02/27/processes-and-threads/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
       
     </div>
     <!-- 添加本文结束标记-->
 
+  <div style="text-align:center;color: #00BFFF;font-size:14px;">
+       -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
+       </div>
+  
   <!-- 添加完成 -->
     <div class="article-info article-info-index">
       
@@ -319,116 +400,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/操作系统//" class="article-tag-list-link color5">操作系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/27/processes-and-threads/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-js-prototype-chain" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/27/js-prototype-chain/">JS 原型链</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2021/02/27/js-prototype-chain/" class="archive-article-date">
-  	<time datetime="2021-02-27T10:08:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="了解JS的原型链"><a href="#了解JS的原型链" class="headerlink" title="了解JS的原型链"></a>了解JS的原型链</h3>
-        
-          <a class="article-more-a" href="/2021/02/27/js-prototype-chain/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
         		</li>
       		
 		</ul>
@@ -450,16 +422,75 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/27/js-prototype-chain/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2021/03/16/react-use-frequently-hook/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2021/03/09/js-cutomize-call-bind-apply/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JS 手写实现call、apply、bind方法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -474,780 +505,67 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-js-distinction-call-apply-bind" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/27/js-distinction-call-apply-bind/">JS 中call,bind,apply的异同</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2021/02/27/js-distinction-call-apply-bind/" class="archive-article-date">
-  	<time datetime="2021-02-27T10:08:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="了解JS中call-bind-apply的异同"><a href="#了解JS中call-bind-apply的异同" class="headerlink" title="了解JS中call,bind,apply的异同"></a>了解JS中call,bind,apply的异同</h3>
-        
-          <a class="article-more-a" href="/2021/02/27/js-distinction-call-apply-bind/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/27/js-distinction-call-apply-bind/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#有关使用-React-Hook的一些知识"><span class="toc-number">1.</span> <span class="toc-text">有关使用 React Hook的一些知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-State-Hook"><span class="toc-number">1.1.</span> <span class="toc-text">1 State Hook</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Effect-Hook"><span class="toc-number">1.2.</span> <span class="toc-text">2 Effect Hook</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Ref-Hook"><span class="toc-number">1.3.</span> <span class="toc-text">3 Ref Hook</span></a></li></ol></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
 
-  
-    <article id="post-js-closure" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/27/js-closure/">JS 中的闭包</a>
-    </h1>
-  
 
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2021/02/27/js-closure/" class="archive-article-date">
-  	<time datetime="2021-02-27T10:07:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="了解JS中的闭包，有何优缺点"><a href="#了解JS中的闭包，有何优缺点" class="headerlink" title="了解JS中的闭包，有何优缺点"></a>了解JS中的闭包，有何优缺点</h3>
-        
-          <a class="article-more-a" href="/2021/02/27/js-closure/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/27/js-closure/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-js-attention-object-key" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/27/js-attention-object-key/">JS 对象key值的注意事项</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2021/02/27/js-attention-object-key/" class="archive-article-date">
-  	<time datetime="2021-02-27T03:17:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="值得注意对象key值的注意事项"><a href="#值得注意对象key值的注意事项" class="headerlink" title="值得注意对象key值的注意事项"></a>值得注意对象key值的注意事项</h3>
-        
-          <a class="article-more-a" href="/2021/02/27/js-attention-object-key/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/27/js-attention-object-key/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-js-find-string" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/27/js-find-string/">JS 查找字符串</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2021/02/27/js-find-string/" class="archive-article-date">
-  	<time datetime="2021-02-27T03:16:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="假设有这样一个题目"><a href="#假设有这样一个题目" class="headerlink" title="假设有这样一个题目"></a>假设有这样一个题目</h3>
-        
-          <a class="article-more-a" href="/2021/02/27/js-find-string/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/27/js-find-string/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-js-string-conversion-case" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/27/js-string-conversion-case/">JS 字符串转换大小写</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2021/02/27/js-string-conversion-case/" class="archive-article-date">
-  	<time datetime="2021-02-27T03:06:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="JS实现将字符串中小写字符转化大写字符"><a href="#JS实现将字符串中小写字符转化大写字符" class="headerlink" title="JS实现将字符串中小写字符转化大写字符"></a>JS实现将字符串中小写字符转化大写字符</h3>
-        
-          <a class="article-more-a" href="/2021/02/27/js-string-conversion-case/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/27/js-string-conversion-case/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-js-deepclone" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/26/js-deepclone/">JS 的深克隆与浅克隆</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2021/02/26/js-deepclone/" class="archive-article-date">
-  	<time datetime="2021-02-26T02:36:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="如何实现JS中的深克隆与浅克隆"><a href="#如何实现JS中的深克隆与浅克隆" class="headerlink" title="如何实现JS中的深克隆与浅克隆"></a>如何实现JS中的深克隆与浅克隆</h3>
-        
-          <a class="article-more-a" href="/2021/02/26/js-deepclone/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/26/js-deepclone/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-js-difference-between-arrow-and-ordinary" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/25/js-difference-between-arrow-and-ordinary/">Js 箭头函数与普通函数的区别</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2021/02/25/js-difference-between-arrow-and-ordinary/" class="archive-article-date">
-  	<time datetime="2021-02-25T13:01:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="箭头函数与普通函数有何区别呢"><a href="#箭头函数与普通函数有何区别呢" class="headerlink" title="箭头函数与普通函数有何区别呢"></a>箭头函数与普通函数有何区别呢</h3>
-        
-          <a class="article-more-a" href="/2021/02/25/js-difference-between-arrow-and-ordinary/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/25/js-difference-between-arrow-and-ordinary/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
+   <!-- valine评论系统开始 -->
+
+   
+    <section id="comments" class="comments">
+      <style>
+        .comments{margin:30px;padding:10px;background:#fff}
+        @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+      </style>
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'true' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "SqWqnmUuTCilnupzDVQgFhrE-gzGzoHsz",
+            app_key: "EuNlMDzK61IRiansuSobGwsH",
+            placeholder: "留下你的评论吧",
+            avatar:"retro",
+            avatar_cdn:'{{ theme.valine.avatar_cdn }}',
+        });
+    }
+</script>
+
+  </section>
+
+
+<!-- valine评论系统结束 -->
 
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -1285,8 +603,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
