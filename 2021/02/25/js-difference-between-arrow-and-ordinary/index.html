@@ -16,7 +16,7 @@
 <meta property="og:description" content="箭头函数与普通函数有何区别呢">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-25T13:01:03.000Z">
-<meta property="article:modified_time" content="2021-02-26T01:00:05.217Z">
+<meta property="article:modified_time" content="2021-03-18T02:52:53.400Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta property="article:tag" content="JavaScript">
@@ -204,10 +204,11 @@
         <h3 id="箭头函数与普通函数有何区别呢"><a href="#箭头函数与普通函数有何区别呢" class="headerlink" title="箭头函数与普通函数有何区别呢"></a>箭头函数与普通函数有何区别呢</h3><a id="more"></a>
 
 
-<p>箭头函数语法上比普通函数更加简洁</p>
-<p>箭头函数没有自己的this，它里面的this的指向是继承函数所属上下文this，使用call,apply等任何方式都无法改变this的指向（回调函数的this一般都是Window（什么是回调函数，把一个函数当做一个值传递给另一个方法，在另一个方法中执行此函数））</p>
-<p>箭头函数没有arguments（类数组），只能够基于…arg获取传递参数集合</p>
-<p>箭头函数不能被new执行，因为没有this,也没有prototype，所以也就没有constructor</p>
+<p>（1）箭头函数语法上比普通函数更加简洁</p>
+<p>（2）箭头函数没有自己的this，它里面的this的指向是继承函数所属上下文this，使用call,apply等任何方式都无法改变this的指向（回调函数的this一般都是Window（什么是回调函数，把一个函数当做一个值传递给另一个方法，在另一个方法中执行此函数））</p>
+<p>（3）箭头函数不可以使用arguments对象，函数体内没有arguments（类数组）对象，只能够基于…arg获取传递参数集合</p>
+<p>（4）箭头函数不可以当做构造函数，不能使用new命令，因为没有this,也没有prototype，所以也就没有constructor</p>
+<p>（5）箭头函数不可以使用yield命令，因此箭头函数不能用作 Generator 函数。</p>
 
       
 
