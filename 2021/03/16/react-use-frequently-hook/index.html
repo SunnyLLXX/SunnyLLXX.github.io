@@ -16,7 +16,7 @@
 <meta property="og:description" content="有关使用 React Hook的一些知识">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-16T13:22:01.000Z">
-<meta property="article:modified_time" content="2021-03-16T13:41:32.725Z">
+<meta property="article:modified_time" content="2021-03-19T04:55:13.891Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -251,9 +251,12 @@ export default function Count() {
     // 在此做一些收尾工作, 比如清除定时器/取消订阅等
   }
 }, [stateValue]) // 如果指定的是[], 回调函数只会在第一次render()后执行</code></pre><p>小案例如下：</p>
-<p>import React from ‘react’<br>import ReactDOM from ‘react-dom’</p>
-<p>export default function Count() {</p>
-<pre><code>const [count,setCount] = React.useState(0)
+<pre><code>import React from &apos;react&apos;
+import ReactDOM from &apos;react-dom&apos;
+
+export default function Count() {
+
+const [count,setCount] = React.useState(0)
 const [name,setName] = React.useState(&apos;lxlx&apos;)
 const myRef = React.useRef()
 
