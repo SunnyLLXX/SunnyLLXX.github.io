@@ -16,7 +16,7 @@
 <meta property="og:description" content="熟悉有关Vue的内容">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-02T08:40:23.000Z">
-<meta property="article:modified_time" content="2021-03-19T01:52:52.003Z">
+<meta property="article:modified_time" content="2021-03-23T01:16:46.861Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="Vue">
 <meta property="article:tag" content="常见题">
@@ -242,8 +242,7 @@
 <p>(1)具备跨平台的优势</p>
 <p>(2)减少DOM操作，js运行的效率高。虚拟DOM本质上其实就是js 和 dom 之间的一个缓存，通过diff算法计算出真正需要更新的节点，最大限度的减少DOM操作</p>
 <p>(3)提升渲染的性能；dom操作的减少，可以避免更多的回流和重绘等，更加高效的提高性能。</p>
-<p>diff算法：遍历旧虚拟DOM，遍历新虚拟DOM，然后重新排序。</p>
-<p>只比较同一层级，不跨级比较。标签名不同，直接删除，不继续进行深度比较。标签名相同，key相同认为是相同节点，不继续深度比较。</p>
+<p>diff算法：遍历旧虚拟DOM，遍历新虚拟DOM，然后重新排序。深度优先，同级比较。</p>
 <p>参考链接</p>
 <p><a href="https://www.cnblogs.com/mufc/p/11131203.html" target="_blank" rel="noopener">Vue 中的 Virtual Dom</a></p>
 <h4 id="18-nextTick的原理"><a href="#18-nextTick的原理" class="headerlink" title="18 nextTick的原理"></a>18 nextTick的原理</h4><p>在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。</p>
@@ -298,8 +297,9 @@ Vue.use(MyPlugin)</code></pre><h4 id="20-vue-loader是什么"><a href="#20-vue-l
 <h4 id="22-对vue的性能优化方法"><a href="#22-对vue的性能优化方法" class="headerlink" title="22 对vue的性能优化方法"></a>22 对vue的性能优化方法</h4><p>1.路由懒加载</p>
 <p>2.keep-alive组件缓存</p>
 <p>3.在进行频繁切换时使用v-show</p>
-<p>4.图片懒加载</p>
-<p>5.使用第三方插件如element-ui进行按需加载，避免体积过大</p>
+<p>4.v-if与v-for不要一起使用，可以嵌套</p>
+<p>5.图片懒加载</p>
+<p>6.使用第三方插件如element-ui进行按需加载，避免体积过大</p>
 <h4 id="23-对Vue3-0新特性的了解"><a href="#23-对Vue3-0新特性的了解" class="headerlink" title="23 对Vue3.0新特性的了解"></a>23 对Vue3.0新特性的了解</h4><p>根据尤大的PPT总结，Vue3.0改进主要在以下几点:</p>
 <p>1.更快</p>
 <p>虚拟DOM重写、优化slots的生成、静态树提升、静态属性提升、基于Proxy的响应式系统</p>

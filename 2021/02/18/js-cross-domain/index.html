@@ -16,7 +16,7 @@
 <meta property="og:description" content="如何解决 js 跨域问题">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-18T12:36:46.000Z">
-<meta property="article:modified_time" content="2021-02-18T12:45:42.942Z">
+<meta property="article:modified_time" content="2021-03-23T13:38:56.876Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta name="twitter:card" content="summary">
@@ -205,7 +205,18 @@
 <h4 id="1-什么是跨域"><a href="#1-什么是跨域" class="headerlink" title="1 什么是跨域"></a>1 什么是跨域</h4><p>跨域：违背同源策略就会跨域。比如可能会有多台服务器，提供不同的功能，可能多台服务器对应的域名，端口之类的都不太一样。</p>
 <p>什么是同源策略：是浏览器的安全策略，协议名，域名，端口名必须完全一致。</p>
 <p>解决跨域问题的方法有：jsonp,cros,代理等</p>
-<h4 id="2-jsonp"><a href="#2-jsonp" class="headerlink" title="2 jsonp"></a>2 jsonp</h4><pre><code>// 创建script标签
+<h4 id="2-jsonp"><a href="#2-jsonp" class="headerlink" title="2 jsonp"></a>2 jsonp</h4><p>jsonp解决ajax跨域的原理</p>
+<p>1). jsonp只能解决GET类型的ajax请求跨域问题</p>
+<p>2). jsonp请求不是ajax请求, 而是一般的get请求</p>
+<p>3). 基本原理</p>
+<pre><code>浏览器端:
+    动态生成&lt;script&gt;来请求后台接口(src就是接口的url)
+    定义好用于接收响应数据的函数(fn), 并将函数名通过请求参数提交给后台(如: callback=fn)
+服务器端:
+    接收到请求处理产生结果数据后, 返回一个函数调用的js代码, 并将结果数据作为实参传入函数调用
+浏览器端:
+    收到响应自动执行函数调用的js代码, 也就执行了提前定义好的回调函数, 并得到了需要的结果数据</code></pre><p>小案例实现：</p>
+<pre><code>// 创建script标签
 var script = document.createElement(&quot;script&quot;)
 
 // 设置回调函数
