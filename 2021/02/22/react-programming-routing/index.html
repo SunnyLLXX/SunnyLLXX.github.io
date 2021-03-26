@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/02/22/react-programming-routing/pic01.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/02/22/react-programming-routing/pic02.png">
 <meta property="article:published_time" content="2021-02-22T08:36:42.000Z">
-<meta property="article:modified_time" content="2021-02-22T09:58:12.316Z">
+<meta property="article:modified_time" content="2021-03-26T01:49:39.773Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -210,7 +210,8 @@
 -this.prosp.history.replace()
 -this.prosp.history.goBack()
 -this.prosp.history.goForward()
--this.prosp.history.go()</code></pre><h4 id="1-编程式路由"><a href="#1-编程式路由" class="headerlink" title="1 编程式路由"></a>1 编程式路由</h4><p>Message.jsx组件</p>
+-this.prosp.history.go()</code></pre><h4 id="1-编程式路由"><a href="#1-编程式路由" class="headerlink" title="1 编程式路由"></a>1 编程式路由</h4><p>向路由组件传递参数有三种: params参数,search参数,state参数</p>
+<p>Message.jsx组件</p>
 <p>使用编程式路由Link组件传递参数类型需要与Route组件声明接收参数类型匹配，在Detail组件中接收数据也需要仔细查看参数。</p>
 <pre><code>import React, { Component } from &apos;react&apos;;
 import {Link,Route} from &apos;react-router-dom&apos;
@@ -272,7 +273,55 @@ class Message extends Component {
 }
 
 export default Message;</code></pre><p><img src="/2021/02/22/react-programming-routing/pic01.png" alt></p>
-<h4 id="2-withRouter的使用"><a href="#2-withRouter的使用" class="headerlink" title="2 withRouter的使用"></a>2 withRouter的使用</h4><p>假设在Head组件中，可以对页面进行调转，可是目前Head组件是一个一般组件，不是路由组件，那么他就不具备路由组件特有的API，如何解决呢？</p>
+<h4 id="接收传递的参数数据"><a href="#接收传递的参数数据" class="headerlink" title="接收传递的参数数据"></a>接收传递的参数数据</h4><p>1.params参数</p>
+<pre><code>class Detail extends Component {
+    render() {
+        //接收params参数
+        const {match} = this.props
+        return (
+            &lt;div&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;ID:{match.params.id}&lt;/li&gt;
+                    &lt;li&gt;title:{match.params.title}&lt;/li&gt;
+                    &lt;li&gt;content:{match.params.content}&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        );
+    }
+}</code></pre><p>2.search参数</p>
+<pre><code>class Detail extends Component {
+    render() {
+        //接收search参数
+        console.log(this.props)
+        const {search} = this.props.location
+        const obj = qs.parse(search)  //将字符串解析对象
+        return (
+            &lt;div&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;ID:{obj.id}&lt;/li&gt;
+                    &lt;li&gt;title:{obj.title}&lt;/li&gt;
+                    &lt;li&gt;content:{obj.content}&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        );
+    }
+}</code></pre><p>3.state参数</p>
+<pre><code>class Detail extends Component {
+    render() {
+        //接收state参数
+        console.log(this.props)
+        const {state} = this.props.location
+        return (
+            &lt;div&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;ID:{state.id}&lt;/li&gt;
+                    &lt;li&gt;title:{state.title}&lt;/li&gt;
+                    &lt;li&gt;content:{state.content}&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        );
+    }
+}</code></pre><h4 id="3-withRouter的使用"><a href="#3-withRouter的使用" class="headerlink" title="3 withRouter的使用"></a>3 withRouter的使用</h4><p>假设在Head组件中，可以对页面进行调转，可是目前Head组件是一个一般组件，不是路由组件，那么他就不具备路由组件特有的API，如何解决呢？</p>
 <p>withRouter可以接受一个一般组件，使之含有路由组件的特有API</p>
 <pre><code>import React, { Component } from &apos;react&apos;
 import {withRouter} from &apos;react-router-dom&apos;
@@ -493,7 +542,7 @@ export default withRouter(Head)
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#了解什么是React编程式路由"><span class="toc-number">1.</span> <span class="toc-text">了解什么是React编程式路由</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-编程式路由"><span class="toc-number">1.1.</span> <span class="toc-text">1 编程式路由</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-withRouter的使用"><span class="toc-number">1.2.</span> <span class="toc-text">2 withRouter的使用</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#了解什么是React编程式路由"><span class="toc-number">1.</span> <span class="toc-text">了解什么是React编程式路由</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-编程式路由"><span class="toc-number">1.1.</span> <span class="toc-text">1 编程式路由</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#接收传递的参数数据"><span class="toc-number">1.2.</span> <span class="toc-text">接收传递的参数数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-withRouter的使用"><span class="toc-number">1.3.</span> <span class="toc-text">3 withRouter的使用</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
