@@ -6,15 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>étoile的小窝</title>
+  <title>React 中 setState 的使用 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="étoile的小窝">
-<meta property="og:url" content="http://sunnyllxx.github.io/page/5/index.html">
+  <meta name="description" content="有关React中使用setState的注意事项">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React 中 setState 的使用">
+<meta property="og:url" content="http://sunnyllxx.github.io/2021/03/28/react-setState/index.html">
 <meta property="og:site_name" content="étoile的小窝">
+<meta property="og:description" content="有关React中使用setState的注意事项">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/03/28/react-setState/pic07.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/03/28/react-setState/pic01.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/03/28/react-setState/pic02.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/03/28/react-setState/pic03.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/03/28/react-setState/pic04.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/03/28/react-setState/pic05.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/03/28/react-setState/pic06.png">
+<meta property="article:published_time" content="2021-03-28T02:41:18.000Z">
+<meta property="article:modified_time" content="2021-03-28T10:01:16.742Z">
 <meta property="article:author" content="étoile">
+<meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sunnyllxx.github.io/2021/03/28/react-setState/pic07.png">
   
     <link rel="alternative" href="/atom.xml" title="étoile的小窝" type="application/atom+xml">
   
@@ -161,1018 +174,297 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-    <article id="post-js-cross-domain" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+<article id="post-react-setState" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/18/js-cross-domain/">JavaScript 跨域问题</a>
+    <h1 class="article-title" itemprop="name">
+      React 中 setState 的使用
     </h1>
   
 
         <!--显示阅读次数-->
 
+
+
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+           👁 &nbsp;<span id="busuanzi_value_page_pv"></span> &nbsp;&nbsp;
+  </span>
+  </a>
+
 <!--显示阅读次数完毕-->
   
         
-        <a href="/2021/02/18/js-cross-domain/" class="archive-article-date">
-  	<time datetime="2021-02-18T12:36:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-18</time>
+        <a href="/2021/03/28/react-setState/" class="archive-article-date">
+  	<time datetime="2021-03-28T02:41:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="如何解决-js-跨域问题"><a href="#如何解决-js-跨域问题" class="headerlink" title="如何解决 js 跨域问题"></a>如何解决 js 跨域问题</h3>
-        
-          <a class="article-more-a" href="/2021/02/18/js-cross-domain/#more">more >></a>
-        
+        <h3 id="有关React中使用setState的注意事项"><a href="#有关React中使用setState的注意事项" class="headerlink" title="有关React中使用setState的注意事项"></a>有关React中使用setState的注意事项</h3><a id="more"></a>
+
+<p>详细信息请看<a href="https://zh-hans.reactjs.org/docs/state-and-lifecycle.html" target="_blank" rel="noopener">官方文档</a></p>
+<h3 id="1-setState的使用方式"><a href="#1-setState的使用方式" class="headerlink" title="1 setState的使用方式"></a>1 setState的使用方式</h3><p>1.不要直接修改 State，应该使用setState</p>
+<pre><code>//此代码不会重新渲染组件
+
+this.state.count = 1;</code></pre><p>2.使用方式</p>
+<p>（1）setState(updater, [callback])</p>
+<pre><code>updater为返回stateChange对象的函数: (state, props) =&gt; stateChange
+接收的state和props被保证为最新的</code></pre><p>（2）setState(stateChange, [callback])</p>
+<pre><code>stateChange为对象,
+callback是可选的回调函数, 在状态更新且界面更新后才执行</code></pre><p>（3）如何得到异步更新后的状态数据？</p>
+<pre><code>在setState()的callback回调函数中</code></pre><p>（4）如何选择setState的方式呢？</p>
+<pre><code>对象方式是函数方式的简写方式
+如果新状态不依赖于原状态 ===&gt; 可以使用对象方式
+如果新状态依赖于原状态 ===&gt; 使用函数方式</code></pre><p>小案例如下：</p>
+<pre><code>import React, { Component } from &apos;react&apos;;
+
+class Count extends Component {
+    state = {
+        count: 0
+    }
+    add1 = () =&gt; {
+        //点击按钮count+1
+        this.setState((state) =&gt; {
+            return {
+                count:state.count+1
+            }
+        })
+        console.log(&apos;add1 setState之后&apos;,this.state.count)
+    }
+    add2 = () =&gt; {
+        //点击按钮count+2
+        const count = this.state.count+2
+        this.setState({
+            count
+        })
+        console.log(&apos;add2 setState之后&apos;,this.state.count)
+    }
+    add3 = () =&gt; {
+        //点击按钮count+3
+        this.setState(state=&gt;({count:state.count+3}),()=&gt;{  //在状态更新且界面更新之后回调
+            console.log(&apos;add3 setState之后 callback&apos;,this.state.count)
+        })
+    }
+    render() {
+        const {count} = this.state
+        console.log(&apos;render:&apos;,count)
+        return (
+            &lt;div&gt;
+                &lt;h1&gt;Count组件当前count值：{count}&lt;/h1&gt;
+                &lt;button onClick={this.add1}&gt;点击+1&lt;/button&gt;
+                &lt;button onClick={this.add2}&gt;点击+2&lt;/button&gt;
+                &lt;button onClick={this.add3}&gt;点击+3&lt;/button&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+
+export default Count;</code></pre><p><img src="/2021/03/28/react-setState/pic07.png" alt></p>
+<h4 id="2-State-的更新可能是异步的"><a href="#2-State-的更新可能是异步的" class="headerlink" title="2 State 的更新可能是异步的"></a>2 State 的更新可能是异步的</h4><p>根据执行setState()的位置进行判断</p>
+<p>如果在react控制的回调函数中: 生命周期函数、react事件监听回调，执行时异步的。</p>
+<p>如果在非react控制的异步回调函数中: 如定时器回调、原生事件监听回调、promise.then()，执行是同步的。</p>
+<p>小案例如下：</p>
+<pre><code>import React, { Component } from &apos;react&apos;;
+
+class Count extends Component {
+    state = {
+        count: 0
+    }
+    countRef = React.createRef()
+    add1 = () =&gt; {
+        console.log(&apos;add1 setState之前&apos;,this.state.count)
+        this.setState((state) =&gt; {
+            return {
+                count:state.count+1
+            }
+        })
+        console.log(&apos;add1 setState之后&apos;,this.state.count)
+    }
+    add2 = () =&gt; {
+        /**定时器中更新 */
+        setTimeout(()=&gt;{
+            console.log(&apos;setTimeout setState之前&apos;,this.state.count)
+            this.setState((state) =&gt; {
+                return {
+                    count:state.count+1
+                }
+            })
+            console.log(&apos;setTimeout setState之后&apos;,this.state.count)
+        })
+    }
+    add3 = () =&gt; {
+        //原生DOM事件监听
+        const h1node = this.countRef.current
+        h1node.onclick = ()=&gt;{
+            console.log(&apos;onclick setState之前&apos;,this.state.count)
+            this.setState((state) =&gt; {
+                return {
+                    count:state.count+1
+                }
+            })
+            console.log(&apos;onclick setState之后&apos;,this.state.count)
+        }
+    }
+    add4 = () =&gt; {
+        //promise
+        Promise.resolve().then(value=&gt;{
+            console.log(&apos;Promise setState之前&apos;,this.state.count)
+            this.setState((state) =&gt; {
+                return {
+                    count:state.count+1
+                }
+            })
+            console.log(&apos;Promise setState之后&apos;,this.state.count)
+        })
+    }
+    add5 = () =&gt; {
+        //setState更新使用函数形式
+        console.log(&apos;函数形式 setState之前&apos;,this.state.count)
+        this.setState((state) =&gt; {
+            return {
+                count:state.count+1
+            }
+        })
+        console.log(&apos;函数形式 setState之后&apos;,this.state.count)
+        console.log(&apos;函数形式 setState之前2&apos;,this.state.count)
+        this.setState((state) =&gt; {
+            return {
+                count:state.count+1
+            }
+        })
+        console.log(&apos;函数形式 setState之后2&apos;,this.state.count)
+    }
+    add6 = () =&gt; {
+        //setState更新使用对象形式
+        console.log(&apos;对象形式 setState之前&apos;,this.state.count)
+        this.setState({count:this.state.count+1})
+        console.log(&apos;对象形式 setState之后&apos;,this.state.count)
+        console.log(&apos;对象形式 setState之前2&apos;,this.state.count)
+        this.setState({count:this.state.count+1})
+        console.log(&apos;对象形式 setState之后2&apos;,this.state.count)
+    }
+    add7 = () =&gt; {
+        //setState更新使用函数与对象形式
+        console.log(&apos;对象形式 setState之前&apos;,this.state.count)
+        this.setState({count:this.state.count+1})
+        console.log(&apos;对象形式 setState之后&apos;,this.state.count)
+        console.log(&apos;函数形式 setState之前&apos;,this.state.count)
+        this.setState((state) =&gt; {
+            return {
+                count:state.count+1
+            }
+        })
+        console.log(&apos;函数形式 setState之后&apos;,this.state.count)
+    }
+    componentDidMount(){
+        /**生命周期中更新 */
+        console.log(&apos;componentDidMount setState之前&apos;,this.state.count)
+        this.setState((state) =&gt; {
+            return {
+                count:state.count+1
+            }
+        })
+        console.log(&apos;componentDidMount setState之后&apos;,this.state.count)
+    }
+    render() {
+        const {count} = this.state
+        console.log(&apos;render：&apos;,count)
+        return (
+            &lt;div&gt;
+                &lt;h1 ref={this.countRef}&gt;Count组件当前count值：{count}&lt;/h1&gt;
+                &lt;button onClick={this.add1}&gt;点击+1&lt;/button&gt;
+                &lt;button onClick={this.add2}&gt;定时器+1&lt;/button&gt;
+                &lt;button onClick={this.add3}&gt;原生onclick+1&lt;/button&gt;
+                &lt;button onClick={this.add4}&gt;promise+1&lt;/button&gt;
+                &lt;button onClick={this.add5}&gt;函数形式+1&lt;/button&gt;
+                &lt;button onClick={this.add6}&gt;对象形式+1&lt;/button&gt;
+                &lt;button onClick={this.add7}&gt;函数与对象形式+1&lt;/button&gt;
+            &lt;/div&gt;
+        );
+    }
+}
+
+export default Count;</code></pre><p><img src="/2021/03/28/react-setState/pic01.png" alt></p>
+<p><img src="/2021/03/28/react-setState/pic02.png" alt></p>
+<p><img src="/2021/03/28/react-setState/pic03.png" alt></p>
+<h4 id="3-State-的更新会被合并"><a href="#3-State-的更新会被合并" class="headerlink" title="3 State 的更新会被合并"></a>3 State 的更新会被合并</h4><p>关于异步的setState()，多次调用, 如何处理?</p>
+<p>setState({}): （对象形式）合并更新一次状态, 只调用一次render()更新界面 —状态更新和界面更新都合并了</p>
+<p>setState(fn): （函数形式）更新多次状态, 但只调用一次render()更新界面  —状态更新没有合并, 界面更新合并了。</p>
+<p><img src="/2021/03/28/react-setState/pic04.png" alt></p>
+<p><img src="/2021/03/28/react-setState/pic05.png" alt></p>
+<p><img src="/2021/03/28/react-setState/pic06.png" alt></p>
+
       
 
       <!-- 开始添加版权声明-->
 
 
-<div class="declare" hidden="hidden"></div>
+<div class="declare">
+  <ul><li><strong>本文作者：</strong>
+  
+    étoile
+  
+</li></ul>
+  <ul><li><strong>本文链接：</strong>
+ <a href="http://sunnyllxx.github.io/2021/03/28/react-setState/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2021/03/28/react-setState/</a>
+</li></ul>
+  <ul><li><strong>版权声明：</strong>
+  本作品采用
+  <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+  进行许可。转载请注明出处！
+  
+</div>
 
 <!-- 添加完成 -->
 
 
       
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/18/js-cross-domain/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/zhifubaopicture.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechatcollection.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-passing-parameters-to-routing-components" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/18/passing-parameters-to-routing-components/">React 向路由组件传递数据</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2021/02/18/passing-parameters-to-routing-components/" class="archive-article-date">
-  	<time datetime="2021-02-18T11:47:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="如何向路由组件传递数据呢"><a href="#如何向路由组件传递数据呢" class="headerlink" title="如何向路由组件传递数据呢"></a>如何向路由组件传递数据呢</h3>
-        
-          <a class="article-more-a" href="/2021/02/18/passing-parameters-to-routing-components/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
       
     </div>
     <!-- 添加本文结束标记-->
 
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/18/passing-parameters-to-routing-components/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
+  <div style="text-align:center;color: #00BFFF;font-size:14px;">
+       -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
+       </div>
   
-    <article id="post-use-promise" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/18/use-promise/">Promise的基本使用</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2021/02/18/use-promise/" class="archive-article-date">
-  	<time datetime="2021-02-18T11:46:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Promise的基本使用以及需要注意的问题"><a href="#Promise的基本使用以及需要注意的问题" class="headerlink" title="Promise的基本使用以及需要注意的问题"></a>Promise的基本使用以及需要注意的问题</h3>
-        
-          <a class="article-more-a" href="/2021/02/18/use-promise/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Promise</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/18/use-promise/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-enter-url" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/18/enter-url/">输入url</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2021/02/18/enter-url/" class="archive-article-date">
-  	<time datetime="2021-02-18T11:29:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="从网址输入url将会发生什么"><a href="#从网址输入url将会发生什么" class="headerlink" title="从网址输入url将会发生什么"></a>从网址输入url将会发生什么</h3>
-        
-          <a class="article-more-a" href="/2021/02/18/enter-url/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/18/enter-url/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-anti-shake-throttle" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/17/anti-shake-throttle/">JS 函数节流和防抖</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2021/02/17/anti-shake-throttle/" class="archive-article-date">
-  	<time datetime="2021-02-17T07:47:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="学习-js的函数节流与防抖"><a href="#学习-js的函数节流与防抖" class="headerlink" title="学习 js的函数节流与防抖"></a>学习 js的函数节流与防抖</h3>
-        
-          <a class="article-more-a" href="/2021/02/17/anti-shake-throttle/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/17/anti-shake-throttle/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-rem-adapter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/17/rem-adapter/">移动端 rem 适配</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2021/02/17/rem-adapter/" class="archive-article-date">
-  	<time datetime="2021-02-17T07:46:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="如何为移动端进行rem适配"><a href="#如何为移动端进行rem适配" class="headerlink" title="如何为移动端进行rem适配"></a>如何为移动端进行rem适配</h3>
-        
-          <a class="article-more-a" href="/2021/02/17/rem-adapter/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/17/rem-adapter/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-react-compare-with-vue" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/17/react-compare-with-vue/">React与Vue的区别</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2021/02/17/react-compare-with-vue/" class="archive-article-date">
-  	<time datetime="2021-02-17T06:19:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="比较React与Vue有何相同点与不同点"><a href="#比较React与Vue有何相同点与不同点" class="headerlink" title="比较React与Vue有何相同点与不同点"></a>比较React与Vue有何相同点与不同点</h3>
-        
-          <a class="article-more-a" href="/2021/02/17/react-compare-with-vue/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/17/react-compare-with-vue/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-conprehention-of-async-await" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/17/conprehention-of-async-await/">对async、await的理解</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2021/02/17/conprehention-of-async-await/" class="archive-article-date">
-  	<time datetime="2021-02-17T05:42:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="对async、await的理解，内部原理"><a href="#对async、await的理解，内部原理" class="headerlink" title="对async、await的理解，内部原理"></a>对async、await的理解，内部原理</h3>
-        
-          <a class="article-more-a" href="/2021/02/17/conprehention-of-async-await/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/17/conprehention-of-async-await/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-repaint-reflow" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/17/repaint-reflow/">重绘与重排</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2021/02/17/repaint-reflow/" class="archive-article-date">
-  	<time datetime="2021-02-17T05:23:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="html之重绘与重排"><a href="#html之重绘与重排" class="headerlink" title="html之重绘与重排"></a>html之重绘与重排</h3>
-        
-          <a class="article-more-a" href="/2021/02/17/repaint-reflow/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">常见题</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/17/repaint-reflow/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-nest-react-routing" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/02/16/nest-react-routing/">React 嵌套路由</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2021/02/16/nest-react-routing/" class="archive-article-date">
-  	<time datetime="2021-02-16T13:52:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="如何使用React-嵌套路由"><a href="#如何使用React-嵌套路由" class="headerlink" title="如何使用React 嵌套路由"></a>如何使用React 嵌套路由</h3>
-        
-          <a class="article-more-a" href="/2021/02/16/nest-react-routing/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
   <!-- 添加完成 -->
     <div class="article-info article-info-index">
       
@@ -1205,16 +497,75 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/02/16/nest-react-routing/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2021/03/28/react-setState/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2021/03/26/react-config-proxy/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">React 脚手架配置代理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -1229,17 +580,67 @@
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#有关React中使用setState的注意事项"><span class="toc-number">1.</span> <span class="toc-text">有关React中使用setState的注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-setState的使用方式"><span class="toc-number">2.</span> <span class="toc-text">1 setState的使用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-State-的更新可能是异步的"><span class="toc-number">2.1.</span> <span class="toc-text">2 State 的更新可能是异步的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-State-的更新会被合并"><span class="toc-number">2.2.</span> <span class="toc-text">3 State 的更新会被合并</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
 
 
 
+
+   <!-- valine评论系统开始 -->
+
+   
+    <section id="comments" class="comments">
+      <style>
+        .comments{margin:30px;padding:10px;background:#fff}
+        @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+      </style>
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'true' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "SqWqnmUuTCilnupzDVQgFhrE-gzGzoHsz",
+            app_key: "EuNlMDzK61IRiansuSobGwsH",
+            placeholder: "留下你的评论吧",
+            avatar:"retro",
+            avatar_cdn:'{{ theme.valine.avatar_cdn }}',
+        });
+    }
+</script>
+
+  </section>
+
+
+<!-- valine评论系统结束 -->
+
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -1277,8 +678,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
