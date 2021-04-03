@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>Archives | étoile的小窝</title>
+  <title>在React应用中使用 Redux | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="étoile的小窝">
-<meta property="og:url" content="http://sunnyllxx.github.io/archives/page/7/index.html">
+  <meta name="description" content="有关Redux的使用方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在React应用中使用 Redux">
+<meta property="og:url" content="http://sunnyllxx.github.io/2021/04/02/react-redux/index.html">
 <meta property="og:site_name" content="étoile的小窝">
+<meta property="og:description" content="有关Redux的使用方法">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/04/02/react-redux/pic01.png">
+<meta property="article:published_time" content="2021-04-02T11:33:27.000Z">
+<meta property="article:modified_time" content="2021-04-02T12:35:31.994Z">
 <meta property="article:author" content="étoile">
+<meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sunnyllxx.github.io/2021/04/02/react-redux/pic01.png">
   
     <link rel="alternative" href="/atom.xml" title="étoile的小窝" type="application/atom+xml">
   
@@ -161,390 +168,288 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-react-redux" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在React应用中使用 Redux
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+
+
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+           👁 &nbsp;<span id="busuanzi_value_page_pv"></span> &nbsp;&nbsp;
+  </span>
+  </a>
+
+<!--显示阅读次数完毕-->
+  
+        
+        <a href="/2021/04/02/react-redux/" class="archive-article-date">
+  	<time datetime="2021-04-02T11:33:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-02</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="有关Redux的使用方法"><a href="#有关Redux的使用方法" class="headerlink" title="有关Redux的使用方法"></a>有关Redux的使用方法</h3><a id="more"></a>
+<p>详细请查看<a href="http://www.redux.org.cn/" target="_blank" rel="noopener">中文文档</a></p>
+<h4 id="1-redux是什么"><a href="#1-redux是什么" class="headerlink" title="1 redux是什么"></a>1 redux是什么</h4><p>redux是一个专门用于做状态管理的JS库，它可以用在react, angular, vue等项目中, 但基本与react配合使用，用于集中式管理react应用中多个组件共享的状态。</p>
+<h4 id="2-什么情况下可以使用redux"><a href="#2-什么情况下可以使用redux" class="headerlink" title="2 什么情况下可以使用redux"></a>2 什么情况下可以使用redux</h4><p>1.某个组件的状态，需要让其他组件可以随时拿到（组件间共享数据）。</p>
+<p>2.一个组件需要改变另一个组件的状态（组件间通信）。</p>
+<h4 id="3-redux流程"><a href="#3-redux流程" class="headerlink" title="3 redux流程"></a>3 redux流程</h4><p><img src="/2021/04/02/react-redux/pic01.png" alt></p>
+<h4 id="4-redux的三个核心概念"><a href="#4-redux的三个核心概念" class="headerlink" title="4 redux的三个核心概念"></a>4 redux的三个核心概念</h4><p>1.Action：Action 是把数据从应用传到 store 的有效载荷。它是 store 数据的唯一来源。一般来说你会通过 store.dispatch() 将 action 传到 store。Action 本质上是 JavaScript 普通对象。除了 type 字段外，action 对象的结构完全由你自己决定。</p>
+<p>一般可以包含2个属性</p>
+<pre><code>type：标识属性, 值为字符串, 唯一, 必要属性
+data：数据属性, 值类型任意, 可选属性
+
+{ type: &apos;add_person&apos;,data:{name: &apos;lx&apos;,age:18} }</code></pre><p>2.Reducer：Reducers 指定了应用状态的变化如何响应 actions 并发送到 store 的，记住 actions 只是描述了有事情发生了这一事实，并没有描述应用如何更新 state。</p>
+<p>（用于初始化状态、加工状态）根据旧的state和action， 产生新的state的纯函数。</p>
+<p>永远不要在 reducer 里做这些操作：</p>
+<pre><code>修改传入参数；
+执行有副作用的操作，如 API 请求和路由跳转；
+调用非纯函数，如 Date.now() 或 Math.random()。</code></pre><p>3.Store：将state、action、reducer联系在一起的对象。Redux 应用只有一个单一的 store。</p>
+<p>（1）如何生成store对象?</p>
+<pre><code>import {createStore} from &apos;redux&apos;
+import reducer from &apos;./reducers&apos;
+const store = createStore(reducer)</code></pre><p>（2）此对象的方法?</p>
+<pre><code>getState(): 获取state
+dispatch(action): 分发action, 触发reducer调用, 产生新的state
+subscribe(listener): 注册监听, 当产生了新的state时, 自动调用</code></pre><h4 id="5-redux的核心API"><a href="#5-redux的核心API" class="headerlink" title="5 redux的核心API"></a>5 redux的核心API</h4><p>1.createstore()：创建包含指定reducer的store对象</p>
+<p>2.store对象：redux库最核心的管理对象</p>
+<p>（1）核心方法:</p>
+<pre><code>getState()
+dispatch(action)
+subscribe(listener)</code></pre><p>（2）具体用法:</p>
+<pre><code>store.getState()
+store.dispatch({type:&apos;INCREMENT&apos;, number})
+store.subscribe(render)
+applyMiddleware()：应用上基于redux的中间件(插件库)
+combineReducers()：合并多个reducer函数</code></pre><h4 id="6-实现小案例"><a href="#6-实现小案例" class="headerlink" title="6 实现小案例"></a>6 实现小案例</h4><p>计数器小案例：使用下拉框选择每次需要加或减的数字，点击按钮进行修改count，功能包括加，减，当前count为奇数进行加，异步加数字。</p>
+<p>在src/components/Count文件夹下新建Count.jsx</p>
+<pre><code>import React, { Component } from &apos;react&apos;;
+import store from &apos;../../redux/store&apos;;
+//引入actioncreator，专门用于创建action对象
+import {createAddAction,createSubAction,createAddAsyncAction} from &apos;../../redux/count_action&apos;
+class Count extends Component {
+    add = () =&gt; {
+        const {value} = this.selectNum
+        // store.dispatch({type:&apos;add&apos;,data: parseInt(value)})
+        store.dispatch(createAddAction(parseInt(value)))
+    }
+    sub = () =&gt; {
+        const {value} = this.selectNum
+        // store.dispatch({type:&apos;sub&apos;,data: parseInt(value)})
+        store.dispatch(createSubAction(parseInt(value)))
+    }
+    addOdd = () =&gt; {
+        const {value} = this.selectNum
+        const count = store.getState()
+        if(count % 2 !== 0){
+            store.dispatch({type:&apos;add&apos;,data: parseInt(value)})
+        }
+
+    }
+    addAsync = () =&gt; {
+        const {value} = this.selectNum
+        // setTimeout(function(){
+        //     store.dispatch({type:&apos;add&apos;,data: parseInt(value)})
+        // },1000)
+        store.dispatch(createAddAsyncAction(parseInt(value),1000))
+
+    }
+    componentDidMount(){
+        //检测redux变化，只要变化，就调用render
+        store.subscribe(()=&gt;{
+            this.setState({})
+        })
+    }
+    render() {
+        return (
+            &lt;div&gt;
+                &lt;h1&gt;当前值为:{store.getState()}&lt;/h1&gt;
+                &lt;select ref={(current)=&gt;{this.selectNum = current}}&gt;
+                    &lt;option value=&quot;1&quot;&gt;1&lt;/option&gt;
+                    &lt;option value=&quot;2&quot;&gt;2&lt;/option&gt;
+                    &lt;option value=&quot;3&quot;&gt;3&lt;/option&gt;
+                &lt;/select&gt;
+                &lt;button onClick={this.add}&gt;+&lt;/button&gt;
+                &lt;button onClick={this.sub}&gt;-&lt;/button&gt;
+                &lt;button onClick={this.addOdd}&gt;奇数+&lt;/button&gt;
+                &lt;button onClick={this.addAsync}&gt;异步+&lt;/button&gt;
+            &lt;/div&gt;
+
+        );
+    }
+}
+
+export default Count;</code></pre><p>App.js代码</p>
+<pre><code>import React, { Component } from &apos;react&apos;
+import Count from &apos;./components/Count/Count.jsx&apos;
+export default class App extends Component {
+render() {
+    return (
+    &lt;div&gt;
+        &lt;Count&gt;&lt;/Count&gt;
+    &lt;/div&gt;
+    )
+}
+}</code></pre><p>在src/redux下新建store.js</p>
+<pre><code>//createStore用于创建redux中的store对象
+import {createStore,applyMiddleware} from &apos;redux&apos;
+
+
+//引入为Count组件服务的reducer
+import countReducer from &apos;./count_reducer&apos;
+
+//引入redux-thunk，用于支持异步action
+import thunk from &apos;redux-thunk&apos;
+
+export default createStore(countReducer,applyMiddleware(thunk))</code></pre><p>在src/redux新建count_action.js</p>
+<pre><code>//该文件专门为Count组件生成对象
+
+// import store from &quot;./store&quot;
+
+export function createAddAction(data){
+    return {type: &apos;add&apos;,data }
+}
+
+export function createSubAction(data){
+    return {type: &apos;sub&apos;,data }
+}
+
+//异步action，指action返回值为函数，同步action指action返回值为object类型的一般对象，异步action异步都会调用同步action
+export function createAddAsyncAction(data,time){
+    return function(dispatch){
+        setTimeout(()=&gt;{
+            // store.dispatch(createAddAction(data))
+            dispatch(createAddAction(data))
+        },time)
+    }
+}</code></pre><p>在src/redux下新建count_reducer.js</p>
+<pre><code>//函数会接受两个参数，之前的状态，动作对象
+export default function countReducer(preState,action){
+    if(preState === undefined){
+        preState = 0
+    }
+    //从action对象中取出type,data
+    const {type,data} = action
+
+    //加工数据
+    switch (type) {
+        case &apos;add&apos;:
+            return preState + data;
+        case &apos;sub&apos;:
+            return preState - data
+
+        default:
+            return preState
+    }
+}</code></pre><h4 id="7-注意"><a href="#7-注意" class="headerlink" title="7 注意"></a>7 注意</h4><p>1.redux只负责管理状态，想要状态的改变驱动着页面的改变，需要自己手动编写。</p>
+<p>（1）可以在组件中的componentDidMount生命周期进行编写</p>
+<pre><code>componentDidMount(){
+        //检测redux变化，只要变化，就调用render
+        store.subscribe(()=&gt;{
+            this.setState({})
+        })
+    }
+
+当this.setState()被调用的时候，不仅会更新state，React会重新调用render方法来重新渲染UI。</code></pre><p>（2）在index.js中监测store中状态的改变，一旦发生改变重新渲染App组件</p>
+<pre><code>store.subscribe(()=&gt;{
+        ReactDOM.render(
+            &lt;App /&gt;,
+            document.getElementById(&apos;root&apos;)
+    )
+})</code></pre><p>2.使用异步action时需要注意的地方</p>
+<p>（1）首先yarn add redux-thunk，并配置在store中</p>
+<p>（2）创建action的函数不再返回一般对象，而是一个函数，该函数中写异步任务。</p>
+<p>（3）异步任务有结果后，分发一个同步的action去真正操作数据。</p>
+<p>（4）异步action不是必须要写的，完全可以等待异步任务的结果了再去分发同步action。</p>
+
+      
+
+      <!-- 开始添加版权声明-->
+
+
+<div class="declare">
+  <ul><li><strong>本文作者：</strong>
+  
+    étoile
+  
+</li></ul>
+  <ul><li><strong>本文链接：</strong>
+ <a href="http://sunnyllxx.github.io/2021/04/02/react-redux/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2021/04/02/react-redux/</a>
+</li></ul>
+  <ul><li><strong>版权声明：</strong>
+  本作品采用
+  <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+  进行许可。转载请注明出处！
+  
+</div>
+
+<!-- 添加完成 -->
+
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/zhifubaopicture.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechatcollection.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <!-- 添加本文结束标记-->
+
+  <div style="text-align:center;color: #00BFFF;font-size:14px;">
+       -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
+       </div>
+  
+  <!-- 添加完成 -->
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/17/valine-comment/" class="archive-article-date">
-  	<time datetime="2020-08-17T09:10:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/17/valine-comment/">hexo yilia主题添加valine评论系统</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/14/download-file/" class="archive-article-date">
-  	<time datetime="2020-08-14T09:44:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/14/download-file/">微信小程序下载并预览excel,ppt,pdf等文件</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/微信小程序//" class="article-tag-list-link color1">微信小程序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/11/Shopping-spike/" class="archive-article-date">
-  	<time datetime="2020-08-11T05:39:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/11/Shopping-spike/">购物倒计时秒杀小案例页面</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/09/Create-tables-dynamically/" class="archive-article-date">
-  	<time datetime="2020-08-09T13:02:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/09/Create-tables-dynamically/">动态创建表格</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/07/jump-page/" class="archive-article-date">
-  	<time datetime="2020-08-07T15:17:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/07/jump-page/">微信小程序跨页面传递参数</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/微信小程序//" class="article-tag-list-link color1">微信小程序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/05/Pagination-loading/" class="archive-article-date">
-  	<time datetime="2020-08-05T07:14:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/05/Pagination-loading/">微信小程序上拉分页渲染刷新</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/微信小程序//" class="article-tag-list-link color1">微信小程序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/30/components/" class="archive-article-date">
-  	<time datetime="2020-07-30T13:40:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/30/components/">微信小程序自定义组件tab选项</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/微信小程序//" class="article-tag-list-link color1">微信小程序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/07/%E8%A7%A3%E5%86%B3layui%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4%E5%86%85%E5%AE%B9%E5%88%B0%E7%BD%91%E5%9D%80%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-07-07T13:34:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/07/%E8%A7%A3%E5%86%B3layui%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4%E5%86%85%E5%AE%B9%E5%88%B0%E7%BD%91%E5%9D%80%E7%9A%84%E9%97%AE%E9%A2%98/">解决layui表单提交内容到网址的问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/layui//" class="article-tag-list-link color1">layui</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/23/README/" class="archive-article-date">
-  	<time datetime="2020-06-23T03:25:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/23/README/">README</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo-blog%E9%83%A8%E7%BD%B2github%E4%B8%80%E7%9B%B4%E5%87%BA%E7%8E%B0404/" class="archive-article-date">
-  	<time datetime="2020-06-20T05:57:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo-blog%E9%83%A8%E7%BD%B2github%E4%B8%80%E7%9B%B4%E5%87%BA%E7%8E%B0404/">解决hexo blog部署github一直出现404</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
         		</li>
       		
 		</ul>
@@ -552,33 +457,173 @@
 
 
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
+        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2021/04/02/react-redux/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2021/04/02/react-react-redux/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          有关react-redux的使用
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2021/03/28/react-setState/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">React 中 setState 的使用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#有关Redux的使用方法"><span class="toc-number">1.</span> <span class="toc-text">有关Redux的使用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-redux是什么"><span class="toc-number">1.1.</span> <span class="toc-text">1 redux是什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-什么情况下可以使用redux"><span class="toc-number">1.2.</span> <span class="toc-text">2 什么情况下可以使用redux</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-redux流程"><span class="toc-number">1.3.</span> <span class="toc-text">3 redux流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-redux的三个核心概念"><span class="toc-number">1.4.</span> <span class="toc-text">4 redux的三个核心概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-redux的核心API"><span class="toc-number">1.5.</span> <span class="toc-text">5 redux的核心API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-实现小案例"><span class="toc-number">1.6.</span> <span class="toc-text">6 实现小案例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-注意"><span class="toc-number">1.7.</span> <span class="toc-text">7 注意</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+
+
+   <!-- valine评论系统开始 -->
+
+   
+    <section id="comments" class="comments">
+      <style>
+        .comments{margin:30px;padding:10px;background:#fff}
+        @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+      </style>
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'true' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "SqWqnmUuTCilnupzDVQgFhrE-gzGzoHsz",
+            app_key: "EuNlMDzK61IRiansuSobGwsH",
+            placeholder: "留下你的评论吧",
+            avatar:"retro",
+            avatar_cdn:'{{ theme.valine.avatar_cdn }}',
+        });
+    }
+</script>
+
+  </section>
+
+
+<!-- valine评论系统结束 -->
+
+  
+  
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/6/">&amp;laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/5/">5</a><a class="page-number" href="/archives/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/archives/page/8/">8</a><a class="extend next" rel="next" href="/archives/page/8/">Next &amp;raquo;</a>
-    </nav>
+  
+
+  
+
   
 
 
@@ -617,8 +662,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

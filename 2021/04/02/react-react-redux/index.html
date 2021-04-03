@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>Archives | étoile的小窝</title>
+  <title>有关react-redux的使用 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="étoile的小窝">
-<meta property="og:url" content="http://sunnyllxx.github.io/archives/page/7/index.html">
+  <meta name="description" content="了解react-redux的使用方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有关react-redux的使用">
+<meta property="og:url" content="http://sunnyllxx.github.io/2021/04/02/react-react-redux/index.html">
 <meta property="og:site_name" content="étoile的小窝">
+<meta property="og:description" content="了解react-redux的使用方法">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/04/02/react-react-redux/pic01.png">
+<meta property="article:published_time" content="2021-04-02T12:36:28.000Z">
+<meta property="article:modified_time" content="2021-04-03T03:07:46.152Z">
 <meta property="article:author" content="étoile">
+<meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sunnyllxx.github.io/2021/04/02/react-react-redux/pic01.png">
   
     <link rel="alternative" href="/atom.xml" title="étoile的小窝" type="application/atom+xml">
   
@@ -161,390 +168,312 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-react-react-redux" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      有关react-redux的使用
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+
+
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+           👁 &nbsp;<span id="busuanzi_value_page_pv"></span> &nbsp;&nbsp;
+  </span>
+  </a>
+
+<!--显示阅读次数完毕-->
+  
+        
+        <a href="/2021/04/02/react-react-redux/" class="archive-article-date">
+  	<time datetime="2021-04-02T12:36:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-02</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="了解react-redux的使用方法"><a href="#了解react-redux的使用方法" class="headerlink" title="了解react-redux的使用方法"></a>了解react-redux的使用方法</h3><a id="more"></a>
+<p>React-Redux是Redux的官方React绑定库。它能够使你的React组件从Redux store中读取数据，并且向store分发actions以更新数据。</p>
+<p>详细信息请看<a href="https://www.redux.org.cn/docs/react-redux/" target="_blank" rel="noopener">文档</a></p>
+<h4 id="1-react-Redux将所有组件分成两大类"><a href="#1-react-Redux将所有组件分成两大类" class="headerlink" title="1 react-Redux将所有组件分成两大类"></a>1 react-Redux将所有组件分成两大类</h4><p>1.UI组件</p>
+<p>（1）只负责 UI 的呈现，不带有任何业务逻辑</p>
+<p>（2）通过props接收数据(一般数据和函数)</p>
+<p>（3）不使用任何 Redux 的 API</p>
+<p>（4）一般保存在components文件夹下</p>
+<p>2.容器组件</p>
+<p>（1）负责管理数据和业务逻辑，不负责UI的呈现</p>
+<p>（2）使用 Redux 的 API</p>
+<p>（3）一般保存在containers文件夹下</p>
+<p><img src="/2021/04/02/react-react-redux/pic01.png" alt></p>
+<h4 id="2-相关API"><a href="#2-相关API" class="headerlink" title="2 相关API"></a>2 相关API</h4><p>1.Provider：让所有组件都可以得到state数据</p>
+<pre><code>&lt;Provider store={store}&gt;
+    &lt;App /&gt;
+&lt;/Provider&gt;</code></pre><p>2.connect：用于包装 UI 组件生成容器组件</p>
+<pre><code>export default connect(mapStateToProps,mapDispatchToProps)(CountUI)</code></pre><p>3.mapStateToprops：将外部的数据（即state对象）转换为UI组件的标签属性</p>
+<pre><code>const mapStateToProps = function(state){
+    return {count: state}
+}</code></pre><p>4.mapDispatchToProps：将分发action的函数转换为UI组件的标签属性</p>
+<pre><code>const mapDispatchToProps = function(dispatch){
+    return {
+        add:function(data){
+            //通知redux执行加法
+            dispatch(createAddAction(data))
+        },
+        sub: function(data){
+            dispatch(createSubAction(data))
+        },
+        addAsync: function(data,time){
+            dispatch(createAddAsyncAction(data,time))
+        }
+    }
+}</code></pre><h4 id="3-计数器小案例"><a href="#3-计数器小案例" class="headerlink" title="3 计数器小案例"></a>3 计数器小案例</h4><p>在这篇文章<a href></a>里面使用了Redux进行实现计数器，本篇文章将利用react-redux进行修改简化。</p>
+<p>使用react-redux进行修改</p>
+<pre><code>yarn add react-redux</code></pre><p>在App.js中</p>
+<pre><code>import React, { Component } from &apos;react&apos;
+import Count from &apos;./containers/Count/Count.jsx&apos;
+import store from &apos;./redux/store&apos;
+export default class App extends Component {
+    render() {
+        return (
+        &lt;div&gt;
+            {/* 给容器组件传递store */}
+            &lt;Count store = {store}&gt;&lt;/Count&gt;
+        &lt;/div&gt;
+        )
+    }
+}</code></pre><p>在src/components/Count/Count.jsx中</p>
+<p>import React, { Component } from ‘react’;</p>
+<p>class Count extends Component {<br>    add = () =&gt; {<br>        const {value} = this.selectNum<br>        this.props.add(parseInt(value))</p>
+<pre><code>}
+sub = () =&gt; {
+    const {value} = this.selectNum
+    this.props.sub(parseInt(value))
+
+}
+addOdd = () =&gt; {
+    const {value} = this.selectNum
+    if(this.props.count % 2 !==0){
+        this.props.add(parseInt(value))
+    }
+
+}
+addAsync = () =&gt; {
+    const {value} = this.selectNum
+    this.props.addAsync(parseInt(value),1000)
+
+}
+render() {
+    console.log(&apos;CountUI组件接收到的&apos;,this.props)
+    return (
+        &lt;div&gt;
+            &lt;h1&gt;当前值为：{this.props.count}&lt;/h1&gt;
+            &lt;select ref={(current)=&gt;{this.selectNum = current}}&gt;
+                &lt;option value=&quot;1&quot;&gt;1&lt;/option&gt;
+                &lt;option value=&quot;2&quot;&gt;2&lt;/option&gt;
+                &lt;option value=&quot;3&quot;&gt;3&lt;/option&gt;
+            &lt;/select&gt;
+            &lt;button onClick={this.add}&gt;+&lt;/button&gt;
+            &lt;button onClick={this.sub}&gt;-&lt;/button&gt;
+            &lt;button onClick={this.addOdd}&gt;奇数+&lt;/button&gt;
+            &lt;button onClick={this.addAsync}&gt;异步+&lt;/button&gt;
+        &lt;/div&gt;
+
+    );
+}</code></pre><p>}</p>
+<p>export default Count;</p>
+<p>在src/containers/Count/Count.jsx中</p>
+<pre><code>//引入Count UI组件
+import CountUI from &apos;../../components/Count/Count&apos;
+
+import {createAddAction,createSubAction,createAddAsyncAction} from &apos;../../redux/count_action&apos;
+//引入connect用于连接UI组件与redux
+import {connect} from &apos;react-redux&apos;
+
+//函数返回值作为状态传递给UI组件
+const mapStateToProps = function(state){
+    return {count: state}
+}
+const mapDispatchToProps = function(dispatch){
+    return {
+        add:function(data){
+            //通知redux执行加法
+            dispatch(createAddAction(data))
+        },
+        sub: function(data){
+            dispatch(createSubAction(data))
+        },
+        addAsync: function(data,time){
+            dispatch(createAddAsyncAction(data,time))
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(CountUI)</code></pre><h4 id="4-进行优化代码"><a href="#4-进行优化代码" class="headerlink" title="4 进行优化代码"></a>4 进行优化代码</h4><p>1.使用了react-redux后也不用再自己检测redux中状态的改变了，容器组件可以自动完成这个工作。</p>
+<pre><code>//index.js中不需要store.subscribe(()=&gt;{})
+
+ReactDOM.render(
+    &lt;App /&gt;,
+document.getElementById(&apos;root&apos;)
+);</code></pre><p>2.在index.js中修改为如下代码，无需自己给容器组件传递store，给App包裹一个Provider，然后传递store。这样，App的所有子组件就默认都可以拿到state了。</p>
+<pre><code>import React from &apos;react&apos;;
+import ReactDOM from &apos;react-dom&apos;;
+import &apos;./index.css&apos;;
+import App from &apos;./App&apos;;
+import {Provider} from &apos;react-redux&apos;
+import store from &apos;./redux/store&apos;
+
+import reportWebVitals from &apos;./reportWebVitals&apos;;
+
+ReactDOM.render(
+
+    &lt;Provider store={store}&gt;
+        &lt;App /&gt;
+    &lt;/Provider&gt;
+    ,
+    document.getElementById(&apos;root&apos;));
+
+reportWebVitals();</code></pre><p>3.将容器组件和UI组件整合一个文件。可以将mapDispatchToProps，mapStateToProps进行简写。删除components文件，保留containers文件。</p>
+<pre><code>import React, { Component } from &apos;react&apos;;
+import {createAddAction,createSubAction,createAddAsyncAction} from &apos;../../redux/count_action&apos;
+//引入connect用于连接UI组件与redux
+import {connect} from &apos;react-redux&apos;
+
+class Count extends Component {
+    add = () =&gt; {
+        const {value} = this.selectNum
+        this.props.add(parseInt(value))
+
+    }
+    sub = () =&gt; {
+        const {value} = this.selectNum
+        this.props.sub(parseInt(value))
+
+    }
+    addOdd = () =&gt; {
+        const {value} = this.selectNum
+        if(this.props.count % 2 !==0){
+            this.props.add(parseInt(value))
+        }
+
+    }
+    addAsync = () =&gt; {
+        const {value} = this.selectNum
+        this.props.addAsync(parseInt(value),1000)
+
+    }
+    render() {
+        console.log(&apos;CountUI组件接收到的&apos;,this.props)
+        return (
+            &lt;div&gt;
+                &lt;h1&gt;当前值为：{this.props.count}&lt;/h1&gt;
+                &lt;select ref={(current)=&gt;{this.selectNum = current}}&gt;
+                    &lt;option value=&quot;1&quot;&gt;1&lt;/option&gt;
+                    &lt;option value=&quot;2&quot;&gt;2&lt;/option&gt;
+                    &lt;option value=&quot;3&quot;&gt;3&lt;/option&gt;
+                &lt;/select&gt;
+                &lt;button onClick={this.add}&gt;+&lt;/button&gt;
+                &lt;button onClick={this.sub}&gt;-&lt;/button&gt;
+                &lt;button onClick={this.addOdd}&gt;奇数+&lt;/button&gt;
+                &lt;button onClick={this.addAsync}&gt;异步+&lt;/button&gt;
+            &lt;/div&gt;
+
+        );
+    }
+}
+
+export default connect(
+    state=&gt;({count: state}) //映射状态
+    ,
+    {
+        add: createAddAction,
+        sub: createSubAction,
+        addAsync: createAddAsyncAction
+        //映射操作状态的方法
+    }
+)(Count)</code></pre>
+      
+
+      <!-- 开始添加版权声明-->
+
+
+<div class="declare">
+  <ul><li><strong>本文作者：</strong>
+  
+    étoile
+  
+</li></ul>
+  <ul><li><strong>本文链接：</strong>
+ <a href="http://sunnyllxx.github.io/2021/04/02/react-react-redux/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2021/04/02/react-react-redux/</a>
+</li></ul>
+  <ul><li><strong>版权声明：</strong>
+  本作品采用
+  <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+  进行许可。转载请注明出处！
+  
+</div>
+
+<!-- 添加完成 -->
+
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/zhifubaopicture.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechatcollection.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <!-- 添加本文结束标记-->
+
+  <div style="text-align:center;color: #00BFFF;font-size:14px;">
+       -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
+       </div>
+  
+  <!-- 添加完成 -->
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/17/valine-comment/" class="archive-article-date">
-  	<time datetime="2020-08-17T09:10:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/17/valine-comment/">hexo yilia主题添加valine评论系统</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/14/download-file/" class="archive-article-date">
-  	<time datetime="2020-08-14T09:44:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/14/download-file/">微信小程序下载并预览excel,ppt,pdf等文件</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/微信小程序//" class="article-tag-list-link color1">微信小程序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/11/Shopping-spike/" class="archive-article-date">
-  	<time datetime="2020-08-11T05:39:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/11/Shopping-spike/">购物倒计时秒杀小案例页面</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/09/Create-tables-dynamically/" class="archive-article-date">
-  	<time datetime="2020-08-09T13:02:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/09/Create-tables-dynamically/">动态创建表格</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/07/jump-page/" class="archive-article-date">
-  	<time datetime="2020-08-07T15:17:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/07/jump-page/">微信小程序跨页面传递参数</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/微信小程序//" class="article-tag-list-link color1">微信小程序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/05/Pagination-loading/" class="archive-article-date">
-  	<time datetime="2020-08-05T07:14:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/05/Pagination-loading/">微信小程序上拉分页渲染刷新</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/微信小程序//" class="article-tag-list-link color1">微信小程序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/30/components/" class="archive-article-date">
-  	<time datetime="2020-07-30T13:40:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/30/components/">微信小程序自定义组件tab选项</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/微信小程序//" class="article-tag-list-link color1">微信小程序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/07/%E8%A7%A3%E5%86%B3layui%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4%E5%86%85%E5%AE%B9%E5%88%B0%E7%BD%91%E5%9D%80%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-07-07T13:34:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/07/%E8%A7%A3%E5%86%B3layui%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4%E5%86%85%E5%AE%B9%E5%88%B0%E7%BD%91%E5%9D%80%E7%9A%84%E9%97%AE%E9%A2%98/">解决layui表单提交内容到网址的问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/layui//" class="article-tag-list-link color1">layui</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/23/README/" class="archive-article-date">
-  	<time datetime="2020-06-23T03:25:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/23/README/">README</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo-blog%E9%83%A8%E7%BD%B2github%E4%B8%80%E7%9B%B4%E5%87%BA%E7%8E%B0404/" class="archive-article-date">
-  	<time datetime="2020-06-20T05:57:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo-blog%E9%83%A8%E7%BD%B2github%E4%B8%80%E7%9B%B4%E5%87%BA%E7%8E%B0404/">解决hexo blog部署github一直出现404</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
         		</li>
       		
 		</ul>
@@ -552,33 +481,164 @@
 
 
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
+        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2021/04/02/react-react-redux/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2021/04/02/react-redux/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">在React应用中使用 Redux</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#了解react-redux的使用方法"><span class="toc-number">1.</span> <span class="toc-text">了解react-redux的使用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-react-Redux将所有组件分成两大类"><span class="toc-number">1.1.</span> <span class="toc-text">1 react-Redux将所有组件分成两大类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-相关API"><span class="toc-number">1.2.</span> <span class="toc-text">2 相关API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-计数器小案例"><span class="toc-number">1.3.</span> <span class="toc-text">3 计数器小案例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-进行优化代码"><span class="toc-number">1.4.</span> <span class="toc-text">4 进行优化代码</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+
+
+   <!-- valine评论系统开始 -->
+
+   
+    <section id="comments" class="comments">
+      <style>
+        .comments{margin:30px;padding:10px;background:#fff}
+        @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+      </style>
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'true' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "SqWqnmUuTCilnupzDVQgFhrE-gzGzoHsz",
+            app_key: "EuNlMDzK61IRiansuSobGwsH",
+            placeholder: "留下你的评论吧",
+            avatar:"retro",
+            avatar_cdn:'{{ theme.valine.avatar_cdn }}',
+        });
+    }
+</script>
+
+  </section>
+
+
+<!-- valine评论系统结束 -->
+
+  
+  
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/6/">&amp;laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/5/">5</a><a class="page-number" href="/archives/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/archives/page/8/">8</a><a class="extend next" rel="next" href="/archives/page/8/">Next &amp;raquo;</a>
-    </nav>
+  
+
+  
+
   
 
 
@@ -617,8 +677,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
