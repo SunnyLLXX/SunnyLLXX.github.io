@@ -17,7 +17,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/04/02/react-react-redux/pic01.png">
 <meta property="article:published_time" content="2021-04-02T12:36:28.000Z">
-<meta property="article:modified_time" content="2021-04-03T03:10:28.785Z">
+<meta property="article:modified_time" content="2021-04-05T03:18:54.365Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -236,7 +236,7 @@
             dispatch(createAddAsyncAction(data,time))
         }
     }
-}</code></pre><h4 id="3-计数器小案例"><a href="#3-计数器小案例" class="headerlink" title="3 计数器小案例"></a>3 计数器小案例</h4><p>在这篇文章<a href></a>里面使用了Redux进行实现计数器，本篇文章将利用react-redux进行修改简化。</p>
+}</code></pre><h4 id="3-计数器小案例"><a href="#3-计数器小案例" class="headerlink" title="3 计数器小案例"></a>3 计数器小案例</h4><p>在这篇文章<a href="http://sunnyllxx.github.io/2021/04/02/react-redux/">在React应用中使用 Redux</a>使用了Redux进行实现计数器，本篇文章将利用react-redux进行修改简化。</p>
 <p>使用react-redux进行修改</p>
 <pre><code>yarn add react-redux</code></pre><p>在App.js中</p>
 <pre><code>import React, { Component } from &apos;react&apos;
@@ -252,46 +252,52 @@ export default class App extends Component {
         )
     }
 }</code></pre><p>在src/components/Count/Count.jsx中</p>
-<p>import React, { Component } from ‘react’;</p>
-<p>class Count extends Component {<br>    add = () =&gt; {<br>        const {value} = this.selectNum<br>        this.props.add(parseInt(value))</p>
-<pre><code>}
-sub = () =&gt; {
-    const {value} = this.selectNum
-    this.props.sub(parseInt(value))
+<pre><code>import React, { Component } from &apos;react&apos;;
 
-}
-addOdd = () =&gt; {
-    const {value} = this.selectNum
-    if(this.props.count % 2 !==0){
+class Count extends Component {
+    add = () =&gt; {
+        const {value} = this.selectNum
         this.props.add(parseInt(value))
+
     }
+    sub = () =&gt; {
+        const {value} = this.selectNum
+        this.props.sub(parseInt(value))
 
+    }
+    addOdd = () =&gt; {
+        const {value} = this.selectNum
+        if(this.props.count % 2 !==0){
+            this.props.add(parseInt(value))
+        }
+
+    }
+    addAsync = () =&gt; {
+        const {value} = this.selectNum
+        this.props.addAsync(parseInt(value),1000)
+
+    }
+    render() {
+        console.log(&apos;CountUI组件接收到的&apos;,this.props)
+        return (
+            &lt;div&gt;
+                &lt;h1&gt;当前值为：{this.props.count}&lt;/h1&gt;
+                &lt;select ref={(current)=&gt;{this.selectNum = current}}&gt;
+                    &lt;option value=&quot;1&quot;&gt;1&lt;/option&gt;
+                    &lt;option value=&quot;2&quot;&gt;2&lt;/option&gt;
+                    &lt;option value=&quot;3&quot;&gt;3&lt;/option&gt;
+                &lt;/select&gt;
+                &lt;button onClick={this.add}&gt;+&lt;/button&gt;
+                &lt;button onClick={this.sub}&gt;-&lt;/button&gt;
+                &lt;button onClick={this.addOdd}&gt;奇数+&lt;/button&gt;
+                &lt;button onClick={this.addAsync}&gt;异步+&lt;/button&gt;
+            &lt;/div&gt;
+
+        );
+    }
 }
-addAsync = () =&gt; {
-    const {value} = this.selectNum
-    this.props.addAsync(parseInt(value),1000)
 
-}
-render() {
-    console.log(&apos;CountUI组件接收到的&apos;,this.props)
-    return (
-        &lt;div&gt;
-            &lt;h1&gt;当前值为：{this.props.count}&lt;/h1&gt;
-            &lt;select ref={(current)=&gt;{this.selectNum = current}}&gt;
-                &lt;option value=&quot;1&quot;&gt;1&lt;/option&gt;
-                &lt;option value=&quot;2&quot;&gt;2&lt;/option&gt;
-                &lt;option value=&quot;3&quot;&gt;3&lt;/option&gt;
-            &lt;/select&gt;
-            &lt;button onClick={this.add}&gt;+&lt;/button&gt;
-            &lt;button onClick={this.sub}&gt;-&lt;/button&gt;
-            &lt;button onClick={this.addOdd}&gt;奇数+&lt;/button&gt;
-            &lt;button onClick={this.addAsync}&gt;异步+&lt;/button&gt;
-        &lt;/div&gt;
-
-    );
-}</code></pre><p>}</p>
-<p>export default Count;</p>
-<p>在src/containers/Count/Count.jsx中</p>
+export default Count;</code></pre><p>在src/containers/Count/Count.jsx中</p>
 <pre><code>//引入Count UI组件
 import CountUI from &apos;../../components/Count/Count&apos;
 
@@ -399,7 +405,129 @@ export default connect(
         addAsync: createAddAsyncAction
         //映射操作状态的方法
     }
-)(Count)</code></pre>
+)(Count)</code></pre><h4 id="5-多组件数据共享"><a href="#5-多组件数据共享" class="headerlink" title="5 多组件数据共享"></a>5 多组件数据共享</h4><p>1.了解什么是combineReducers？</p>
+<p>combineReducers(reducers)：随着应用变得越来越复杂，可以考虑将 reducer 函数 拆分成多个单独的函数，拆分后的每个函数负责独立管理 state 的一部分。</p>
+<p>combineReducers 辅助函数的作用是，把一个由多个不同 reducer 函数作为 value 的 object，合并成一个最终的 reducer 函数，然后就可以对这个 reducer 调用 createStore 方法。</p>
+<p>合并后的 reducer 可以调用各个子 reducer，并把它们返回的结果合并成一个 state 对象。 由 combineReducers() 返回的 state 对象，会将传入的每个 reducer 返回的 state 按其传递给 combineReducers() 时对应的 key 进行命名。</p>
+<p>示例：</p>
+<pre><code>const allReducer = combineReducers({counts: countReducer,persons: personReducer})
+// allReducer 将返回如下的 state 对象
+{
+    counts: {
+        // ... counts, 和一些其他由 countReducer 管理的 state 对象 ... 
+    },
+    persons: {
+        // ... persons, 和一些其他由 personReducer 管理的 state 对象 ...
+    }
+}</code></pre><p>通过为传入对象的 reducer 命名不同的 key 来控制返回 state key 的命名。例如，你可以调用 combineReducers({counts: countReducer,persons: personReducer}) 将 state 结构变为 { counts, persons }。</p>
+<p>2.小案例：有一个Person组件，他可以显示数据person的name,age，并且也可以显示Count组件的count值。Count组件不仅可以显示count值，也可以显示Person组件的总人数。</p>
+<p>（1）修改redux中的目录结构，添加actions,reducers文件夹，将组件对应的action,reducer分别放在对应的文件夹中，修改引入的路径。</p>
+<p>（2）创建src/redux/actions/person.js，添加如下代码</p>
+<pre><code>export function addPerson (data){
+    return {
+        type: &apos;add_person&apos;,
+        data
+    }
+} </code></pre><p>（3）创建src/redux/reducers/person.js</p>
+<pre><code>const initPerson = [{id:&apos;001&apos;,name:&apos;xinxin&apos;,age:18}]
+export default function personReducer(preState = initPerson,action){
+    const {type,data} = action
+    switch (type) {
+        case &apos;add_person&apos;:
+            return [data,...preState]
+
+        default:
+            return preState
+    }
+
+}</code></pre><p>（4）修改store.js。因为有多个reducer，所以需要引入combineReducers用来汇总所有的reducer。</p>
+<pre><code>import {createStore,applyMiddleware, combineReducers} from &apos;redux&apos;
+
+//引入为Count组件服务的reducer
+import countReducer from &apos;../redux/reducers/count_reducer&apos;
+//引入为Person服务的reducer
+import personReducer from &apos;../redux/reducers/person&apos;
+//引入redux-thunk，用于支持异步action
+import thunk from &apos;redux-thunk&apos;
+
+//汇总reducer
+const allReducer = combineReducers({
+    counts: countReducer,
+    persons: personReducer
+})
+
+export default createStore(allReducer,applyMiddleware(thunk))</code></pre><p>如果有多个reducer需要汇总，一般将创建一个单独的js文件，用于汇总reducer，不需要全部都写在store.js中。</p>
+<p>（5）在src/containers/Person/Person.jsx添加如下代码</p>
+<pre><code>import React, { Component, Fragment } from &apos;react&apos;;
+//引入connect用于连接UI组件与redux
+import {connect} from &apos;react-redux&apos;
+import {addPerson} from &apos;../../redux/actions/person.js&apos;
+import {nanoid} from &apos;nanoid&apos;
+
+
+class Person extends Component {
+
+
+    addPerson = () =&gt; {
+        const name = this.nameNode.value
+        const age = this.ageNode.value*1
+
+        const personObj = {
+            id: nanoid(), // 用于自动生成id
+            name,
+            age
+        }
+        console.log(personObj)
+        this.props.add(personObj)
+    }
+    render() {
+        console.log(&apos;Person组件接收到的&apos;,this.props)
+        return (
+            &lt;Fragment&gt;
+                &lt;h1&gt;我是Person组件，Count组件求和为:{this.props.count}&lt;/h1&gt;
+                &lt;input text=&quot;text&quot; placeholder=&quot;请输入姓名&quot; ref={cur =&gt; this.nameNode = cur}&gt;&lt;/input&gt;
+                &lt;input text=&quot;number&quot; placeholder=&quot;请输入年龄&quot; ref={cur =&gt; this.ageNode = cur}&gt;&lt;/input&gt;
+                &lt;br/&gt;
+                &lt;button onClick={this.addPerson}&gt;添加&lt;/button&gt;
+                &lt;ul&gt;
+                    {
+                        this.props.person.map((item)=&gt;{
+                            return &lt;li key={item.id}&gt;姓名为{item.name}，年龄为{item.age}&lt;/li&gt;
+                        })
+                    }
+                &lt;/ul&gt;
+            &lt;/Fragment&gt;
+        );
+    }
+}
+
+export default connect(
+    state=&gt;({person: state.persons,count:state.counts}) //映射状态
+    ,
+    {
+        add: addPerson,
+
+        //映射操作状态的方法
+    }
+)(Person)</code></pre><p>（6）修改src/containers/Count/Count.jsx代码</p>
+<pre><code>render() {
+    console.log(&apos;CountUI组件接收到的&apos;,this.props)
+    return (
+        &lt;div&gt;
+            &lt;h1&gt;Count组件当前值为：{this.props.count}，Person组件总人数:{this.props.totalPerson}&lt;/h1&gt;
+            &lt;select ref={(current)=&gt;{this.selectNum = current}}&gt;
+                &lt;option value=&quot;1&quot;&gt;1&lt;/option&gt;
+                &lt;option value=&quot;2&quot;&gt;2&lt;/option&gt;
+                &lt;option value=&quot;3&quot;&gt;3&lt;/option&gt;
+            &lt;/select&gt;
+            &lt;button onClick={this.add}&gt;+&lt;/button&gt;
+            &lt;button onClick={this.sub}&gt;-&lt;/button&gt;
+            &lt;button onClick={this.addOdd}&gt;奇数+&lt;/button&gt;
+            &lt;button onClick={this.addAsync}&gt;异步+&lt;/button&gt;
+        &lt;/div&gt;
+
+    );
+}</code></pre>
       
 
       <!-- 开始添加版权声明-->
@@ -585,7 +713,7 @@ export default connect(
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#了解react-redux的使用方法"><span class="toc-number">1.</span> <span class="toc-text">了解react-redux的使用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-react-Redux将所有组件分成两大类"><span class="toc-number">1.1.</span> <span class="toc-text">1 react-Redux将所有组件分成两大类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-相关API"><span class="toc-number">1.2.</span> <span class="toc-text">2 相关API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-计数器小案例"><span class="toc-number">1.3.</span> <span class="toc-text">3 计数器小案例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-进行优化代码"><span class="toc-number">1.4.</span> <span class="toc-text">4 进行优化代码</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#了解react-redux的使用方法"><span class="toc-number">1.</span> <span class="toc-text">了解react-redux的使用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-react-Redux将所有组件分成两大类"><span class="toc-number">1.1.</span> <span class="toc-text">1 react-Redux将所有组件分成两大类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-相关API"><span class="toc-number">1.2.</span> <span class="toc-text">2 相关API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-计数器小案例"><span class="toc-number">1.3.</span> <span class="toc-text">3 计数器小案例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-进行优化代码"><span class="toc-number">1.4.</span> <span class="toc-text">4 进行优化代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-多组件数据共享"><span class="toc-number">1.5.</span> <span class="toc-text">5 多组件数据共享</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
