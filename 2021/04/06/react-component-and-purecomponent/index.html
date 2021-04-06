@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/04/06/react-component-and-purecomponent/pic01.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/04/06/react-component-and-purecomponent/pic02.png">
 <meta property="article:published_time" content="2021-04-06T01:26:32.000Z">
-<meta property="article:modified_time" content="2021-04-06T01:55:23.135Z">
+<meta property="article:modified_time" content="2021-04-06T02:31:43.821Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -204,7 +204,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="如何实现react的组件优化"><a href="#如何实现react的组件优化" class="headerlink" title="如何实现react的组件优化"></a>如何实现react的组件优化</h3><a id="more"></a>
-<p>本篇文章将通过一个小案例进行分析。假设有一个Parent组件，子组件是Child组件，通过点击按钮使得Parent组件中的state数据改变，通过props将数据传递给Child。分析每次修改数据父子组件是否重新渲染。</p>
+<p>本篇文章将通过一个小案例进行分析。假设有一个Parent组件，子组件是Child组件，通过点击按钮使得Parent组件中的state数据改变，通过props将数据传递给Child，分析每次修改数据父子组件是否重新渲染。</p>
 <h4 id="1-React-Component"><a href="#1-React-Component" class="headerlink" title="1 React.Component"></a>1 React.Component</h4><p>定义 class 组件，需要继承 React.Component。</p>
 <p>Parent.jsx中代码：</p>
 <pre><code>import React, { Fragment, Component } from &apos;react&apos;;
@@ -257,61 +257,67 @@ export default Parent;</code></pre><p>执行结果如下图</p>
 <p>我们所希望的是只有当组件的state或props数据发生改变时才重新render()。</p>
 <h4 id="1-3-解决办法"><a href="#1-3-解决办法" class="headerlink" title="1.3 解决办法"></a>1.3 解决办法</h4><p>1.重写shouldComponentUpdate()方法</p>
 <p>比较新旧state或props数据, 如果有变化才返回true, 如果没有返回false</p>
-<p>class Parent extends Component {</p>
-<pre><code>state = {
-    name: &apos;liaoxin&apos;
-}
-changeName = () =&gt; {
-    this.setState({
-        name: &apos;xinxin&apos;
-    })
-    //this.setState({})
+<pre><code>class Parent extends Component {
 
+    state = {
+        name: &apos;liaoxin&apos;
+    }
+    changeName = () =&gt; {
+        this.setState({
+            name: &apos;xinxin&apos;
+        })
+        //this.setState({})
+
+    }
+    shouldComponentUpdate(nextProps,nextState){
+        console.log(&apos;Parent组件的props,state&apos;)
+        console.log(nextProps,nextState)
+        if(this.state.name === nextState.name){
+            return false
+        }else {
+            return true
+        }
+
+    }
+    render() {
+        console.log(&apos;Parent render&apos;)
+        return (
+            &lt;Fragment&gt;
+                &lt;h1&gt;Parent组件，当前姓名为:{this.state.name}&lt;/h1&gt;
+                &lt;button onClick={this.changeName}&gt;点击切换姓名&lt;/button&gt;
+                &lt;hr/&gt;
+                &lt;Child name={this.state.name}&gt;&lt;/Child&gt;
+                {/* &lt;Child &gt;&lt;/Child&gt; */}
+            &lt;/Fragment&gt;
+        );
+    }
 }
-shouldComponentUpdate(nextProps,nextState){
-    console.log(&apos;Parent组件的props,state&apos;)
-    console.log(nextProps,nextState)
-    if(this.state.name === nextState.name){
-        return false
-    }else {
-        return true
+
+
+class Child extends Component {
+
+    shouldComponentUpdate(nextProps,nextState){
+        console.log(&apos;Child组件的props,state&apos;)
+        console.log(nextProps,nextState)
+        if(this.props.name === nextProps.name){
+            return false
+        }else {
+            return true
+        }
+
     }
 
-}
-render() {
-    console.log(&apos;Parent render&apos;)
-    return (
-        &lt;Fragment&gt;
-            &lt;h1&gt;Parent组件，当前姓名为:{this.state.name}&lt;/h1&gt;
-            &lt;button onClick={this.changeName}&gt;点击切换姓名&lt;/button&gt;
-            &lt;hr/&gt;
-            &lt;Child name={this.state.name}&gt;&lt;/Child&gt;
-            {/* &lt;Child &gt;&lt;/Child&gt; */}
-        &lt;/Fragment&gt;
-    );
-}</code></pre><p>}</p>
-<p>class Child extends Component {</p>
-<pre><code>shouldComponentUpdate(nextProps,nextState){
-    console.log(&apos;Child组件的props,state&apos;)
-    console.log(nextProps,nextState)
-    if(this.props.name === nextProps.name){
-        return false
-    }else {
-        return true
+    render() {
+        console.log(&apos;Child render&apos;)
+        return (
+            &lt;Fragment&gt;
+            &lt;h1&gt;Child组件，接收到的Parent姓名为:{this.props.name}&lt;/h1&gt;
+            &lt;/Fragment&gt;
+        );
     }
-
 }
 
-render() {
-    console.log(&apos;Child render&apos;)
-    return (
-        &lt;Fragment&gt;
-           &lt;h1&gt;Child组件，接收到的Parent姓名为:{this.props.name}&lt;/h1&gt;
-        &lt;/Fragment&gt;
-    );
-}</code></pre><p>}</p>
-<p>export default Parent;</p>
-<p>执行结果如下图，继续点击父子组件将不再render</p>
+export default Parent;</code></pre><p>执行结果如下图，继续点击父子组件将不再render</p>
 <p><img src="/2021/04/06/react-component-and-purecomponent/pic02.png" alt></p>
 <p>2.使用PureComponent</p>
 <p>PureComponent重写了shouldComponentUpdate(), 只有state或props数据有变化才返回true。</p>
