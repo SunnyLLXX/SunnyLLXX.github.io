@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
   <title>LeetCode题库 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="206 反转链表时间复杂度O(n)，空间复杂度O(1) &#x2F;** * Definition for singly-linked list. * function ListNode(val, next) { *     this.val &#x3D; (val&#x3D;&#x3D;&#x3D;undefined ? 0 : val) *     this.next &#x3D; (next&#x3D;&#x3D;&#x3D;undefined ? null : next) *">
+  <meta name="description" content="1 链表有关链表的题目">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode题库">
 <meta property="og:url" content="http://sunnyllxx.github.io/2021/05/22/leetcode/index.html">
 <meta property="og:site_name" content="étoile的小窝">
-<meta property="og:description" content="206 反转链表时间复杂度O(n)，空间复杂度O(1) &#x2F;** * Definition for singly-linked list. * function ListNode(val, next) { *     this.val &#x3D; (val&#x3D;&#x3D;&#x3D;undefined ? 0 : val) *     this.next &#x3D; (next&#x3D;&#x3D;&#x3D;undefined ? null : next) *">
+<meta property="og:description" content="1 链表有关链表的题目">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-05-22T10:14:32.000Z">
-<meta property="article:modified_time" content="2021-05-22T10:59:41.713Z">
+<meta property="article:modified_time" content="2021-05-22T11:54:29.591Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="LeetCode">
 <meta name="twitter:card" content="summary">
@@ -200,7 +200,66 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206 反转链表"></a>206 反转链表</h4><p>时间复杂度O(n)，空间复杂度O(1)</p>
+        <h3 id="1-链表"><a href="#1-链表" class="headerlink" title="1 链表"></a>1 链表</h3><p>有关链表的题目</p>
+<a id="more"></a>
+
+<h4 id="21-合并两个有序链表"><a href="#21-合并两个有序链表" class="headerlink" title="21 合并两个有序链表"></a>21 合并两个有序链表</h4><p>将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。</p>
+<p>示例1：<br>输入：l1 = [1,2,4], l2 = [1,3,4]<br>输出：[1,1,2,3,4,4]</p>
+<p>示例2：<br>输入：l1 = [], l2 = []<br>输出：[]</p>
+<p>示例3：<br>输入：l1 = [], l2 = [0]<br>输出：[0]</p>
+<p>解决思想：判断两个链表当前节点值的大小，进行比较，然后节点更新遍历。</p>
+<p>迭代法：时间复杂度O(n)空间复杂度O(n)  </p>
+<pre><code>/**
+* Definition for singly-linked list.
+* function ListNode(val, next) {
+*     this.val = (val===undefined ? 0 : val)
+*     this.next = (next===undefined ? null : next)
+* }
+*/
+/**
+* @param {ListNode} l1
+* @param {ListNode} l2
+* @return {ListNode}
+*/
+
+var mergeTwoLists = function(l1, l2) {
+    let res = new ListNode()
+    let cur = res
+    while(l1 &amp;&amp; l2){
+        if(l1.val &lt;= l2.val){
+            cur.next = l1   //如果l1的val小，将cur的next指向l1当前节点，然后l1向后遍历
+            l1 = l1.next
+        }else {
+            cur.next = l2
+            l2 = l2.next
+        }
+        cur = cur.next  // cur继续更新
+    }
+    if(l1 === null){
+        cur.next = l2
+    }
+    if(l2 === null){
+        cur.next = l1
+    }
+    return res.next
+};</code></pre><p>递归法</p>
+<pre><code>var mergeTwoLists = function(l1, l2) {
+    if(l1 === null || l2 === null){
+        return l1 || l2
+    }
+    if(l1.val &lt;= l2.val){
+        l1.next = mergeTwoLists(l1.next,l2)
+        return l1
+    }else{
+        l2.next = mergeTwoLists(l1,l2.next)
+        return l2
+    }
+};</code></pre><h4 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206 反转链表"></a>206 反转链表</h4><p>给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。</p>
+<p>示例1：<br>输入：head = [1,2,3,4,5]<br>输出：[5,4,3,2,1]</p>
+<p>示例2：<br>输入：head = [1,2]<br>输出：[2,1]</p>
+<p>示例3：<br>输入：head = []<br>输出：[]</p>
+<p>解决思想：当前项的next指向前一项</p>
+<p>时间复杂度O(n)，空间复杂度O(1)</p>
 <pre><code>/**
 * Definition for singly-linked list.
 * function ListNode(val, next) {
@@ -410,7 +469,7 @@ var reverseList = function(head) {
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#206-反转链表"><span class="toc-number">1.</span> <span class="toc-text">206 反转链表</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-链表"><span class="toc-number">1.</span> <span class="toc-text">1 链表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#21-合并两个有序链表"><span class="toc-number">1.1.</span> <span class="toc-text">21 合并两个有序链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#206-反转链表"><span class="toc-number">1.2.</span> <span class="toc-text">206 反转链表</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

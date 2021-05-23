@@ -186,31 +186,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206 反转链表"></a>206 反转链表</h4><p>时间复杂度O(n)，空间复杂度O(1)</p>
-<pre><code>/**
-* Definition for singly-linked list.
-* function ListNode(val, next) {
-*     this.val = (val===undefined ? 0 : val)
-*     this.next = (next===undefined ? null : next)
-* }
-*/
-/**
-* @param {ListNode} head
-* @return {ListNode}
-*/
-/**反转链表：当前项的next指向前一项 */
-var reverseList = function(head) {
-    //记录指针变量
-    let pre = null
-    let cur = head
-    while(cur){
-        let next = cur.next //先保存当前节点的next，防止断链
-        cur.next = pre 
-        pre = cur
-        cur = next
-    }
-    return pre
-};</code></pre>
+        <h3 id="1-链表"><a href="#1-链表" class="headerlink" title="1 链表"></a>1 链表</h3><p>有关链表的题目</p>
+        
+          <a class="article-more-a" href="/2021/05/22/leetcode/#more">more >></a>
+        
       
 
       <!-- 开始添加版权声明-->
