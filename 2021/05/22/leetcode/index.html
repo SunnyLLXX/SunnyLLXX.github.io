@@ -8,18 +8,25 @@
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
   <title>LeetCode题库 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1 链表有关链表的题目">
+  <meta name="description" content="链表有关链表的题目">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode题库">
 <meta property="og:url" content="http://sunnyllxx.github.io/2021/05/22/leetcode/index.html">
 <meta property="og:site_name" content="étoile的小窝">
-<meta property="og:description" content="1 链表有关链表的题目">
+<meta property="og:description" content="链表有关链表的题目">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/19deleteLastN.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/19deleteLastN2.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/24swapTwoNumbers.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/61transferList.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/84deleteSortedSameNode.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/84deleteSortedSameNode2.png">
 <meta property="article:published_time" content="2021-05-22T10:14:32.000Z">
-<meta property="article:modified_time" content="2021-05-22T11:54:29.591Z">
+<meta property="article:modified_time" content="2021-05-30T12:29:56.946Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="LeetCode">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/19deleteLastN.png">
   
     <link rel="alternative" href="/atom.xml" title="étoile的小窝" type="application/atom+xml">
   
@@ -200,10 +207,119 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-链表"><a href="#1-链表" class="headerlink" title="1 链表"></a>1 链表</h3><p>有关链表的题目</p>
+        <h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><p>有关链表的题目</p>
 <a id="more"></a>
 
-<h4 id="21-合并两个有序链表"><a href="#21-合并两个有序链表" class="headerlink" title="21 合并两个有序链表"></a>21 合并两个有序链表</h4><p>将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。</p>
+<h4 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2 两数相加"></a>2 两数相加</h4><p>给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。</p>
+<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
+<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。<br>示例1</p>
+<p>输入：l1 = [2,4,3], l2 = [5,6,4]<br>输出：[7,0,8]</p>
+<p>解释：342 + 465 = 807.</p>
+<p>示例 2：</p>
+<p>输入：l1 = [0], l2 = [0]<br>输出：[0]</p>
+<p>示例 3：</p>
+<p>输入：l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]<br>输出：[8,9,9,9,0,0,0,1]</p>
+<p>时间复杂度 O(n)  空间复杂度O(1)</p>
+<pre><code>/**
+* Definition for singly-linked list.
+* function ListNode(val, next) {
+*     this.val = (val===undefined ? 0 : val)
+*     this.next = (next===undefined ? null : next)
+* }
+*/
+/**
+* @param {ListNode} l1
+* @param {ListNode} l2
+* @return {ListNode}
+*/
+
+/**2两数相加 */
+var addTwoNumbers = function(l1, l2) {
+    let res = new ListNode() //结果链表
+    let cur = res
+    let total = 0  //节点相加得到的和
+    let next1 = 0  //是否需要向下一位进1
+    let num1 = 0 //当前两个链表的节点值
+    let num2 = 0
+    while(l1 !== null || l2 !== null){
+        num1 = l1 === null ? 0 : l1.val
+        num2 = l2 === null ? 0 : l2.val
+        total = num1 + num2 + next1
+        cur.next = new ListNode(total % 10)  //新建节点，取总和的个位数进行赋值
+        next1 = parseInt(total / 10) //取十位数
+        //遍历节点
+        if(l1 !== null){
+            l1 = l1.next 
+        }
+        if(l2 !== null){
+            l2 = l2.next
+        }
+        cur = cur.next
+    }
+if(next1 != 0){
+    //说明此时还有一个数没有加上
+    cur.next = new ListNode(next1)
+}
+    return res.next
+};</code></pre><h4 id="19-删除链表倒数第n个节点"><a href="#19-删除链表倒数第n个节点" class="headerlink" title="19 删除链表倒数第n个节点"></a>19 删除链表倒数第n个节点</h4><p>给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。</p>
+<p>进阶：你能尝试使用一趟扫描实现吗？</p>
+<p>示例1：<br>输入：head = [1,2,3,4,5], n = 2<br>输出：[1,2,3,5]</p>
+<p>示例2：<br>输入：head = [1], n = 1<br>输出：[]</p>
+<p>示例3：<br>输入：head = [1,2], n = 1<br>输出：[1]</p>
+<p>解题思想1：快慢指针，要删除链表的节点，找到该节点的前驱节点。时间复杂度 O(n)，空间复杂度 O(1)</p>
+<p><img src="/2021/05/22/leetcode/19deleteLastN.png" alt></p>
+<p><img src="/2021/05/22/leetcode/19deleteLastN2.png" alt></p>
+<pre><code>/**
+* Definition for singly-linked list.
+* function ListNode(val, next) {
+*     this.val = (val===undefined ? 0 : val)
+*     this.next = (next===undefined ? null : next)
+* }
+*/
+/**
+* @param {ListNode} head
+* @param {number} n
+* @return {ListNode}
+*/
+var removeNthFromEnd = function(head, n) {
+    if(head === null){
+        return head //如果head为空
+    }
+    let first = head //定义个快指针
+    let second = head //定义一个慢指针
+    while(n){
+        first = first.next //快指针前进n步
+        n--
+    }
+    if(first === null){
+        return head.next //如果此时快指针超过链表，说明头节点就是倒数第n个节点，考虑删除头节点的情况
+    }
+    while(first.next !== null){
+        first = first.next //两指针一起遍历移动，直到快指针指向最后一个节点，慢指针指向倒数第n+1个节点
+        second = second.next
+    }
+    second.next = second.next.next //删除倒数第n个节点
+    return head
+};</code></pre><p>解题思想2：暴力求解，找到列表的长度length，删除从列表头部开始的第L-n+1个节点。时间复杂度 O(n)，空间复杂度 O(1)</p>
+<pre><code>var removeNthFromEnd = function(head, n) {
+    let length = 0 //链表长度
+    let res = head
+    while(head){
+        head = head.next //获取链表长度
+        length++
+    }
+    head = res //重新赋值
+    let count = length- n//要删除的节点
+    // 如果是正向第一个结点，则头结点被删除，只需要直接返回头结点的next
+    if (count === 0) {
+        return head.next;
+    } 
+    for(let i = 0; i &lt; count - 1; i++){
+        head = head.next //直接遍历到该结点的前一个结点
+    }
+    head.next = head.next.next
+    return res
+};</code></pre><h4 id="21-合并两个有序链表"><a href="#21-合并两个有序链表" class="headerlink" title="21 合并两个有序链表"></a>21 合并两个有序链表</h4><p>将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。</p>
 <p>示例1：<br>输入：l1 = [1,2,4], l2 = [1,3,4]<br>输出：[1,1,2,3,4,4]</p>
 <p>示例2：<br>输入：l1 = [], l2 = []<br>输出：[]</p>
 <p>示例3：<br>输入：l1 = [], l2 = [0]<br>输出：[0]</p>
@@ -254,11 +370,175 @@ var mergeTwoLists = function(l1, l2) {
         l2.next = mergeTwoLists(l1,l2.next)
         return l2
     }
+};</code></pre><h4 id="24-两两交换链表中的节点"><a href="#24-两两交换链表中的节点" class="headerlink" title="24 两两交换链表中的节点"></a>24 两两交换链表中的节点</h4><p>给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p>
+<p>示例1：<br>输入：head = [1,2,3,4]<br>输出：[2,1,4,3] </p>
+<p>示例2：<br>输入：head = []<br>输出：[]</p>
+<p>示例3：<br>输入：head = [1]<br>输出：[1]</p>
+<p>解题思想1：迭代法 时间复杂度O(n) 空间复杂度O(1)</p>
+<p><img src="/2021/05/22/leetcode/24swapTwoNumbers.png" alt></p>
+<pre><code>/**
+* Definition for singly-linked list.
+* function ListNode(val, next) {
+*     this.val = (val===undefined ? 0 : val)
+*     this.next = (next===undefined ? null : next)
+* }
+*/
+/**
+* @param {ListNode} head
+* @return {ListNode}
+*/
+var swapPairs = function(head) {
+    if(head === null || head.next === null){
+        return head
+    }
+    let res = new ListNode() //定义一个新节点指向head
+    res.next = head
+    let cur = res
+    let next = null  // 用于保存后续的两个节点
+    let temp = null
+    while(cur.next !== null &amp;&amp; cur.next.next !== null){
+        next = head.next //节点赋值
+        temp = next.next
+        cur.next = next //交换节节点
+        next.next = head
+        head.next = temp
+        cur = head  //继续遍历更新
+        head = head.next
+    }
+    return res.next
+};</code></pre><p>解题思想2：递归法 时间复杂度O(n) 空间复杂度O(n)</p>
+<pre><code>var swapPairs = function(head) {
+    if(head === null || head.next === null){
+        return head //如果头节点为空或者只有一个节点就返回头节点
+    }
+    let next = head.next //将头节点后一个节点进行赋值保存
+    head.next = swapPairs(head.next.next)
+    next.next = head
+    return next
+}</code></pre><h4 id="61-旋转链表"><a href="#61-旋转链表" class="headerlink" title="61 旋转链表"></a>61 旋转链表</h4><p>给你一个链表的头节点 head ，旋转链表，将链表每个节点向右移动 k 个位置，k非负数。</p>
+<p>示例1：<br>输入：head = [1,2,3,4,5], k = 2<br>输出：[4,5,1,2,3]</p>
+<p>示例2：<br>输入：head = [0,1,2], k = 4<br>输出：[2,0,1]</p>
+<p>解题思想：找到倒数第k个节点放在链表最前面，利用快慢指针的方式。时间复杂度：O(N)  空间复杂度：O(1)</p>
+<p><img src="/2021/05/22/leetcode/61transferList.png" alt></p>
+<pre><code>/**
+* Definition for singly-linked list.
+* function ListNode(val, next) {
+*     this.val = (val===undefined ? 0 : val)
+*     this.next = (next===undefined ? null : next)
+* }
+*/
+/**
+* @param {ListNode} head
+* @param {number} k
+* @return {ListNode}
+*/
+var rotateRight = function(head, k) {
+    if(head === null){
+        return head
+    }
+    let cur = head
+    let first = head //快指针
+    let second = head //慢指针
+    let length = 0 //链表长度
+    while(cur !== null){
+        length++ //获取链表长度
+        cur = cur.next
+    }
+    k = k % length //可能会有k大于长度的情况
+    if(k === 0){
+        return head
+    }
+    for(let i = 0; i &lt; k; i++){
+        first = first.next
+    }
+    while(first.next !== null){
+        first = first.next
+        second = second.next //找到慢指针需要断链的节点
+    }
+    let newHead = second.next
+    second.next = null
+    first.next = head
+    return newHead
+};</code></pre><h4 id="82-删除排序链表中的重复元素II"><a href="#82-删除排序链表中的重复元素II" class="headerlink" title="82 删除排序链表中的重复元素II"></a>82 删除排序链表中的重复元素II</h4><p>存在一个按升序排列的链表，给你这个链表的头节点 head ，请你删除链表中所有存在数字重复情况的节点，只保留原始链表中 没有重复出现的数字。返回同样按升序排列的结果链表。</p>
+<p>示例1：<br>输入：head = [1,2,3,3,4,4,5]<br>输出：[1,2,5]</p>
+<p>示例2：<br>输入：head = [1,1,1,2,3]<br>输出：[2,3]</p>
+<p>解题思想：如下图</p>
+<p><img src="/2021/05/22/leetcode/84deleteSortedSameNode.png" alt></p>
+<p><img src="/2021/05/22/leetcode/84deleteSortedSameNode2.png" alt></p>
+<p>时间复杂度：O(n)  空间复杂度：O(1)</p>
+<pre><code>/**
+* Definition for singly-linked list.
+* function ListNode(val, next) {
+*     this.val = (val===undefined ? 0 : val)
+*     this.next = (next===undefined ? null : next)
+* }
+*/
+/**
+* @param {ListNode} head
+* @return {ListNode}
+*/
+var deleteDuplicates = function(head) {
+    let pre = new ListNode(0) //创建一个虚拟的节点指向head,有可能删除头节点，方便为后续操作。
+    pre.next = head
+    let res = pre //结果链表
+    let cur = head //当前节点，指向重复元素的最后一个节点
+    while(cur !== null){
+        while(cur.next !== null &amp;&amp; cur.val === cur.next.val){
+            cur = cur.next  //如果cur的next不为空，并且当前节点与后续节点值相同，继续向后移动
+        }
+        if(pre.next !== cur){/* 当前节点不是 pre 节点的下一节点，则将 pre 节点的下一节点指向当前节点的下一节点，相当于删除当前所有含跟当前节点值相等的节点 */
+            pre.next = cur.next
+        }else if(pre.next === cur){     //否则pre向右移动
+            pre = pre.next
+        }
+        cur = cur.next
+    }
+    return res.next
+};</code></pre><h4 id="138-复制带随机指针的链表"><a href="#138-复制带随机指针的链表" class="headerlink" title="138 复制带随机指针的链表"></a>138 复制带随机指针的链表</h4><p>给你一个长度为 n 的链表，每个节点包含一个额外增加的随机指针 random ，该指针可以指向链表中的任何节点或空节点。<br>构造这个链表的 深拷贝。 深拷贝应该正好由 n 个 全新 节点组成，其中每个新节点的值都设为其对应的原节点的值。新节点的 next 指针和 random 指针也都应指向复制链表中的新节点，并使原链表和复制链表中的这些指针能够表示相同的链表状态。复制链表中的指针都不应指向原链表中的节点 。<br>例如，如果原链表中有 X 和 Y 两个节点，其中 X.random –&gt; Y 。那么在复制链表中对应的两个节点 x 和 y ，同样有 x.random –&gt; y 。<br>返回复制链表的头节点。<br>用一个由 n 个节点组成的链表来表示输入/输出中的链表。每个节点用一个 [val, random_index] 表示：<br>val：一个表示 Node.val 的整数。<br>random_index：随机指针指向的节点索引（范围从 0 到 n-1）；如果不指向任何节点，则为  null 。<br>你的代码 只 接受原链表的头节点 head 作为传入参数。</p>
+<p>解题思想：利用Map存储新链表与旧链表之间random一一对应的关系，两个循环进行实现，一个循环用于拷贝链表普通属性next、val，并且记录random指针所对应的关系，一个循环按照记录的关系对random进行赋值。时间复杂度：O(n)   空间复杂度：O(n)</p>
+<pre><code>/**
+* // Definition for a Node.
+* function Node(val, next, random) {
+*    this.val = val;
+*    this.next = next;
+*    this.random = random;
+* };
+*/
+/**
+* @param {Node} head
+* @return {Node}
+*/
+
+var copyRandomList = function(head) {
+    if(head === null){
+        return head
+    }
+    let cur = head //当前指针
+    let node = new Node() //新的链表
+    let temp = node
+    let map = new Map() //用于存储新链表与旧链表之间random一一对应的关系
+    //此循环用于拷贝链表普通属性next、val，并且记录random指针所对应的关系
+    while(cur !== null){
+        temp.val = cur.val
+        temp.next = cur.next ? new Node() : null
+        map.set(cur,temp) //存储一一对应的关系
+        temp = temp.next
+        cur = cur.next
+    }
+    temp = node //指针重新回到头部
+    cur = head
+    //此循环按照记录的关系对random进行赋值
+    while(cur !== null){
+        temp.random = cur.random ? map.get(cur.random) : null   //判断旧链表中当前节点是否存在random
+        cur = cur.next
+        temp = temp.next
+    }
+    return node
 };</code></pre><h4 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206 反转链表"></a>206 反转链表</h4><p>给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。</p>
 <p>示例1：<br>输入：head = [1,2,3,4,5]<br>输出：[5,4,3,2,1]</p>
 <p>示例2：<br>输入：head = [1,2]<br>输出：[2,1]</p>
 <p>示例3：<br>输入：head = []<br>输出：[]</p>
-<p>解决思想：当前项的next指向前一项</p>
+<p>解题思想：当前项的next指向前一项</p>
 <p>时间复杂度O(n)，空间复杂度O(1)</p>
 <pre><code>/**
 * Definition for singly-linked list.
@@ -283,6 +563,68 @@ var reverseList = function(head) {
         cur = next
     }
     return pre
+};</code></pre><h3 id="树"><a href="#树" class="headerlink" title="树"></a>树</h3><h4 id="101-对称二叉树"><a href="#101-对称二叉树" class="headerlink" title="101 对称二叉树"></a>101 对称二叉树</h4><p>例如，二叉树 [1,2,2,3,4,4,3] 是对称的。</p>
+<pre><code> 1
+/ \
+2   2
+/ \ / \
+3  4 4  3</code></pre><p>但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:</p>
+<pre><code> 1
+/ \
+2   2
+\   \
+3    3</code></pre><p>子树对称条件：</p>
+<p>他们两个的根结点具有相同的值</p>
+<p>每个树的右子树都与另一个树的左子树镜面对称</p>
+<p>解题思想1：根据子树对称条件进行解决。递归法 时间复杂度O(n) 空间复杂度o(n)</p>
+<pre><code>/**
+* Definition for a binary tree node.
+* function TreeNode(val, left, right) {
+*     this.val = (val===undefined ? 0 : val)
+*     this.left = (left===undefined ? null : left)
+*     this.right = (right===undefined ? null : right)
+* }
+*/
+/**
+* @param {TreeNode} root
+* @return {boolean}
+*/
+var isSymmetric = function(root) {
+    return isSimilar(root,root)
+};
+/**判断是否对称 */
+const isSimilar = (tree1,tree2)=&gt;{
+    if(tree1 == null &amp;&amp; tree2 === null){
+        //如果两个子树都为空
+        return true
+    }
+    if(tree1 == null || tree2 === null){
+        return false  //其中一个子树为空
+    }
+    return (tree1.val === tree2.val) &amp;&amp; isSimilar(tree1.right,tree2.left) &amp;&amp; isSimilar(tree1.left,tree2.right)  //子树节点有值并且互为对称
+}</code></pre><p>解题思想2：根据子树对称条件进行解决。迭代法 时间复杂度O(n) 空间复杂度O(n)</p>
+<pre><code>var isSymmetric = function(root) {
+    let queue = [root,root]
+    while(queue.length &gt; 0){
+        let tree1 = queue.shift()   //取队头元素
+        let tree2 = queue.shift()
+        if(tree1 == null &amp;&amp; tree2 === null){
+            //如果两个子树都为空
+            continue
+        }
+        if(tree1 == null || tree2 === null){
+            return false  //其中一个子树为空
+        }
+        if(tree1.val !== tree2.val){
+            return false  
+        }
+        queue.push(tree1.left)
+        queue.push(tree2.right)
+        queue.push(tree1.right)
+        queue.push(tree2.left)
+    }
+    return true
+
 };</code></pre>
       
 
@@ -469,7 +811,7 @@ var reverseList = function(head) {
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-链表"><span class="toc-number">1.</span> <span class="toc-text">1 链表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#21-合并两个有序链表"><span class="toc-number">1.1.</span> <span class="toc-text">21 合并两个有序链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#206-反转链表"><span class="toc-number">1.2.</span> <span class="toc-text">206 反转链表</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#链表"><span class="toc-number">1.</span> <span class="toc-text">链表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-两数相加"><span class="toc-number">1.1.</span> <span class="toc-text">2 两数相加</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#19-删除链表倒数第n个节点"><span class="toc-number">1.2.</span> <span class="toc-text">19 删除链表倒数第n个节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#21-合并两个有序链表"><span class="toc-number">1.3.</span> <span class="toc-text">21 合并两个有序链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#24-两两交换链表中的节点"><span class="toc-number">1.4.</span> <span class="toc-text">24 两两交换链表中的节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#61-旋转链表"><span class="toc-number">1.5.</span> <span class="toc-text">61 旋转链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#82-删除排序链表中的重复元素II"><span class="toc-number">1.6.</span> <span class="toc-text">82 删除排序链表中的重复元素II</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#138-复制带随机指针的链表"><span class="toc-number">1.7.</span> <span class="toc-text">138 复制带随机指针的链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#206-反转链表"><span class="toc-number">1.8.</span> <span class="toc-text">206 反转链表</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#树"><span class="toc-number">2.</span> <span class="toc-text">树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#101-对称二叉树"><span class="toc-number">2.1.</span> <span class="toc-text">101 对称二叉树</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
