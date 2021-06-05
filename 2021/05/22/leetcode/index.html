@@ -23,8 +23,11 @@
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/84deleteSortedSameNode2.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/105buildTree.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/105buildTree2.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/106buildTree2.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/106buildTree.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/106buildTree3.png">
 <meta property="article:published_time" content="2021-05-22T10:14:32.000Z">
-<meta property="article:modified_time" content="2021-06-05T02:30:23.789Z">
+<meta property="article:modified_time" content="2021-06-05T09:00:40.299Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="LeetCode">
 <meta name="twitter:card" content="summary">
@@ -761,12 +764,11 @@ var buildTree = function(preorder, inorder) {
 */
 function createTree(preorder, preLeft, preRight, map, inLeft, inRight) {
     if (preLeft &gt; preRight || inLeft &gt; inRight) {
-        return   // 终止条件，区间没有值
+        return null   // 终止条件，区间没有值
     }
     //前序遍历中找到根节点
     let rootVal = preorder[preLeft]
     let root = new TreeNode(rootVal)
-    console.log(&apos;root&apos;,root)
     // 前序遍历的根节点在中序遍历中的位置
     let pIndex = map.get(rootVal)
     root.left = createTree(preorder, preLeft + 1, pIndex - inLeft + preLeft, map, inLeft, pIndex - 1)
@@ -792,7 +794,68 @@ function createTree(preorder, preLeft, preRight, map, inLeft, inRight) {
     root.left = buildTree(preorder.slice(1,pIndex+1),inorder.slice(0,pIndex))
     root.right = buildTree(preorder.slice(pIndex+1),inorder.splice(pIndex+1))
     return root
-};</code></pre><h4 id="108-将有序数组转换为二叉搜索树"><a href="#108-将有序数组转换为二叉搜索树" class="headerlink" title="108 将有序数组转换为二叉搜索树"></a>108 将有序数组转换为二叉搜索树</h4><p>给你一个整数数组 nums ，其中元素已经按 升序 排列，请你将其转换为一棵 高度平衡 二叉搜索树。</p>
+};</code></pre><h4 id="106-从中序与后序遍历序列构造二叉树"><a href="#106-从中序与后序遍历序列构造二叉树" class="headerlink" title="106 从中序与后序遍历序列构造二叉树"></a>106 从中序与后序遍历序列构造二叉树</h4><p>根据一棵树的中序遍历与后序遍历构造二叉树。</p>
+<p>注意:<br>你可以假设树中没有重复的元素。</p>
+<p>例如，给出</p>
+<p>中序遍历 inorder = [9,3,15,20,7]<br>后序遍历 postorder = [9,15,7,20,3]<br>返回如下的二叉树：</p>
+<pre><code> 3
+/ \
+9  20
+    /  \
+    15  7</code></pre><p>解题思想：后序遍历的最后一个节点一定是二叉树的根节点。在中序遍历中，根节点把中序遍历序列分成了两个部分，左边构成了二叉树的的根节点的左子树，右边部分构成了二叉树的根节点的右子树。时间复杂度 O(n)  空间复杂度 O(n)。</p>
+<p><img src="/2021/05/22/leetcode/106buildTree2.png" alt></p>
+<p><img src="/2021/05/22/leetcode/106buildTree.png" alt></p>
+<p><img src="/2021/05/22/leetcode/106buildTree3.png" alt></p>
+<pre><code>/**
+* Definition for a binary tree node.
+* function TreeNode(val, left, right) {
+*     this.val = (val===undefined ? 0 : val)
+*     this.left = (left===undefined ? null : left)
+*     this.right = (right===undefined ? null : right)
+* }
+*/
+/**
+* @param {number[]} inorder
+* @param {number[]} postorder
+* @return {TreeNode}
+*/
+/**106. 从中序与后序遍历序列构造二叉树 */
+var buildTree = function(inorder, postorder) {
+    let inLen = inorder.length  // 中序遍历数组长度
+    let posLen = postorder.length  // 后序遍历数组长度
+    if (inLen === 0 || posLen === 0) {
+        return null
+    }
+    let map = new Map()  // 保存中序遍历数组的值和下标
+    for(let i = 0; i &lt; inLen; i++) {
+        map.set(inorder[i],i)
+    }
+    return createTree(postorder, 0, posLen - 1, map, 0, inLen - 1)
+};
+
+
+/**
+* @param {number[]} postorder 前序遍历
+* @param {number} posLeft 前序遍历左边界
+* @param {number} posRight 前序遍历右边界
+* @param {Map} map 后序遍历的值和下标
+* @param {number} inLeft 后序遍历左边界
+* @param {number} inRigth 后序遍历右边界
+* @return {TreeNode}
+*/
+function createTree(postorder, posLeft, posRight, map, inLeft, inRight) {
+    if (posLeft &gt; posRight || inLeft &gt; inRight) {
+        return null  // 终止条件，区间没有值
+    }
+    //前序遍历中找到根节点
+    let rootVal = postorder[posRight]
+    let root = new TreeNode(rootVal)
+    // 前序遍历的根节点在后序遍历中的位置
+    let pIndex = map.get(rootVal)
+    root.left = createTree(postorder, posLeft, posRight - inRight + pIndex - 1, map, inLeft, pIndex - 1)
+    root.right = createTree(postorder, posRight - inRight + pIndex, posRight - 1, map, pIndex + 1, inRight)
+    return root
+}</code></pre><h4 id="108-将有序数组转换为二叉搜索树"><a href="#108-将有序数组转换为二叉搜索树" class="headerlink" title="108 将有序数组转换为二叉搜索树"></a>108 将有序数组转换为二叉搜索树</h4><p>给你一个整数数组 nums ，其中元素已经按 升序 排列，请你将其转换为一棵 高度平衡 二叉搜索树。</p>
 <p>高度平衡 二叉树是一棵满足「每个节点的左右两个子树的高度差的绝对值不超过 1 的二叉树。</p>
 <p>示例 1：<br>输入：nums = [-10,-3,0,5,9]<br>输出：[0,-3,9,-10,null,5]</p>
 <p>解释：[0,-10,5,null,-3,null,9] 也将被视为正确答案：</p>
@@ -1086,7 +1149,7 @@ var hasPathSum = function(root, targetSum) {
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#链表"><span class="toc-number">1.</span> <span class="toc-text">链表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-两数相加"><span class="toc-number">1.1.</span> <span class="toc-text">2 两数相加</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#19-删除链表倒数第n个节点"><span class="toc-number">1.2.</span> <span class="toc-text">19 删除链表倒数第n个节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#21-合并两个有序链表"><span class="toc-number">1.3.</span> <span class="toc-text">21 合并两个有序链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#24-两两交换链表中的节点"><span class="toc-number">1.4.</span> <span class="toc-text">24 两两交换链表中的节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#61-旋转链表"><span class="toc-number">1.5.</span> <span class="toc-text">61 旋转链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#82-删除排序链表中的重复元素II"><span class="toc-number">1.6.</span> <span class="toc-text">82 删除排序链表中的重复元素II</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#138-复制带随机指针的链表"><span class="toc-number">1.7.</span> <span class="toc-text">138 复制带随机指针的链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#206-反转链表"><span class="toc-number">1.8.</span> <span class="toc-text">206 反转链表</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#树"><span class="toc-number">2.</span> <span class="toc-text">树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#101-对称二叉树"><span class="toc-number">2.1.</span> <span class="toc-text">101 对称二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#102-二叉树的层序遍历"><span class="toc-number">2.2.</span> <span class="toc-text">102 二叉树的层序遍历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#105-从前序与中序遍历序列构造二叉树"><span class="toc-number">2.3.</span> <span class="toc-text">105 从前序与中序遍历序列构造二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#108-将有序数组转换为二叉搜索树"><span class="toc-number">2.4.</span> <span class="toc-text">108 将有序数组转换为二叉搜索树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#112-路径总和"><span class="toc-number">2.5.</span> <span class="toc-text">112 路径总和</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#链表"><span class="toc-number">1.</span> <span class="toc-text">链表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-两数相加"><span class="toc-number">1.1.</span> <span class="toc-text">2 两数相加</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#19-删除链表倒数第n个节点"><span class="toc-number">1.2.</span> <span class="toc-text">19 删除链表倒数第n个节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#21-合并两个有序链表"><span class="toc-number">1.3.</span> <span class="toc-text">21 合并两个有序链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#24-两两交换链表中的节点"><span class="toc-number">1.4.</span> <span class="toc-text">24 两两交换链表中的节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#61-旋转链表"><span class="toc-number">1.5.</span> <span class="toc-text">61 旋转链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#82-删除排序链表中的重复元素II"><span class="toc-number">1.6.</span> <span class="toc-text">82 删除排序链表中的重复元素II</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#138-复制带随机指针的链表"><span class="toc-number">1.7.</span> <span class="toc-text">138 复制带随机指针的链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#206-反转链表"><span class="toc-number">1.8.</span> <span class="toc-text">206 反转链表</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#树"><span class="toc-number">2.</span> <span class="toc-text">树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#101-对称二叉树"><span class="toc-number">2.1.</span> <span class="toc-text">101 对称二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#102-二叉树的层序遍历"><span class="toc-number">2.2.</span> <span class="toc-text">102 二叉树的层序遍历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#105-从前序与中序遍历序列构造二叉树"><span class="toc-number">2.3.</span> <span class="toc-text">105 从前序与中序遍历序列构造二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#106-从中序与后序遍历序列构造二叉树"><span class="toc-number">2.4.</span> <span class="toc-text">106 从中序与后序遍历序列构造二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#108-将有序数组转换为二叉搜索树"><span class="toc-number">2.5.</span> <span class="toc-text">108 将有序数组转换为二叉搜索树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#112-路径总和"><span class="toc-number">2.6.</span> <span class="toc-text">112 路径总和</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
