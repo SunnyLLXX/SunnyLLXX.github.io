@@ -6,14 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>LeetCode题库 | étoile的小窝</title>
+  <title>LeetCode题解 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="链表有关链表的题目">
+  <meta name="description" content="leetcode官方题库">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode题库">
+<meta property="og:title" content="LeetCode题解">
 <meta property="og:url" content="http://sunnyllxx.github.io/2021/05/22/leetcode/index.html">
 <meta property="og:site_name" content="étoile的小窝">
-<meta property="og:description" content="链表有关链表的题目">
+<meta property="og:description" content="leetcode官方题库">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/19deleteLastN.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/19deleteLastN2.png">
@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/106buildTree.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/106buildTree3.png">
 <meta property="article:published_time" content="2021-05-22T10:14:32.000Z">
-<meta property="article:modified_time" content="2021-06-05T09:00:40.299Z">
+<meta property="article:modified_time" content="2021-07-03T03:48:34.848Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="LeetCode">
 <meta name="twitter:card" content="summary">
@@ -185,7 +185,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      LeetCode题库
+      LeetCode题解
     </h1>
   
 
@@ -212,8 +212,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><p>有关链表的题目</p>
-<a id="more"></a>
+        <h3 id="leetcode官方题库"><a href="#leetcode官方题库" class="headerlink" title="leetcode官方题库"></a><a href="https://leetcode-cn.com/problemset/all/" target="_blank" rel="noopener">leetcode官方题库</a></h3><a id="more"></a>
 
 <h4 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2 两数相加"></a>2 两数相加</h4><p>给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。</p>
 <p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
@@ -266,7 +265,110 @@ if(next1 != 0){
     cur.next = new ListNode(next1)
 }
     return res.next
-};</code></pre><h4 id="19-删除链表倒数第n个节点"><a href="#19-删除链表倒数第n个节点" class="headerlink" title="19 删除链表倒数第n个节点"></a>19 删除链表倒数第n个节点</h4><p>给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。</p>
+};</code></pre><h4 id="11-盛最多水的容器"><a href="#11-盛最多水的容器" class="headerlink" title="11. 盛最多水的容器"></a>11. 盛最多水的容器</h4><p>给你 n 个非负整数 a1，a2，…，an，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0) 。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。</p>
+<p>说明：你不能倾斜容器。</p>
+<p>示例1：<br>输入：[1,8,6,2,5,4,8,3,7]<br>输出：49 </p>
+<p>解释：图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。</p>
+<p>示例 2：<br>输入：height = [1,1]<br>输出：1</p>
+<p>示例 3：<br>输入：height = [4,3,2,1,4]<br>输出：16</p>
+<p>解题思想1：两条线较短的那条是容器高度，两条线之间的距离是容器宽度，求最大的面积。时间复杂度O(n^2) 空间复杂度O(1)</p>
+<pre><code>/**
+* @param {number[]} height
+* @return {number}
+*/
+
+var maxArea = function(height) {
+    // 结果
+    let res = 0  
+    // 数组长度
+    let n = height.length 
+    for (let i = 0; i &lt; n; i++) {
+        for (let j = i + 1; j &lt; n; j++) {
+            // 两个条垂直线之间的面积(高度为较短的那条垂直线)
+            let area = (j - i) * Math.min(height[i], height[j])
+            // 面积最大的区域
+            res = Math.max(res, area)
+        }
+    }
+    return res
+};</code></pre><p>解题思想2：双指针解法，时间复杂度O(n) 空间复杂度O(1)</p>
+<pre><code>var maxArea = function(height) {
+    // 结果
+    let res = 0  
+    // 左指针
+    let left = 0 
+    // 右指针
+    let right = height.length - 1
+    while (left &lt; right) {
+        // 两个条垂直线之间的面积(高度为较短的那条垂直线)
+        let area = (right - left) * Math.min(height[right], height[left])
+        // 面积最大的区域
+        res = Math.max(res, area)
+        // 移动高度较短的线
+        if (height[left] &lt; height[right]) {
+            left++
+        }else {
+            right--
+        }
+    }
+    return res
+};</code></pre><h4 id="17-电话号码的字母组合"><a href="#17-电话号码的字母组合" class="headerlink" title="17. 电话号码的字母组合"></a>17. 电话号码的字母组合</h4><p>给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回。</p>
+<p>给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。</p>
+<p>示例 1：<br>输入：digits = “23”<br>输出：[“ad”,”ae”,”af”,”bd”,”be”,”bf”,”cd”,”ce”,”cf”]</p>
+<p>示例 2：<br>输入：digits = “”<br>输出：[]</p>
+<p>示例 3：<br>输入：digits = “2”<br>输出：[“a”,”b”,”c”]</p>
+<pre><code>/**
+* @param {string} digits
+* @return {string[]}
+*/
+/**17. 电话号码的字母组合 */
+var letterCombinations = function(digits) {
+    // 结果集
+    let res = []
+    if (digits.length === 0) {
+        return res
+    }
+    // 保存数字与字母的映射关系
+    let letterMap = new Map()
+    letterMap.set(&quot;2&quot;, &quot;abc&quot;)
+    letterMap.set(&quot;3&quot;, &quot;def&quot;)
+    letterMap.set(&quot;4&quot;, &quot;ghi&quot;)
+    letterMap.set(&quot;5&quot;, &quot;jkl&quot;)
+    letterMap.set(&quot;6&quot;, &quot;mno&quot;)
+    letterMap.set(&quot;7&quot;, &quot;pqrs&quot;)
+    letterMap.set(&quot;8&quot;, &quot;tuv&quot;)
+    letterMap.set(&quot;9&quot;, &quot;wxyz&quot;)
+    let combination = new String()
+    backTracking(res, letterMap, 0, digits, combination)
+    return res
+};
+/**
+* @param {string[]} res 映射关系
+* @param {Map} letterMap 映射关系
+* @param {string} digits
+* @param {number} index 当前项索引
+* @param {string} combination 组合字符串
+* 
+*/
+function backTracking(res, letterMap, index, digits, combination) {
+    // 终止条件，当前项索引等于digits字符串长度
+    if (index === digits.length) {
+        res.push(combination.slice())
+        return
+    }else {
+        // 当前数字元素
+        let ch = digits.charAt(index)
+        // 获取对应数字的字符组合
+        let letters = letterMap.get(ch)
+        let len = letters.length
+        for (let i = 0; i &lt; len; i++) {
+            // 将字符添加进组合
+            combination = combination.concat(letters.charAt(i))
+            backTracking(res, letterMap, index + 1, digits, combination)
+            combination = combination.substring(0, combination.length - 1)
+        }
+    }
+}</code></pre><h4 id="19-删除链表倒数第n个节点"><a href="#19-删除链表倒数第n个节点" class="headerlink" title="19 删除链表倒数第n个节点"></a>19 删除链表倒数第n个节点</h4><p>给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。</p>
 <p>进阶：你能尝试使用一趟扫描实现吗？</p>
 <p>示例1：<br>输入：head = [1,2,3,4,5], n = 2<br>输出：[1,2,3,5]</p>
 <p>示例2：<br>输入：head = [1], n = 1<br>输出：[]</p>
@@ -375,7 +477,54 @@ var mergeTwoLists = function(l1, l2) {
         l2.next = mergeTwoLists(l1,l2.next)
         return l2
     }
-};</code></pre><h4 id="24-两两交换链表中的节点"><a href="#24-两两交换链表中的节点" class="headerlink" title="24 两两交换链表中的节点"></a>24 两两交换链表中的节点</h4><p>给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p>
+};</code></pre><h4 id="22-括号生成"><a href="#22-括号生成" class="headerlink" title="22. 括号生成"></a>22. 括号生成</h4><p>数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。</p>
+<p>示例 1：<br>输入：n = 3<br>输出：[“((()))”,”(()())”,”(())()”,”()(())”,”()()()”]</p>
+<p>示例 2：<br>输入：n = 1<br>输出：[“()”]</p>
+<p>解题思想：括号有效：左边的括号数大于或等于右边括号数</p>
+<pre><code>/**
+* @param {number} n
+* @return {string[]}
+*/
+
+var generateParenthesis = function(n) {
+    // 结果集
+    let res = []
+    if (n === 0) {
+        return res
+    }
+    // 组合集
+    let combination = new String()
+    backTracking(n, res, 0, 0, combination)
+    return res
+};
+/**
+* @param {number} n
+* @param {string[]} res
+* @param {number} left 左边括号数量
+* @param {number} right 右边括号数量
+* @param {string[]} combination 当前获取到的括号的样子/组合集
+*/
+
+function backTracking(n, res, left, right, combination) {
+    // 不是有效的括号
+    if (right &gt; left) {
+        return
+    }
+    // 终止条件，当左边括号数等于右边括号数并且等于n时
+    if (left === n &amp;&amp; right === n) {
+        // 加入括号组合
+        res.push(combination.slice())
+        return
+    }
+    // 加左括号
+    if (left &lt; n) {
+        backTracking(n, res, left + 1, right, combination + &apos;(&apos;)
+    }
+    // 加右括号
+    if (right &lt; left) {
+        backTracking(n, res, left, right + 1, combination + &apos;)&apos;)
+    }
+}</code></pre><h4 id="24-两两交换链表中的节点"><a href="#24-两两交换链表中的节点" class="headerlink" title="24 两两交换链表中的节点"></a>24 两两交换链表中的节点</h4><p>给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p>
 <p>示例1：<br>输入：head = [1,2,3,4]<br>输出：[2,1,4,3] </p>
 <p>示例2：<br>输入：head = []<br>输出：[]</p>
 <p>示例3：<br>输入：head = [1]<br>输出：[1]</p>
@@ -420,7 +569,188 @@ var swapPairs = function(head) {
     head.next = swapPairs(head.next.next)
     next.next = head
     return next
-}</code></pre><h4 id="61-旋转链表"><a href="#61-旋转链表" class="headerlink" title="61 旋转链表"></a>61 旋转链表</h4><p>给你一个链表的头节点 head ，旋转链表，将链表每个节点向右移动 k 个位置，k非负数。</p>
+}</code></pre><h4 id="39-组合总和"><a href="#39-组合总和" class="headerlink" title="39. 组合总和"></a>39. 组合总和</h4><p>给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。</p>
+<p>candidates 中的数字可以无限制重复被选取。</p>
+<p>说明：<br>所有数字（包括 target）都是正整数。<br>解集不能包含重复的组合。 </p>
+<p>示例 1：<br>输入：candidates = [2,3,6,7], target = 7,<br>所求解集为：<br>[<br>  [7],<br>  [2,2,3]<br>]</p>
+<p>示例 2：<br>输入：candidates = [2,3,5], target = 8,<br>所求解集为：<br>[<br>  [2,2,2,2],<br>  [2,3,3],<br>  [3,5]<br>]</p>
+<pre><code>/**
+* @param {number[]} candidates
+* @param {number} target
+* @return {number[][]}
+*/
+/**39. 组合总和 */
+var combinationSum = function(candidates, target) {
+    // 结果集
+    let res = []
+    // 每一层结果
+    let combineList = []
+    dfs(0, combineList, res, candidates, target)
+    return res
+};
+/**
+* @param {number} start 起始指针
+* @param {number[]} combineList 每一层结果
+* @param {number[]} res 结果
+* @param {number[]} candidates
+* @param {number} target
+*/
+function dfs(start, combineList, res, candidates, target) {
+    // 终止条件，集合找到了
+    if (target === 0) {
+        // 拷贝一份结果
+        res.push(combineList.slice())
+        return
+    }
+    for (let i = start; i &lt; candidates.length; i++) {
+        // 小于等于情况下可以找组合
+        if (candidates[i] &lt;= target) {
+            combineList.push(candidates[i])
+            // 元素可以重复选择，下次的循环可以从自身开始
+            dfs(i, combineList, res, candidates, target - candidates[i])
+            combineList.pop()
+        }
+    }
+}</code></pre><h4 id="46-全排列"><a href="#46-全排列" class="headerlink" title="46. 全排列"></a>46. 全排列</h4><p>给定一个不含重复数字的数组 nums ，返回其 所有可能的全排列 。你可以 按任意顺序 返回答案。</p>
+<p>示例 1：<br>输入：nums = [1,2,3]<br>输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]</p>
+<p>示例 2：<br>输入：nums = [0,1]<br>输出：[[0,1],[1,0]]</p>
+<p>示例 3：<br>输入：nums = [1]<br>输出：[[1]]</p>
+<p>解题思想：按顺序枚举每个位置可能出现的数字，之前已经出现的数字在接下来选择的数字中不能出现。树形结构。</p>
+<pre><code>/**
+* @param {number[]} nums
+* @return {number[][]}
+*/
+
+var permute = function(nums) {
+    // 数组长度
+    let len = nums.length
+    // 返回结果
+    let res = []
+    // 如果数组长度为0
+    if (len === 0) {
+        return res
+    }
+    // 排列路径
+    let path = []
+    // 元素是否使用过
+    let used = new Boolean(len)
+    dfs(nums, len, 0, path, used, res)
+    return res
+};
+/**
+* @param {number[]} nums 数组
+* @param {number} len  数组长度
+* @param {number} depth  当前层
+* @param {number[]} path  数组排列
+* @param {boolean} used  元素是否被使用过
+* @param {number[]} res  返回结果
+*/
+function dfs(nums, len, depth, path, used, res) {
+    // 当前层等于数组长度,递归终止条件
+    if (depth === len) {
+        // 添加排列，拷贝一份path
+        res.push(path.slice())
+        return
+    }
+    for (let i = 0; i &lt; len; i++) {
+        // 如果元素已经被使用了
+        if (used[i]) {
+            continue
+        }
+        // 加入排列
+        path.push(nums[i])
+        // 元素被使用赋值true
+        used[i] = true
+        // 下一层
+        dfs(nums, len, depth + 1, path, used, res)
+        // 回溯
+        path.pop()
+        used[i] = false
+    }
+}</code></pre><h4 id="47-全排列"><a href="#47-全排列" class="headerlink" title="47. 全排列 ||"></a>47. 全排列 ||</h4><p>给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。</p>
+<p>示例 1：<br>输入：nums = [1,1,2]<br>输出：<br>[[1,1,2],<br> [1,2,1],<br> [2,1,1]]</p>
+<p>示例 2：<br>输入：nums = [1,2,3]<br>输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]</p>
+<pre><code>/**
+* @param {number[]} nums
+* @return {number[][]}
+*/
+var permuteUnique = function(nums) {
+    // 结果集
+    let res = []
+    // 数组长度
+    let len = nums.length
+    // 排列
+    let path = []
+    if (len === 0) {
+        return res
+    }
+    // 是否使用过元素
+    let used = new Boolean(len)
+    // 将元素排序，方便后续去重
+    nums.sort()
+    dfs(nums, path, 0, len, used, res)
+    return res
+};
+/**
+* @param {number[]} nums 数组
+* @param {number} len  数组长度
+* @param {number} depth  当前层
+* @param {number[]} path  数组排列
+* @param {boolean} used  元素是否被使用过
+* @param {number[]} res  返回结果
+*/
+function dfs(nums, path, depth, len, used, res) {
+    if (depth === len) {
+        res.push(path.slice())
+        return
+    }
+    for (let i = 0; i &lt; len; i++) {
+        if (used[i]) {
+            continue
+        }
+        // 如果当前元素与前一个元素相等并且前一个元素被使用过，去重
+        if (i &gt; 0 &amp;&amp; nums[i] === nums[i - 1] &amp;&amp; used[i - 1]) {
+            continue
+        }
+        path.push(nums[i])
+        used[i] = true
+        dfs(nums, path, depth + 1, len, used, res)
+        path.pop()
+        used[i] = false
+    }
+}</code></pre><h4 id="53-最大子序和"><a href="#53-最大子序和" class="headerlink" title="53. 最大子序和"></a>53. 最大子序和</h4><p>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<p>示例 1：<br>输入：nums = [-2,1,-3,4,-1,2,1,-5,4]<br>输出：6<br>解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。</p>
+<p>示例 2：<br>输入：nums = [1]<br>输出：1</p>
+<p>示例 3：<br>输入：nums = [0]<br>输出：0</p>
+<p>解题思想1：暴力求解 时间复杂度O(n^2) 空间复杂度O(1)</p>
+<pre><code>var maxSubArray = function(nums) {
+    // res结果初始和数组下标为0的元素
+    let res = nums[0]
+    // 当前连续子数组之和
+    let temp = 0
+    for (let i = 0; i &lt; nums.length; i++) {
+        temp = 0
+        for (let j = i; j &lt; nums.length; j++) {
+            temp += nums[j]
+            res = Math.max(temp, res)
+        }
+    }
+    return res
+};</code></pre><p>解题思想2：动态规划 时间复杂度O(n) 空间复杂度O(1)</p>
+<pre><code>var maxSubArray = function(nums) {
+    // res结果初始和数组下标为0的元素
+    let res = nums[0]
+    // 当前连续子数组最大和
+    let temp = 0
+    // 遍历数组
+    for (let value of nums) {
+        // 当前连续子数组之和与后续数组元素进行比较，取最大值
+        temp = Math.max(temp + value, value)
+        // 结果取最大值
+        res = Math.max(res, temp)
+    }
+    return res
+};</code></pre><h4 id="61-旋转链表"><a href="#61-旋转链表" class="headerlink" title="61 旋转链表"></a>61 旋转链表</h4><p>给你一个链表的头节点 head ，旋转链表，将链表每个节点向右移动 k 个位置，k非负数。</p>
 <p>示例1：<br>输入：head = [1,2,3,4,5], k = 2<br>输出：[4,5,1,2,3]</p>
 <p>示例2：<br>输入：head = [0,1,2], k = 4<br>输出：[2,0,1]</p>
 <p>解题思想：找到倒数第k个节点放在链表最前面，利用快慢指针的方式。时间复杂度：O(N)  空间复杂度：O(1)</p>
@@ -568,7 +898,113 @@ var reverseList = function(head) {
         cur = next
     }
     return pre
-};</code></pre><h3 id="树"><a href="#树" class="headerlink" title="树"></a>树</h3><h4 id="101-对称二叉树"><a href="#101-对称二叉树" class="headerlink" title="101 对称二叉树"></a>101 对称二叉树</h4><p>例如，二叉树 [1,2,2,3,4,4,3] 是对称的。</p>
+};</code></pre><h4 id="99-恢复二叉搜索树"><a href="#99-恢复二叉搜索树" class="headerlink" title="99. 恢复二叉搜索树"></a>99. 恢复二叉搜索树</h4><p>给你二叉搜索树的根节点 root ，该树中的两个节点被错误地交换。请在不改变其结构的情况下，恢复这棵树。</p>
+<p>示例1：<br>输入：root = [1,3,null,null,2]<br>输出：[3,1,null,null,2]</p>
+<p>解释：3 不能是 1 左孩子，因为 3 &gt; 1 。交换 1 和 3 使二叉搜索树有效。</p>
+<p>示例 2：<br>输入：root = [3,1,4,null,null,2]<br>输出：[2,1,4,null,null,3]</p>
+<p>解释：2 不能在 3 的右子树中，因为 2 &lt; 3 。交换 2 和 3 使二叉搜索树有效。</p>
+<p>解题思想1：二叉搜索树利用中序遍历的结果是一个递增数列。找到两个错误节点的位置（两种情况，两节点相邻和不相邻），然后交换的两个节点的值。时间复杂度O(n) 空间复杂度(h) h是递归栈的深度。</p>
+<pre><code>/**
+* Definition for a binary tree node.
+* function TreeNode(val, left, right) {
+*     this.val = (val===undefined ? 0 : val)
+*     this.left = (left===undefined ? null : left)
+*     this.right = (right===undefined ? null : right)
+* }
+*/
+/**
+* @param {TreeNode} root
+* @return {void} Do not return anything, modify root in-place instead.
+*/
+
+var recoverTree = (root) =&gt; {
+    // 前一个节点元素，初始值为最小值（需要注意数据范围）
+    let pre = new TreeNode(-Infinity);
+    // 错误位置1 and 2
+    let err1, err2 = null;
+
+    const inOrder = (node) =&gt; {
+        if (node === null) {
+            return;
+        }
+        inOrder(node.left);
+        // 如果前一个元素大于当前元素并且错误位置1为空
+        if (pre.val &gt;= node.val &amp;&amp; err1 === null) { 
+            // 记录错误位置1
+            err1 = pre;                            
+        }
+        // 如果前一个元素大于当前元素并且错误位置1不为空
+        if (pre.val &gt;= node.val &amp;&amp; err1 !== null) { 
+            // 记录错误位置2
+            err2 = node;                            
+        }
+        // 更新pre
+        pre = node;     
+        inOrder(node.right);
+    };
+    // 函数调用
+    inOrder(root);
+    // 交换两个错误位置节点值
+    let temp = err1.val;
+    err1.val = err2.val;
+    err2.val = temp;
+};</code></pre><p>解题思想2：Morris 遍历算法</p>
+<p>假设当前节点为root，初始值为root。</p>
+<p>1.cur无左树，cur直接向右移动，cur = cur.right</p>
+<p>2.cur有左树，找到左树最右节点设为mostRight </p>
+<p>（1）mostRight的右指针指向null的话，mostRight的右指针指向当前节点，mostRight.right = cur, 然后cur向左移动，cur = cur.left</p>
+<p>（2）mostRight的右指针指向cur(第一步操作的结果)，mostRight.right = null，cur = cur.right，向右移动</p>
+<p>3.cur = null流程截止</p>
+<p>时间复杂度O(n) 空间复杂度(1)</p>
+<pre><code>var recoverTree = function(root) {
+    let err1 = null, err2 = null, pre = null, mostRight = null
+    // 如果root不为空
+    while (root !== null) {
+    // 如果节点含有左子树
+    if (root.left !== null) {
+        // 找到左树最右节点设为mostRight
+        mostRight = root.left
+        while (mostRight.right !== null &amp;&amp; mostRight.right !== root) {
+            mostRight = mostRight.right
+        }
+        // mostRight的右指针指向null的话，mostRight的右指针指向当前节点，然后root向左移动
+        if (mostRight.right === null) {
+        mostRight.right = root
+        root = root.left
+        } else {
+            // 如果前一个元素大于当前元素
+            if (pre !== null &amp;&amp; root.val &lt; pre.val) {
+                err2 = root
+                // 错误位置1为空
+                if (err1 === null) {
+                    err1 = pre
+                }
+            }
+            // 更新pre
+            pre = root
+            // mostRight的右指针指向root，向右移动
+            mostRight.right = null
+            root = root.right
+        }
+    }else {
+        // 如果前一个元素大于当前元素
+        if (pre !== null &amp;&amp; root.val &lt; pre.val) {
+            err2 = root
+            // 错误位置1不为空
+            if (err1 === null) {
+                err1 = pre
+            }
+        }
+        pre = root
+        // root无左树，root直接向右移动
+        root = root.right
+    }
+    }
+    // 交换两个错误位置节点的值
+    let temp = err1.val
+    err1.val = err2.val
+    err2.val = temp
+};</code></pre><h4 id="101-对称二叉树"><a href="#101-对称二叉树" class="headerlink" title="101 对称二叉树"></a>101 对称二叉树</h4><p>例如，二叉树 [1,2,2,3,4,4,3] 是对称的。</p>
 <pre><code> 1
 / \
 2   2
@@ -713,7 +1149,100 @@ const dfs = (node, result, level) =&gt; {
     if (node.right !== null) {
         dfs(node.right, result, level +1)
     }
-}</code></pre><h4 id="105-从前序与中序遍历序列构造二叉树"><a href="#105-从前序与中序遍历序列构造二叉树" class="headerlink" title="105 从前序与中序遍历序列构造二叉树"></a>105 从前序与中序遍历序列构造二叉树</h4><p>根据一棵树的前序遍历与中序遍历构造二叉树。</p>
+}</code></pre><h4 id="103-二叉树的锯齿形层序遍历"><a href="#103-二叉树的锯齿形层序遍历" class="headerlink" title="103. 二叉树的锯齿形层序遍历"></a>103. 二叉树的锯齿形层序遍历</h4><p>给定一个二叉树，返回其节点值的锯齿形层序遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。</p>
+<p>例如：<br>给定二叉树 [3,9,20,null,null,15,7],</p>
+<pre><code> 3
+/ \
+9  20
+    /  \
+   15   7</code></pre><p>返回锯齿形层序遍历如下：</p>
+<pre><code>[
+    [3],
+    [20,9],
+    [15,7]
+]</code></pre><p>解题思想1：深度优先遍历：递归，相同层序的节点放入同一个数组中，传入辅助的level参数，决定层序，根据层次的奇偶性判断遍历方向。时间复杂度O(n)  空间复杂度O(n)</p>
+<pre><code>/**
+* Definition for a binary tree node.
+* function TreeNode(val, left, right) {
+*     this.val = (val===undefined ? 0 : val)
+*     this.left = (left===undefined ? null : left)
+*     this.right = (right===undefined ? null : right)
+* }
+*/
+/**
+* @param {TreeNode} root
+* @return {number[][]}
+*/
+
+var zigzagLevelOrder = function(root) {
+    let res = [] // 结果数组
+    if (root === null) {
+        return res
+    }
+    levelOrder(root, 0, res)
+    return res
+};
+/**
+* @param {TreeNode} node  节点
+* @param {number} level 层序
+* @param {number[][]} res 结果数组
+*/
+function levelOrder(node, level, res) {
+    if( node === null) {
+        return []
+    }
+    if (level === res.length) {
+        // 如果level等于res的长度（当根节点为第0层）
+        let cur = []  // 存储当前层的节点
+        cur.push(node.val)
+        res.push(cur)  // 放入结果集中
+    }else {
+        if (level % 2 === 0) {
+            res[level].push(node.val)   // 根据level层序，将节点加入对应层。根据层序的奇偶性确定加入的位置
+        }else {
+            res[level].unshift(node.val)
+        }
+    }
+    // 递归
+    if (node.left !== null) {
+        levelOrder(node.left, level + 1, res)
+    }
+    if (node.right !== null) {
+        levelOrder(node.right, level + 1, res)
+    }
+}</code></pre><p>解题思想2：广度优先遍历，时间复杂度O(n)  空间复杂度O(n)</p>
+<pre><code>var zigzagLevelOrder = function(root) {
+    let res = []  //用于返回结果
+    if (root === null) {
+        return res
+    }
+    let queue = [] // 初始化数组
+    queue.push(root)
+    while (queue.length &gt; 0) {   // 外循环开启新的层级
+        size = queue.length // 当前层有多少元素
+        let list = [] // 存储每一层上的元素
+        while (size &gt; 0) {
+            // 遍历当层所有元素
+            let cur = queue.shift()  // cur用于存储从queue中取出的数
+            // 将cur的值加进list中
+            if (isOrderLeft) {
+                list.push(cur.val);  // 从左往右存数据
+            } else {
+                list.unshift(cur.val);  // 从右往左存数据
+            }
+            if (cur.left !== null) {
+                queue.push(cur.left)  // 如果此节点的左子树存在，就把他加进queue中，因为他是下一层的元素
+            }
+            if (cur.right !== null) {
+                queue.push(cur.right)
+            }
+            --size  // 跳出循环
+        }
+        res.push(list)  // 将每一层的数据放在结果数组中
+        isOrderLeft = !isOrderLeft   // 修改遍历的方向
+    }
+    return res
+};</code></pre><h4 id="105-从前序与中序遍历序列构造二叉树"><a href="#105-从前序与中序遍历序列构造二叉树" class="headerlink" title="105 从前序与中序遍历序列构造二叉树"></a>105 从前序与中序遍历序列构造二叉树</h4><p>根据一棵树的前序遍历与中序遍历构造二叉树。</p>
 <p>注意:<br>你可以假设树中没有重复的元素。</p>
 <p>例如，给出</p>
 <p>前序遍历 preorder = [3,9,20,15,7]<br>中序遍历 inorder = [9,3,15,20,7]<br>返回如下的二叉树：</p>
@@ -963,7 +1492,339 @@ var hasPathSum = function(root, targetSum) {
     }
     // 递归分别传入当前节点的左/右子节点和目标值
     return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.root, targetSum - root.val)
-}</code></pre>
+}</code></pre><h4 id="114-二叉树展开为链表"><a href="#114-二叉树展开为链表" class="headerlink" title="114. 二叉树展开为链表"></a>114. 二叉树展开为链表</h4><p>给你二叉树的根结点 root ，请你将它展开为一个单链表：</p>
+<p>展开后的单链表应该同样使用 TreeNode ，其中 right 子指针指向链表中下一个结点，而左子指针始终为 null 。<br>展开后的单链表应该与二叉树 先序遍历 顺序相同。</p>
+<p>示例 1：</p>
+<p>输入：root = [1,2,5,3,4,null,6]<br>输出：[1,null,2,null,3,null,4,null,5,null,6]</p>
+<p>示例 2：<br>输入：root = []<br>输出：[]</p>
+<p>示例 3：<br>输入：root = [0]<br>输出：[0]</p>
+<p>解题思想：采用后序遍历的方式，也就是 左节点-右节点-打印根节点 这个顺序遍历二叉树。当遍历到根节点后，对根节点的左右子树做一些调整,将右节点挂到左节点的最右边,再将整个左子树挂到根节点的右边，这样就可以将整棵树变成链表结构了。 时间复杂度O(n)  空间复杂度O(h) h是树高度。</p>
+<pre><code>/**
+* Definition for a binary tree node.
+* function TreeNode(val, left, right) {
+*     this.val = (val===undefined ? 0 : val)
+*     this.left = (left===undefined ? null : left)
+*     this.right = (right===undefined ? null : right)
+* }
+*/
+/**
+* @param {TreeNode} root
+* @return {void} 
+*/
+
+var flatten = function(root) {
+    if (root === null) {
+        return null
+    }
+    list(root)
+};
+/**
+* @param {TreeNode} root
+* @return {TreeNode}
+*/
+function list(root) {
+    if (root === null) {
+        return null
+    }
+    let left = list(root.left) // 左子树
+    let right = list(root.right) // 右子树
+    if (left === null) {
+        root.right = right  // 如果左子树为空，节点的right指针指向右子树
+    }else {
+        root.right = left // 右指针指向左子树
+        let cur = left
+        while(cur.right !== null) {
+            cur = cur.right  // 找到左子树最右节点
+        }
+        cur.right = right  //令左子树中的最右节点的右指针指向根节点的右子树
+        root.left = null  // 令二叉树的左子树为空
+    }
+    return root
+}</code></pre><h4 id="116-填充每个节点的下一个右侧节点指针"><a href="#116-填充每个节点的下一个右侧节点指针" class="headerlink" title="116. 填充每个节点的下一个右侧节点指针"></a>116. 填充每个节点的下一个右侧节点指针</h4><p>给定一个 完美二叉树 ，其所有叶子节点都在同一层，每个父节点都有两个子节点。二叉树定义如下：</p>
+<pre><code>struct Node {
+int val;
+Node *left;
+Node *right;
+Node *next;
+}</code></pre><p>填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 NULL。</p>
+<p>初始状态下，所有 next 指针都被设置为 NULL。</p>
+<p>示例1：<br>输入：root = [1,2,3,4,5,6,7]<br>输出：[1,#,2,3,#,4,5,6,7,#]</p>
+<p>解释：给定二叉树如图 A 所示，你的函数应该填充它的每个 next 指针，以指向其下一个右侧节点，如图 B 所示。序列化的输出按层序遍历排列，同一层节点由 next 指针连接，’#’ 标志着每一层的结束。</p>
+<p>解题思想：第一种情况两个子节点属于同一个父节点，直接通过父节点建立两个子节点的 next 指针。node.left.next = node.right。第二种情况是连接不同父节点之间子节点的情况。连接的是第一个父节点的右孩子和第二父节点的左孩子。可以直接通过第一个父节点的 next 指针找到第二个父节点，然后在它们的孩子之间建立连接。node.right.next = node.next.left。时间复杂度O(n)  空间复杂度O(h) h是树高度</p>
+<pre><code>/**
+* // Definition for a Node.
+* function Node(val, left, right, next) {
+*    this.val = val === undefined ? null : val;
+*    this.left = left === undefined ? null : left;
+*    this.right = right === undefined ? null : right;
+*    this.next = next === undefined ? null : next;
+* };
+*/
+
+/**
+* @param {Node} root
+* @return {Node}
+*/
+
+var connect = function(root) {
+    if (root === null) {
+        return null
+    }
+    // 如果是叶子节点
+    if (root.left === null &amp;&amp; root.right === null) {
+        return root
+    }
+    // next指针指向其下一个右侧节点
+    root.left.next = root.right
+    // 如果右侧节点存在,处理不同父节点之间子节点的情况
+    if (root.next !== null) {
+        // 连接的是第一个父节点的右孩子和第二父节点的左孩子。
+        root.right.next = root.next.left
+    }
+    // 递归
+    connect(root.left)
+    connect(root.right)
+    return root
+};</code></pre><h4 id="117-填充每个节点的下一个右侧节点指针-II"><a href="#117-填充每个节点的下一个右侧节点指针-II" class="headerlink" title="117. 填充每个节点的下一个右侧节点指针 II"></a>117. 填充每个节点的下一个右侧节点指针 II</h4><p>给定一个二叉树</p>
+<pre><code>struct Node {
+int val;
+Node *left;
+Node *right;
+Node *next;
+}</code></pre><p>填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 NULL。</p>
+<p>初始状态下，所有 next 指针都被设置为 NULL。<br>输入：root = [1,2,3,4,5,null,7]<br>输出：[1,#,2,3,#,4,5,7,#]</p>
+<p>解释：给定二叉树如图 A 所示，你的函数应该填充它的每个 next 指针，以指向其下一个右侧节点，如图 B 所示。序列化输出按层序遍历顺序（由 next 指针连接），’#’ 表示每层的末尾。</p>
+<p>解题思想：此题二叉树不再是完美二叉树，是一棵普通的二叉树。使用广度优先搜索，初始化一个队列，将根结点放入队列中。当队列不为空的时候，记录当前队列大小为len，从队列中取出len个元素并通过这len个元素拓展新节点。如此循环，直到队列为空。在遍历每一层的时候修改这一层节点的next指针。时间复杂度O(n)  空间复杂度O(n) </p>
+<pre><code>/**
+* // Definition for a Node.
+* function Node(val, left, right, next) {
+*    this.val = val === undefined ? null : val;
+*    this.left = left === undefined ? null : left;
+*    this.right = right === undefined ? null : right;
+*    this.next = next === undefined ? null : next;
+* };
+*/
+
+/**
+* @param {Node} root
+* @return {Node}
+*/
+
+var connect = function(root) {
+    if (root === null) {
+        return null;
+    }
+    // 定义一个队列
+    let queue = []
+    // 将根节点放入队列
+    queue.push(root)
+    while (queue.length &gt; 0) {
+        // 队列长度
+        let len = queue.length; 
+        let last = null;
+        // 遍历当前层所有元素
+        for (let i = 0; i &lt; len; i++) {
+            //取出元素
+            let cur = queue.shift();
+            if (cur.left !== null) {
+                queue.push(cur.left);
+            }
+            if (cur.right !== null) {
+                queue.push(cur.right);
+            }
+            // 修改这一层节点的next指针，
+            if (i !== 0) {
+                last.next = cur;
+            }
+            last = cur;
+        }
+    }
+    return root;
+};</code></pre><h4 id="146-LRU-缓存机制"><a href="#146-LRU-缓存机制" class="headerlink" title="146. LRU 缓存机制"></a>146. LRU 缓存机制</h4><p>运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制 。<br>实现 LRUCache 类：</p>
+<p>LRUCache(int capacity) 以正整数作为容量 capacity 初始化 LRU 缓存<br>int get(int key) 如果关键字 key 存在于缓存中，则返回关键字的值，否则返回 -1 。<br>void put(int key, int value) 如果关键字已经存在，则变更其数据值；如果关键字不存在，则插入该组「关键字-值」。当缓存容量达到上限时，它应该在写入新数据之前删除最久未使用的数据值，从而为新的数据值留出空间。</p>
+<p>示例：</p>
+<p>输入<br>[“LRUCache”, “put”, “put”, “get”, “put”, “get”, “put”, “get”, “get”, “get”]</p>
+<p>[[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]</p>
+<p>输出<br>[null, null, null, 1, null, -1, null, -1, 3, 4]</p>
+<p>解释</p>
+<p>LRUCache lRUCache = new LRUCache(2);<br>lRUCache.put(1, 1); // 缓存是 {1=1}<br>lRUCache.put(2, 2); // 缓存是 {1=1, 2=2}<br>lRUCache.get(1);    // 返回 1<br>lRUCache.put(3, 3); // 该操作会使得关键字 2 作废，缓存是 {1=1, 3=3}<br>lRUCache.get(2);    // 返回 -1 (未找到)<br>lRUCache.put(4, 4); // 该操作会使得关键字 1 作废，缓存是 {4=4, 3=3}<br>lRUCache.get(1);    // 返回 -1 (未找到)<br>lRUCache.get(3);    // 返回 3<br>lRUCache.get(4);    // 返回 4</p>
+<p>解题思想：改变数据访问时间，需要能随机访问，需要把该数据插入到头部或者尾部。</p>
+<pre><code>/**
+* @param {number} capacity
+*/
+
+var LRUCache = function(capacity) {
+    this.capacity = capacity
+    // 保存键、值
+    this.map = new Map()
+};
+
+/** 
+* @param {number} key
+* @return {number}
+*/
+LRUCache.prototype.get = function(key) {
+    // 获取键的值
+    let value = this.map.get(key)
+    // 如果不含有这个键，就返回-1
+    if (value === undefined) {
+        return -1
+    }
+    // 寻找是否有记录
+    this.map.delete(key); // 因为被用过一次，原有位置删除
+    this.map.set(key, value); // 放入最下面表示最新使用
+    return value
+
+};
+/** 
+* @param {number} key 
+* @param {number} value
+* @return {void}
+*/
+LRUCache.prototype.put = function(key, value) {
+    // 如果存在元素
+    if (this.map.has(key)) {
+        // 先删除
+        this.map.delete(key)
+    }
+    // 放到最下面表示最新使用
+    this.map.set(key,value)
+    // map中元素个数大于容量，就一个个删除
+    if (this.map.size &gt; this.capacity) {
+        // 迭代器
+        let keyIterator = this.map.keys();
+        // 迭代器调用next顺序返回
+        this.map.delete(keyIterator.next().value);
+    }
+};</code></pre><h4 id="199-二叉树的右视图"><a href="#199-二叉树的右视图" class="headerlink" title="199. 二叉树的右视图"></a>199. 二叉树的右视图</h4><p>给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。</p>
+<p>示例:<br>输入: [1,2,3,null,5,null,4]<br>输出: [1, 3, 4]</p>
+<p>解释:</p>
+<pre><code>  1            &lt;---
+/   \
+2     3         &lt;---
+\     \
+5     4       &lt;---</code></pre><p>解题思想1：广度优先搜索，进行层次遍历，利用map记录每层最后一个元素。时间复杂度O(n)  空间复杂度O(n)。</p>
+<pre><code>/**
+* Definition for a binary tree node.
+* function TreeNode(val, left, right) {
+*     this.val = (val===undefined ? 0 : val)
+*     this.left = (left===undefined ? null : left)
+*     this.right = (right===undefined ? null : right)
+* }
+*/
+/**
+* @param {TreeNode} root
+* @return {number[]}
+*/
+var rightSideView = function(root) {
+    // 结果集
+    let res = [] 
+    if (root === null) {
+        return res
+    }
+    // 定义一个队列，放入节点
+    let queue = []  
+    // 将根节点放入队列
+    queue.push(root) 
+    // 定义一个队列放入depth
+    let queueDepth = []
+    queueDepth.push(0)
+    // 存放每层最右边的节点
+    let map = new Map()
+    while(queue.length &gt; 0) {
+        // 取出元素
+        let cur = queue.shift() 
+        let depth = queueDepth.shift()
+        if (!map.has(depth)) {
+            // 如果不存在对应深度的节点
+            map.set(depth, cur.val)
+        }
+        if (cur.right !== null) {
+            queue.push(cur.right)
+            queueDepth.push(depth + 1)
+        }
+        if (cur.left !== null) {
+            queue.push(cur.left)
+            queueDepth.push(depth + 1)
+        }
+    }
+    // 遍历map，将值放入res结果数组中
+    for(let value of map.values()) {
+        res.push(value)
+    }
+    return res
+};</code></pre><p>解题思想2：深度优先搜索，按照根节点-&gt;右子树-&gt;左子树进行遍历，这样每次每层都是最先访问最右边的节点。时间复杂度O(n)  空间复杂度O(n)</p>
+<pre><code>var rightSideView = function(root) {
+    // 结果集
+    let res = []
+    if (root === null) {
+        return res
+    }
+    dfs(root, 0, res)
+    return res
+}
+/**
+* @param {TreeNode} node // 节点
+* @param {number} level // 层序
+* @param {number[]} res // 结果
+*/
+function dfs(node, level, res) {
+    if (node === null) {
+        return res
+    }
+    //先访问当前节点
+    //如果当前节点所在层序没有出现在res中，说明在该层序下当前节点是第一个被访问的节点，则将当前节点加入res中
+    if (level === res.length) {
+        res.push(node.val)
+    }
+    //递归访问右子树和左子树
+    dfs(node.right, level + 1, res)
+    dfs(node.left, level + 1, res)
+}</code></pre><h4 id="236-二叉树的最近公共祖先"><a href="#236-二叉树的最近公共祖先" class="headerlink" title="236. 二叉树的最近公共祖先"></a>236. 二叉树的最近公共祖先</h4><p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个节点 p、q，最近公共祖先表示为一个节点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
+<p>示例1:<br>输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1<br>输出：3</p>
+<p>解释：节点 5 和节点 1 的最近公共祖先是节点 3 。</p>
+<p>示例 2：<br>输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4<br>输出：5</p>
+<p>解释：节点 5 和节点 4 的最近公共祖先是节点 5 。因为根据定义最近公共祖先节点可以为节点本身。</p>
+<p>示例 3：<br>输入：root = [1,2], p = 1, q = 2<br>输出：1</p>
+<pre><code>/**
+* Definition for a binary tree node.
+* function TreeNode(val) {
+*     this.val = val;
+*     this.left = this.right = null;
+* }
+*/
+/**
+* @param {TreeNode} root
+* @param {TreeNode} p
+* @param {TreeNode} q
+* @return {TreeNode}
+*/
+/**时间复杂度O(n)   空间复杂度O(n) */
+var lowestCommonAncestor = function(root, p, q) {
+    if (root === null) {
+        return null
+    }
+    let res = new TreeNode()
+    function dfs(root, p, q) {
+        if (node === null) {
+            return false
+        }
+        // 递归
+        let leftTree = dfs(root.left, p, q)
+        let rightTree = dfs(root.right, p, q)
+        // 左子树和右子树均包含p或q或者当前节点是p或q且它的左子树或右子树有一个包含了另一个节点的，判断当前节点是否可能成为最近的公共祖先
+        if ((leftTree &amp;&amp; rightTree) || ((root.val === p.val || root.val === q.val) &amp;&amp; (leftTree || rightTree))) {
+            // 记录公共祖先
+            res = root
+        }
+        // 判断当前节点子树是否分别包含p或q，如果是返回true，否则返回false
+        return (root.val === p.val || root.val === q.val) || (leftTree || rightTree)
+    }
+    // 函数调用
+    dfs(root, p, q)
+    return res
+};</code></pre>
       
 
       <!-- 开始添加版权声明-->
@@ -1149,7 +2010,7 @@ var hasPathSum = function(root, targetSum) {
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#链表"><span class="toc-number">1.</span> <span class="toc-text">链表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-两数相加"><span class="toc-number">1.1.</span> <span class="toc-text">2 两数相加</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#19-删除链表倒数第n个节点"><span class="toc-number">1.2.</span> <span class="toc-text">19 删除链表倒数第n个节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#21-合并两个有序链表"><span class="toc-number">1.3.</span> <span class="toc-text">21 合并两个有序链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#24-两两交换链表中的节点"><span class="toc-number">1.4.</span> <span class="toc-text">24 两两交换链表中的节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#61-旋转链表"><span class="toc-number">1.5.</span> <span class="toc-text">61 旋转链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#82-删除排序链表中的重复元素II"><span class="toc-number">1.6.</span> <span class="toc-text">82 删除排序链表中的重复元素II</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#138-复制带随机指针的链表"><span class="toc-number">1.7.</span> <span class="toc-text">138 复制带随机指针的链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#206-反转链表"><span class="toc-number">1.8.</span> <span class="toc-text">206 反转链表</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#树"><span class="toc-number">2.</span> <span class="toc-text">树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#101-对称二叉树"><span class="toc-number">2.1.</span> <span class="toc-text">101 对称二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#102-二叉树的层序遍历"><span class="toc-number">2.2.</span> <span class="toc-text">102 二叉树的层序遍历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#105-从前序与中序遍历序列构造二叉树"><span class="toc-number">2.3.</span> <span class="toc-text">105 从前序与中序遍历序列构造二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#106-从中序与后序遍历序列构造二叉树"><span class="toc-number">2.4.</span> <span class="toc-text">106 从中序与后序遍历序列构造二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#108-将有序数组转换为二叉搜索树"><span class="toc-number">2.5.</span> <span class="toc-text">108 将有序数组转换为二叉搜索树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#112-路径总和"><span class="toc-number">2.6.</span> <span class="toc-text">112 路径总和</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#leetcode官方题库"><span class="toc-number">1.</span> <span class="toc-text">leetcode官方题库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-两数相加"><span class="toc-number">1.1.</span> <span class="toc-text">2 两数相加</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-盛最多水的容器"><span class="toc-number">1.2.</span> <span class="toc-text">11. 盛最多水的容器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#17-电话号码的字母组合"><span class="toc-number">1.3.</span> <span class="toc-text">17. 电话号码的字母组合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#19-删除链表倒数第n个节点"><span class="toc-number">1.4.</span> <span class="toc-text">19 删除链表倒数第n个节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#21-合并两个有序链表"><span class="toc-number">1.5.</span> <span class="toc-text">21 合并两个有序链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#22-括号生成"><span class="toc-number">1.6.</span> <span class="toc-text">22. 括号生成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#24-两两交换链表中的节点"><span class="toc-number">1.7.</span> <span class="toc-text">24 两两交换链表中的节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#39-组合总和"><span class="toc-number">1.8.</span> <span class="toc-text">39. 组合总和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#46-全排列"><span class="toc-number">1.9.</span> <span class="toc-text">46. 全排列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#47-全排列"><span class="toc-number">1.10.</span> <span class="toc-text">47. 全排列 ||</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#53-最大子序和"><span class="toc-number">1.11.</span> <span class="toc-text">53. 最大子序和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#61-旋转链表"><span class="toc-number">1.12.</span> <span class="toc-text">61 旋转链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#82-删除排序链表中的重复元素II"><span class="toc-number">1.13.</span> <span class="toc-text">82 删除排序链表中的重复元素II</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#138-复制带随机指针的链表"><span class="toc-number">1.14.</span> <span class="toc-text">138 复制带随机指针的链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#206-反转链表"><span class="toc-number">1.15.</span> <span class="toc-text">206 反转链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#99-恢复二叉搜索树"><span class="toc-number">1.16.</span> <span class="toc-text">99. 恢复二叉搜索树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#101-对称二叉树"><span class="toc-number">1.17.</span> <span class="toc-text">101 对称二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#102-二叉树的层序遍历"><span class="toc-number">1.18.</span> <span class="toc-text">102 二叉树的层序遍历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#103-二叉树的锯齿形层序遍历"><span class="toc-number">1.19.</span> <span class="toc-text">103. 二叉树的锯齿形层序遍历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#105-从前序与中序遍历序列构造二叉树"><span class="toc-number">1.20.</span> <span class="toc-text">105 从前序与中序遍历序列构造二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#106-从中序与后序遍历序列构造二叉树"><span class="toc-number">1.21.</span> <span class="toc-text">106 从中序与后序遍历序列构造二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#108-将有序数组转换为二叉搜索树"><span class="toc-number">1.22.</span> <span class="toc-text">108 将有序数组转换为二叉搜索树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#112-路径总和"><span class="toc-number">1.23.</span> <span class="toc-text">112 路径总和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#114-二叉树展开为链表"><span class="toc-number">1.24.</span> <span class="toc-text">114. 二叉树展开为链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#116-填充每个节点的下一个右侧节点指针"><span class="toc-number">1.25.</span> <span class="toc-text">116. 填充每个节点的下一个右侧节点指针</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#117-填充每个节点的下一个右侧节点指针-II"><span class="toc-number">1.26.</span> <span class="toc-text">117. 填充每个节点的下一个右侧节点指针 II</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#146-LRU-缓存机制"><span class="toc-number">1.27.</span> <span class="toc-text">146. LRU 缓存机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#199-二叉树的右视图"><span class="toc-number">1.28.</span> <span class="toc-text">199. 二叉树的右视图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#236-二叉树的最近公共祖先"><span class="toc-number">1.29.</span> <span class="toc-text">236. 二叉树的最近公共祖先</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -1432,23 +2293,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             </li>
           
             <li class="search-li">
-              <a href="https://blog.csdn.net/MarcoAsensio?spm=1001.2014.3001.5509" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>超厉害的后端同学</a>
+              <a href="https://blog.csdn.net/MarcoAsensio?spm=1001.2014.3001.5509" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Mr.ml</a>
             </li>
           
             <li class="search-li">
-              <a href="https://blog.tigerxly.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>二次元同学</a>
+              <a href="https://blog.tigerxly.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>FANTASY博客</a>
             </li>
           
             <li class="search-li">
-              <a href="https://www.caichen.cc" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>失败的何先生</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="https://blog.kinlon.work/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>搞python的同学</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://65zlui.ltd/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>65zlui</a>
+              <a href="https://blog.kinlon.work/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Kinlon</a>
             </li>
           
         </ul>
