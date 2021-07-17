@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>étoile的小窝</title>
+  <title>React 动态加载组件 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="étoile的小窝">
-<meta property="og:url" content="http://sunnyllxx.github.io/page/8/index.html">
+  <meta name="description" content="如何实现 React 路由懒加载">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React 动态加载组件">
+<meta property="og:url" content="http://sunnyllxx.github.io/2021/07/17/react-lazy-load/index.html">
 <meta property="og:site_name" content="étoile的小窝">
+<meta property="og:description" content="如何实现 React 路由懒加载">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-17T06:09:06.000Z">
+<meta property="article:modified_time" content="2021-07-17T06:57:41.484Z">
 <meta property="article:author" content="étoile">
+<meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="étoile的小窝" type="application/atom+xml">
@@ -161,414 +166,157 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-    <article id="post-Pagination-loading" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+<article id="post-react-lazy-load" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/05/Pagination-loading/">微信小程序上拉分页渲染刷新</a>
+    <h1 class="article-title" itemprop="name">
+      React 动态加载组件
     </h1>
   
 
         <!--显示阅读次数-->
 
+
+
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+           👁 &nbsp;<span id="busuanzi_value_page_pv"></span> &nbsp;&nbsp;
+  </span>
+  </a>
+
 <!--显示阅读次数完毕-->
   
         
-        <a href="/2020/08/05/Pagination-loading/" class="archive-article-date">
-  	<time datetime="2020-08-05T07:14:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-05</time>
+        <a href="/2021/07/17/react-lazy-load/" class="archive-article-date">
+  	<time datetime="2021-07-17T06:09:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-17</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="问题-如何在微信小程序中实现上拉分页渲染刷新"><a href="#问题-如何在微信小程序中实现上拉分页渲染刷新" class="headerlink" title="问题 如何在微信小程序中实现上拉分页渲染刷新"></a>问题 如何在微信小程序中实现上拉分页渲染刷新</h3>
-        
-          <a class="article-more-a" href="/2020/08/05/Pagination-loading/#more">more >></a>
-        
+        <h3 id="如何实现-React-路由懒加载"><a href="#如何实现-React-路由懒加载" class="headerlink" title="如何实现 React 路由懒加载"></a>如何实现 React 路由懒加载</h3><a id="more"></a>
+
+<p>当打包构建项目时，JavaScript包会变得非常大，影响页面加载。如果我们能把不同路由对应的组件分割成不同的代码块，然后当路由被访问的时候才加载对应组件，提高效率。</p>
+<h4 id="1-使用-React-lazy-结合-Suspense-实现"><a href="#1-使用-React-lazy-结合-Suspense-实现" class="headerlink" title="1 使用 React.lazy 结合 Suspense 实现"></a>1 使用 React.lazy 结合 Suspense 实现</h4><p>1.通过 lazy() 来动态 import 需要懒加载的组件。<br>2.Suspense来包裹懒加载的组件进行加载，设置fallback现实加载中效果，此处使用 antd 的 Spin 组件。</p>
+<pre><code>import React, { Component, Suspense, lazy } from &apos;react&apos;
+import {BrowserRouter,Route,Switch} from &apos;react-router-dom&apos;
+import &apos;./App.css&apos;;
+import { Spin } from &apos;antd&apos;;
+const Login = lazy(() =&gt; import(&apos;./pages/Login/Login.jsx&apos;));
+const Admin = lazy(() =&gt; import(&apos;./pages/Admin/Admin.jsx&apos;));
+
+export default class App extends Component {
+    render() {
+        return (
+            &lt;div className=&quot;app&quot;&gt;
+                &lt;BrowserRouter&gt;
+                &lt;Suspense fallback={&lt;div style={{textAlign: 'center',margin:'200px auto', width: '100%', height: '100%'}}&gt;&lt;Spin&gt;&lt;/Spin&gt;&lt;/div&gt;}&gt;
+                    &lt;Switch&gt; 
+                    {/* 只匹配一个路由 */}
+                    &lt;Route path=&quot;/login&quot; component={Login}&gt;&lt;/Route&gt;
+                    &lt;Route path=&quot;/&quot; component={Admin}&gt;&lt;/Route&gt;
+                    &lt;/Switch&gt;
+                &lt;/Suspense&gt;
+                &lt;/BrowserRouter&gt;
+            &lt;/div&gt;
+
+        )
+    }
+}</code></pre><h4 id="2-自定义lazyLoad函数进行实现"><a href="#2-自定义lazyLoad函数进行实现" class="headerlink" title="2 自定义lazyLoad函数进行实现"></a>2 自定义lazyLoad函数进行实现</h4><p>1.在App.js中引入lazyLoad.js文件</p>
+<pre><code>import {lazyLoad} from &apos;../../util/lazyLoad&apos;</code></pre><p>2.修改引入路由的方式</p>
+<pre><code>const Login = lazyLoad(() =&gt; import(&apos;./pages/Login/Login.jsx&apos;));</code></pre><p>lazyLoad.js 代码如下：</p>
+<pre><code>import React from &quot;react&quot;;
+
+/**
+* 路由分割方法
+*/
+export function lazyLoad(loadComponent) {
+    return class extends React.Component{
+        state = {Component:null}
+        componentDidMount() {
+            loadComponent().then(result =&gt; {
+                this.setState({Component: result.default})
+            })
+        }
+        render() {
+            const {Component} = this.state
+            return Component &amp;&amp; &lt;Component&gt;&lt;/Component&gt;
+        }
+    }
+}</code></pre><h4 id="3-预获取-预加载模块-prefetch-preload-module"><a href="#3-预获取-预加载模块-prefetch-preload-module" class="headerlink" title="3 预获取/预加载模块(prefetch/preload module)"></a>3 预获取/预加载模块(prefetch/preload module)</h4><p>在声明 import 时，使用下面这些内置指令，可以让 webpack 输出 “resource hint(资源提示)”，来告知浏览器：</p>
+<p>1.prefetch(预获取)：将来某些导航下可能需要的资源（浏览器会在空闲时间加载资源）<br>2.preload(预加载)：当前导航下可能需要资源</p>
+<p>与 prefetch 指令相比，preload 指令有许多不同之处：</p>
+<p>1.preload chunk 会在父 chunk 加载时，以并行方式开始加载。prefetch chunk 会在父 chunk 加载结束后开始加载。<br>2.preload chunk 具有中等优先级，并立即下载。prefetch chunk 在浏览器闲置时下载。<br>3.preload chunk 会在父 chunk 中立即请求，用于当下时刻。prefetch chunk 会用于未来的某个时刻。</p>
+<pre><code>const Category = lazy(() =&gt; import(/*webpackPrefetch:true*/&apos;../../pages/Category/Category&apos;));</code></pre>
       
 
       <!-- 开始添加版权声明-->
 
 
-<div class="declare" hidden="hidden"></div>
+<div class="declare">
+  <ul><li><strong>本文作者：</strong>
+  
+    étoile
+  
+</li></ul>
+  <ul><li><strong>本文链接：</strong>
+ <a href="http://sunnyllxx.github.io/2021/07/17/react-lazy-load/" target="_blank" rel="noopener">http://sunnyllxx.github.io/2021/07/17/react-lazy-load/</a>
+</li></ul>
+  <ul><li><strong>版权声明：</strong>
+  本作品采用
+  <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+  进行许可。转载请注明出处！
+  
+</div>
 
 <!-- 添加完成 -->
 
 
       
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/微信小程序//" class="article-tag-list-link color1">微信小程序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/05/Pagination-loading/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/zhifubaopicture.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechatcollection.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-components" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/30/components/">微信小程序自定义组件tab选项</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/07/30/components/" class="archive-article-date">
-  	<time datetime="2020-07-30T13:40:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1自定义组件添加"><a href="#1自定义组件添加" class="headerlink" title="1自定义组件添加"></a>1自定义组件添加</h3>
-        
-          <a class="article-more-a" href="/2020/07/30/components/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
       
     </div>
     <!-- 添加本文结束标记-->
 
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/微信小程序//" class="article-tag-list-link color1">微信小程序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/30/components/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
+  <div style="text-align:center;color: #00BFFF;font-size:14px;">
+       -------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------
+       </div>
   
-    <article id="post-解决layui表单提交内容到网址的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/07/07/%E8%A7%A3%E5%86%B3layui%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4%E5%86%85%E5%AE%B9%E5%88%B0%E7%BD%91%E5%9D%80%E7%9A%84%E9%97%AE%E9%A2%98/">解决layui表单提交内容到网址的问题</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/07/07/%E8%A7%A3%E5%86%B3layui%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4%E5%86%85%E5%AE%B9%E5%88%B0%E7%BD%91%E5%9D%80%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-07-07T13:34:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="如何解决layui表单提交后内容出现在网址上的问题"><a href="#如何解决layui表单提交后内容出现在网址上的问题" class="headerlink" title="如何解决layui表单提交后内容出现在网址上的问题"></a>如何解决layui表单提交后内容出现在网址上的问题</h3>
-        
-          <a class="article-more-a" href="/2020/07/07/%E8%A7%A3%E5%86%B3layui%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4%E5%86%85%E5%AE%B9%E5%88%B0%E7%BD%91%E5%9D%80%E7%9A%84%E9%97%AE%E9%A2%98/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/layui//" class="article-tag-list-link color1">layui</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/07/07/%E8%A7%A3%E5%86%B3layui%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4%E5%86%85%E5%AE%B9%E5%88%B0%E7%BD%91%E5%9D%80%E7%9A%84%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-README" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/23/README/">README</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/06/23/README/" class="archive-article-date">
-  	<time datetime="2020-06-23T03:25:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="我的hexo博客"><a href="#我的hexo博客" class="headerlink" title="我的hexo博客"></a>我的hexo博客</h2><p>博客地址：<a href="https://sunnyllxx.github.io/">https://sunnyllxx.github.io/</a></p>
-        
-          <a class="article-more-a" href="/2020/06/23/README/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/23/README/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-解决hexo-blog部署github一直出现404" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo-blog%E9%83%A8%E7%BD%B2github%E4%B8%80%E7%9B%B4%E5%87%BA%E7%8E%B0404/">解决hexo blog部署github一直出现404</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo-blog%E9%83%A8%E7%BD%B2github%E4%B8%80%E7%9B%B4%E5%87%BA%E7%8E%B0404/" class="archive-article-date">
-  	<time datetime="2020-06-20T05:57:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="如何解决hexo部署到github网页一直出现404的问题"><a href="#如何解决hexo部署到github网页一直出现404的问题" class="headerlink" title="如何解决hexo部署到github网页一直出现404的问题"></a>如何解决hexo部署到github网页一直出现404的问题</h3>
-        
-          <a class="article-more-a" href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo-blog%E9%83%A8%E7%BD%B2github%E4%B8%80%E7%9B%B4%E5%87%BA%E7%8E%B0404/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
   <!-- 添加完成 -->
     <div class="article-info article-info-index">
       
@@ -579,7 +327,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">github</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
         		</li>
       		
 		</ul>
@@ -593,7 +341,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
+        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
         		</li>
       		
 		</ul>
@@ -601,16 +349,75 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo-blog%E9%83%A8%E7%BD%B2github%E4%B8%80%E7%9B%B4%E5%87%BA%E7%8E%B0404/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://SunnyLLXX.github.io/hub.io/2021/07/17/react-lazy-load/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2021/05/22/leetcode/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">LeetCode题解</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -625,404 +432,67 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-解决hexo博客Cannot-find-module-chalk-问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2Cannot-find-module-chalk-%E9%97%AE%E9%A2%98/">解决hexo博客Cannot find module&#39;chalk&#39;问题</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2Cannot-find-module-chalk-%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-06-20T05:45:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="如何解决使用hexo命令后出现Cannot-find-module-‘chalk’问题"><a href="#如何解决使用hexo命令后出现Cannot-find-module-‘chalk’问题" class="headerlink" title="如何解决使用hexo命令后出现Cannot find module ‘chalk’问题"></a>如何解决使用hexo命令后出现Cannot find module ‘chalk’问题</h3>
-        
-          <a class="article-more-a" href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2Cannot-find-module-chalk-%E9%97%AE%E9%A2%98/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/20/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2Cannot-find-module-chalk-%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何实现-React-路由懒加载"><span class="toc-number">1.</span> <span class="toc-text">如何实现 React 路由懒加载</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-使用-React-lazy-结合-Suspense-实现"><span class="toc-number">1.1.</span> <span class="toc-text">1 使用 React.lazy 结合 Suspense 实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-自定义lazyLoad函数进行实现"><span class="toc-number">1.2.</span> <span class="toc-text">2 自定义lazyLoad函数进行实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-预获取-预加载模块-prefetch-preload-module"><span class="toc-number">1.3.</span> <span class="toc-text">3 预获取&#x2F;预加载模块(prefetch&#x2F;preload module)</span></a></li></ol></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
 
-  
-    <article id="post-解决hexo部署文章到github图片无法显示问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/21/%E8%A7%A3%E5%86%B3hexo%E9%83%A8%E7%BD%B2%E6%96%87%E7%AB%A0%E5%88%B0github%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/">解决hexo部署文章到github图片无法显示问题</a>
-    </h1>
-  
 
-        <!--显示阅读次数-->
+   <!-- valine评论系统开始 -->
 
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/05/21/%E8%A7%A3%E5%86%B3hexo%E9%83%A8%E7%BD%B2%E6%96%87%E7%AB%A0%E5%88%B0github%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-05-21T08:10:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="如何解决hexo部署文章到github图片无法解决的问题"><a href="#如何解决hexo部署文章到github图片无法解决的问题" class="headerlink" title="如何解决hexo部署文章到github图片无法解决的问题"></a>如何解决hexo部署文章到github图片无法解决的问题</h3>
-        
-          <a class="article-more-a" href="/2020/05/21/%E8%A7%A3%E5%86%B3hexo%E9%83%A8%E7%BD%B2%E6%96%87%E7%AB%A0%E5%88%B0github%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/#more">more >></a>
-        
-      
+   
+    <section id="comments" class="comments">
+      <style>
+        .comments{margin:30px;padding:10px;background:#fff}
+        @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+      </style>
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'true' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "SqWqnmUuTCilnupzDVQgFhrE-gzGzoHsz",
+            app_key: "EuNlMDzK61IRiansuSobGwsH",
+            placeholder: "留下你的评论吧",
+            avatar:"retro",
+            avatar_cdn:'{{ theme.valine.avatar_cdn }}',
+        });
+    }
+</script>
 
-      <!-- 开始添加版权声明-->
+  </section>
 
 
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/21/%E8%A7%A3%E5%86%B3hexo%E9%83%A8%E7%BD%B2%E6%96%87%E7%AB%A0%E5%88%B0github%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-将本地项目提交到github" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/21/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E6%8F%90%E4%BA%A4%E5%88%B0github/">将本地项目提交到github</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/05/21/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E6%8F%90%E4%BA%A4%E5%88%B0github/" class="archive-article-date">
-  	<time datetime="2020-05-21T07:54:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="如何将本地项目提交到github"><a href="#如何将本地项目提交到github" class="headerlink" title="如何将本地项目提交到github"></a>如何将本地项目提交到github</h3>
-        
-          <a class="article-more-a" href="/2020/05/21/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E6%8F%90%E4%BA%A4%E5%88%B0github/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/github//" class="article-tag-list-link color2">github</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/21/%E5%B0%86%E6%9C%AC%E5%9C%B0%E9%A1%B9%E7%9B%AE%E6%8F%90%E4%BA%A4%E5%88%B0github/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hexo博客搭建感想及yilia主题的一些美化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/02/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%84%9F%E6%83%B3%E5%8F%8Ayilia%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BE%8E%E5%8C%96/">hexo博客搭建感想及yilia主题的一些美化</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-  
-        
-        <a href="/2020/05/02/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%84%9F%E6%83%B3%E5%8F%8Ayilia%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BE%8E%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2020-05-02T12:18:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="这篇文章主要列举了利用hexo搭建博客遇到的问题和解决方法以及yilia主题的一些美化功能的添加"><a href="#这篇文章主要列举了利用hexo搭建博客遇到的问题和解决方法以及yilia主题的一些美化功能的添加" class="headerlink" title="这篇文章主要列举了利用hexo搭建博客遇到的问题和解决方法以及yilia主题的一些美化功能的添加"></a>这篇文章主要列举了利用hexo搭建博客遇到的问题和解决方法以及yilia主题的一些美化功能的添加</h4>
-        
-          <a class="article-more-a" href="/2020/05/02/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%84%9F%E6%83%B3%E5%8F%8Ayilia%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BE%8E%E5%8C%96/#more">more >></a>
-        
-      
-
-      <!-- 开始添加版权声明-->
-
-
-<div class="declare" hidden="hidden"></div>
-
-<!-- 添加完成 -->
-
-
-      
-    </div>
-    <!-- 添加本文结束标记-->
-
-  <!-- 添加完成 -->
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">yilia</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/02/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%84%9F%E6%83%B3%E5%8F%8Ayilia%E4%B8%BB%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BE%8E%E5%8C%96/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
+<!-- valine评论系统结束 -->
 
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/7/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -1060,8 +530,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
