@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/03/28/react-setState/pic03.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/03/28/react-setState/pic04.png">
 <meta property="article:published_time" content="2021-03-28T02:41:18.000Z">
-<meta property="article:modified_time" content="2021-03-29T01:48:50.563Z">
+<meta property="article:modified_time" content="2021-07-18T13:40:00.283Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -212,8 +212,7 @@
 <h3 id="1-setState的使用方式"><a href="#1-setState的使用方式" class="headerlink" title="1 setState的使用方式"></a>1 setState的使用方式</h3><p>1.不要直接修改 State，应该使用setState</p>
 <pre><code>//此代码不会重新渲染组件
 
-this.state.count = 1;</code></pre><p>2.使用方式</p>
-<p>（1）setState(updater, [callback])</p>
+this.state.count = 1;</code></pre><p>2.使用方式<br>（1）setState(updater, [callback])</p>
 <pre><code>updater为返回stateChange对象的函数: (state, props) =&gt; stateChange
 接收的state和props被保证为最新的</code></pre><p>（2）setState(stateChange, [callback])</p>
 <pre><code>stateChange为对象,
@@ -266,10 +265,7 @@ class Count extends Component {
 }
 
 export default Count;</code></pre><p><img src="/2021/03/28/react-setState/pic07.png" alt></p>
-<h4 id="2-State-的更新可能是异步的"><a href="#2-State-的更新可能是异步的" class="headerlink" title="2 State 的更新可能是异步的"></a>2 State 的更新可能是异步的</h4><p>根据执行setState()的位置进行判断</p>
-<p>如果在react控制的回调函数中: 生命周期函数、react事件监听回调，执行时异步的。</p>
-<p>如果在非react控制的异步回调函数中: 如定时器回调、原生事件监听回调、promise.then()，执行是同步的。</p>
-<p>小案例如下：</p>
+<h4 id="2-State-的更新可能是异步的"><a href="#2-State-的更新可能是异步的" class="headerlink" title="2 State 的更新可能是异步的"></a>2 State 的更新可能是异步的</h4><p>根据执行setState()的位置进行判断<br>如果在react控制的回调函数中: 生命周期函数、react事件监听回调，执行时异步的。<br>如果在非react控制的异步回调函数中: 如定时器回调、原生事件监听回调、promise.then()，执行是同步的。<br>小案例如下：</p>
 <pre><code>import React, { Component } from &apos;react&apos;;
 
 class Count extends Component {
@@ -392,9 +388,7 @@ class Count extends Component {
 
 export default Count;</code></pre><p><img src="/2021/03/28/react-setState/pic01.png" alt></p>
 <p><img src="/2021/03/28/react-setState/pic02.png" alt></p>
-<h4 id="3-State-的更新会被合并"><a href="#3-State-的更新会被合并" class="headerlink" title="3 State 的更新会被合并"></a>3 State 的更新会被合并</h4><p>关于异步的setState()，多次调用, 如何处理?</p>
-<p>setState({}): （对象形式）合并更新一次状态, 只调用一次render()更新界面 —状态更新和界面更新都合并了</p>
-<p>setState(fn): （函数形式）更新多次状态, 但只调用一次render()更新界面  —状态更新没有合并, 界面更新合并了。</p>
+<h4 id="3-State-的更新会被合并"><a href="#3-State-的更新会被合并" class="headerlink" title="3 State 的更新会被合并"></a>3 State 的更新会被合并</h4><p>关于异步的setState()，多次调用, 如何处理?<br>setState({}): （对象形式）合并更新一次状态, 只调用一次render()更新界面 —状态更新和界面更新都合并了<br>setState(fn): （函数形式）更新多次状态, 但只调用一次render()更新界面  —状态更新没有合并, 界面更新合并了。</p>
 <p><img src="/2021/03/28/react-setState/pic03.png" alt></p>
 <p><img src="/2021/03/28/react-setState/pic04.png" alt></p>
 

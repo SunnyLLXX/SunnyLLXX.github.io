@@ -16,7 +16,7 @@
 <meta property="og:description" content="使用es5实现Promise方法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-23T05:56:49.000Z">
-<meta property="article:modified_time" content="2021-02-23T06:14:14.742Z">
+<meta property="article:modified_time" content="2021-07-18T14:21:25.137Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta property="article:tag" content="JavaScript">
@@ -204,10 +204,7 @@
       
         <h3 id="使用es5实现Promise方法"><a href="#使用es5实现Promise方法" class="headerlink" title="使用es5实现Promise方法"></a>使用es5实现Promise方法</h3><a id="more"></a>
 <p>本篇主要讲解实现then(),catch(),Promise.resolve(),Promise.reject(),Promise.all(),Promise.race()</p>
-<h4 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h4><p>1.首先将整体结构罗列出来，包括Promise构造函数，执行器，Promise原型对象then,catch方法，函数对象resolve，reject，all，race方法</p>
-<p>2.实现内部函数reslove，reject方法，捕获执行器异常</p>
-<p>3.实现各种方法</p>
-<p>新建一个Promise.js文件</p>
+<h4 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h4><p>1.首先将整体结构罗列出来，包括Promise构造函数，执行器，Promise原型对象then,catch方法，函数对象resolve，reject，all，race方法<br>2.实现内部函数reslove，reject方法，捕获执行器异常<br>3.实现各种方法<br>新建一个Promise.js文件</p>
 <pre><code>(function (window) {
 
     //三种状态
@@ -270,7 +267,6 @@
         }
 
     }
-
 
     /**Promise原型对象的then()
     * 指定成功和失败的回调函数
@@ -340,7 +336,6 @@
             }
         }) 
     }
-
 
     /**Promise原型对象的catch() 
     * 执行失败的回调函数

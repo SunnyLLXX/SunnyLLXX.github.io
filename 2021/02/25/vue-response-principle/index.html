@@ -16,7 +16,7 @@
 <meta property="og:description" content="什么是vue响应式原理，该如何实现">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-25T08:29:37.000Z">
-<meta property="article:modified_time" content="2021-05-22T10:08:29.556Z">
+<meta property="article:modified_time" content="2021-07-18T14:18:57.629Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="Vue">
 <meta property="article:tag" content="常见题">
@@ -203,10 +203,7 @@
       
         <h4 id="什么是vue响应式原理，该如何实现"><a href="#什么是vue响应式原理，该如何实现" class="headerlink" title="什么是vue响应式原理，该如何实现"></a>什么是vue响应式原理，该如何实现</h4><a id="more"></a>
 
-<p>详细请看<a href="https://cn.vuejs.org/v2/guide/reactivity.html" target="_blank" rel="noopener">官方文档</a></p>
-<p>Vue 最独特的特性之一，是其非侵入性的响应式系统。数据模型仅仅是普通的 JavaScript 对象。而当你修改它们时，视图会进行更新。</p>
-<p>当你把一个普通的 JavaScript 对象传入 Vue 实例作为 data 选项，Vue 将遍历此对象所有的 property，并使用 Object.defineProperty（数据劫持） 把这些 property 全部转为 getter/setter。</p>
-<p>getter是使用数据的时候触发，setter是在修改数据的时候触发，修改数据的时候触发setter，同时也触发了底层的watcher监听，通知dom修改刷新。</p>
+<p>详细请看<a href="https://cn.vuejs.org/v2/guide/reactivity.html" target="_blank" rel="noopener">官方文档</a><br>Vue 最独特的特性之一，是其非侵入性的响应式系统。数据模型仅仅是普通的 JavaScript 对象。而当你修改它们时，视图会进行更新。<br>当你把一个普通的 JavaScript 对象传入 Vue 实例作为 data 选项，Vue 将遍历此对象所有的 property，并使用 Object.defineProperty（数据劫持） 把这些 property 全部转为 getter/setter。<br>getter是使用数据的时候触发，setter是在修改数据的时候触发，修改数据的时候触发setter，同时也触发了底层的watcher监听，通知dom修改刷新。</p>
 <pre><code>&lt;script&gt;
     var data = {
         name: &apos;Liao&apos;,

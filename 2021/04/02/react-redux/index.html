@@ -17,7 +17,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/04/02/react-redux/pic01.png">
 <meta property="article:published_time" content="2021-04-02T11:33:27.000Z">
-<meta property="article:modified_time" content="2021-04-02T12:35:31.994Z">
+<meta property="article:modified_time" content="2021-07-18T13:39:01.240Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -205,29 +205,22 @@
         <h3 id="有关Redux的使用方法"><a href="#有关Redux的使用方法" class="headerlink" title="有关Redux的使用方法"></a>有关Redux的使用方法</h3><a id="more"></a>
 <p>详细请查看<a href="http://www.redux.org.cn/" target="_blank" rel="noopener">中文文档</a></p>
 <h4 id="1-redux是什么"><a href="#1-redux是什么" class="headerlink" title="1 redux是什么"></a>1 redux是什么</h4><p>redux是一个专门用于做状态管理的JS库，它可以用在react, angular, vue等项目中, 但基本与react配合使用，用于集中式管理react应用中多个组件共享的状态。</p>
-<h4 id="2-什么情况下可以使用redux"><a href="#2-什么情况下可以使用redux" class="headerlink" title="2 什么情况下可以使用redux"></a>2 什么情况下可以使用redux</h4><p>1.某个组件的状态，需要让其他组件可以随时拿到（组件间共享数据）。</p>
-<p>2.一个组件需要改变另一个组件的状态（组件间通信）。</p>
+<h4 id="2-什么情况下可以使用redux"><a href="#2-什么情况下可以使用redux" class="headerlink" title="2 什么情况下可以使用redux"></a>2 什么情况下可以使用redux</h4><p>1.某个组件的状态，需要让其他组件可以随时拿到（组件间共享数据）。<br>2.一个组件需要改变另一个组件的状态（组件间通信）。</p>
 <h4 id="3-redux流程"><a href="#3-redux流程" class="headerlink" title="3 redux流程"></a>3 redux流程</h4><p><img src="/2021/04/02/react-redux/pic01.png" alt></p>
-<h4 id="4-redux的三个核心概念"><a href="#4-redux的三个核心概念" class="headerlink" title="4 redux的三个核心概念"></a>4 redux的三个核心概念</h4><p>1.Action：Action 是把数据从应用传到 store 的有效载荷。它是 store 数据的唯一来源。一般来说你会通过 store.dispatch() 将 action 传到 store。Action 本质上是 JavaScript 普通对象。除了 type 字段外，action 对象的结构完全由你自己决定。</p>
-<p>一般可以包含2个属性</p>
+<h4 id="4-redux的三个核心概念"><a href="#4-redux的三个核心概念" class="headerlink" title="4 redux的三个核心概念"></a>4 redux的三个核心概念</h4><p>1.Action：Action 是把数据从应用传到 store 的有效载荷。它是 store 数据的唯一来源。一般来说你会通过 store.dispatch() 将 action 传到 store。Action 本质上是 JavaScript 普通对象。除了 type 字段外，action 对象的结构完全由你自己决定。<br>一般可以包含2个属性</p>
 <pre><code>type：标识属性, 值为字符串, 唯一, 必要属性
 data：数据属性, 值类型任意, 可选属性
 
-{ type: &apos;add_person&apos;,data:{name: &apos;lx&apos;,age:18} }</code></pre><p>2.Reducer：Reducers 指定了应用状态的变化如何响应 actions 并发送到 store 的，记住 actions 只是描述了有事情发生了这一事实，并没有描述应用如何更新 state。</p>
-<p>（用于初始化状态、加工状态）根据旧的state和action， 产生新的state的纯函数。</p>
-<p>永远不要在 reducer 里做这些操作：</p>
+{ type: &apos;add_person&apos;,data:{name: &apos;lx&apos;,age:18} }</code></pre><p>2.Reducer：Reducers 指定了应用状态的变化如何响应 actions 并发送到 store 的，记住 actions 只是描述了有事情发生了这一事实，并没有描述应用如何更新 state。<br>（用于初始化状态、加工状态）根据旧的state和action， 产生新的state的纯函数。<br>永远不要在 reducer 里做这些操作：</p>
 <pre><code>修改传入参数；
 执行有副作用的操作，如 API 请求和路由跳转；
-调用非纯函数，如 Date.now() 或 Math.random()。</code></pre><p>3.Store：将state、action、reducer联系在一起的对象。Redux 应用只有一个单一的 store。</p>
-<p>（1）如何生成store对象?</p>
+调用非纯函数，如 Date.now() 或 Math.random()。</code></pre><p>3.Store：将state、action、reducer联系在一起的对象。Redux 应用只有一个单一的 store。<br>（1）如何生成store对象?</p>
 <pre><code>import {createStore} from &apos;redux&apos;
 import reducer from &apos;./reducers&apos;
 const store = createStore(reducer)</code></pre><p>（2）此对象的方法?</p>
 <pre><code>getState(): 获取state
 dispatch(action): 分发action, 触发reducer调用, 产生新的state
-subscribe(listener): 注册监听, 当产生了新的state时, 自动调用</code></pre><h4 id="5-redux的核心API"><a href="#5-redux的核心API" class="headerlink" title="5 redux的核心API"></a>5 redux的核心API</h4><p>1.createstore()：创建包含指定reducer的store对象</p>
-<p>2.store对象：redux库最核心的管理对象</p>
-<p>（1）核心方法:</p>
+subscribe(listener): 注册监听, 当产生了新的state时, 自动调用</code></pre><h4 id="5-redux的核心API"><a href="#5-redux的核心API" class="headerlink" title="5 redux的核心API"></a>5 redux的核心API</h4><p>1.createstore()：创建包含指定reducer的store对象<br>2.store对象：redux库最核心的管理对象<br>（1）核心方法:</p>
 <pre><code>getState()
 dispatch(action)
 subscribe(listener)</code></pre><p>（2）具体用法:</p>
@@ -235,8 +228,7 @@ subscribe(listener)</code></pre><p>（2）具体用法:</p>
 store.dispatch({type:&apos;INCREMENT&apos;, number})
 store.subscribe(render)
 applyMiddleware()：应用上基于redux的中间件(插件库)
-combineReducers()：合并多个reducer函数</code></pre><h4 id="6-实现小案例"><a href="#6-实现小案例" class="headerlink" title="6 实现小案例"></a>6 实现小案例</h4><p>计数器小案例：使用下拉框选择每次需要加或减的数字，点击按钮进行修改count，功能包括加，减，当前count为奇数进行加，异步加数字。</p>
-<p>在src/components/Count文件夹下新建Count.jsx</p>
+combineReducers()：合并多个reducer函数</code></pre><h4 id="6-实现小案例"><a href="#6-实现小案例" class="headerlink" title="6 实现小案例"></a>6 实现小案例</h4><p>计数器小案例：使用下拉框选择每次需要加或减的数字，点击按钮进行修改count，功能包括加，减，当前count为奇数进行加，异步加数字。<br>在src/components/Count文件夹下新建Count.jsx</p>
 <pre><code>import React, { Component } from &apos;react&apos;;
 import store from &apos;../../redux/store&apos;;
 //引入actioncreator，专门用于创建action对象
@@ -355,8 +347,7 @@ export default function countReducer(preState,action){
         default:
             return preState
     }
-}</code></pre><h4 id="7-注意"><a href="#7-注意" class="headerlink" title="7 注意"></a>7 注意</h4><p>1.redux只负责管理状态，想要状态的改变驱动着页面的改变，需要自己手动编写。</p>
-<p>（1）可以在组件中的componentDidMount生命周期进行编写</p>
+}</code></pre><h4 id="7-注意"><a href="#7-注意" class="headerlink" title="7 注意"></a>7 注意</h4><p>1.redux只负责管理状态，想要状态的改变驱动着页面的改变，需要自己手动编写。<br>（1）可以在组件中的componentDidMount生命周期进行编写</p>
 <pre><code>componentDidMount(){
         //检测redux变化，只要变化，就调用render
         store.subscribe(()=&gt;{
@@ -370,11 +361,7 @@ export default function countReducer(preState,action){
             &lt;App /&gt;,
             document.getElementById(&apos;root&apos;)
     )
-})</code></pre><p>2.使用异步action时需要注意的地方</p>
-<p>（1）首先yarn add redux-thunk，并配置在store中</p>
-<p>（2）创建action的函数不再返回一般对象，而是一个函数，该函数中写异步任务。</p>
-<p>（3）异步任务有结果后，分发一个同步的action去真正操作数据。</p>
-<p>（4）异步action不是必须要写的，完全可以等待异步任务的结果了再去分发同步action。</p>
+})</code></pre><p>2.使用异步action时需要注意的地方<br>（1）首先yarn add redux-thunk，并配置在store中<br>（2）创建action的函数不再返回一般对象，而是一个函数，该函数中写异步任务。<br>（3）异步任务有结果后，分发一个同步的action去真正操作数据。<br>（4）异步action不是必须要写的，完全可以等待异步任务的结果了再去分发同步action。</p>
 
       
 

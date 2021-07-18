@@ -16,7 +16,7 @@
 <meta property="og:description" content="学习 js的函数节流与防抖">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-17T07:47:43.000Z">
-<meta property="article:modified_time" content="2021-03-12T06:39:56.913Z">
+<meta property="article:modified_time" content="2021-07-18T14:40:33.066Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta property="article:tag" content="JavaScript">
@@ -203,10 +203,7 @@
       
         <h3 id="学习-js的函数节流与防抖"><a href="#学习-js的函数节流与防抖" class="headerlink" title="学习 js的函数节流与防抖"></a>学习 js的函数节流与防抖</h3><a id="more"></a>
 
-
-<h4 id="1-函数节流"><a href="#1-函数节流" class="headerlink" title="1 函数节流"></a>1 函数节流</h4><p>函数节流：一个函数执行一次后，只有在大于设定时间执行周期后才会执行</p>
-<p>有一个频繁触发的函数，处于对性能的考虑，在规定时间内，只执行一次生效，其余不生效。</p>
-<p>应用场景：用户滚动窗口时，在规定时间内事件触发。</p>
+<h4 id="1-函数节流"><a href="#1-函数节流" class="headerlink" title="1 函数节流"></a>1 函数节流</h4><p>函数节流：一个函数执行一次后，只有在大于设定时间执行周期后才会执行<br>有一个频繁触发的函数，处于对性能的考虑，在规定时间内，只执行一次生效，其余不生效。<br>应用场景：用户滚动窗口时，在规定时间内事件触发。</p>
 <pre><code>function throttle(fn,delay){
     //传入要被节流的函数参数，延迟时间
     //声明上一次的执行时间
@@ -227,8 +224,7 @@
 }                
 
 //为document绑定事件
-document.onscroll =  throll(function(){console.log(&quot;事件触发啦&quot;+Date.now())},200)</code></pre><h4 id="2-函数防抖"><a href="#2-函数防抖" class="headerlink" title="2 函数防抖"></a>2 函数防抖</h4><p>函数防抖：一个频繁触发的函数，在规定时间内，只让最后一个生效，其余不生效。</p>
-<p>应用场景：用户在输入框中输入完成后，进行事件触发。</p>
+document.onscroll =  throll(function(){console.log(&quot;事件触发啦&quot;+Date.now())},200)</code></pre><h4 id="2-函数防抖"><a href="#2-函数防抖" class="headerlink" title="2 函数防抖"></a>2 函数防抖</h4><p>函数防抖：一个频繁触发的函数，在规定时间内，只让最后一个生效，其余不生效。<br>应用场景：用户在输入框中输入完成后，进行事件触发。</p>
 <pre><code>function debounce(fn,delay){
     //记录上一次的延迟器
     var timer = null

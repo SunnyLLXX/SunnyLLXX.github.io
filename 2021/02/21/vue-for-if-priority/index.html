@@ -16,7 +16,7 @@
 <meta property="og:description" content="Vue2.x中v-for和v-if为何不能连用">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-21T08:22:01.000Z">
-<meta property="article:modified_time" content="2021-05-22T10:07:21.020Z">
+<meta property="article:modified_time" content="2021-07-18T14:27:05.126Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="Vue">
 <meta property="article:tag" content="常见题">
@@ -203,11 +203,7 @@
       
         <h3 id="Vue2-x中v-for和v-if为何不能连用"><a href="#Vue2-x中v-for和v-if为何不能连用" class="headerlink" title="Vue2.x中v-for和v-if为何不能连用"></a>Vue2.x中v-for和v-if为何不能连用</h3><a id="more"></a>
 
-<p>如果二者在同一个标签中，v-for会比v-if优先执行。</p>
-<p>因为首先需要循环数组，然后看每个循环出来的标签中是否含有v-if，如果有值为true就会显示，如果没有或者值为false就不会显示。</p>
-<p>如果每一次都需要遍历整个数组，将会影响速度，尤其是当之需要渲染很小一部分的时候。</p>
-<p>如果连用的话会把 v-if 给每个元素都添加一下,会造成性能浪费。</p>
-<p>v-for和v-if在同一个标签中</p>
+<p>如果二者在同一个标签中，v-for会比v-if优先执行。<br>因为首先需要循环数组，然后看每个循环出来的标签中是否含有v-if，如果有值为true就会显示，如果没有或者值为false就不会显示。<br>如果每一次都需要遍历整个数组，将会影响速度，尤其是当之需要渲染很小一部分的时候。<br>如果连用的话会把 v-if 给每个元素都添加一下,会造成性能浪费。<br>v-for和v-if在同一个标签中</p>
 <pre><code>&lt;body&gt;
     &lt;div id=&quot;app&quot;&gt;
         &lt;div&gt;
@@ -234,8 +230,6 @@
         &lt;/ul&gt;
     &lt;/div&gt;
 &lt;/div&gt;
-
-
 &lt;div id=&quot;app&quot;&gt;
     &lt;div &gt;
         &lt;ul v-for=&quot;item in colors&quot; :key=&quot;item&quot;&gt;

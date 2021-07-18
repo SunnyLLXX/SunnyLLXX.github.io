@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/02/22/react-programming-routing/pic01.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/02/22/react-programming-routing/pic02.png">
 <meta property="article:published_time" content="2021-02-22T08:36:42.000Z">
-<meta property="article:modified_time" content="2021-03-26T01:49:39.773Z">
+<meta property="article:modified_time" content="2021-07-18T14:26:32.392Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -210,9 +210,7 @@
 -this.prosp.history.replace()
 -this.prosp.history.goBack()
 -this.prosp.history.goForward()
--this.prosp.history.go()</code></pre><h4 id="1-编程式路由"><a href="#1-编程式路由" class="headerlink" title="1 编程式路由"></a>1 编程式路由</h4><p>向路由组件传递参数有三种: params参数,search参数,state参数</p>
-<p>Message.jsx组件</p>
-<p>使用编程式路由Link组件传递参数类型需要与Route组件声明接收参数类型匹配，在Detail组件中接收数据也需要仔细查看参数。</p>
+-this.prosp.history.go()</code></pre><h4 id="1-编程式路由"><a href="#1-编程式路由" class="headerlink" title="1 编程式路由"></a>1 编程式路由</h4><p>向路由组件传递参数有三种: params参数,search参数,state参数<br>Message.jsx组件<br>使用编程式路由Link组件传递参数类型需要与Route组件声明接收参数类型匹配，在Detail组件中接收数据也需要仔细查看参数。</p>
 <pre><code>import React, { Component } from &apos;react&apos;;
 import {Link,Route} from &apos;react-router-dom&apos;
 import Detail from &apos;./Detail/Detail&apos;
@@ -321,8 +319,7 @@ export default Message;</code></pre><p><img src="/2021/02/22/react-programming-r
             &lt;/div&gt;
         );
     }
-}</code></pre><h4 id="3-withRouter的使用"><a href="#3-withRouter的使用" class="headerlink" title="3 withRouter的使用"></a>3 withRouter的使用</h4><p>假设在Head组件中，可以对页面进行调转，可是目前Head组件是一个一般组件，不是路由组件，那么他就不具备路由组件特有的API，如何解决呢？</p>
-<p>withRouter可以接受一个一般组件，使之含有路由组件的特有API</p>
+}</code></pre><h4 id="3-withRouter的使用"><a href="#3-withRouter的使用" class="headerlink" title="3 withRouter的使用"></a>3 withRouter的使用</h4><p>假设在Head组件中，可以对页面进行调转，可是目前Head组件是一个一般组件，不是路由组件，那么他就不具备路由组件特有的API，如何解决呢？<br>withRouter可以接受一个一般组件，使之含有路由组件的特有API</p>
 <pre><code>import React, { Component } from &apos;react&apos;
 import {withRouter} from &apos;react-router-dom&apos;
 

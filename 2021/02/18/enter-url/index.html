@@ -16,7 +16,7 @@
 <meta property="og:description" content="从网址输入url将会发生什么">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-18T11:29:13.000Z">
-<meta property="article:modified_time" content="2021-03-04T07:44:51.350Z">
+<meta property="article:modified_time" content="2021-07-18T14:39:51.209Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta name="twitter:card" content="summary">
@@ -202,33 +202,15 @@
       
         <h3 id="从网址输入url将会发生什么"><a href="#从网址输入url将会发生什么" class="headerlink" title="从网址输入url将会发生什么"></a>从网址输入url将会发生什么</h3><a id="more"></a>
 <p>从一个url地址到最终页面渲染完成，发生了什么</p>
-<h4 id="1-DNS解析"><a href="#1-DNS解析" class="headerlink" title="1 DNS解析"></a>1 DNS解析</h4><p>DNS解析：将域名地址解析成ip地址</p>
-<p>1.首先浏览器先检查本地hosts文件是否有这个网址映射关系，如果有就调用这个IP地址映射，完成域名解析。</p>
-<p>2.如果没找到则会查找本地DNS解析器缓存，如果查找到则返回。</p>
-<p>3.如果还是没有找到则会查找本地DNS服务器，如果查找到则返回。</p>
-<p>4.递归查找：假设有一个网址： blog.baidu.com</p>
-<p>先.com查找DNS解析，找不到，在.baidu查找，找不到，在blog查找，否则找不到</p>
-<p>简单来说就是在浏览器DNS缓存、系统DNS缓存、路由器DNS缓存、网络运营商DNS缓存、递归查找</p>
-<h4 id="2-TCP连接：三次握手"><a href="#2-TCP连接：三次握手" class="headerlink" title="2 TCP连接：三次握手"></a>2 TCP连接：三次握手</h4><p>第一次握手是浏览器发起的，告诉服务器浏览器发起请求了</p>
-<p>第二次握手是服务器发起的，告诉浏览器服务器准备接受了，你赶紧发送吧</p>
-<p>第三次握手是是浏览器发起的，告诉服务器，我马上发送了，你准备接收吧</p>
-<p>TCP为什么会进行三次握手？</p>
-<p>为了保证服务端能收接受到客户端的信息并能做出正确的应答而进行前两次(第一次和第二次)握手，</p>
-<p>为了保证客户端能够接收到服务端的信息并能做出正确的应答而进行后两次(第二次和第三次)握手。</p>
+<h4 id="1-DNS解析"><a href="#1-DNS解析" class="headerlink" title="1 DNS解析"></a>1 DNS解析</h4><p>DNS解析：将域名地址解析成ip地址<br>1.浏览器先检查自身缓存中有没有被解析过的这个域名对应的ip地址，如果有就调用这个IP地址映射，完成域名解析。<br>2.如果浏览器缓存中没有，浏览器会检查操作系统缓存中有没有对应的已解析过的结果，如果查找到则返回。<br>3.如果还是没有找到则会请求本地域名服务器来解析这个域名，如果查找到则返回。<br>4.如果还是没有找到则会请求根域名服务器进行解析，查找到就返回</p>
+<h4 id="2-TCP连接：三次握手"><a href="#2-TCP连接：三次握手" class="headerlink" title="2 TCP连接：三次握手"></a>2 TCP连接：三次握手</h4><p>第一次握手是浏览器发起的，告诉服务器浏览器发起请求了<br>第二次握手是服务器发起的，告诉浏览器服务器准备接受了，你赶紧发送吧<br>第三次握手是是浏览器发起的，告诉服务器，我马上发送了，你准备接收吧</p>
+<p>TCP为什么会进行三次握手？<br>为了保证服务端能收接受到客户端的信息并能做出正确的应答而进行前两次(第一次和第二次)握手，<br>为了保证客户端能够接收到服务端的信息并能做出正确的应答而进行后两次(第二次和第三次)握手。</p>
 <p>参考链接</p>
 <p><a href="https://www.cnblogs.com/yuilin/archive/2012/11/05/2755298.html" target="_blank" rel="noopener">理解TCP为什么需要进行三次握手(白话)</a></p>
 <h4 id="3-发送请求"><a href="#3-发送请求" class="headerlink" title="3 发送请求"></a>3 发送请求</h4><p>请求报文</p>
 <h4 id="4-接收响应"><a href="#4-接收响应" class="headerlink" title="4 接收响应"></a>4 接收响应</h4><p>响应报文</p>
-<h4 id="5-渲染页面"><a href="#5-渲染页面" class="headerlink" title="5 渲染页面"></a>5 渲染页面</h4><p>1.遇见HTML标签，调用HTML解析器解析成Token构成DOM树</p>
-<p>2.遇见style/link标签，调用css解析器，处理css并构成css OM树</p>
-<p>3.遇见script标签，调用javascript解析器，处理script代码(绑定事件，修改dom树/om树)</p>
-<p>4.将dom树,cssom树合并成渲染树，根据渲染树计算布局</p>
-<p>5.将各个节点颜色渲染在页面上</p>
-<h4 id="6-断开连接，4次挥手"><a href="#6-断开连接，4次挥手" class="headerlink" title="6 断开连接，4次挥手"></a>6 断开连接，4次挥手</h4><p>1.第一次挥手由浏览器发起，告诉服务器，请求报文发送完毕，你准备关闭吧</p>
-<p>2.第二次挥手由服务器发起，告诉浏览器请求报文接收了，准备关闭了，你也准备吧</p>
-<p>3.第三次挥手由服务器发起，告诉浏览器我东西（响应报文）发送完毕，你准备关闭吧</p>
-<p>4.第四次挥手由浏览器发起，告诉服务器我东西（响应报文）接收完了，准备关闭了，你也准备吧</p>
-<p>注意： 这几个阶段不一定按照顺序执行，如果dom树或cssom树被修改了，可能会执行多次布局和渲染，往往实际中，这些步骤会执行多次</p>
+<h4 id="5-渲染页面"><a href="#5-渲染页面" class="headerlink" title="5 渲染页面"></a>5 渲染页面</h4><p>1.遇见HTML标签，调用HTML解析器解析成Token构成DOM树<br>2.遇见style/link标签，调用css解析器，处理css并构成css OM树<br>3.遇见script标签，调用javascript解析器，处理script代码(绑定事件，修改dom树/om树)<br>4.将dom树,cssom树合并成渲染树，根据渲染树计算布局<br>5.将各个节点颜色渲染在页面上</p>
+<h4 id="6-断开连接，4次挥手"><a href="#6-断开连接，4次挥手" class="headerlink" title="6 断开连接，4次挥手"></a>6 断开连接，4次挥手</h4><p>1.第一次挥手由浏览器发起，告诉服务器，请求报文发送完毕，你准备关闭吧<br>2.第二次挥手由服务器发起，告诉浏览器请求报文接收了，准备关闭了，你也准备吧<br>3.第三次挥手由服务器发起，告诉浏览器我东西（响应报文）发送完毕，你准备关闭吧<br>4.第四次挥手由浏览器发起，告诉服务器我东西（响应报文）接收完了，准备关闭了，你也准备吧<br>注意： 这几个阶段不一定按照顺序执行，如果dom树或cssom树被修改了，可能会执行多次布局和渲染，往往实际中，这些步骤会执行多次</p>
 
       
 

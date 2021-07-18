@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
   <title>Vue 父子组件挂载顺序 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="了解 Vue 父子组件挂载的顺序是如何的">
+  <meta name="description" content="了解 Vue2.x 父子组件挂载的顺序是如何的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue 父子组件挂载顺序">
 <meta property="og:url" content="http://sunnyllxx.github.io/2021/02/22/vue-parent-child-component-mount-order/index.html">
 <meta property="og:site_name" content="étoile的小窝">
-<meta property="og:description" content="了解 Vue 父子组件挂载的顺序是如何的">
+<meta property="og:description" content="了解 Vue2.x 父子组件挂载的顺序是如何的">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/02/22/vue-parent-child-component-mount-order/pic01.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/02/22/vue-parent-child-component-mount-order/pic02.png">
 <meta property="article:published_time" content="2021-02-22T08:38:29.000Z">
-<meta property="article:modified_time" content="2021-02-22T08:50:08.743Z">
+<meta property="article:modified_time" content="2021-07-18T14:23:53.991Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="Vue">
 <meta property="article:tag" content="常见题">
@@ -204,9 +204,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="了解-Vue-父子组件挂载的顺序是如何的"><a href="#了解-Vue-父子组件挂载的顺序是如何的" class="headerlink" title="了解 Vue 父子组件挂载的顺序是如何的"></a>了解 Vue 父子组件挂载的顺序是如何的</h3><a id="more"></a>
-<p>本篇文章将会通过父子组件小案例进行讲解。</p>
-<p>组件并未通过template进行显示，而是通过render函数。</p>
+        <h3 id="了解-Vue2-x-父子组件挂载的顺序是如何的"><a href="#了解-Vue2-x-父子组件挂载的顺序是如何的" class="headerlink" title="了解 Vue2.x 父子组件挂载的顺序是如何的"></a>了解 Vue2.x 父子组件挂载的顺序是如何的</h3><a id="more"></a>
+<p>本篇文章将会通过父子组件小案例进行讲解。<br>组件并未通过template进行显示，而是通过render函数。</p>
 <p>Parent.vue</p>
 <pre><code>&lt;script&gt;
 
@@ -295,10 +294,7 @@ margin-top: 60px;
 &lt;/style&gt;</code></pre><p>结果显示如下图</p>
 <p><img src="/2021/02/22/vue-parent-child-component-mount-order/pic01.png" alt></p>
 <p><img src="/2021/02/22/vue-parent-child-component-mount-order/pic02.png" alt></p>
-<p>根据打印出来的顺序，可以得知</p>
-<p>父组件先初始化-&gt;父渲染完毕-&gt;子组件开始初始化-&gt;子组件渲染完毕-&gt;子组件挂载完毕-&gt;父组件挂载完毕</p>
-<p>子组件如何得知父组件挂载完毕呢？</p>
-<p>首先在main.js中，在Vue原型上面添加$bus方法</p>
+<p>根据打印出来的顺序，可以得知<br>父组件先初始化-&gt;父渲染完毕-&gt;子组件开始初始化-&gt;子组件渲染完毕-&gt;子组件挂载完毕-&gt;父组件挂载完毕<br>子组件如何得知父组件挂载完毕呢？<br>首先在main.js中，在Vue原型上面添加$bus方法</p>
 <pre><code>Vue.prototype.$bus = new Vue()</code></pre><p>然后在子组件挂载完毕进行监听事件</p>
 <pre><code>mounted(){
     console.log(&apos;child mounted&apos;)
@@ -508,7 +504,7 @@ margin-top: 60px;
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#了解-Vue-父子组件挂载的顺序是如何的"><span class="toc-number">1.</span> <span class="toc-text">了解 Vue 父子组件挂载的顺序是如何的</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#了解-Vue2-x-父子组件挂载的顺序是如何的"><span class="toc-number">1.</span> <span class="toc-text">了解 Vue2.x 父子组件挂载的顺序是如何的</span></a></li></ol>
                     </div>
                 </span>
             </div>

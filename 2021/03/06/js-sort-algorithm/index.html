@@ -16,7 +16,7 @@
 <meta property="og:description" content="利用JS实现常见的三种排序算法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-06T02:17:14.000Z">
-<meta property="article:modified_time" content="2021-03-15T01:24:17.961Z">
+<meta property="article:modified_time" content="2021-07-18T13:52:42.717Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta property="article:tag" content="JavaScript">
@@ -203,7 +203,6 @@
       
         <h3 id="利用JS实现常见的三种排序算法"><a href="#利用JS实现常见的三种排序算法" class="headerlink" title="利用JS实现常见的三种排序算法"></a>利用JS实现常见的三种排序算法</h3><a id="more"></a>
 
-
 <h4 id="1-冒泡排序"><a href="#1-冒泡排序" class="headerlink" title="1 冒泡排序"></a>1 冒泡排序</h4><p>重复访问数组元素，依次比较相邻两个元素，然后进行交换</p>
 <pre><code>function bubblingSort(arr){
     for(let i = 0; i &lt; arr.length - 1; i++){
@@ -218,10 +217,7 @@
     return arr
 }
 
-console.log(bubblingSort([3,6,5,1,8,9,0,7,2]))</code></pre><h4 id="2-快速排序"><a href="#2-快速排序" class="headerlink" title="2 快速排序"></a>2 快速排序</h4><p>1.首先选择一个基数作为中心轴（一般选取第一个元素）</p>
-<p>2.将比基数小的数放在基数的左边</p>
-<p>3.将比基数大的数放在基数右边</p>
-<p>4.然后分别对左边子右序列重复前三步</p>
+console.log(bubblingSort([3,6,5,1,8,9,0,7,2]))</code></pre><h4 id="2-快速排序"><a href="#2-快速排序" class="headerlink" title="2 快速排序"></a>2 快速排序</h4><p>1.首先选择一个基数作为中心轴（一般选取第一个元素）<br>2.将比基数小的数放在基数的左边<br>3.将比基数大的数放在基数右边<br>4.然后分别对左边子右序列重复前三步</p>
 <pre><code>function quickSort(arr){
     if(arr.length &lt;= 1){
         return arr
@@ -250,14 +246,7 @@ console.log(quickSort([2,5,4,1,7,8,9,0,4,3]))</code></pre><h4 id="3-选择排序
     }
     return arr
 }
-console.log(selectSort([2,5,4,7,8,1,0,6]))</code></pre><h4 id="4-插入排序"><a href="#4-插入排序" class="headerlink" title="4 插入排序"></a>4 插入排序</h4><p>将未排序数据，对已排序数据序列从后向前扫描，找到对应的位置并插入。</p>
-<p>算法描述：</p>
-<p>（1）从第一个元素开始，该元素可以被认为已经被排序</p>
-<p>（2）取出下一个元素，在已经排好序的序列中从后往前扫描</p>
-<p>（3）直到找到小于或者等于该元素的位置</p>
-<p>（4）将该位置后面的所有已排序的元素从后往前依次移一位</p>
-<p>（5）将该元素插入到该位置</p>
-<p>（6）重复步骤2~5</p>
+console.log(selectSort([2,5,4,7,8,1,0,6]))</code></pre><h4 id="4-插入排序"><a href="#4-插入排序" class="headerlink" title="4 插入排序"></a>4 插入排序</h4><p>将未排序数据，对已排序数据序列从后向前扫描，找到对应的位置并插入。<br>算法描述：<br>（1）从第一个元素开始，该元素可以被认为已经被排序<br>（2）取出下一个元素，在已经排好序的序列中从后往前扫描<br>（3）直到找到小于或者等于该元素的位置<br>（4）将该位置后面的所有已排序的元素从后往前依次移一位<br>（5）将该元素插入到该位置<br>（6）重复步骤2~5</p>
 <pre><code>function insertSort(arr){
     for(let i = 1; i &lt; arr.length; i++){
         let pre = i - 1,currentNum = arr[i]

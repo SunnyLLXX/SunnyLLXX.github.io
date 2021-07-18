@@ -16,7 +16,7 @@
 <meta property="og:description" content="有关使用 React Hook的一些知识">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-16T13:22:01.000Z">
-<meta property="article:modified_time" content="2021-04-01T02:56:19.008Z">
+<meta property="article:modified_time" content="2021-07-18T13:42:18.215Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -202,9 +202,7 @@
       
         <h3 id="有关使用-React-Hook的一些知识"><a href="#有关使用-React-Hook的一些知识" class="headerlink" title="有关使用 React Hook的一些知识"></a>有关使用 React Hook的一些知识</h3><a id="more"></a>
 <p>Hook 是什么？ Hook 是一个特殊的函数，它可以让你“钩入” React 的特性。</p>
-<h4 id="1-State-Hook"><a href="#1-State-Hook" class="headerlink" title="1 State Hook"></a>1 State Hook</h4><p>详细请看<a href="https://zh-hans.reactjs.org/docs/hooks-state.html" target="_blank" rel="noopener">官方文档</a></p>
-<p>State Hook 可以让函数组件也可以有state状态, 并进行状态数据的读写操作。</p>
-<p>语法: </p>
+<h4 id="1-State-Hook"><a href="#1-State-Hook" class="headerlink" title="1 State Hook"></a>1 State Hook</h4><p>详细请看<a href="https://zh-hans.reactjs.org/docs/hooks-state.html" target="_blank" rel="noopener">官方文档</a><br>State Hook 可以让函数组件也可以有state状态, 并进行状态数据的读写操作。<br>语法: </p>
 <pre><code>const [xxx, setXxx] = React.useState(initValue)  </code></pre><p>React.useState()的说明：</p>
 <pre><code>参数initValue: 第一次初始化指定的值在内部作缓存
 返回值[xxx, setXxx]: 包含2个元素的数组, 第1个为内部当前状态值, 第2个为更新状态值的函数 //当前 state 以及更新 state 的函数
@@ -240,9 +238,7 @@ export default function Count() {
             &lt;button onClick={modifyName}&gt;点击修改姓名&lt;/button&gt;
         &lt;/div&gt;
     )
-}</code></pre><h4 id="2-Effect-Hook"><a href="#2-Effect-Hook" class="headerlink" title="2 Effect Hook"></a>2 Effect Hook</h4><p>详细请看<a href="https://zh-hans.reactjs.org/docs/hooks-overview.html#effect-hook" target="_blank" rel="noopener">官方文档</a></p>
-<p>Effect Hook，给函数组件增加了操作副作用的能力。它跟 class 组件中的 componentDidMount、componentDidUpdate 和 componentWillUnmount 具有相同的用途，只不过被合并成了一个 API。</p>
-<p>语法：</p>
+}</code></pre><h4 id="2-Effect-Hook"><a href="#2-Effect-Hook" class="headerlink" title="2 Effect Hook"></a>2 Effect Hook</h4><p>详细请看<a href="https://zh-hans.reactjs.org/docs/hooks-overview.html#effect-hook" target="_blank" rel="noopener">官方文档</a><br>Effect Hook，给函数组件增加了操作副作用的能力。它跟 class 组件中的 componentDidMount、componentDidUpdate 和 componentWillUnmount 具有相同的用途，只不过被合并成了一个 API。<br>语法：</p>
 <pre><code>React.useEffect(() =&gt; { 
   // 在此可以执行任何带副作用操作
 
@@ -301,8 +297,7 @@ return (
     &lt;/div&gt;
 )</code></pre><p>}</p>
 <h4 id="3-Ref-Hook"><a href="#3-Ref-Hook" class="headerlink" title="3 Ref Hook"></a>3 Ref Hook</h4><p>详细请看<a href="https://zh-hans.reactjs.org/docs/hooks-reference.html#useref" target="_blank" rel="noopener">官方文档</a></p>
-<p>Ref Hook可以在函数组件中存储/查找组件内的标签或任意其它数据。useRef 返回一个可变的 ref 对象，其 .current 属性被初始化为传入的参数（initialValue）。返回的 ref 对象在组件的整个生命周期内保持不变。</p>
-<p>语法: </p>
+<p>Ref Hook可以在函数组件中存储/查找组件内的标签或任意其它数据。useRef 返回一个可变的 ref 对象，其 .current 属性被初始化为传入的参数（initialValue）。返回的 ref 对象在组件的整个生命周期内保持不变。<br>语法: </p>
 <pre><code>const refContainer = useRef()</code></pre><p>小案例如下：</p>
 <pre><code>import React from &apos;react&apos;
 import ReactDOM from &apos;react-dom&apos;

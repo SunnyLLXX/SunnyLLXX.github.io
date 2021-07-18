@@ -17,7 +17,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/02/16/basic-use-of-react-routing/pic01.png">
 <meta property="article:published_time" content="2021-02-16T13:08:36.000Z">
-<meta property="article:modified_time" content="2021-02-16T14:42:30.549Z">
+<meta property="article:modified_time" content="2021-07-18T14:44:02.663Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -206,8 +206,7 @@
 <p>常见使用路由的应用场景应该就属SPA应用了吧，接下来带领大家了解路由的基本使用，小案例如下所示。</p>
 <p><img src="/2021/02/16/basic-use-of-react-routing/pic01.png" alt></p>
 <h4 id="1-安装react路由插件"><a href="#1-安装react路由插件" class="headerlink" title="1 安装react路由插件"></a>1 安装react路由插件</h4><p>下载react-router-dom</p>
-<pre><code>npm install --save react-router-dom</code></pre><h4 id="2-划分组件"><a href="#2-划分组件" class="headerlink" title="2 划分组件"></a>2 划分组件</h4><p>根据案例图分析可得，组件包括App,About,Home<br>之后就创建组件，首先在src目录下新建pages文件夹，一般将路由组件放在pages下。</p>
-<p>About组件内容如下</p>
+<pre><code>npm install --save react-router-dom</code></pre><h4 id="2-划分组件"><a href="#2-划分组件" class="headerlink" title="2 划分组件"></a>2 划分组件</h4><p>根据案例图分析可得，组件包括App,About,Home<br>之后就创建组件，首先在src目录下新建pages文件夹，一般将路由组件放在pages下。<br>About组件内容如下</p>
 <pre><code>import React, { Component } from &apos;react&apos;;
 
 class About extends Component {
@@ -240,29 +239,28 @@ import Home from &apos;./pages/Home/Home&apos;
 import About from &apos;./pages/About/About&apos;
 class App extends React.Component{
 
+    render(){
 
-render(){
+        return (
+        &lt;div className=&quot;container&quot;&gt;
+            &lt;h1 className=&quot;title1&quot;&gt;router demo&lt;/h1&gt;
+            &lt;div className=&quot;main&quot;&gt;
+            &lt;div className=&quot;left&quot;&gt;
+            {/* 使用Link组件编写路由链接，to属性值是路由路径 */}
 
-    return (
-    &lt;div className=&quot;container&quot;&gt;
-        &lt;h1 className=&quot;title1&quot;&gt;router demo&lt;/h1&gt;
-        &lt;div className=&quot;main&quot;&gt;
-        &lt;div className=&quot;left&quot;&gt;
-        {/* 使用Link组件编写路由链接，to属性值是路由路径 */}
+                    &lt;div&gt;&lt;Link className=&quot;line&quot; to=&quot;/about&quot;&gt;about&lt;/Link&gt;&lt;/div&gt;
+                    &lt;div&gt;&lt;Link className=&quot;line&quot; to=&quot;/home&quot;&gt;home&lt;/Link&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;right&quot;&gt;
+                {/* 使用Route组件注册路由，component是组件 */}
+                &lt;Route path=&quot;/about&quot; component={About}&gt;&lt;/Route&gt;
+                &lt;Route path=&quot;/home&quot; component={Home}&gt;&lt;/Route&gt;
+            &lt;/div&gt;
 
-                &lt;div&gt;&lt;Link className=&quot;line&quot; to=&quot;/about&quot;&gt;about&lt;/Link&gt;&lt;/div&gt;
-                &lt;div&gt;&lt;Link className=&quot;line&quot; to=&quot;/home&quot;&gt;home&lt;/Link&gt;&lt;/div&gt;
+            &lt;/div&gt;
         &lt;/div&gt;
-        &lt;div className=&quot;right&quot;&gt;
-            {/* 使用Route组件注册路由，component是组件 */}
-            &lt;Route path=&quot;/about&quot; component={About}&gt;&lt;/Route&gt;
-            &lt;Route path=&quot;/home&quot; component={Home}&gt;&lt;/Route&gt;
-        &lt;/div&gt;
-
-        &lt;/div&gt;
-    &lt;/div&gt;
-    );
-}
+        );
+    }
 
 }
 
@@ -279,8 +277,7 @@ document.getElementById(&apos;root&apos;)
 
 &lt;div&gt;&lt;NavLink activeClassName=&quot;title&quot; to=&quot;/about&quot;&gt;about&lt;/NavLink&gt;&lt;/div&gt;
 &lt;div&gt;&lt;NavLink activeClassName=&quot;title&quot; to=&quot;/home&quot;&gt;home&lt;/NavLink&gt;&lt;/div&gt;</code></pre><h4 id="5-封装NavLink"><a href="#5-封装NavLink" class="headerlink" title="5 封装NavLink"></a>5 封装NavLink</h4><p>如果代码中出现很多个如下代码，可读性较差，因此，可以对NavLink进行封装</p>
-<p><NavLink activeclassname="title" to="/about">about</NavLink></p>
-<p>创建MyNavLink组件</p>
+<pre><code>&lt;NavLink activeClassName=&quot;title&quot; to=&quot;/about&quot;&gt;about&lt;/NavLink&gt;</code></pre><p>创建MyNavLink组件</p>
 <pre><code>import React, { Component } from &apos;react&apos;;
 import {Route,NavLink} from &apos;react-router-dom&apos;
 class MyNavLink extends Component {
@@ -299,8 +296,7 @@ class MyNavLink extends Component {
 export default MyNavLink;</code></pre><p>在App.js中修改路由链接</p>
 <pre><code>{/* 编写路由链接 */}
 &lt;MyNavLink to=&quot;/about&quot; title=&quot;about&quot; a=&quot;1&quot; b=&quot;2&quot;&gt;About&lt;/MyNavLink&gt;
-&lt;MyNavLink to=&quot;/home&quot; title=&quot;home&quot;&gt;Home&lt;/MyNavLink&gt;</code></pre><h4 id="6-使用Redirect组件"><a href="#6-使用Redirect组件" class="headerlink" title="6 使用Redirect组件"></a>6 使用Redirect组件</h4><p>使用该组件的目的在于路由重定向，一般写在所有路由注册的最下方，当所有路由都无法匹配时，跳转到Redirect指定的路由</p>
-<p>直接在注册路由最后添加Redirect组件</p>
+&lt;MyNavLink to=&quot;/home&quot; title=&quot;home&quot;&gt;Home&lt;/MyNavLink&gt;</code></pre><h4 id="6-使用Redirect组件"><a href="#6-使用Redirect组件" class="headerlink" title="6 使用Redirect组件"></a>6 使用Redirect组件</h4><p>使用该组件的目的在于路由重定向，一般写在所有路由注册的最下方，当所有路由都无法匹配时，跳转到Redirect指定的路由。<br>直接在注册路由最后添加Redirect组件</p>
 <pre><code>&lt;Route path=&quot;/about&quot; component={About}&gt;&lt;/Route&gt;
 &lt;Route path=&quot;/home&quot; component={Home}&gt;&lt;/Route&gt;
 &lt;Redirect to=&quot;/about&quot;&gt;&lt;/Redirect&gt;</code></pre><h4 id="6-使用Switch组件"><a href="#6-使用Switch组件" class="headerlink" title="6 使用Switch组件"></a>6 使用Switch组件</h4><p>如果注册路由含有相同的，这时就可以利用Switch组件，只要匹配到了路由就不会继续向下匹配了，否则就会向下继续匹配,效率较高</p>

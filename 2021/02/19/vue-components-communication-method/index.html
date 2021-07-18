@@ -16,7 +16,7 @@
 <meta property="og:description" content="了解Vue组件间的通信方式有哪些">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-19T11:13:30.000Z">
-<meta property="article:modified_time" content="2021-02-20T08:14:08.590Z">
+<meta property="article:modified_time" content="2021-07-18T14:29:59.026Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="Vue">
 <meta property="article:tag" content="常见题">
@@ -203,18 +203,9 @@
       
         <h3 id="了解Vue组件间的通信方式有哪些"><a href="#了解Vue组件间的通信方式有哪些" class="headerlink" title="了解Vue组件间的通信方式有哪些"></a>了解Vue组件间的通信方式有哪些</h3><a id="more"></a>
 
-<h4 id="1-通信种类"><a href="#1-通信种类" class="headerlink" title="1 通信种类"></a>1 通信种类</h4><p>1)父组件向子组件通信</p>
-<p>2)子组件向父组件通信</p>
-<p>3)隔代组件间通信</p>
-<p>4)兄弟组件间通信</p>
-<h4 id="2-实现通信方式"><a href="#2-实现通信方式" class="headerlink" title="2 实现通信方式"></a>2 实现通信方式</h4><p>1)props</p>
-<p>2)vue自定义事件</p>
-<p>3)消息订阅与发布</p>
-<p>4)vuex</p>
-<p>5)slot</p>
-<h4 id="2-1-props"><a href="#2-1-props" class="headerlink" title="2.1 props"></a>2.1 props</h4><p>1)通过一般属性实现父向子通信</p>
-<p>2)通过函数属性实现子向父通信</p>
-<p>3)缺点:隔代组件和兄弟组件间通信比较麻烦</p>
+<h4 id="1-通信种类"><a href="#1-通信种类" class="headerlink" title="1 通信种类"></a>1 通信种类</h4><p>1)父组件向子组件通信<br>2)子组件向父组件通信<br>3)隔代组件间通信<br>4)兄弟组件间通信</p>
+<h4 id="2-实现通信方式"><a href="#2-实现通信方式" class="headerlink" title="2 实现通信方式"></a>2 实现通信方式</h4><p>1)props<br>2)vue自定义事件<br>3)消息订阅与发布<br>4)vuex<br>5)slot</p>
+<h4 id="2-1-props"><a href="#2-1-props" class="headerlink" title="2.1 props"></a>2.1 props</h4><p>1)通过一般属性实现父向子通信<br>2)通过函数属性实现子向父通信<br>3)缺点:隔代组件和兄弟组件间通信比较麻烦</p>
 <p>Child.vue</p>
 <pre><code>&lt;template&gt;
     &lt;h3&gt;子组件&lt;/h3&gt;
@@ -308,8 +299,7 @@ b.触发(分发)事件: this.$emit(&quot;eventName&quot;, data)</code></pre><p>2
 <h4 id="2-3消息订阅与发布"><a href="#2-3消息订阅与发布" class="headerlink" title="2.3消息订阅与发布"></a>2.3消息订阅与发布</h4><p>1)需要引入消息订阅与发布的实现库，如: pubsub.js</p>
 <pre><code>a.订阅消息:PubSub.subscribe( &apos;msg&apos; , function(msg, data))
 b.发布消息: PubSub.publish(&apos;msg&apos;, data)</code></pre><p>2)优点:此方式可实现任意关系组件间通信</p>
-<h4 id="2-4-Vuex"><a href="#2-4-Vuex" class="headerlink" title="2.4 Vuex"></a>2.4 Vuex</h4><p>1)vuex是vue官方提供的集中式管理vue多组件共享状态数据的vue插件</p>
-<p>2)优点:对组件间关系没有限制，且相比于pubsub库管理更集中，更方便</p>
+<h4 id="2-4-Vuex"><a href="#2-4-Vuex" class="headerlink" title="2.4 Vuex"></a>2.4 Vuex</h4><p>1)vuex是vue官方提供的集中式管理vue多组件共享状态数据的vue插件<br>2)优点:对组件间关系没有限制，且相比于pubsub库管理更集中，更方便</p>
 
       
 

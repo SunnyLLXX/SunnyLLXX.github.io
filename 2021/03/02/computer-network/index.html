@@ -16,7 +16,7 @@
 <meta property="og:description" content="有关计算机网络基础的一些知识">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-02T06:32:04.000Z">
-<meta property="article:modified_time" content="2021-03-15T09:34:26.063Z">
+<meta property="article:modified_time" content="2021-07-18T14:01:34.188Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="计算机网络基础">
 <meta name="twitter:card" content="summary">
@@ -202,57 +202,16 @@
       
         <h3 id="有关计算机网络基础的一些知识"><a href="#有关计算机网络基础的一些知识" class="headerlink" title="有关计算机网络基础的一些知识"></a>有关计算机网络基础的一些知识</h3><a id="more"></a>
 
-<h4 id="1-http与https的区别"><a href="#1-http与https的区别" class="headerlink" title="1 http与https的区别"></a>1 http与https的区别</h4><p>https协议是由ssl/tls+http协议构建的可进行加密传输、身份认证的网络协议，要比http协议安全。</p>
-<p>https协议的主要作用可以分为两种：一种是建立一个信息安全通道，来保证数据传输的安全；另一种就是确认网站的真实性。</p>
-<p>https和http的主要区别：</p>
-<p>1、https协议需要到CA申请证书，一般免费证书较少，因而需要一定费用。</p>
-<p>2、http是超文本传输协议，信息是明文传输，https则是具有安全性的ssl/tls加密传输协议。</p>
-<p>3、http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。</p>
-<p>4、http的连接很简单，是无状态的；https协议是由ssl/tls+http协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。</p>
-<h4 id="2-TCP与UDP的区别"><a href="#2-TCP与UDP的区别" class="headerlink" title="2 TCP与UDP的区别"></a>2 TCP与UDP的区别</h4><p>1.TCP服务</p>
-<p>面向连接，客户机/服务器进程间 需要建立连接；可靠的传输</p>
-<p>流量控制: 发送方不会发送速度过 快，超过接收方的处理能力</p>
-<p>拥塞控制: 当网络负载过重时能够 限制发送方的发送速度</p>
-<p>不提供时间/延迟保障、不提供最小带宽保障</p>
-<p>应用场景：效率要求相对低，但对准确性要求相对高的场景。可用于文件传输（ftp）、邮件传输（smtp）、http</p>
-<p>2.UDP服务</p>
-<p>无连接、不可靠的数据传输</p>
-<p>不提供：可靠性保障、流量控制、拥塞控制、延迟保障、带宽保障</p>
-<p>应用场景：效率要求相对高，对准确性要求相对低的场景。可用于一些流媒体，比如：聊天、视频、语音电话</p>
-<h4 id="3-get与post的区别"><a href="#3-get与post的区别" class="headerlink" title="3 get与post的区别"></a>3 get与post的区别</h4><p>1.get在浏览器回退时是无害的，而post会再次提交请求。</p>
-<p>2.get请求会被浏览器主动缓存，而post不会，除非手动设置。</p>
-<p>3.get请求参数会被完整保留在浏览器历史记录里，而post中的参数不会被保留。</p>
-<p>4.get参数通过url传递，post放在request body 中。</p>
-<p>5.get请求在url中传送的参数是有长度限制的，而post没有限制。</p>
-<p>6.get比post更不安全，因为参数直接暴露在url上，所以不能用来传递敏感信息。</p>
-<h4 id="4-从url输入地址的发生过程"><a href="#4-从url输入地址的发生过程" class="headerlink" title="4 从url输入地址的发生过程"></a>4 <a href="http://sunnyllxx.github.io/2021/02/18/enter-url/">从url输入地址的发生过程</a></h4><h4 id="5-http常见状态码"><a href="#5-http常见状态码" class="headerlink" title="5 http常见状态码"></a>5 http常见状态码</h4><p>200 OK:客户端请求成功。</p>
-<p>301 Moved Permanently：所请求的页面都已经转移至新的url。</p>
-<p>302 Found：所请求的页面已经临时转移至新的url。</p>
-<p>304 Not Modified：客户端有缓冲的文档并发出了一个条件性的请求，服务器告诉客户，原来缓冲的文档还可以继续使用。</p>
-<p>400 Bad Request：客户端请求有语法错误，不能被服务器所理解</p>
-<p>401 Unauthorized： 请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用。</p>
-<p>403 Forbidden：对被请求页面的访问被禁止。</p>
-<p>404 Not Found：请求资源不存在。</p>
-<p>500 Internal Server Error：服务器发生不可预期的错误。</p>
-<p>503 Server Unavailable：请求未完成，服务器临时过载或宕机，一段时间后可能恢复正常。</p>
+<h4 id="1-http与https的区别"><a href="#1-http与https的区别" class="headerlink" title="1 http与https的区别"></a>1 http与https的区别</h4><p>https协议是由ssl/tls+http协议构建的可进行加密传输、身份认证的网络协议，要比http协议安全。<br>https协议的主要作用可以分为两种：一种是建立一个信息安全通道，来保证数据传输的安全；另一种就是确认网站的真实性。<br>https和http的主要区别：<br>1、https协议需要到CA申请证书，一般免费证书较少，因而需要一定费用。<br>2、http是超文本传输协议，信息是明文传输，https则是具有安全性的ssl/tls加密传输协议。<br>3、http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。<br>4、http的连接很简单，是无状态的；https协议是由ssl/tls+http协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。</p>
+<h4 id="2-TCP与UDP的区别"><a href="#2-TCP与UDP的区别" class="headerlink" title="2 TCP与UDP的区别"></a>2 TCP与UDP的区别</h4><p>1.TCP服务<br>面向连接，客户机/服务器进程间需要建立连接；可靠的传输。<br>流量控制: 发送方不会发送速度过快，超过接收方的处理能力。<br>拥塞控制: 当网络负载过重时能够 限制发送方的发送速度。<br>不提供时间/延迟保障、不提供最小带宽保障。<br>应用场景：效率要求相对低，但对准确性要求相对高的场景。可用于文件传输（ftp）、邮件传输（smtp）、http</p>
+<p>2.UDP服务<br>无连接、不可靠的数据传输<br>不提供：可靠性保障、流量控制、拥塞控制、延迟保障、带宽保障<br>应用场景：效率要求相对高，对准确性要求相对低的场景。可用于一些流媒体，比如：聊天、视频、语音电话。</p>
+<h4 id="3-TCP-的拥塞控制"><a href="#3-TCP-的拥塞控制" class="headerlink" title="3 TCP 的拥塞控制"></a>3 TCP 的拥塞控制</h4><h4 id="4-TCP-的流量控制"><a href="#4-TCP-的流量控制" class="headerlink" title="4 TCP 的流量控制"></a>4 TCP 的流量控制</h4><h4 id="5-get与post的区别"><a href="#5-get与post的区别" class="headerlink" title="5 get与post的区别"></a>5 get与post的区别</h4><p>1.get在浏览器回退时是无害的，而post会再次提交请求。<br>2.get请求会被浏览器主动缓存，而post不会，除非手动设置。<br>3.get请求参数会被完整保留在浏览器历史记录里，而post中的参数不会被保留。<br>4.get参数通过url传递，post放在request body 中。<br>5.get请求在url中传送的参数是有长度限制的，而post没有限制。<br>6.get比post更不安全，因为参数直接暴露在url上，所以不能用来传递敏感信息。</p>
+<h4 id="6-从url输入地址的发生过程"><a href="#6-从url输入地址的发生过程" class="headerlink" title="6 从url输入地址的发生过程"></a>6 <a href="http://sunnyllxx.github.io/2021/02/18/enter-url/">从url输入地址的发生过程</a></h4><h4 id="7-http常见状态码"><a href="#7-http常见状态码" class="headerlink" title="7 http常见状态码"></a>7 http常见状态码</h4><p>200 OK:客户端请求成功。<br>301 Moved Permanently：所请求的页面都已经转移至新的url。<br>302 Found：所请求的页面已经临时转移至新的url。<br>304 Not Modified：客户端有缓冲的文档并发出了一个条件性的请求，服务器告诉客户，原来缓冲的文档还可以继续使用。<br>400 Bad Request：客户端请求有语法错误，不能被服务器所理解<br>401 Unauthorized： 请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用。<br>403 Forbidden：对被请求页面的访问被禁止。<br>404 Not Found：请求资源不存在。<br>500 Internal Server Error：服务器发生不可预期的错误。<br>503 Server Unavailable：请求未完成，服务器临时过载或宕机，一段时间后可能恢复正常。</p>
 <p>参考链接</p>
 <p><a href="https://blog.csdn.net/aSuncat/article/details/109180153" target="_blank" rel="noopener">web前端经典面试题试题及答案-前后端通信（http、https、tcp）</a></p>
-<h4 id="5-http缓存"><a href="#5-http缓存" class="headerlink" title="5 http缓存"></a>5 http缓存</h4><p>http缓存能够帮助服务器提高并发性能，很多资源不需要重复请求，直接从浏览器中拿缓存。</p>
-<p>http缓存分类:强缓存、协商缓存</p>
-<p>1.强缓存</p>
-<p>向浏览器缓存查找该请求结果，并根据该结果的缓存规则来决定是否使用该缓存结果的过程，浏览器不会将请求发送给服务器。</p>
-<p>在Chrome的开发者工具中看到http的状态码是200，在Size列会显示为(from cache)。利用http的响应头中的expires或者cache-control两个字段来控制的，用来表示资源的缓存时间、缓存类型等。</p>
-<p>cache-control比expires优先级高，并且expires是缓存过期时间的绝对时间，存在浏览器与服务端时间不同步的问题，cache-control缓存的过期时间是相对时间。</p>
-<p>2.协商缓存</p>
-<p>协商缓存就是强制缓存失效后，浏览器携带缓存标识向服务器发起请求，由服务器根据缓存标识决定是否使用缓存的过程。利用http响应头中的etag、last-modified两个字段进行控制。</p>
-<p>为什么存在last-mlodified还会有etag?</p>
-<p>（1）last-modified标注的最后修改只能精确到秒级，如果某些文件在1秒钟以内，被修改多次的话，它将不能准确标注文件的修改时间</p>
-<p>（2）如果某些文件会被定期生成，当有时内容并没有任何变化，但last-modified却改变了，导致文件没法使用缓存</p>
-<p>（3）有可能存在服务器没有准确获取文件修改时间，或者与代理服务器时间不一致等情形</p>
-<p>请求步骤：</p>
-<p>请求资源时，把用户本地该资源的 etag 同时带到服务端，服务端和最新资源做对比。</p>
-<p>如果资源没更改，返回状态码304，浏览器读取本地缓存。</p>
-<p>如果资源有更改，返回状态码200，返回最新的资源。</p>
+<h4 id="8-http缓存"><a href="#8-http缓存" class="headerlink" title="8 http缓存"></a>8 http缓存</h4><p>http缓存能够帮助服务器提高并发性能，很多资源不需要重复请求，直接从浏览器中拿缓存。<br>http缓存分类:强缓存、协商缓存</p>
+<p>1.强缓存<br>向浏览器缓存查找该请求结果，并根据该结果的缓存规则来决定是否使用该缓存结果的过程，浏览器不会将请求发送给服务器。<br>在Chrome的开发者工具中看到http的状态码是200，在Size列会显示为(from cache)。利用http的响应头中的expires或者cache-control两个字段来控制的，用来表示资源的缓存时间、缓存类型等。<br>cache-control比expires优先级高，并且expires是缓存过期时间的绝对时间，存在浏览器与服务端时间不同步的问题，cache-control缓存的过期时间是相对时间。</p>
+<p>2.协商缓存<br>协商缓存就是强制缓存失效后，浏览器携带缓存标识向服务器发起请求，由服务器根据缓存标识决定是否使用缓存的过程。利用http响应头中的etag、last-modified两个字段进行控制。<br>为什么存在last-mlodified还会有etag?<br>（1）last-modified标注的最后修改只能精确到秒级，如果某些文件在1秒钟以内，被修改多次的话，它将不能准确标注文件的修改时间<br>（2）如果某些文件会被定期生成，当有时内容并没有任何变化，但last-modified却改变了，导致文件没法使用缓存<br>（3）有可能存在服务器没有准确获取文件修改时间，或者与代理服务器时间不一致等情形<br>请求步骤：<br>请求资源时，把用户本地该资源的 etag 同时带到服务端，服务端和最新资源做对比。<br>如果资源没更改，返回状态码304，浏览器读取本地缓存。<br>如果资源有更改，返回状态码200，返回最新的资源。</p>
 
       
 
@@ -448,7 +407,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#有关计算机网络基础的一些知识"><span class="toc-number">1.</span> <span class="toc-text">有关计算机网络基础的一些知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-http与https的区别"><span class="toc-number">1.1.</span> <span class="toc-text">1 http与https的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-TCP与UDP的区别"><span class="toc-number">1.2.</span> <span class="toc-text">2 TCP与UDP的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-get与post的区别"><span class="toc-number">1.3.</span> <span class="toc-text">3 get与post的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-从url输入地址的发生过程"><span class="toc-number">1.4.</span> <span class="toc-text">4 从url输入地址的发生过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-http常见状态码"><span class="toc-number">1.5.</span> <span class="toc-text">5 http常见状态码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-http缓存"><span class="toc-number">1.6.</span> <span class="toc-text">5 http缓存</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#有关计算机网络基础的一些知识"><span class="toc-number">1.</span> <span class="toc-text">有关计算机网络基础的一些知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-http与https的区别"><span class="toc-number">1.1.</span> <span class="toc-text">1 http与https的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-TCP与UDP的区别"><span class="toc-number">1.2.</span> <span class="toc-text">2 TCP与UDP的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-TCP-的拥塞控制"><span class="toc-number">1.3.</span> <span class="toc-text">3 TCP 的拥塞控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-TCP-的流量控制"><span class="toc-number">1.4.</span> <span class="toc-text">4 TCP 的流量控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-get与post的区别"><span class="toc-number">1.5.</span> <span class="toc-text">5 get与post的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-从url输入地址的发生过程"><span class="toc-number">1.6.</span> <span class="toc-text">6 从url输入地址的发生过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-http常见状态码"><span class="toc-number">1.7.</span> <span class="toc-text">7 http常见状态码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-http缓存"><span class="toc-number">1.8.</span> <span class="toc-text">8 http缓存</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

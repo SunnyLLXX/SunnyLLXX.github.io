@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/02/25/vue-data-bidirectional-binding/pic01.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/02/25/vue-data-bidirectional-binding/pic02.png">
 <meta property="article:published_time" content="2021-02-25T07:43:02.000Z">
-<meta property="article:modified_time" content="2021-03-08T10:19:02.989Z">
+<meta property="article:modified_time" content="2021-07-18T14:19:58.880Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="Vue">
 <meta property="article:tag" content="常见题">
@@ -206,14 +206,7 @@
       
         <h3 id="Vue的双向数据绑定是如何实现的呢"><a href="#Vue的双向数据绑定是如何实现的呢" class="headerlink" title="Vue的双向数据绑定是如何实现的呢"></a>Vue的双向数据绑定是如何实现的呢</h3><a id="more"></a>
 <p>本篇文章将会通过一些小案例以及基础必备知识进行讲解，如Object.defineProperty。</p>
-<h4 id="1-Object-defineProperty"><a href="#1-Object-defineProperty" class="headerlink" title="1 Object.defineProperty"></a>1 Object.defineProperty</h4><p>Object.defineProperty(obj,prop,descriptor)</p>
-<p>参数obj，表示要定义属性的对象</p>
-<p>参数prop，表示要定义的属性</p>
-<p>参数descriptor，要定义或修改的属性描述符</p>
-<p>返回值，是被传递给函数的对象</p>
-<p>get属性的 getter 函数，如果没有 getter，则为 undefined。当访问该属性时，会调用此函数。执行时不传入任何参数。该函数的返回值会被用作属性的值。默认为 undefined。</p>
-<p>set属性的 setter 函数，如果没有 setter，则为 undefined。当属性值被修改时，会调用此函数。该方法接受一个参数（也就是被赋予的新值）。默认为 undefined。</p>
-<p>详细信息请查看<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="noopener">MDN</a></p>
+<h4 id="1-Object-defineProperty"><a href="#1-Object-defineProperty" class="headerlink" title="1 Object.defineProperty"></a>1 Object.defineProperty</h4><p>Object.defineProperty(obj,prop,descriptor)<br>参数obj，表示要定义属性的对象<br>参数prop，表示要定义的属性<br>参数descriptor，要定义或修改的属性描述符<br>返回值，是被传递给函数的对象<br>get属性的 getter 函数，如果没有 getter，则为 undefined。当访问该属性时，会调用此函数。执行时不传入任何参数。该函数的返回值会被用作属性的值。默认为 undefined。<br>set属性的 setter 函数，如果没有 setter，则为 undefined。当属性值被修改时，会调用此函数。该方法接受一个参数（也就是被赋予的新值）。默认为 undefined。<br>详细信息请查看<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="noopener">MDN</a></p>
 <h4 id="1-1-基本使用"><a href="#1-1-基本使用" class="headerlink" title="1.1 基本使用"></a>1.1 基本使用</h4><pre><code>&lt;body&gt;
     &lt;script&gt;
         let data = {}
@@ -271,17 +264,12 @@
         }
         /*1.对原始数据克隆
         2.需要分别给对象中的每一个属性监听设置*/
-    &lt;/script&gt; 
-
-
+    &lt;/script&gt;      
 &lt;/body&gt;</code></pre><p>执行结果如下图</p>
 <p><img src="/2021/02/25/vue-data-bidirectional-binding/pic01.png" alt></p>
 <p><img src="/2021/02/25/vue-data-bidirectional-binding/pic02.png" alt></p>
-<h4 id="3-利用Proxy实现双向数据绑定"><a href="#3-利用Proxy实现双向数据绑定" class="headerlink" title="3 利用Proxy实现双向数据绑定"></a>3 利用Proxy实现双向数据绑定</h4><p>Proxy 对象用于创建一个对象的代理，从而实现基本操作的拦截和自定义（如属性查找、赋值、枚举、函数调用等）</p>
-<p>语法</p>
-<pre><code>const p = new Proxy(target, handler)</code></pre><p>参数target：要使用 Proxy 包装的目标对象（可以是任何类型的对象，包括原生数组，函数，甚至另一个代理）。<br>参数handler：一个通常以函数作为属性的对象，各属性中的函数分别定义了在执行各种操作时代理 p 的行为。</p>
-<p>handler.get()属性读取操作的捕捉器。</p>
-<p>handler.set()属性设置操作的捕捉器。</p>
+<h4 id="3-利用Proxy实现双向数据绑定"><a href="#3-利用Proxy实现双向数据绑定" class="headerlink" title="3 利用Proxy实现双向数据绑定"></a>3 利用Proxy实现双向数据绑定</h4><p>Proxy 对象用于创建一个对象的代理，从而实现基本操作的拦截和自定义（如属性查找、赋值、枚举、函数调用等）<br>语法：</p>
+<pre><code>const p = new Proxy(target, handler)</code></pre><p>参数target：要使用 Proxy 包装的目标对象（可以是任何类型的对象，包括原生数组，函数，甚至另一个代理）。<br>参数handler：一个通常以函数作为属性的对象，各属性中的函数分别定义了在执行各种操作时代理 p 的行为。<br>handler.get()属性读取操作的捕捉器。<br>handler.set()属性设置操作的捕捉器。</p>
 <p>详细信息请查看<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy" target="_blank" rel="noopener">MDN</a></p>
 <pre><code>&lt;script&gt;
     //第二种，使用Proxy，不需要克隆，也不需要给每个对象属性单独设置
@@ -312,14 +300,8 @@
         obj.name = this.value
     }
 &lt;/script&gt;</code></pre><p>执行结果相同。</p>
-<h4 id="4-Object-defineProperty与Proxy的区别"><a href="#4-Object-defineProperty与Proxy的区别" class="headerlink" title="4 Object.defineProperty与Proxy的区别"></a>4 Object.defineProperty与Proxy的区别</h4><p>1.Object.defineProperty() 的问题主要有三个：</p>
-<p>不能监听数组的变化，需要重写数组方法，利用Array.prototype。</p>
-<p>必须遍历对象的每个属性，无法监听到对象删除属性或者新增属性。</p>
-<p>必须深层遍历嵌套的对象。</p>
-<p>2.Proxy</p>
-<p>可以直接监听对象而非属性。</p>
-<p>可以直接监听数组的变化。</p>
-<p>可以嵌套。</p>
+<h4 id="4-Object-defineProperty与Proxy的区别"><a href="#4-Object-defineProperty与Proxy的区别" class="headerlink" title="4 Object.defineProperty与Proxy的区别"></a>4 Object.defineProperty与Proxy的区别</h4><p>1.Object.defineProperty() 的问题主要有三个：<br>不能监听数组的变化，需要重写数组方法，利用Array.prototype。<br>必须遍历对象的每个属性，无法监听到对象删除属性或者新增属性。<br>必须深层遍历嵌套的对象。</p>
+<p>2.Proxy<br>可以直接监听对象而非属性。<br>可以直接监听数组的变化。<br>可以嵌套。</p>
 
       
 

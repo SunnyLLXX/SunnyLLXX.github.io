@@ -16,7 +16,7 @@
 <meta property="og:description" content="熟悉有关CSS的内容">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-28T01:32:57.000Z">
-<meta property="article:modified_time" content="2021-03-15T13:22:28.044Z">
+<meta property="article:modified_time" content="2021-07-18T14:11:52.849Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta property="article:tag" content="CSS">
@@ -203,19 +203,10 @@
       
         <h3 id="熟悉有关CSS的内容"><a href="#熟悉有关CSS的内容" class="headerlink" title="熟悉有关CSS的内容"></a>熟悉有关CSS的内容</h3><a id="more"></a>
 
-<h4 id="1-行内元素与块级元素的比较"><a href="#1-行内元素与块级元素的比较" class="headerlink" title="1 行内元素与块级元素的比较"></a>1 行内元素与块级元素的比较</h4><p>常见的块级元素包括 div,p,h1-h6,ul,ol,dl</p>
-<p>常见的行内元素包括 span,a,b,input</p>
-<p>1.块级元素独自占一行且宽度会占满父元素宽度，行内元素不会独占一行，相邻行内元素可以排在同一行。</p>
-<p>2.块级元素可以设置width和height，行内元素设置width和height无效，而且块级元素即使设置宽度也还是独占一行。</p>
-<p>3.块级元素可以设置margin和padding属性，行内元素可以设置padding，水平方向的margin-left、margin-right可以产生外边距效果，竖直方向的margin-bottom、margin-top不会产生外边距效果。</p>
-<p>4.可以通过修改元素的display属性来切换行内元素和块级元素。修改为块级元素对应display:block（此外还具有显示元素的作用），修改为行内元素对应display:inline。另外display:inline-block，可以让元素具有块级元素和行内元素的特性。</p>
-<h4 id="2-非替换元素与替换元素"><a href="#2-非替换元素与替换元素" class="headerlink" title="2 非替换元素与替换元素"></a>2 非替换元素与替换元素</h4><p>1.替换元素是浏览器根据其标签的元素与属性来判断显示具体的内容。比如根据input标签的type属性来决定显示文本框还是密码框还是其他的。替换元素设置width,height来进行缩放。</p>
-<p>2.非替换元素：HTML 的大多数元素是不可替换元素，他们将内容直接告诉浏览器，将其显示出来。比如p标签。</p>
-<h4 id="3-img的title属性和alt属性"><a href="#3-img的title属性和alt属性" class="headerlink" title="3 img的title属性和alt属性"></a>3 img的title属性和alt属性</h4><p>1.title是全局属性，可以不仅用于图片属性中。当用户把鼠标移动到元素上时，就会出现title的内容，起到对图片说明的作用，其实质就是对图片的一种备注或者注释。</p>
-<p>2.alt是局部属性。倘若图片加载不成功未能显示出来，就会在图片未显示的地方出现一段文字。这一作用是为了给未加载出来的图片提供信息，方便用户浏览网页。</p>
-<p>3.如果图片未能加载显示，仅设置alt属性就显示alt属性内容，仅设置title属性就显示title属性内容。两者同时设置，就显示alt属性内容。</p>
-<h4 id="4-meta-标签"><a href="#4-meta-标签" class="headerlink" title="4 meta 标签"></a>4 meta 标签</h4><p>meta 元素可提供有关页面的元信息（meta-information），比如针对搜索引擎和更新频度的描述和关键词。</p>
-<p>meta 标签位于文档的头部，不包含任何内容。meta 标签的属性定义了与文档相关联的名称/值对。</p>
+<h4 id="1-行内元素与块级元素的比较"><a href="#1-行内元素与块级元素的比较" class="headerlink" title="1 行内元素与块级元素的比较"></a>1 行内元素与块级元素的比较</h4><p>常见的块级元素包括 div,p,h1-h6,ul,ol,dl<br>常见的行内元素包括 span,a,b,input<br>1.块级元素独自占一行且宽度会占满父元素宽度，行内元素不会独占一行，相邻行内元素可以排在同一行。<br>2.块级元素可以设置width和height，行内元素设置width和height无效，而且块级元素即使设置宽度也还是独占一行。<br>3.块级元素可以设置margin和padding属性，行内元素可以设置padding，水平方向的margin-left、margin-right可以产生外边距效果，竖直方向的margin-bottom、margin-top不会产生外边距效果。<br>4.可以通过修改元素的display属性来切换行内元素和块级元素。修改为块级元素对应display:block（此外还具有显示元素的作用），修改为行内元素对应display:inline。另外display:inline-block，可以让元素具有块级元素和行内元素的特性。</p>
+<h4 id="2-非替换元素与替换元素"><a href="#2-非替换元素与替换元素" class="headerlink" title="2 非替换元素与替换元素"></a>2 非替换元素与替换元素</h4><p>1.替换元素是浏览器根据其标签的元素与属性来判断显示具体的内容。比如根据input标签的type属性来决定显示文本框还是密码框还是其他的。替换元素设置width,height来进行缩放。<br>2.非替换元素：HTML 的大多数元素是不可替换元素，他们将内容直接告诉浏览器，将其显示出来。比如p标签。</p>
+<h4 id="3-img的title属性和alt属性"><a href="#3-img的title属性和alt属性" class="headerlink" title="3 img的title属性和alt属性"></a>3 img的title属性和alt属性</h4><p>1.title是全局属性，可以不仅用于图片属性中。当用户把鼠标移动到元素上时，就会出现title的内容，起到对图片说明的作用，其实质就是对图片的一种备注或者注释。<br>2.alt是局部属性。倘若图片加载不成功未能显示出来，就会在图片未显示的地方出现一段文字。这一作用是为了给未加载出来的图片提供信息，方便用户浏览网页。<br>3.如果图片未能加载显示，仅设置alt属性就显示alt属性内容，仅设置title属性就显示title属性内容。两者同时设置，就显示alt属性内容。</p>
+<h4 id="4-meta-标签"><a href="#4-meta-标签" class="headerlink" title="4 meta 标签"></a>4 meta 标签</h4><p>meta 元素可提供有关页面的元信息（meta-information），比如针对搜索引擎和更新频度的描述和关键词。<br>meta 标签位于文档的头部，不包含任何内容。meta 标签的属性定义了与文档相关联的名称/值对。</p>
 <table>
 <thead>
 <tr>
@@ -245,30 +236,17 @@
 <td align="center">把 content 属性关联到一个名称</td>
 </tr>
 </tbody></table>
-<p>实例：</p>
 <p>实例 1 - 定义文档关键词，用于搜索引擎：</p>
 <pre><code>&lt;meta name=&quot;keywords&quot; content=&quot;HTML, CSS, XML, XHTML, JavaScript&quot;&gt;</code></pre><p>实例 2 - 定义web页面描述：</p>
 <pre><code>&lt;meta name=&quot;description&quot; content=&quot;Free Web tutorials on HTML and CSS&quot;&gt;</code></pre><p>实例 3 - 定义页面作者：</p>
 <pre><code>&lt;meta name=&quot;author&quot; content=&quot;Hege Refsnes&quot;&gt;</code></pre><p>实例 4 - 每30秒刷新页面：</p>
 <pre><code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;30&quot;&gt;</code></pre><p>实例 5 - 定义文档的字符编码：</p>
-<pre><code>&lt;meta charset=&quot;UTF-8&quot;&gt;</code></pre><h4 id="5-DOCTYPE-标签"><a href="#5-DOCTYPE-标签" class="headerlink" title="5 DOCTYPE 标签"></a>5 DOCTYPE 标签</h4><p>定义和用法 &lt;!DOCTYPE&gt; 声明必须是 HTML 文档的第一行，位于 html 标签之前。&lt;!DOCTYPE&gt; 声明不是 HTML 标签；它是指示 web 浏览器关于页面使用哪个 HTML 版本进行编写的指令。</p>
-<p>注意： &lt;!DOCTYPE&gt; 声明没有结束标签。</p>
-<p>提示：&lt;!DOCTYPE&gt; 声明对大小写不敏感。</p>
-<h4 id="8-CSS-盒模型"><a href="#8-CSS-盒模型" class="headerlink" title="8 CSS 盒模型"></a>8 CSS 盒模型</h4><p>CSS 盒模型由四部分组成：元素内容（content）、内边距（padding）、边框 （border）、 外边距 （margin）。<br>盒模型分别：W3C盒模型和IE盒模型。</p>
-<p>W3C盒模型的width和height指content这部分。</p>
-<p>IE盒模型的width和height指content、padding、border这三部分。</p>
-<p>css如何设置这两种模型？</p>
+<pre><code>&lt;meta charset=&quot;UTF-8&quot;&gt;</code></pre><h4 id="5-DOCTYPE-标签"><a href="#5-DOCTYPE-标签" class="headerlink" title="5 DOCTYPE 标签"></a>5 DOCTYPE 标签</h4><p>定义和用法 &lt;!DOCTYPE&gt; 声明必须是 HTML 文档的第一行，位于 html 标签之前。&lt;!DOCTYPE&gt; 声明不是 HTML 标签；它是指示 web 浏览器关于页面使用哪个 HTML 版本进行编写的指令。<br>注意： &lt;!DOCTYPE&gt; 声明没有结束标签。<br>提示：&lt;!DOCTYPE&gt; 声明对大小写不敏感。</p>
+<h4 id="8-CSS-盒模型"><a href="#8-CSS-盒模型" class="headerlink" title="8 CSS 盒模型"></a>8 CSS 盒模型</h4><p>CSS 盒模型由四部分组成：元素内容（content）、内边距（padding）、边框 （border）、 外边距 （margin）。<br>盒模型分别：W3C盒模型和IE盒模型。<br>W3C盒模型的width和height指content这部分。<br>IE盒模型的width和height指content、padding、border这三部分。<br>css如何设置这两种模型？</p>
 <pre><code>box-sizing:content-box;
 box-sizing:border-box; /*IE模型*/
-box-sizing默认属性是content-box</code></pre><h4 id="9-BFC"><a href="#9-BFC" class="headerlink" title="9 BFC"></a>9 BFC</h4><p>1.什么是BFC？</p>
-<p>它决定了元素如何对其内容进行定位以及与其他元素的关系和相互作用当涉及到可视化布局的时候Block Formatting Context提供了一个环境，HTML元素在这个环境中按照一定规则进行布局。触发了BFC的元素就是页面上完全隔离开的一个容器，外面的元素不会影响里面的元素，里面的元素也不会影响外面的元素。</p>
-<p>2.触发BFC的条件</p>
-<p>（1）float不为none，可以为left,right</p>
-<p>（2）position不为relative和static</p>
-<p>（3）overflow为auto scroll和hidden</p>
-<p>（4）display的值为table-cell或inline-block</p>
-<p>3.通过触发BFC可以解决的问题</p>
-<p>（1）浮动元素的父元素高度塌陷</p>
+box-sizing默认属性是content-box</code></pre><h4 id="9-BFC"><a href="#9-BFC" class="headerlink" title="9 BFC"></a>9 BFC</h4><p>1.什么是BFC？<br>它决定了元素如何对其内容进行定位以及与其他元素的关系和相互作用当涉及到可视化布局的时候Block Formatting Context提供了一个环境，HTML元素在这个环境中按照一定规则进行布局。触发了BFC的元素就是页面上完全隔离开的一个容器，外面的元素不会影响里面的元素，里面的元素也不会影响外面的元素。<br>2.触发BFC的条件<br>（1）float不为none，可以为left,right<br>（2）position不为relative和static<br>（3）overflow为auto scroll和hidden<br>（4）display的值为table-cell或inline-block</p>
+<p>3.通过触发BFC可以解决的问题<br>（1）浮动元素的父元素高度塌陷</p>
 <pre><code>&lt;style&gt;
     .parent {
         width: 300px;
@@ -283,7 +261,6 @@ box-sizing默认属性是content-box</code></pre><h4 id="9-BFC"><a href="#9-BFC"
         background-color: red;
     }
 &lt;/style&gt;
-
 
 &lt;!-- 子元素都浮动，脱离文档流，父元素无法察觉子元素的存在，父元素高度坍塌 
 解决办法：父元素添加属性overflow:hidden或者dispaly:table-cell  或者display:block或者position:fixed/absolute等
@@ -307,8 +284,6 @@ box-sizing默认属性是content-box</code></pre><h4 id="9-BFC"><a href="#9-BFC"
         background-color: purple;
     }
 &lt;/style&gt;
-
-
 &lt;div class=&quot;box1&quot;&gt;123&lt;/div&gt;
 &lt;div class=&quot;box2&quot;&gt;456&lt;/div&gt;</code></pre><p>第二种，利用定位实现</p>
 <pre><code>.box1 {
@@ -377,21 +352,8 @@ box-sizing默认属性是content-box</code></pre><h4 id="9-BFC"><a href="#9-BFC"
 
 &lt;div class=&quot;box1&quot;&gt;123&lt;/div&gt;
 &lt;!-- &lt;div class=&quot;parent&quot;&gt;&lt;div class=&quot;box2&quot;&gt;456&lt;/div&gt;&lt;/div&gt; --&gt;
-&lt;div class=&quot;box2&quot;&gt;456&lt;/div&gt;</code></pre><h4 id="10-position属性"><a href="#10-position属性" class="headerlink" title="10 position属性"></a>10 position属性</h4><p>position属性指定一个元素（静态的，相对的，绝对或固定）的定位方法的类型。</p>
-<p>absolute：生成绝对定位的元素，相对于最近的非 static 定位的父元素进行定位。元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定。会脱离文档流。</p>
-<p>fixed：生成固定定位的元素，相对于浏览器窗口进行定位。元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定。会脱离文档流。</p>
-<p>relative：生成相对定位的元素，相对于其正常位置进行定位。因此，”left:20” 会向元素的 LEFT 位置添加 20 像素。不会脱离文档流。</p>
-<p>static：默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right 或者 z-index 声明）。<br>sticky：粘性定位，该定位基于用户滚动的位置。它的行为就像 position:relative; 而当页面滚动超出目标区域时，它的表现就像 position:fixed;，它会固定在目标位置。</p>
-<p>注意: Internet Explorer, Edge 15 及更早 IE 版本不支持 sticky 定位。 Safari 需要使用 -webkit- prefix (查看以下实例)。</p>
-<p>inherit：规定应该从父元素继承 position 属性的值。</p>
-<h4 id="11-隐藏元素的方法"><a href="#11-隐藏元素的方法" class="headerlink" title="11 隐藏元素的方法"></a>11 隐藏元素的方法</h4><p>css隐藏元素的方法常用的有三种，分别是display:none，visibility:hidden，opacity:0</p>
-<p>三种方法的比较</p>
-<p>display:none</p>
-<p>页面中不存在，元素本来占有的空间就会被其他元素占有，会导致重排和重绘，鼠标无法接触到元素，不触发自身绑定事件。根据点击none元素结果，元素瞬间消失，不受transition影响。</p>
-<p>visibility:hidden</p>
-<p>页面中看不见，但是其占据的空间依旧会保留着，会导致浏览器重绘，不导致重排。鼠标无法接触到元素，不触发自身绑定事件。根据点击hidden元素结果，元素如同设置的效果时间隐藏，可是没有动画。</p>
-<p>opacity:0</p>
-<p>元素在页面中看不见，但是依旧占据着空间，不会导致重排，不一定会导致重绘。可触发自身绑定事件。根据点击opacity元素结果，元素如同设置的效果时间隐藏，有动画。</p>
+&lt;div class=&quot;box2&quot;&gt;456&lt;/div&gt;</code></pre><h4 id="10-position属性"><a href="#10-position属性" class="headerlink" title="10 position属性"></a>10 position属性</h4><p>position属性指定一个元素（静态的，相对的，绝对或固定）的定位方法的类型。<br>absolute：生成绝对定位的元素，相对于最近的非 static 定位的父元素进行定位。元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定。会脱离文档流。<br>fixed：生成固定定位的元素，相对于浏览器窗口进行定位。元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定。会脱离文档流。<br>relative：生成相对定位的元素，相对于其正常位置进行定位。因此，”left:20” 会向元素的 LEFT 位置添加 20 像素。不会脱离文档流。<br>static：默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right 或者 z-index 声明）。<br>sticky：粘性定位，该定位基于用户滚动的位置。它的行为就像 position:relative; 而当页面滚动超出目标区域时，它的表现就像 position:fixed;，它会固定在目标位置。<br>注意: Internet Explorer, Edge 15 及更早 IE 版本不支持 sticky 定位。 Safari 需要使用 -webkit- prefix (查看以下实例)。<br>inherit：规定应该从父元素继承 position 属性的值。</p>
+<h4 id="11-隐藏元素的方法"><a href="#11-隐藏元素的方法" class="headerlink" title="11 隐藏元素的方法"></a>11 隐藏元素的方法</h4><p>css隐藏元素的方法常用的有三种，分别是display:none，visibility:hidden，opacity:0<br>三种方法的比较<br>display:none<br>页面中不存在，元素本来占有的空间就会被其他元素占有，会导致重排和重绘，鼠标无法接触到元素，不触发自身绑定事件。根据点击none元素结果，元素瞬间消失，不受transition影响。<br>visibility:hidden<br>页面中看不见，但是其占据的空间依旧会保留着，会导致浏览器重绘，不导致重排。鼠标无法接触到元素，不触发自身绑定事件。根据点击hidden元素结果，元素如同设置的效果时间隐藏，可是没有动画。<br>opacity:0<br>元素在页面中看不见，但是依旧占据着空间，不会导致重排，不一定会导致重绘。可触发自身绑定事件。根据点击opacity元素结果，元素如同设置的效果时间隐藏，有动画。</p>
 <pre><code>&lt;style&gt;
     div {
         width: 100px;
@@ -409,11 +371,10 @@ box-sizing默认属性是content-box</code></pre><h4 id="9-BFC"><a href="#9-BFC"
         opacity: 0;
     }
 &lt;/style&gt;
-
-
 &lt;div id=&quot;none&quot;&gt;none&lt;/div&gt;
 &lt;div id=&quot;hidden&quot;&gt;hidden&lt;/div&gt;
 &lt;div id=&quot;opacity&quot;&gt;opacity&lt;/div&gt;
+
 &lt;script&gt;
     none = document.getElementById(&apos;none&apos;)
     hidden = document.getElementById(&apos;hidden&apos;)
@@ -429,9 +390,6 @@ box-sizing默认属性是content-box</code></pre><h4 id="9-BFC"><a href="#9-BFC"
     }
 &lt;/script&gt;
 
-
-
-
 &lt;style&gt;
     div {
         width: 100px;
@@ -441,7 +399,6 @@ box-sizing默认属性是content-box</code></pre><h4 id="9-BFC"><a href="#9-BFC"
         transition: all linear 2s;
     }
 &lt;/style&gt;
-
 
 &lt;script&gt;
     none = document.getElementById(&apos;none&apos;)
@@ -456,28 +413,12 @@ box-sizing默认属性是content-box</code></pre><h4 id="9-BFC"><a href="#9-BFC"
     opacity.onclick = function(){
         this.style.opacity = 0
     }
-&lt;/script&gt;</code></pre><h4 id="12-flex布局"><a href="#12-flex布局" class="headerlink" title="12 flex布局"></a>12 flex布局</h4><p>Flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。</p>
-<p>采用Flex布局的元素，称为Flex容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为Flex项目（flex item），简称”项目”。</p>
-<p>注意，设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。</p>
-<p>容器属性</p>
-<p>flex-direction：flex-direction属性决定主轴的方向（即项目的排列方向）。</p>
-<p>flex-wrap：flex-wrap属性定义，如果一条轴线排不下，如何换行。nowrap（默认）：不换行。wrap：换行，第一行在上方。wrap-reverse：换行，第一行在下方。</p>
-<p>flex-flow：flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。</p>
-<p>justify-content：ustify-content属性定义了项目在主轴上的对齐方式。</p>
-<p>align-items：align-items属性定义项目在交叉轴上如何对齐。</p>
-<p>align-content：align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。</p>
-<p>项目属性</p>
-<p>align-self：属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。</p>
-<p>flex-grow：属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。</p>
-<p>flex-shrink：属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。</p>
-<p>flex-basis：属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。</p>
-<p>flex：属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。</p>
+&lt;/script&gt;</code></pre><h4 id="12-flex布局"><a href="#12-flex布局" class="headerlink" title="12 flex布局"></a>12 flex布局</h4><p>Flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。<br>采用Flex布局的元素，称为Flex容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为Flex项目（flex item），简称”项目”。<br>注意，设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。<br>容器属性：<br>flex-direction：flex-direction属性决定主轴的方向（即项目的排列方向）。<br>flex-wrap：flex-wrap属性定义，如果一条轴线排不下，如何换行。nowrap（默认）：不换行。wrap：换行，第一行在上方。wrap-reverse：换行，第一行在下方。<br>flex-flow：flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。<br>justify-content：ustify-content属性定义了项目在主轴上的对齐方式。<br>align-items：align-items属性定义项目在交叉轴上如何对齐。<br>align-content：align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。<br>项目属性：<br>align-self：属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。<br>flex-grow：属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。<br>flex-shrink：属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。<br>flex-basis：属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。<br>flex：属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。</p>
 <h4 id="13-三栏布局"><a href="#13-三栏布局" class="headerlink" title="13 三栏布局"></a>13 三栏布局</h4><p>第一种，利用浮动布局 </p>
 <pre><code>* {
     margin: 0px;
     padding: 0px;
 }
-
 .left {
     float: left;
     width: 100px;
@@ -497,8 +438,6 @@ box-sizing默认属性是content-box</code></pre><h4 id="9-BFC"><a href="#9-BFC"
     background-color: purple;
     text-align: center;
 }
-
-
 &lt;div class=&quot;mainbox&quot;&gt;
     &lt;div class=&quot;left&quot;&gt;左&lt;/div&gt;
     &lt;div class=&quot;right&quot;&gt;右&lt;/div&gt;
@@ -539,8 +478,6 @@ box-sizing默认属性是content-box</code></pre><h4 id="9-BFC"><a href="#9-BFC"
     text-align: center;
 
 }
-
-
 &lt;div class=&quot;mainbox2&quot;&gt;
     &lt;div class=&quot;left2&quot;&gt;左&lt;/div&gt;
     &lt;div class=&quot;right2&quot;&gt;右&lt;/div&gt;
@@ -574,8 +511,6 @@ box-sizing默认属性是content-box</code></pre><h4 id="9-BFC"><a href="#9-BFC"
         text-align: center;
 
     }
-
-
 &lt;div class=&quot;mainbox3&quot;&gt;
     &lt;div class=&quot;left3&quot;&gt;左&lt;/div&gt;
     &lt;div class=&quot;middle3&quot;&gt;中
@@ -583,19 +518,7 @@ box-sizing默认属性是content-box</code></pre><h4 id="9-BFC"><a href="#9-BFC"
     &lt;/div&gt;
     &lt;div class=&quot;right3&quot;&gt;右&lt;/div&gt;
 
-&lt;/div&gt;</code></pre><h4 id="14-H5和CSS3新特性"><a href="#14-H5和CSS3新特性" class="headerlink" title="14 H5和CSS3新特性"></a>14 H5和CSS3新特性</h4><p>H5的新特性：</p>
-<p>1.用于绘画 canvas 元素。</p>
-<p>2.音频视频：video、audio 元素。</p>
-<p>3.本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失；sessionStorage 的数据在浏览器关闭后自动删除。</p>
-<p>4.语意化标签：article、footer、header、nav、section。</p>
-<p>5.datalist、keygen、output</p>
-<p>5.新增表单控件类型，calendar、date、time、email、url、search、number、range。</p>
-<p>6.新增表单属性：placehoder、required、min、max、width、height、autofocus、required、multiple。</p>
-<p>7.地理定位。</p>
-<p>8.拖拽。</p>
-<p>9.新事件：onresize、ondrag、onscroll、onmousewheel、onerror、onplay、onpause。</p>
-<p>css3的新特征:</p>
-<p>1.选择器：</p>
+&lt;/div&gt;</code></pre><h4 id="14-H5和CSS3新特性"><a href="#14-H5和CSS3新特性" class="headerlink" title="14 H5和CSS3新特性"></a>14 H5和CSS3新特性</h4><p>H5的新特性：<br>1.用于绘画 canvas 元素。<br>2.音频视频：video、audio 元素。<br>3.本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失；sessionStorage 的数据在浏览器关闭后自动删除。<br>4.语意化标签：article、footer、header、nav、section。<br>5.datalist、keygen、output<br>5.新增表单控件类型，calendar、date、time、email、url、search、number、range。<br>6.新增表单属性：placehoder、required、min、max、width、height、autofocus、required、multiple。<br>7.地理定位。<br>8.拖拽。<br>9.新事件：onresize、ondrag、onscroll、onmousewheel、onerror、onplay、onpause。<br>css3的新特征:<br>1.选择器：</p>
 <pre><code>:last-child /* 选择元素最后一个孩子 */
 :first-child /* 选择元素第一个孩子 */
 :nth-child(1) /* 按照第几个孩子给它设置样式 */
@@ -609,14 +532,12 @@ box-sizing默认属性是content-box</code></pre><h4 id="9-BFC"><a href="#9-BFC"
 
 伪类选择器
 
-:link，:visited，:hover，:active</code></pre><p>2.透明度。</p>
-<p>3.多栏布局。</p>
+:link，:visited，:hover，:active</code></pre><p>2.透明度。<br>3.多栏布局。</p>
 <pre><code>通过CSS3，能够创建多个列来对文本进行布局
 
 column-count: 规定元素应该被分隔的列数
 column-gap: 规定列之间的间隔
-column-rule: 设置列之间的宽度、样式和颜色规则</code></pre><p>4.动画（animation）、过渡（transition）</p>
-<p>5.文本效果。</p>
+column-rule: 设置列之间的宽度、样式和颜色规则</code></pre><p>4.动画（animation）、过渡（transition）<br>5.文本效果。</p>
 <pre><code>text-shadow    向文本添加阴影
 text-justify    规定当 text-align 设置为 “justify” 时所使用的对齐方法
 text-emphasis    向元素的文本应用重点标记以及重点标记的前景色
@@ -625,8 +546,7 @@ text-overflow    规定当文本溢出包含元素时发生的事情
 text-wrap    规定文本的换行规则
 word-break    规定非中日韩文本的换行规则
 word-wrap    允许对长的不可分割的单词进行分割并换行到下一行
-text-decoration    文本修饰符：overline、line-through、underline 分别是上划线、中划线、下划线</code></pre><p>6.@font-face属性，自定义字体。</p>
-<p>7.背景和边框</p>
+text-decoration    文本修饰符：overline、line-through、underline 分别是上划线、中划线、下划线</code></pre><p>6.@font-face属性，自定义字体。<br>7.背景和边框</p>
 <pre><code>background-size：规定背景图片的尺寸（cover：填充；100% 100%：拉伸）
 background-origin：规定背景图片的定位区域
 对于 background-origin 属性，有如下属性
@@ -635,8 +555,7 @@ background-origin：规定背景图片的定位区域
 边框：
 border-radius：圆角
 box-shadow / text-shadow：阴影
-border-image：边框图片</code></pre><p>8.2D/3D转换：transform</p>
-<p>9.盒模型</p>
+border-image：边框图片</code></pre><p>8.2D/3D转换：transform<br>9.盒模型</p>
 <pre><code>box-sizing</code></pre><p>10.CSS 兼容内核</p>
 <pre><code>-moz-：代表FireFox浏览器私有属性
 -ms-：代表IE浏览器私有属性

@@ -16,7 +16,7 @@
 <meta property="og:description" content="了解两者的区别">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-22T09:33:34.000Z">
-<meta property="article:modified_time" content="2021-02-22T10:00:44.319Z">
+<meta property="article:modified_time" content="2021-07-18T14:23:07.404Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -202,16 +202,7 @@
       
         <h3 id="了解两者的区别"><a href="#了解两者的区别" class="headerlink" title="了解两者的区别"></a>了解两者的区别</h3><a id="more"></a>
 
-<p>1.底层原理不一样：</p>
-<p>BrowserRouter使用的是H5的history API，不兼容IE9及以下版本。</p>
-<p>HashRouter使用的是URL的哈希值。</p>
-<p>2.path表现形式不一样</p>
-<p>BrowserRouter的路径中没有#,例如：localhost:3000/demo/test</p>
-<p>HashRouter的路径包含#,例如：localhost:3000/#/demo/test</p>
-<p>3.刷新后对路由state参数的影响</p>
-<p>BrowserRouter没有任何影响，因为state保存在history对象中。</p>
-<p>HashRouter刷新后会导致路由state参数的丢失！！！</p>
-<p>4.备注：HashRouter可以用于解决一些路径错误相关的问题。</p>
+<p>1.底层原理不一样：<br>BrowserRouter使用的是H5的history API，不兼容IE9及以下版本。<br>HashRouter使用的是URL的哈希值。<br>2.path表现形式不一样<br>BrowserRouter的路径中没有#,例如：localhost:3000/demo/test<br>HashRouter的路径包含#,例如：localhost:3000/#/demo/test<br>3.刷新后对路由state参数的影响<br>BrowserRouter没有任何影响，因为state保存在history对象中。<br>HashRouter刷新后会导致路由state参数的丢失！！！<br>4.备注：HashRouter可以用于解决一些路径错误相关的问题。</p>
 
       
 

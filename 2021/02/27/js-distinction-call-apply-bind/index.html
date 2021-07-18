@@ -16,7 +16,7 @@
 <meta property="og:description" content="了解JS中call,bind,apply的异同">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-27T10:08:02.000Z">
-<meta property="article:modified_time" content="2021-02-27T10:16:38.798Z">
+<meta property="article:modified_time" content="2021-07-18T14:14:29.773Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta property="article:tag" content="JavaScript">
@@ -203,10 +203,7 @@
       
         <h3 id="了解JS中call-bind-apply的异同"><a href="#了解JS中call-bind-apply的异同" class="headerlink" title="了解JS中call,bind,apply的异同"></a>了解JS中call,bind,apply的异同</h3><a id="more"></a>
 
-<p>call，apply，bind都是Function原型上的方法，而每个函数作为Function的实例，所以可以调用call，apply，bind方法，都是主要用于让函数执行并且修改this指向。三者第一个参数都是this要指向的对象，都可以利用后续参数传参。</p>
-<p>call要求给函数传参是一个一个传递，apply要求把所有的参数以数组的形式传递，bind要求给函数传参是一个一个传递的。</p>
-<p>只是bind并没有将函数立即执行，只是预先改变this。</p>
-<p>bind 返回的是一个新的函数，你必须调用它才会被执行指向。</p>
+<p>call，apply，bind都是Function原型上的方法，而每个函数作为Function的实例，所以可以调用call，apply，bind方法，都是主要用于让函数执行并且修改this指向。三者第一个参数都是this要指向的对象，都可以利用后续参数传参。<br>call要求给函数传参是一个一个传递，apply要求把所有的参数以数组的形式传递，bind要求给函数传参是一个一个传递的。<br>只是bind并没有将函数立即执行，只是预先改变this。<br>bind 返回的是一个新的函数，你必须调用它才会被执行指向。</p>
 
       
 

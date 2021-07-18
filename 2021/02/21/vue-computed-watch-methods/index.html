@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://SunnyLLXX.github.io">
-  <title>Vue 计算属性与监听器、方法的比较 | étoile的小窝</title>
+  <title>Vue2.x 计算属性与监听器、方法的比较 | étoile的小窝</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Vue computed vs watch vs methods">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vue 计算属性与监听器、方法的比较">
+<meta property="og:title" content="Vue2.x 计算属性与监听器、方法的比较">
 <meta property="og:url" content="http://sunnyllxx.github.io/2021/02/21/vue-computed-watch-methods/index.html">
 <meta property="og:site_name" content="étoile的小窝">
 <meta property="og:description" content="Vue computed vs watch vs methods">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-21T02:09:01.000Z">
-<meta property="article:modified_time" content="2021-02-21T03:20:08.254Z">
+<meta property="article:modified_time" content="2021-07-18T14:28:04.785Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="Vue">
 <meta property="article:tag" content="常见题">
@@ -174,7 +174,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Vue 计算属性与监听器、方法的比较
+      Vue2.x 计算属性与监听器、方法的比较
     </h1>
   
 
@@ -204,9 +204,7 @@
         <h3 id="Vue-computed-vs-watch-vs-methods"><a href="#Vue-computed-vs-watch-vs-methods" class="headerlink" title="Vue computed vs watch vs methods"></a>Vue computed vs watch vs methods</h3><a id="more"></a>
 
 <p>在开发vue项目中，可能会经常遇见实现某种功能具体使用哪种方法更好呢？接下来通过一些小案例进行分析（通过在浏览器控制台修改vm.firstName或者vm.lastName得到效果）。</p>
-<h4 id="1-计算属性-VS-侦听器"><a href="#1-计算属性-VS-侦听器" class="headerlink" title="1 计算属性 VS 侦听器"></a>1 计算属性 VS 侦听器</h4><p>computed：计算属性是用来声明式的描述一个值依赖了其它的值，当所依赖的值或者变量改变时，计算属性也会跟着改变。</p>
-<p>watch：Vue 提供了一种更通用的方式来观察和响应 Vue 实例上的数据变动。监听的是已经在 data 中定义的变量，当该变量变化时，会触发 watch 中的方法。</p>
-<p>使用计算属性(不需要在data中声明)</p>
+<h4 id="1-计算属性-VS-侦听器"><a href="#1-计算属性-VS-侦听器" class="headerlink" title="1 计算属性 VS 侦听器"></a>1 计算属性 VS 侦听器</h4><p>computed：计算属性是用来声明式的描述一个值依赖了其它的值，当所依赖的值或者变量改变时，计算属性也会跟着改变。<br>watch：Vue 提供了一种更通用的方式来观察和响应 Vue 实例上的数据变动。监听的是已经在 data 中定义的变量，当该变量变化时，会触发 watch 中的方法。<br>使用计算属性(不需要在data中声明)</p>
 <pre><code>&lt;body&gt;
     &lt;div id=&quot;app&quot;&gt;
         &lt;p&gt;{{fullName}}&lt;/p&gt;
@@ -250,8 +248,7 @@
             }
         })
     &lt;/script&gt;
-&lt;/body&gt;</code></pre><p>但是，当需要在数据变化时执行异步或开销较大的操作时，推荐使用侦听器。<br>使用 watch 选项允许我们执行异步操作 (访问一个 API)，限制我们执行该操作的频率，并在得到最终结果前，设置中间状态。这些都是计算属性无法做到的。</p>
-<p>在计算属性与侦听器都能够实现同一功能时，推荐使用计算属性，因为代码更加简洁。</p>
+&lt;/body&gt;</code></pre><p>但是，当需要在数据变化时执行异步或开销较大的操作时，推荐使用侦听器。<br>使用 watch 选项允许我们执行异步操作 (访问一个 API)，限制我们执行该操作的频率，并在得到最终结果前，设置中间状态。这些都是计算属性无法做到的。<br>在计算属性与侦听器都能够实现同一功能时，推荐使用计算属性，因为代码更加简洁。</p>
 <h4 id="2-计算属性-VS-方法"><a href="#2-计算属性-VS-方法" class="headerlink" title="2 计算属性 VS 方法"></a>2 计算属性 VS 方法</h4><p>通过表达式调用方法也可以实现同样的效果</p>
 <pre><code>&lt;body&gt;
     &lt;div id=&quot;app&quot;&gt;
@@ -273,8 +270,7 @@
             }
         })
     &lt;/script&gt;
-&lt;/body&gt;</code></pre><p>不同的是计算属性是基于它们的响应式依赖进行缓存的。只在相关响应式依赖发生改变时它们才会重新求值。这就意味着只要 fullName 还没有发生改变，多次访问计算属性会立即返回之前的计算结果，而不必再次执行函数。</p>
-<p>所以在下面的代码中，fullName将不会更新，因为Date.now()不是响应式依赖</p>
+&lt;/body&gt;</code></pre><p>不同的是计算属性是基于它们的响应式依赖进行缓存的。只在相关响应式依赖发生改变时它们才会重新求值。这就意味着只要 fullName 还没有发生改变，多次访问计算属性会立即返回之前的计算结果，而不必再次执行函数。<br>所以在下面的代码中，fullName将不会更新，因为Date.now()不是响应式依赖</p>
 <pre><code>computed: {
             fullName: function(){
                 return Date.now()

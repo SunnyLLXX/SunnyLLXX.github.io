@@ -16,7 +16,7 @@
 <meta property="og:description" content="如何实现小程序的订阅消息功能">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-21T02:07:33.000Z">
-<meta property="article:modified_time" content="2021-02-21T03:18:25.294Z">
+<meta property="article:modified_time" content="2021-07-18T14:28:49.366Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="微信小程序">
 <meta name="twitter:card" content="summary">
@@ -202,15 +202,9 @@
       
         <h3 id="如何实现小程序的订阅消息功能"><a href="#如何实现小程序的订阅消息功能" class="headerlink" title="如何实现小程序的订阅消息功能"></a>如何实现小程序的订阅消息功能</h3><a id="more"></a>
 <p>本篇文章将会通过一个小案例实现订阅消息功能</p>
-<h4 id="1-订阅消息"><a href="#1-订阅消息" class="headerlink" title="1 订阅消息"></a>1 订阅消息</h4><p>订阅消息能力是小程序能力中的重要组成，以便实现服务的闭环和更优的体验。</p>
-<p>订阅消息推送位置：服务通知</p>
-<p>订阅消息下发条件：用户自主订阅</p>
+<h4 id="1-订阅消息"><a href="#1-订阅消息" class="headerlink" title="1 订阅消息"></a>1 订阅消息</h4><p>订阅消息能力是小程序能力中的重要组成，以便实现服务的闭环和更优的体验。<br>订阅消息推送位置：服务通知<br>订阅消息下发条件：用户自主订阅</p>
 <p>订阅消息卡片跳转能力：点击查看详情可跳转至该小程序的页面</p>
-<h4 id="2-实现步骤"><a href="#2-实现步骤" class="headerlink" title="2 实现步骤"></a>2 实现步骤</h4><p>1.获取模板ID</p>
-<p>在微信公众平台手动配置获取模板 ID，如果没有合适的模板，可以申请添加新模板，审核通过后可使用</p>
-<p>2.获取下发权限</p>
-<p>使用小程序API wx.requestSubscribeMessage()，详细使用请看官方文档。</p>
-<p>3.调用接口下发订阅消息</p>
+<h4 id="2-实现步骤"><a href="#2-实现步骤" class="headerlink" title="2 实现步骤"></a>2 实现步骤</h4><p>1.获取模板ID<br>在微信公众平台手动配置获取模板 ID，如果没有合适的模板，可以申请添加新模板，审核通过后可使用<br>2.获取下发权限<br>使用小程序API wx.requestSubscribeMessage()，详细使用请看官方文档。<br>3.调用接口下发订阅消息</p>
 <p>小案例代码</p>
 <pre><code>messageSubscription: function () {
     // 订阅消息
@@ -450,7 +444,7 @@ acceptMessage: function () {
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Vue 计算属性与监听器、方法的比较
+          Vue2.x 计算属性与监听器、方法的比较
         
       </div>
     </a>

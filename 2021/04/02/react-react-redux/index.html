@@ -17,7 +17,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/04/02/react-react-redux/pic01.png">
 <meta property="article:published_time" content="2021-04-02T12:36:28.000Z">
-<meta property="article:modified_time" content="2021-04-05T03:18:54.365Z">
+<meta property="article:modified_time" content="2021-07-18T13:37:02.122Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -203,17 +203,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="了解react-redux的使用方法"><a href="#了解react-redux的使用方法" class="headerlink" title="了解react-redux的使用方法"></a>了解react-redux的使用方法</h3><a id="more"></a>
-<p>React-Redux是Redux的官方React绑定库。它能够使你的React组件从Redux store中读取数据，并且向store分发actions以更新数据。</p>
-<p>详细信息请看<a href="https://www.redux.org.cn/docs/react-redux/" target="_blank" rel="noopener">文档</a></p>
-<h4 id="1-react-Redux将所有组件分成两大类"><a href="#1-react-Redux将所有组件分成两大类" class="headerlink" title="1 react-Redux将所有组件分成两大类"></a>1 react-Redux将所有组件分成两大类</h4><p>1.UI组件</p>
-<p>（1）只负责 UI 的呈现，不带有任何业务逻辑</p>
-<p>（2）通过props接收数据(一般数据和函数)</p>
-<p>（3）不使用任何 Redux 的 API</p>
-<p>（4）一般保存在components文件夹下</p>
-<p>2.容器组件</p>
-<p>（1）负责管理数据和业务逻辑，不负责UI的呈现</p>
-<p>（2）使用 Redux 的 API</p>
-<p>（3）一般保存在containers文件夹下</p>
+<p>React-Redux是Redux的官方React绑定库。它能够使你的React组件从Redux store中读取数据，并且向store分发actions以更新数据。<br>详细信息请看<a href="https://www.redux.org.cn/docs/react-redux/" target="_blank" rel="noopener">文档</a></p>
+<h4 id="1-react-Redux将所有组件分成两大类"><a href="#1-react-Redux将所有组件分成两大类" class="headerlink" title="1 react-Redux将所有组件分成两大类"></a>1 react-Redux将所有组件分成两大类</h4><p>1.UI组件<br>（1）只负责 UI 的呈现，不带有任何业务逻辑<br>（2）通过props接收数据(一般数据和函数)<br>（3）不使用任何 Redux 的 API<br>（4）一般保存在components文件夹下<br>2.容器组件<br>（1）负责管理数据和业务逻辑，不负责UI的呈现<br>（2）使用 Redux 的 API<br>（3）一般保存在containers文件夹下</p>
 <p><img src="/2021/04/02/react-react-redux/pic01.png" alt></p>
 <h4 id="2-相关API"><a href="#2-相关API" class="headerlink" title="2 相关API"></a>2 相关API</h4><p>1.Provider：让所有组件都可以得到state数据</p>
 <pre><code>&lt;Provider store={store}&gt;
@@ -405,10 +396,7 @@ export default connect(
         addAsync: createAddAsyncAction
         //映射操作状态的方法
     }
-)(Count)</code></pre><h4 id="5-多组件数据共享"><a href="#5-多组件数据共享" class="headerlink" title="5 多组件数据共享"></a>5 多组件数据共享</h4><p>1.了解什么是combineReducers？</p>
-<p>combineReducers(reducers)：随着应用变得越来越复杂，可以考虑将 reducer 函数 拆分成多个单独的函数，拆分后的每个函数负责独立管理 state 的一部分。</p>
-<p>combineReducers 辅助函数的作用是，把一个由多个不同 reducer 函数作为 value 的 object，合并成一个最终的 reducer 函数，然后就可以对这个 reducer 调用 createStore 方法。</p>
-<p>合并后的 reducer 可以调用各个子 reducer，并把它们返回的结果合并成一个 state 对象。 由 combineReducers() 返回的 state 对象，会将传入的每个 reducer 返回的 state 按其传递给 combineReducers() 时对应的 key 进行命名。</p>
+)(Count)</code></pre><h4 id="5-多组件数据共享"><a href="#5-多组件数据共享" class="headerlink" title="5 多组件数据共享"></a>5 多组件数据共享</h4><p>1.了解什么是combineReducers？<br>combineReducers(reducers)：随着应用变得越来越复杂，可以考虑将 reducer 函数 拆分成多个单独的函数，拆分后的每个函数负责独立管理 state 的一部分。<br>combineReducers 辅助函数的作用是，把一个由多个不同 reducer 函数作为 value 的 object，合并成一个最终的 reducer 函数，然后就可以对这个 reducer 调用 createStore 方法。<br>合并后的 reducer 可以调用各个子 reducer，并把它们返回的结果合并成一个 state 对象。 由 combineReducers() 返回的 state 对象，会将传入的每个 reducer 返回的 state 按其传递给 combineReducers() 时对应的 key 进行命名。</p>
 <p>示例：</p>
 <pre><code>const allReducer = combineReducers({counts: countReducer,persons: personReducer})
 // allReducer 将返回如下的 state 对象
@@ -420,9 +408,7 @@ export default connect(
         // ... persons, 和一些其他由 personReducer 管理的 state 对象 ...
     }
 }</code></pre><p>通过为传入对象的 reducer 命名不同的 key 来控制返回 state key 的命名。例如，你可以调用 combineReducers({counts: countReducer,persons: personReducer}) 将 state 结构变为 { counts, persons }。</p>
-<p>2.小案例：有一个Person组件，他可以显示数据person的name,age，并且也可以显示Count组件的count值。Count组件不仅可以显示count值，也可以显示Person组件的总人数。</p>
-<p>（1）修改redux中的目录结构，添加actions,reducers文件夹，将组件对应的action,reducer分别放在对应的文件夹中，修改引入的路径。</p>
-<p>（2）创建src/redux/actions/person.js，添加如下代码</p>
+<p>2.小案例：有一个Person组件，他可以显示数据person的name,age，并且也可以显示Count组件的count值。Count组件不仅可以显示count值，也可以显示Person组件的总人数。<br>（1）修改redux中的目录结构，添加actions,reducers文件夹，将组件对应的action,reducer分别放在对应的文件夹中，修改引入的路径。<br>（2）创建src/redux/actions/person.js，添加如下代码</p>
 <pre><code>export function addPerson (data){
     return {
         type: &apos;add_person&apos;,
@@ -463,7 +449,6 @@ export default createStore(allReducer,applyMiddleware(thunk))</code></pre><p>如
 import {connect} from &apos;react-redux&apos;
 import {addPerson} from &apos;../../redux/actions/person.js&apos;
 import {nanoid} from &apos;nanoid&apos;
-
 
 class Person extends Component {
 

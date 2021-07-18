@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/04/06/react-component-and-purecomponent/pic01.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/04/06/react-component-and-purecomponent/pic02.png">
 <meta property="article:published_time" content="2021-04-06T01:26:32.000Z">
-<meta property="article:modified_time" content="2021-04-06T02:31:43.821Z">
+<meta property="article:modified_time" content="2021-07-18T13:35:18.169Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -250,11 +250,8 @@ class Child extends Component {
 
 export default Parent;</code></pre><p>执行结果如下图</p>
 <p><img src="/2021/04/06/react-component-and-purecomponent/pic01.png" alt></p>
-<p>可以发现：</p>
-<p>1.只要执行setState(),即使不改变状态数据, 组件也会重新render()，这样就会造成效率低。</p>
-<p>2.只要当前组件重新render(), 就会自动重新render子组件，纵使子组件没有用到父组件的任何数据，这样就会造成效率低。</p>
-<h4 id="1-2-原因"><a href="#1-2-原因" class="headerlink" title="1.2 原因"></a>1.2 原因</h4><p>Component中的shouldComponentUpdate()总是返回true。</p>
-<p>我们所希望的是只有当组件的state或props数据发生改变时才重新render()。</p>
+<p>可以发现：<br>1.只要执行setState(),即使不改变状态数据, 组件也会重新render()，这样就会造成效率低。<br>2.只要当前组件重新render(), 就会自动重新render子组件，纵使子组件没有用到父组件的任何数据，这样就会造成效率低。</p>
+<h4 id="1-2-原因"><a href="#1-2-原因" class="headerlink" title="1.2 原因"></a>1.2 原因</h4><p>Component中的shouldComponentUpdate()总是返回true。<br>我们所希望的是只有当组件的state或props数据发生改变时才重新render()。</p>
 <h4 id="1-3-解决办法"><a href="#1-3-解决办法" class="headerlink" title="1.3 解决办法"></a>1.3 解决办法</h4><p>1.重写shouldComponentUpdate()方法</p>
 <p>比较新旧state或props数据, 如果有变化才返回true, 如果没有返回false</p>
 <pre><code>class Parent extends Component {
@@ -319,8 +316,7 @@ class Child extends Component {
 
 export default Parent;</code></pre><p>执行结果如下图，继续点击父子组件将不再render</p>
 <p><img src="/2021/04/06/react-component-and-purecomponent/pic02.png" alt></p>
-<p>2.使用PureComponent</p>
-<p>PureComponent重写了shouldComponentUpdate(), 只有state或props数据有变化才返回true。</p>
+<p>2.使用PureComponent<br>PureComponent重写了shouldComponentUpdate(), 只有state或props数据有变化才返回true。</p>
 <h4 id="2-React-PureComponent"><a href="#2-React-PureComponent" class="headerlink" title="2 React.PureComponent"></a>2 React.PureComponent</h4><p>如果赋予 React 组件相同的 props 和 state，render() 函数会渲染相同的内容，那么在某些情况下使用 React.PureComponent 可提高性能。</p>
 <p>在Parent.jsx中</p>
 <pre><code>import React, { Fragment, PureComponent } from &apos;react&apos;;

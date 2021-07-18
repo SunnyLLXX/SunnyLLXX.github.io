@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://sunnyllxx.github.io/2020/10/20/use-vuex/pic01.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2020/10/20/use-vuex/pic02.png">
 <meta property="article:published_time" content="2020-10-20T06:20:10.000Z">
-<meta property="article:modified_time" content="2020-10-20T07:22:10.211Z">
+<meta property="article:modified_time" content="2021-07-18T14:46:48.575Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="Vuex">
 <meta name="twitter:card" content="summary">
@@ -206,32 +206,22 @@
         <h3 id="如何使用Vuex"><a href="#如何使用Vuex" class="headerlink" title="如何使用Vuex"></a>如何使用Vuex</h3><p>接下来就通过一个简单的计数器小案例进行阐述</p>
 <a id="more"></a>
 
-<h4 id="1-了解组件之间共享数据的方式"><a href="#1-了解组件之间共享数据的方式" class="headerlink" title="1 了解组件之间共享数据的方式"></a>1 了解组件之间共享数据的方式</h4><p>父向子传值：通过v-bind 属性绑定</p>
-<p>子向父传值：通过v-on事件绑定</p>
-<p>兄弟组件之间共享数据： 通过EventBus</p>
-<p>使用 $on 接收数据的组件 ，使用 $emit 发送数据的组件</p>
+<h4 id="1-了解组件之间共享数据的方式"><a href="#1-了解组件之间共享数据的方式" class="headerlink" title="1 了解组件之间共享数据的方式"></a>1 了解组件之间共享数据的方式</h4><p>父向子传值：通过v-bind 属性绑定<br>子向父传值：通过v-on事件绑定<br>兄弟组件之间共享数据： 通过EventBus<br>使用 $on 接收数据的组件 ，使用 $emit 发送数据的组件</p>
 <h4 id="2-Vuex概述"><a href="#2-Vuex概述" class="headerlink" title="2 Vuex概述"></a>2 Vuex概述</h4><h4 id="2-1-Vuex-是什么"><a href="#2-1-Vuex-是什么" class="headerlink" title="2.1  Vuex 是什么"></a>2.1  Vuex 是什么</h4><p>Vuex 是实现组件全局状态（数据）管理的一种机制，可以方便的实现组件之间数据的共享。 </p>
-<h4 id="2-2-使用-Vuex-统一管理状态的好处"><a href="#2-2-使用-Vuex-统一管理状态的好处" class="headerlink" title="2.2 使用 Vuex 统一管理状态的好处"></a>2.2 使用 Vuex 统一管理状态的好处</h4><p>（1）能够在 vuex 中集中管理共享的数据，易于开发和后期维护 </p>
-<p>（2）能够高效地实现组件之间的数据共享，提高开发效率 </p>
-<p>（3）存储在 vuex 中的数据都是响应式的，能够实时保持数据与页面的同步 </p>
+<h4 id="2-2-使用-Vuex-统一管理状态的好处"><a href="#2-2-使用-Vuex-统一管理状态的好处" class="headerlink" title="2.2 使用 Vuex 统一管理状态的好处"></a>2.2 使用 Vuex 统一管理状态的好处</h4><p>（1）能够在 vuex 中集中管理共享的数据，易于开发和后期维护<br>（2）能够高效地实现组件之间的数据共享，提高开发效率<br>（3）存储在 vuex 中的数据都是响应式的，能够实时保持数据与页面的同步 </p>
 <h4 id="2-3-什么样的数据适合存储到-Vuex-中"><a href="#2-3-什么样的数据适合存储到-Vuex-中" class="headerlink" title="2.3  什么样的数据适合存储到 Vuex 中"></a>2.3  什么样的数据适合存储到 Vuex 中</h4><p>一般情况下，只有组件之间共享的数据，才有必要存储到 vuex 中；对于组件中的私有数据，依旧存储在组件自身的 data 中即可。 </p>
 <h4 id="3-Vuex-的核心概念"><a href="#3-Vuex-的核心概念" class="headerlink" title="3  Vuex 的核心概念"></a>3  Vuex 的核心概念</h4><h4 id="3-1-State"><a href="#3-1-State" class="headerlink" title="3.1 State"></a>3.1 State</h4><p>State 提供唯一的公共数据源，所有共享的数据都要统一放到 Store 的 State 中进行存储。 </p>
 <pre><code>// 创建store数据源，提供唯一公共数据 
 const store = new Vuex.Store({ 
     state: { count: 0 } 
 }) </code></pre><p>组件访问 State 中数据的一种方式： </p>
-<pre><code>this.$store.state.全局数据名称 </code></pre><p>组件访问 State 中数据的第二种方式：<br>通过刚才导入的 mapState 函数，将当前组件需要的全局数据，映射为当前组件的 computed 计算属性： </p>
-<p>1.从 vuex 中按需导入 mapState 函数 </p>
+<pre><code>this.$store.state.全局数据名称 </code></pre><p>组件访问 State 中数据的第二种方式：<br>通过刚才导入的 mapState 函数，将当前组件需要的全局数据，映射为当前组件的 computed 计算属性：<br>1.从 vuex 中按需导入 mapState 函数 </p>
 <pre><code>import { mapState } from &apos;vuex&apos; </code></pre><p>2.将全局数据，映射为当前组件的计算属性 </p>
 <pre><code>computed: { 
 ...mapState([&apos;count&apos;]) 
-} </code></pre><h4 id="3-2-Mutation"><a href="#3-2-Mutation" class="headerlink" title="3.2 Mutation"></a>3.2 Mutation</h4><p>Mutation用于变更 Store中 的数据。<br>(1)只能通过 mutation 变更 Store 数据，不可以直接操作 Store 中的数据。</p>
-<p>(2)通过这种方式虽然操作起来稍微繁琐一些，但是可以集中监控所有数据的变化。 </p>
+} </code></pre><h4 id="3-2-Mutation"><a href="#3-2-Mutation" class="headerlink" title="3.2 Mutation"></a>3.2 Mutation</h4><p>Mutation用于变更 Store中 的数据。<br>(1)只能通过 mutation 变更 Store 数据，不可以直接操作 Store 中的数据。<br>(2)通过这种方式虽然操作起来稍微繁琐一些，但是可以集中监控所有数据的变化。 </p>
 <h4 id="3-4-Action"><a href="#3-4-Action" class="headerlink" title="3.4 Action"></a>3.4 Action</h4><p>Action 用于处理异步任务。<br>如果通过异步操作变更数据，必须通过 Action，而不能使用 Mutation，但是在 Action 中还是要通过触发 Mutation 的方式间接变更数据。 </p>
-<h4 id="3-5-Getter"><a href="#3-5-Getter" class="headerlink" title="3.5 Getter"></a>3.5 Getter</h4><p>Getter 用于对 Store 中的数据进行加工处理形成新的数据。</p>
-<p>(1)Getter 可以对 Store 中已有的数据加工处理之后形成新的数据，类似 Vue 的计算属性。</p>
-<p>（2）Store 中数据发生变化，Getter 的数据也会跟着变化。 </p>
-<p>在了解一些基本信息之后就开始小案例吧。</p>
+<h4 id="3-5-Getter"><a href="#3-5-Getter" class="headerlink" title="3.5 Getter"></a>3.5 Getter</h4><p>Getter 用于对 Store 中的数据进行加工处理形成新的数据。<br>(1)Getter 可以对 Store 中已有的数据加工处理之后形成新的数据，类似 Vue 的计算属性。<br>(2)Store 中数据发生变化，Getter 的数据也会跟着变化。<br>在了解一些基本信息之后就开始小案例吧。</p>
 <h4 id="4-计数器小案例"><a href="#4-计数器小案例" class="headerlink" title="4 计数器小案例"></a>4 计数器小案例</h4><p>使用vue ui新创建一个Vue项目，注意，项目中需要的一定要包括Vuex。<br>在store目录下的index.js文件中的state中添加count:0字段</p>
 <pre><code>import { createStore } from &apos;vuex&apos;
 
@@ -256,39 +246,39 @@ modules: {
 &lt;/template&gt;
 
 &lt;script&gt;
-export default {
-data () {
-    return {}
-},
-methods: {
-}
-}
-&lt;/script&gt;
+    export default {
+        data () {
+            return {}
+        },
+        methods: {
+        }
+        }
+        &lt;/script&gt;
 
-&lt;style scoped&gt;
+        &lt;style scoped&gt;
 
-&lt;/style&gt;
+        &lt;/style&gt;
 
-Sub.vue
-&lt;template&gt;
-    &lt;div&gt;
-        &lt;h3&gt;当前最新的count值为：{{count}}&lt;/h3&gt;
-        &lt;button @click=&quot;btnSub&quot;&gt;-1&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
+        Sub.vue
+        &lt;template&gt;
+            &lt;div&gt;
+                &lt;h3&gt;当前最新的count值为：{{count}}&lt;/h3&gt;
+                &lt;button @click=&quot;btnSub&quot;&gt;-1&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/template&gt;
 
-&lt;script&gt;
-import { mapState } from &apos;vuex&apos;
-export default {
-data () {
-    return {}
-},
-methods: {
-},
-computed: {
-    ...mapState([&apos;count&apos;])
-}
-}
+        &lt;script&gt;
+        import { mapState } from &apos;vuex&apos;
+        export default {
+        data () {
+            return {}
+        },
+        methods: {
+        },
+        computed: {
+            ...mapState([&apos;count&apos;])
+        }
+    }
 &lt;/script&gt;
 
 &lt;style scoped&gt;
@@ -319,8 +309,7 @@ components: {
 
 &lt;style scoped&gt;
 
-&lt;/style&gt;</code></pre><p>接下来就编译运行。</p>
-<p>对于数据增加操作，添加btnAdd事件，要想使count发生变化，应该利用Mutation。在Mutation中添加add方法</p>
+&lt;/style&gt;</code></pre><p>接下来就编译运行。<br>对于数据增加操作，添加btnAdd事件，要想使count发生变化，应该利用Mutation。在Mutation中添加add方法</p>
 <pre><code>mutations: {
     add: function (state) {
     state.count++
@@ -341,7 +330,6 @@ methods: {
     state.count -= step
     }
 },
-
 
 methods: {
     btnSub: function () {

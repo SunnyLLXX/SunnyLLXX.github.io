@@ -16,7 +16,7 @@
 <meta property="og:description" content="Promise的基本使用以及需要注意的问题">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-18T11:46:24.000Z">
-<meta property="article:modified_time" content="2021-03-16T05:22:27.936Z">
+<meta property="article:modified_time" content="2021-07-18T14:33:38.161Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="Promise">
 <meta name="twitter:card" content="summary">
@@ -205,17 +205,9 @@
 <p>接下来就了解一下有关Promise的使用</p>
 <h4 id="1-什么是Promise"><a href="#1-什么是Promise" class="headerlink" title="1 什么是Promise"></a>1 什么是Promise</h4><p>Promise 是异步编程的一种解决方案：从语法上讲，promise是一个对象，从它可以获取异步操作的消息；从本意上讲，它是承诺，承诺它过一段时间会给你一个结果。promise有三种状态： pending(等待态)，fulfiled(成功态)，rejected(失败态)；状态一旦改变，就不会再变。</p>
 <h4 id="2-为什么使用Promise"><a href="#2-为什么使用Promise" class="headerlink" title="2 为什么使用Promise"></a>2 为什么使用Promise</h4><ol>
-<li>指定回调函数的方式更加灵活: </li>
+<li>指定回调函数的方式更加灵活:<br>旧的: 必须在启动异步任务前指定<br>promise: 启动异步任务 =&gt; 返回promie对象 =&gt; 给promise对象绑定回调函数(甚至可以在异步任务结束后指定)</li>
+<li>支持链式调用, 可以解决回调地狱问题<br>什么是回调地狱? 回调函数嵌套调用, 外部回调函数异步执行的结果是嵌套的回调函数执行的条件<br>回调地狱的缺点?  不便于阅读、不便于异常处理<br>解决方案? promise链式调用<br>终极解决方案? async+await</li>
 </ol>
-<p>旧的: 必须在启动异步任务前指定</p>
-<p>promise: 启动异步任务 =&gt; 返回promie对象 =&gt; 给promise对象绑定回调函数(甚至可以在异步任务结束后指定)</p>
-<ol start="2">
-<li>支持链式调用, 可以解决回调地狱问题</li>
-</ol>
-<p>什么是回调地狱? 回调函数嵌套调用, 外部回调函数异步执行的结果是嵌套的回调函数执行的条件</p>
-<p>回调地狱的缺点?  不便于阅读、不便于异常处理</p>
-<p>解决方案? promise链式调用</p>
-<p>终极解决方案? async+await</p>
 <h4 id="3-Promise基本使用"><a href="#3-Promise基本使用" class="headerlink" title="3 Promise基本使用"></a>3 Promise基本使用</h4><pre><code>//创建一个promise对象
     const p = new Promise((resolve,reject)=&gt;{ //执行器函数
         //执行异步操作
@@ -271,18 +263,7 @@
         console.log(&quot;race onResolved&quot;+value)
     },(reason)=&gt;{
         console.log(&quot;race onRejected&quot;+reason)
-    })</code></pre><h4 id="5-Promise关键问题"><a href="#5-Promise关键问题" class="headerlink" title="5 Promise关键问题"></a>5 Promise关键问题</h4><p>1.promise.then()返回的新promise的结果状态由什么决定?</p>
-<p>(1)简单表达:由then()指定的回调函数执行的结果决定</p>
-<p>(2)详细表达:</p>
-<p>如果抛出异常，新promise变为rejected,reason为抛出的异常</p>
-<p>如果返回的是非promise的任意值，新promise变为resolved,value为返回的值</p>
-<p>如果返回的是另一个新promise，此promise的结果就会成为新promise的结果</p>
-<p>2.promise异常传透?</p>
-<p>(1)当使用promise的then链式调用时，可以在最后指定失败的回调</p>
-<p>(2)前面任何操作出了异常，都会传到最后失败的回调中处理</p>
-<p>3.中断promise链?</p>
-<p>(1)当使用promise的then链式调用时，在中间中断，不再调用后面的回调函数</p>
-<p>(2)办法:在回调函数中返回一个pendding状态的promise对象</p>
+    })</code></pre><h4 id="5-Promise关键问题"><a href="#5-Promise关键问题" class="headerlink" title="5 Promise关键问题"></a>5 Promise关键问题</h4><p>1.promise.then()返回的新promise的结果状态由什么决定?<br>(1)简单表达:由then()指定的回调函数执行的结果决定<br>(2)详细表达:<br>如果抛出异常，新promise变为rejected,reason为抛出的异常<br>如果返回的是非promise的任意值，新promise变为resolved,value为返回的值<br>如果返回的是另一个新promise，此promise的结果就会成为新promise的结果<br>2.promise异常传透?<br>(1)当使用promise的then链式调用时，可以在最后指定失败的回调<br>(2)前面任何操作出了异常，都会传到最后失败的回调中处理<br>3.中断promise链?<br>(1)当使用promise的then链式调用时，在中间中断，不再调用后面的回调函数<br>(2)办法:在回调函数中返回一个pendding状态的promise对象</p>
 <pre><code>new Promise((resolve, reject) =&gt; {
     // resolve(1)
     reject(1)
@@ -315,9 +296,7 @@
     reason =&gt; {
         console.log(&apos;onReejected2()&apos;, reason)
     }
-)</code></pre><h4 id="6-Promise的缺点"><a href="#6-Promise的缺点" class="headerlink" title="6 Promise的缺点"></a>6 Promise的缺点</h4><p>1.无法取消promise，一旦新建它就会立即执行，无法中途取消</p>
-<p>2.如果不设置回调函数，promise内部抛出的错误无法反应到外部</p>
-<p>3.当处于pending状态时，无法得知目前的进展到哪一个阶段（是刚刚开始还是即将完成）</p>
+)</code></pre><h4 id="6-Promise的缺点"><a href="#6-Promise的缺点" class="headerlink" title="6 Promise的缺点"></a>6 Promise的缺点</h4><p>1.无法取消promise，一旦新建它就会立即执行，无法中途取消<br>2.如果不设置回调函数，promise内部抛出的错误无法反应到外部<br>3.当处于pending状态时，无法得知目前的进展到哪一个阶段（是刚刚开始还是即将完成）</p>
 
       
 

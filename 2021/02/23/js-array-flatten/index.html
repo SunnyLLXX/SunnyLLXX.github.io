@@ -16,7 +16,7 @@
 <meta property="og:description" content="什么是数组扁平化呢？如何实现呢？">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-23T01:42:55.000Z">
-<meta property="article:modified_time" content="2021-03-06T03:26:16.706Z">
+<meta property="article:modified_time" content="2021-07-18T14:22:17.262Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta property="article:tag" content="JavaScript">
@@ -203,8 +203,7 @@
       
         <h3 id="什么是数组扁平化呢？如何实现呢？"><a href="#什么是数组扁平化呢？如何实现呢？" class="headerlink" title="什么是数组扁平化呢？如何实现呢？"></a>什么是数组扁平化呢？如何实现呢？</h3><a id="more"></a>
 
-<p>数组扁平化就是将一个多维数组转换成一个一维数组。</p>
-<p>可以利用接下来的几种方法实现。</p>
+<p>数组扁平化就是将一个多维数组转换成一个一维数组。<br>可以利用接下来的几种方法实现。</p>
 <h4 id="1-利用数组reduce方法"><a href="#1-利用数组reduce方法" class="headerlink" title="1 利用数组reduce方法"></a>1 利用数组reduce方法</h4><pre><code>function flatten1(arr) {  
     return arr.reduce((result, item)=&gt; {
         return result.concat(Array.isArray(item) ? flatten1(item) : item)
