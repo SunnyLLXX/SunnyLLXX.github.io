@@ -16,7 +16,7 @@
 <meta property="og:description" content="了解什么是错误边界">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-06T12:31:38.000Z">
-<meta property="article:modified_time" content="2021-07-18T13:34:07.570Z">
+<meta property="article:modified_time" content="2021-07-18T14:53:21.790Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -203,67 +203,71 @@
         <h3 id="了解什么是错误边界"><a href="#了解什么是错误边界" class="headerlink" title="了解什么是错误边界"></a>了解什么是错误边界</h3><a id="more"></a>
 
 <h4 id="1-错误边界（Error-Boundaries）"><a href="#1-错误边界（Error-Boundaries）" class="headerlink" title="1 错误边界（Error Boundaries）"></a>1 错误边界（Error Boundaries）</h4><p>1.错误边界是一种 React 组件，这种组件可以捕获并打印发生在其子组件树任何位置的 JavaScript 错误，并且，它会渲染出备用 UI，而不是渲染那些崩溃了的子组件树。错误边界在渲染期间、生命周期方法和整个组件树的构造函数中捕获错误。<br>2.错误边界无法捕获以下场景中产生的错误：事件处理、异步代码（例如 setTimeout ）、服务端渲染、它自身抛出来的错误（并非它的子组件）</p>
-<h4 id="2-小案例测试"><a href="#2-小案例测试" class="headerlink" title="2 小案例测试"></a>2 小案例测试</h4><p>有一个Parent组件以及Child组件，Child组件用来渲染用户列表，在Parent组件中使用错误边界。如果Child组件出错了就显示备用的界面，否则显示Child组件。</p>
-<p>在Parent组件中使用static getDerivedStateFromError()</p>
-<p>class Parent extends PureComponent {</p>
-<pre><code>state = {
-    hasError: false
-}
+<h4 id="2-小案例测试"><a href="#2-小案例测试" class="headerlink" title="2 小案例测试"></a>2 小案例测试</h4><p>有一个Parent组件以及Child组件，Child组件用来渲染用户列表，在Parent组件中使用错误边界。如果Child组件出错了就显示备用的界面，否则显示Child组件。<br>在Parent组件中使用static getDerivedStateFromError()</p>
+<pre><code>class Parent extends PureComponent {
 
-//当Parent的子组件发生错误时，会调用getDerivedStateFromError函数，并携带错误信息
-static getDerivedStateFromError(error){
-    console.log(error)
-    return {
-        hasError: true
+    state = {
+        hasError: false
+    }
+
+    //当Parent的子组件发生错误时，会调用getDerivedStateFromError函数，并携带错误信息
+    static getDerivedStateFromError(error){
+        console.log(error)
+        return {
+            hasError: true
+        }
+    }
+
+    render() {
+
+        const {hasError} = this.state
+        return (
+            &lt;div className=&quot;parent&quot;&gt;
+                &lt;h1&gt;我是Parent组件&lt;/h1&gt;
+                {hasError ? &lt;h4&gt;网络繁忙，请稍后再试&lt;/h4&gt; : &lt;Child&gt;&lt;/Child&gt;}
+
+            &lt;/div&gt;
+        );
     }
 }
 
-render() {
 
-    const {hasError} = this.state
-    return (
-        &lt;div className=&quot;parent&quot;&gt;
-            &lt;h1&gt;我是Parent组件&lt;/h1&gt;
-            {hasError ? &lt;h4&gt;网络繁忙，请稍后再试&lt;/h4&gt; : &lt;Child&gt;&lt;/Child&gt;}
+class Child extends PureComponent {
 
-        &lt;/div&gt;
-    );
-}</code></pre><p>}</p>
-<p>class Child extends PureComponent {</p>
-<pre><code>state = {
-    // userList: [
-    //     {
-    //         id: &apos;001&apos;,
-    //         name: &apos;lx&apos;,
-    //         age: 18
-    //     },{
-    //         id: &apos;002&apos;,
-    //         name: &apos;xinxin&apos;,
-    //         age: 18
-    //     }
-    // ],
-    userList: &apos;&apos;
-}
-render() {
-    const {userList} = this.state
-    console.log(&apos;A render&apos;,this.props)
-    return (
-        &lt;div className=&quot;child&quot;&gt;
-           &lt;h1&gt;我是Child组件&lt;/h1&gt;
-           &lt;ul&gt;
-               {
-                userList.map((item)=&gt;{
-                   return (
-                        &lt;h3 key={item.id}&gt;{item.name} --------{item.age}&lt;/h3&gt;
-                   )
-               })
-            }
-           &lt;/ul&gt;
+    state = {
+        // userList: [
+        //     {
+        //         id: &apos;001&apos;,
+        //         name: &apos;lx&apos;,
+        //         age: 18
+        //     },{
+        //         id: &apos;002&apos;,
+        //         name: &apos;xinxin&apos;,
+        //         age: 18
+        //     }
+        // ],
+        userList: &apos;&apos;
+    }
+    render() {
+        const {userList} = this.state
+        console.log(&apos;A render&apos;,this.props)
+        return (
+            &lt;div className=&quot;child&quot;&gt;
+            &lt;h1&gt;我是Child组件&lt;/h1&gt;
+            &lt;ul&gt;
+                {
+                    userList.map((item)=&gt;{
+                    return (
+                            &lt;h3 key={item.id}&gt;{item.name} --------{item.age}&lt;/h3&gt;
+                    )
+                })
+                }
+            &lt;/ul&gt;
 
-        &lt;/div&gt;
-    );
-}</code></pre><p>}</p>
-<p>如果在开发环境中还是会显示错误，适合用于在生产环境中。<br>另外，可以在Parent.jsx中使用componentDidCatch()，将错误日志上报给服务器。</p>
+            &lt;/div&gt;
+        );
+    }
+}</code></pre><p>如果在开发环境中还是会显示错误，适合用于在生产环境中。<br>另外，可以在Parent.jsx中使用componentDidCatch()，将错误日志上报给服务器。</p>
 <pre><code>class Parent extends PureComponent {
 
     state = {
@@ -775,6 +779,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             </li>
           
             <li class="search-li">
+              <a href="https://dingshiyi.top" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>DingShiYi</a>
+            </li>
+          
+            <li class="search-li">
               <a href="https://blog.tigerxly.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>FANTASY博客</a>
             </li>
           
@@ -790,7 +798,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">滴答滴答滴</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">一个小阔爱</div>
   	  	
     	</section>
     
