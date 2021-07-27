@@ -16,7 +16,7 @@
 <meta property="og:description" content="有关使用 React Hook的一些知识">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-16T13:22:01.000Z">
-<meta property="article:modified_time" content="2021-07-18T13:42:18.215Z">
+<meta property="article:modified_time" content="2021-07-25T07:04:50.955Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
@@ -247,56 +247,56 @@ export default function Count() {
     // 在此做一些收尾工作, 比如清除定时器/取消订阅等
   }
 }, [stateValue]) // 如果指定的是[], 回调函数只会在第一次render()后执行</code></pre><p>小案例如下：</p>
-<pre><code>import React from &apos;react&apos;
-import ReactDOM from &apos;react-dom&apos;
+<pre><code>    import React from &apos;react&apos;
+    import ReactDOM from &apos;react-dom&apos;
 
-export default function Count() {
+    export default function Count() {
 
-const [count,setCount] = React.useState(0)
-const [name,setName] = React.useState(&apos;lxlx&apos;)
-const myRef = React.useRef()
+    const [count,setCount] = React.useState(0)
+    const [name,setName] = React.useState(&apos;lxlx&apos;)
+    const myRef = React.useRef()
 
-// React.useEffect(()=&gt;{
-//     let timer = setInterval(function(){
-//         setCount((count) =&gt; {
-//             return ++count
-//         }) 
-//     },1000)
-//     // 返回值类似于componentWillUnmount生命周期
-//     return ()=&gt;{
-//         clearInterval(timer)
-//     }
-// },[])
+    // React.useEffect(()=&gt;{
+    //     let timer = setInterval(function(){
+    //         setCount((count) =&gt; {
+    //             return ++count
+    //         }) 
+    //     },1000)
+    //     // 返回值类似于componentWillUnmount生命周期
+    //     return ()=&gt;{
+    //         clearInterval(timer)
+    //     }
+    // },[])
 
 
-// React.useEffect(()=&gt;{
-//     console.log(&apos;监听中&apos;)    
-// },[count])  //如果指定的是[], 回调函数只会在第一次render()后执行
+    // React.useEffect(()=&gt;{
+    //     console.log(&apos;监听中&apos;)    
+    // },[count])  //如果指定的是[], 回调函数只会在第一次render()后执行
 
-function add(){
-    setCount((count) =&gt; {
-            return ++count
-        })    
-}
+    function add(){
+        setCount((count) =&gt; {
+                return ++count
+            })    
+    }
 
-function modifyName(){
-    setName((name) =&gt; {
-        return name+=&apos; xinxin&apos;
-    })
-}
-function unLoad(){
-    ReactDOM.unmountComponentAtNode(document.getElementById(&apos;root&apos;))
-}
-return (
-    &lt;div&gt;
-        &lt;h1&gt;当前数值：{count}&lt;/h1&gt;
-        &lt;h1&gt;我是：{name}&lt;/h1&gt;
-        &lt;button onClick={add}&gt;点击+&lt;/button&gt;
-        &lt;button onClick={modifyName}&gt;点击修改姓名&lt;/button&gt;
-        &lt;button onClick={unLoad}&gt;卸载组件&lt;/button&gt;
-    &lt;/div&gt;
-)</code></pre><p>}</p>
-<h4 id="3-Ref-Hook"><a href="#3-Ref-Hook" class="headerlink" title="3 Ref Hook"></a>3 Ref Hook</h4><p>详细请看<a href="https://zh-hans.reactjs.org/docs/hooks-reference.html#useref" target="_blank" rel="noopener">官方文档</a></p>
+    function modifyName(){
+        setName((name) =&gt; {
+            return name+=&apos; xinxin&apos;
+        })
+    }
+    function unLoad(){
+        ReactDOM.unmountComponentAtNode(document.getElementById(&apos;root&apos;))
+    }
+    return (
+        &lt;div&gt;
+            &lt;h1&gt;当前数值：{count}&lt;/h1&gt;
+            &lt;h1&gt;我是：{name}&lt;/h1&gt;
+            &lt;button onClick={add}&gt;点击+&lt;/button&gt;
+            &lt;button onClick={modifyName}&gt;点击修改姓名&lt;/button&gt;
+            &lt;button onClick={unLoad}&gt;卸载组件&lt;/button&gt;
+        &lt;/div&gt;
+    )
+}</code></pre><h4 id="3-Ref-Hook"><a href="#3-Ref-Hook" class="headerlink" title="3 Ref Hook"></a>3 Ref Hook</h4><p>详细请看<a href="https://zh-hans.reactjs.org/docs/hooks-reference.html#useref" target="_blank" rel="noopener">官方文档</a></p>
 <p>Ref Hook可以在函数组件中存储/查找组件内的标签或任意其它数据。useRef 返回一个可变的 ref 对象，其 .current 属性被初始化为传入的参数（initialValue）。返回的 ref 对象在组件的整个生命周期内保持不变。<br>语法: </p>
 <pre><code>const refContainer = useRef()</code></pre><p>小案例如下：</p>
 <pre><code>import React from &apos;react&apos;

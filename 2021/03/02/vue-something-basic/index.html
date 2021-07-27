@@ -16,7 +16,7 @@
 <meta property="og:description" content="熟悉有关Vue的内容">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-02T08:40:23.000Z">
-<meta property="article:modified_time" content="2021-07-18T13:57:21.909Z">
+<meta property="article:modified_time" content="2021-07-27T13:09:03.989Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="Vue">
 <meta property="article:tag" content="常见题">
@@ -271,8 +271,13 @@ router.beforeEach((to, from, next) =&gt; {
 })</code></pre><h4 id="19-Vue-虚拟DOM"><a href="#19-Vue-虚拟DOM" class="headerlink" title="19 Vue 虚拟DOM"></a>19 Vue 虚拟DOM</h4><p>为什么要用虚拟DOM：数据驱动视图，控制DOM操作次数。<br>虚拟DOM简单的说就是一颗树，一颗以javaScript对象（VNode）作为基础的树，用对象的属性来描述节点，因此这个对象至少包含标签名、属性和子元素对象。<br>虚拟DOM 的最终目的是将虚拟的节点渲染到视图上，其实它主要做了两件事：<br>(1)提供与真实DOM节点对应的虚拟节点VNode；<br>(2)将虚拟节点VNode和旧虚拟节点(oldVNode)进行对比，然后更新视图；<br>虚拟DOM的优势：<br>(1)具备跨平台的优势<br>(2)减少DOM操作，js运行的效率高。虚拟DOM本质上其实就是js 和 dom 之间的一个缓存，通过diff算法计算出真正需要更新的节点，最大限度的减少DOM操作<br>(3)提升渲染的性能；dom操作的减少，可以避免更多的回流和重绘等，更加高效的提高性能。<br>diff算法：遍历旧虚拟DOM，遍历新虚拟DOM，然后重新排序。深度优先，同级比较。</p>
 <p>参考链接</p>
 <p><a href="https://www.cnblogs.com/mufc/p/11131203.html" target="_blank" rel="noopener">Vue 中的 Virtual Dom</a></p>
-<h4 id="20-nextTick的原理"><a href="#20-nextTick的原理" class="headerlink" title="20 nextTick的原理"></a>20 nextTick的原理</h4><p>在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。<br>详细查看<a href="https://cn.vuejs.org/v2/api/#Vue-nextTick" target="_blank" rel="noopener">官方文档</a><br>1.什么时候会用到vue.nextTick()<br>（1）created()钩子函数中，进行dom操作，要放在vue.nextTick()回调函数中。<br>原因：created()钩子函数执行的时候,dom其实并未进行任何渲染。<br>（2）mounted钩子函数中，在数据变化中要执行某个操作，而这个操作需要随数据改变而改变数据结构。<br>原因：设置数据改变，vm.someData = ‘new value’, dom并不会马上更新，而是在异步队列被清除，也就是下一个事件循环开始时，才会进行必要的dom更新。此时如果想要根据更新的dom状态去做某些事情时，就会出现问题。<br>为了在数据变化之后等待 Vue 完成更新 DOM ，可以在数据变化之后立即使用 Vue.nextTick(callback) ，这样回调函数在 DOM 更新完成后就会调用。<br>参考链接</p>
-<p><a href="https://blog.csdn.net/aSuncat/article/details/88978775" target="_blank" rel="noopener">【面试】web前端经典面试题试题及答案-vue</a></p>
+<h4 id="20-nextTick的原理"><a href="#20-nextTick的原理" class="headerlink" title="20 nextTick的原理"></a>20 nextTick的原理</h4><p>在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。<br>详细查看<a href="https://cn.vuejs.org/v2/api/#Vue-nextTick" target="_blank" rel="noopener">官方文档</a></p>
+<p>nextTick接受一个回调函数作为参数，他的作用是将回调延迟到下次DOM更新周期之后执行。在开发项目会遇到这样的场景：当更新状态后，需要对新DOM做一些操作，但这时获取不到更新后的DOM。</p>
+<p>为什么Vue.js使用异步更新队列？<br>在VUE.js中，当状态发生变化时，watcher会得到通知，然后触发虚拟DOM的渲染流程。而watcher触发渲染流程不是同步的，而是异步的。Vue.js中有一个队列，每当需要渲染时，会将watcher推入这个队列中，在下次事件循环中再让watcher触发渲染的流程。</p>
+<p>如果在同一轮事件循环中有两个数据发生变化，那么组件的watcher会收到两份通知，从而进行两次渲染。事实上，并不需要两次渲染，虚拟DOM会对整个组件进行渲染，所以只需要等所有状态都修改完毕后，一次性将整个组件的DOM渲染到最新。<br>Vue.js的实现方式是将接收到通知的watcher实例添加进队列缓存起来，并且在添加到队列之前检查是否已经存在相同的watcher，只有不存在时，才将watcher实例添加进队列中。然后再下一次事件循环中，Vue.js会让队列中的watcher触发渲染流程并清空队列。这样就可以保证即便是在同一事件循环中有两个状态发生改变，watcher最后也只执行一次渲染流程。</p>
+<p>“下次更新周期”：下次微任务执行时更新DOM。vm.$nextTick其实是将回调添加进微任务中，只有在特殊情况下才会降级成宏任务，默认会添加进微任务中。使用微任务因为其高优先级特性，能确保队列中的微任务在一次事件循环前被执行完毕，还有因为微任务不会与浏览器默认事件冲突。</p>
+<p>1.什么时候会用到vue.nextTick()<br>（1）created()钩子函数中，进行dom操作，要放在vue.nextTick()回调函数中。<br>原因：created()钩子函数执行的时候,dom其实并未进行任何渲染。<br>（2）mounted钩子函数中，在数据变化中要执行某个操作，而这个操作需要随数据改变而改变数据结构。<br>原因：设置数据改变，vm.someData = ‘new value’, dom并不会马上更新，而是在异步队列被清除，也就是下一个事件循环开始时，才会进行必要的dom更新。此时如果想要根据更新的dom状态去做某些事情时，就会出现问题。<br>为了在数据变化之后等待 Vue 完成更新 DOM ，可以在数据变化之后立即使用 Vue.nextTick(callback) ，这样回调函数在 DOM 更新完成后就会调用。</p>
+<p>参考链接<br><a href="https://blog.csdn.net/aSuncat/article/details/88978775" target="_blank" rel="noopener">【面试】web前端经典面试题试题及答案-vue</a></p>
 <h4 id="21-Vue-插件的使用"><a href="#21-Vue-插件的使用" class="headerlink" title="21 Vue 插件的使用"></a>21 Vue 插件的使用</h4><p>详细请看<a href="https://cn.vuejs.org/v2/guide/plugins.html" target="_blank" rel="noopener">官方文档</a><br>1.创建文件夹libs，在该目录下创建MyPlugin.js<br>2.创建一个对象</p>
 <pre><code>let MyPlugin = {}
 export default MyPlugin</code></pre><p>3.为插件暴露一个install方法，添加全局方法、过滤器、实例方法等</p>
