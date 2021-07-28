@@ -16,7 +16,7 @@
 <meta property="og:description" content="如何解决 js 跨域问题">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-18T12:36:46.000Z">
-<meta property="article:modified_time" content="2021-07-25T06:27:33.823Z">
+<meta property="article:modified_time" content="2021-07-28T14:20:42.681Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta name="twitter:card" content="summary">
@@ -222,7 +222,9 @@ console.log(data)
 // 设置标签src属性
 script.src = &quot;http://localhost:3000?callback=getData&quot; //会自动调用getData函数
 //让script标签生效
-document.body.appendChild(script)</code></pre>
+document.body.appendChild(script)</code></pre><h4 id="3-代理"><a href="#3-代理" class="headerlink" title="3 代理"></a>3 代理</h4><p>代理服务器，需要做以下几个步骤：<br>1.接受客户端请求 。<br>2.将请求转发给服务器。<br>3.拿到服务器 响应 数据。<br>4.将响应转发给客户端。</p>
+<p>假设客户端发送请求的域名为localhost:3000，服务端所在的域名是localhost:5000。<br>客户端发送请求时，不直接到服务器，而是先到代理的中间层，在这里将localhost:3000的这个域名转换为localhost:5000，再将请求发送到服务器这样在服务器端收到的请求就是使用的localhost:5000域名，同理，当服务器返回数据的时候，也是先到代理的中间层将localhost:5000转换成localhost:3000，这样在客户端也是在相同域名下访问的了。</p>
+
       
 
       <!-- 开始添加版权声明-->
@@ -417,7 +419,7 @@ document.body.appendChild(script)</code></pre>
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何解决-js-跨域问题"><span class="toc-number">1.</span> <span class="toc-text">如何解决 js 跨域问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-什么是跨域"><span class="toc-number">1.1.</span> <span class="toc-text">1 什么是跨域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-jsonp"><span class="toc-number">1.2.</span> <span class="toc-text">2 jsonp</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何解决-js-跨域问题"><span class="toc-number">1.</span> <span class="toc-text">如何解决 js 跨域问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-什么是跨域"><span class="toc-number">1.1.</span> <span class="toc-text">1 什么是跨域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-jsonp"><span class="toc-number">1.2.</span> <span class="toc-text">2 jsonp</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-代理"><span class="toc-number">1.3.</span> <span class="toc-text">3 代理</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
