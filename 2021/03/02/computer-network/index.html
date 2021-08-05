@@ -17,7 +17,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/03/02/computer-network/congestion-control.jpg">
 <meta property="article:published_time" content="2021-03-02T06:32:04.000Z">
-<meta property="article:modified_time" content="2021-08-04T13:46:56.822Z">
+<meta property="article:modified_time" content="2021-08-05T12:58:57.583Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="计算机网络基础">
 <meta name="twitter:card" content="summary">
@@ -232,7 +232,8 @@
 <p>参考链接<br><a href="HTTPS://blog.csdn.net/aSuncat/article/details/109180153">web前端经典面试题试题及答案-前后端通信（HTTP、HTTPS、tcp）</a></p>
 <h4 id="10-HTTP缓存"><a href="#10-HTTP缓存" class="headerlink" title="10 HTTP缓存"></a>10 HTTP缓存</h4><p>HTTP缓存能够帮助服务器提高并发性能，很多资源不需要重复请求，直接从浏览器中拿缓存。<br>HTTP缓存分类:强缓存、协商缓存</p>
 <p>1.强缓存<br>向浏览器缓存查找该请求结果，并根据该结果的缓存规则来决定是否使用该缓存结果的过程，浏览器不会将请求发送给服务器。<br>在 Chrome 的开发者工具中看到HTTP的状态码是 200，在 Size 列会显示为(from cache)。利用HTTP的响应头中的 expires 或者 cache-control 两个字段来控制的，用来表示资源的缓存时间、缓存类型等。<br>cache-control 比 expires 优先级高，并且expires是缓存过期时间的绝对时间，存在浏览器与服务端时间不同步的问题，cache-control 缓存的过期时间是相对时间。</p>
-<p>2.协商缓存<br>协商缓存就是强制缓存失效后，浏览器携带缓存标识向服务器发起请求，由服务器根据缓存标识决定是否使用缓存的过程。利用HTTP响应头中的 etag、last-modified 两个字段进行控制。<br>为什么存在 last-mlodified 还会有 etag ?<br>（1）last-modified 标注的最后修改只能精确到秒级，如果某些文件在1秒钟以内，被修改多次的话，它将不能准确标注文件的修改时间<br>（2）如果某些文件会被定期生成，当有时内容并没有任何变化，但 last-modified 却改变了，导致文件没法使用缓存<br>（3）有可能存在服务器没有准确获取文件修改时间，或者与代理服务器时间不一致等情形<br>请求步骤：<br>请求资源时，把用户本地该资源的 etag 同时带到服务端，服务端和最新资源做对比。<br>如果资源没更改，返回状态码 304，浏览器读取本地缓存。<br>如果资源有更改，返回状态码 200，返回最新的资源。</p>
+<p>2.协商缓存<br>协商缓存就是强制缓存失效后，浏览器携带缓存标识向服务器发起请求，由服务器根据缓存标识决定是否使用缓存的过程。利用HTTP响应头中的 ETag、Last-Modified 两个字段进行控制。<br>为什么存在 Last-Modified 还会有 ETag ?<br>Last-Modified 是资源最后更改的时间。ETag HTTP响应头是资源的特定版本的标识符。这可以让缓存更高效，并节省带宽，因为如果内容没有改变，Web服务器不需要发送完整的响应。而如果内容发生了变化，使用 ETag 有助于防止资源的同时更新相互覆盖（“空中碰撞”）。<br>Last-Modified 只能精确到秒，如果某些文件在1秒钟以内，被修改多次的话，它将不能准确标注文件的修改时间，所以在秒级以下的更改无法检测到。而 ETag 可以表明文件的任何更改，只要文件变化 ETag 就会变化。所以 Last-Modified 是一个备用机制，优先级不如 Etag。</p>
+<p>请求步骤：<br>请求资源时，把用户本地该资源的 ETag 同时带到服务端，服务端和最新资源做对比。<br>如果资源没更改，返回状态码 304，浏览器读取本地缓存。<br>如果资源有更改，返回状态码 200，返回最新的资源。</p>
 <h4 id="11-网络安全攻击"><a href="#11-网络安全攻击" class="headerlink" title="11 网络安全攻击"></a>11 网络安全攻击</h4><h5 id="11-1-XSS"><a href="#11-1-XSS" class="headerlink" title="11.1 XSS"></a>11.1 XSS</h5><p>XSS（Cross Site Scripting）跨站脚本攻击，是最普遍的 Web 应用安全漏洞。这类漏洞能够使得攻击者嵌入恶意脚本代码到正常用户会访问到的页面中，当正常用户访问该页面时，则可导致嵌入的恶意脚本代码的执行，从而达到恶意攻击用户的目的。XSS攻击最主要有如下分类：持久型 XSS、非持久型 XSS、DOM XSS。</p>
 <p>1.持久型 XSS ：最直接的危害类型，跨站代码存储在服务器（数据库）。<br>2.非持久型 XSS ：反射型跨站脚本漏洞，最普遍的类型。用户访问服务器-跨站链接-返回跨站代码。<br>3.DOM XSS ：DOM（document object model文档对象模型），客户端脚本处理逻辑导致的安全问题。<br>基于DOM的XSS漏洞是指受害者端的网页脚本在修改本地页面DOM环境时未进行合理的处置，而使得攻击脚本被执行。在整个攻击过程中，服务器响应的页面并没有发生变化，引起客户端脚本执行结果差异的原因是对本地DOM的恶意篡改利用。</p>
 <p>跨站脚本攻击有可能造成以下影响:<br>1.利用虚假输入表单骗取用户个人信息。<br>2.利用脚本窃取用户的 Cookie 值，被害者在不知情的情况下，帮助攻击者发送恶意请求。<br>3.显示伪造的文章或图片。</p>
