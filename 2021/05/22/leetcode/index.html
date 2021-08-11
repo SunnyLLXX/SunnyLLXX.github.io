@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/106buildTree.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/106buildTree3.png">
 <meta property="article:published_time" content="2021-05-22T10:14:32.000Z">
-<meta property="article:modified_time" content="2021-08-07T08:46:32.120Z">
+<meta property="article:modified_time" content="2021-08-11T14:08:27.242Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="LeetCode">
 <meta name="twitter:card" content="summary">
@@ -1488,6 +1488,47 @@ var uniquePaths = function(m, n) {
         }
     }
     return dp[rows - 1][columns - 1];
+};</code></pre><h4 id="67-二进制求和"><a href="#67-二进制求和" class="headerlink" title="67. 二进制求和"></a>67. 二进制求和</h4><p>给你两个二进制字符串，返回它们的和（用二进制表示）。输入为 非空 字符串且只包含数字 1 和 0。<br>示例 1:输入: a = “11”, b = “1”,输出: “100”<br>示例 2:输入: a = “1010”, b = “1011”,输出: “10101”</p>
+<pre><code>/**
+* @param {string} a
+* @param {string} b
+* @return {string}
+*/
+var addBinary = function(a, b) {
+    let n1 = a.length - 1;
+    let n2 = b.length - 1;
+    // 进位，结果
+    let cur = 0, res = &apos;&apos;;
+    while (n1 &gt;= 0 &amp;&amp; n2 &gt;= 0) {
+        // 求和
+        let sum = (a[n1] - &apos;0&apos;) + (b[n2] - &apos;0&apos;) + cur;
+        cur = Math.floor(sum / 2);
+        sum = sum % 2;
+        res += sum;
+        n1--;
+        n2--;
+    }
+    while (n1 &gt;= 0) {
+        // 求和
+        let sum = (a[n1] - &apos;0&apos;) + cur;
+        cur = Math.floor(sum / 2);
+        sum = sum % 2;
+        res += sum;
+        n1--;
+    }
+    while (n2 &gt;= 0) {
+        // 求和
+        let sum = (b[n2] - &apos;0&apos;) + cur;
+        cur = Math.floor(sum / 2);
+        sum = sum % 2;
+        res += sum;
+        n2--;
+    }
+    // 如果还存在进位
+    if (cur &gt; 0) {
+        res += cur;
+    }
+    return res.split(&apos;&apos;).reverse().join(&apos;&apos;);
 };</code></pre><h4 id="82-删除排序链表中的重复元素II"><a href="#82-删除排序链表中的重复元素II" class="headerlink" title="82 删除排序链表中的重复元素II"></a>82 删除排序链表中的重复元素II</h4><p>存在一个按升序排列的链表，给你这个链表的头节点 head ，请你删除链表中所有存在数字重复情况的节点，只保留原始链表中没有重复出现的数字。返回同样按升序排列的结果链表。<br>示例1：输入：head = [1,2,3,3,4,4,5]，输出：[1,2,5]<br>示例2：输入：head = [1,1,1,2,3]，输出：[2,3]</p>
 <p>解题思想：如下图</p>
 <p><img src="/2021/05/22/leetcode/84deleteSortedSameNode.png" alt></p>
@@ -2335,6 +2376,49 @@ var copyRandomList = function(head) {
         temp = temp.next
     }
     return node
+};</code></pre><h4 id="141-环形链表"><a href="#141-环形链表" class="headerlink" title="141. 环形链表"></a>141. 环形链表</h4><p>给定一个链表，判断链表中是否有环。如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。注意：pos 不作为参数进行传递，仅仅是为了标识链表的实际情况。如果链表中存在环，则返回 true 。 否则，返回 false 。<br>进阶：你能用 O(1)（即，常量）内存解决此问题吗？</p>
+<p>解题思想1：使用 map 保存每个节点，判断 map 中节点是否已经含有，若有则有环。</p>
+<pre><code>/**
+* Definition for singly-linked list.
+* function ListNode(val) {
+*     this.val = val;
+*     this.next = null;
+* }
+*/
+
+/**
+* @param {ListNode} head
+* @return {boolean}
+*/
+/**使用map */
+var hasCycle = function(head) {
+    if (head === null || head.next === null) {
+        return false;
+    }
+    let cur = head;
+    let map = new Map();
+    while (cur !== null) {
+        if(map.has(cur)) {
+            return true;
+        }
+        map.set(cur, cur.val);
+        cur = cur.next;
+    }
+    return false;
+};</code></pre><p>解题思想2：使用快慢指针，快指针移动两步，慢指针移动一步，在移动过程中若两者相等，则有环。</p>
+<pre><code>var hasCycle = function(head) {
+    if (head === null || head.next === null) {
+        return false;
+    }
+    let slow = head, fast = head;
+    while (fast !== null &amp;&amp; fast.next !== null) {
+        fast = fast.next.next;
+        slow = slow.next;
+        if (fast === slow) {
+            return true;
+        }
+    }
+    return false;
 };</code></pre><h4 id="146-LRU-缓存机制"><a href="#146-LRU-缓存机制" class="headerlink" title="146. LRU 缓存机制"></a>146. LRU 缓存机制</h4><p>运用你所掌握的数据结构，设计和实现一个 LRU (最近最少使用) 缓存机制 。<br>实现 LRUCache 类：<br>LRUCache(int capacity) 以正整数作为容量 capacity 初始化 LRU 缓存<br>int get(int key) 如果关键字 key 存在于缓存中，则返回关键字的值，否则返回 -1 。<br>void put(int key, int value) 如果关键字已经存在，则变更其数据值；如果关键字不存在，则插入该组「关键字-值」。当缓存容量达到上限时，它应该在写入新数据之前删除最久未使用的数据值，从而为新的数据值留出空间。</p>
 <p>示例：<br>输入<br>[“LRUCache”, “put”, “put”, “get”, “put”, “get”, “put”, “get”, “get”, “get”]<br>[[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]<br>输出<br>[null, null, null, 1, null, -1, null, -1, 3, 4]<br>解释</p>
 <pre><code>LRUCache lRUCache = new LRUCache(2);
@@ -2424,6 +2508,25 @@ var findPeakElement = function(nums) {
             } 
         }
     return left
+};</code></pre><h4 id="198-打家劫舍"><a href="#198-打家劫舍" class="headerlink" title="198. 打家劫舍"></a>198. 打家劫舍</h4><p>你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。<br>给定一个代表每个房屋存放金额的非负整数数组，计算你 不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额。<br>示例 1：输入：[1,2,3,1]，输出：4<br>解释：偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。偷窃到的最高金额 = 1 + 3 = 4 。<br>示例 2：输入：[2,7,9,3,1]，输出：12<br>解释：偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。偷窃到的最高金额 = 2 + 9 + 1 = 12 。</p>
+<p>解题思想：动态规划，因为不可以在相邻的房屋闯入，所以在当前位置 n 房屋可盗窃的最大值，要么就是 n-1 房屋可盗窃的最大值，要么就是 n-2 房屋可盗窃的最大值加上当前房屋的值，dp[i] = Math.max(nums[i] + dp[i - 2], dp[i - 1])，二者之间取最大值。</p>
+<pre><code>/**
+* @param {number[]} nums
+* @return {number}
+*/
+var rob = function(nums) {
+    if (nums.length === 0) {
+        return 0;
+    } else if (nums.length === 1) {
+        return nums[0];
+    } else if (nums.length === 2) {
+        return Math.max(nums[0], nums[1]);
+    }
+    let dp = [nums[0],Math.max(nums[0], nums[1])];
+    for (let i = 2; i &lt; nums.length; i++) {
+        dp[i] = Math.max(nums[i] + dp[i - 2], dp[i - 1]);
+    }
+    return Math.max(dp[nums.length - 1], dp[nums.length - 2]);
 };</code></pre><h4 id="199-二叉树的右视图"><a href="#199-二叉树的右视图" class="headerlink" title="199. 二叉树的右视图"></a>199. 二叉树的右视图</h4><p>给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。<br>示例:输入: [1,2,3,null,5,null,4]，输出: [1, 3, 4]<br>解释:</p>
 <pre><code>  1            &lt;---
 /   \
@@ -2597,6 +2700,27 @@ var lengthOfLIS = function(nums) {
         res = Math.max(res, temp[i])
     }
     return res
+};</code></pre><h4 id="322-零钱兑换"><a href="#322-零钱兑换" class="headerlink" title="322. 零钱兑换"></a>322. 零钱兑换</h4><p>给你一个整数数组 coins ，表示不同面额的硬币；以及一个整数 amount ，表示总金额。计算并返回可以凑成总金额所需的 最少的硬币个数 。如果没有任何一种硬币组合能组成总金额，返回 -1 。你可以认为每种硬币的数量是无限的。<br>示例 1：输入：coins = [1, 2, 5], amount = 11,输出：3<br>解释：11 = 5 + 5 + 1<br>示例 2：输入：coins = [2], amount = 3,输出：-1<br>示例 3：输入：coins = [1], amount = 0,输出：0</p>
+<p>解题思想：动态规划，金额为n时，硬币数等于(n-coin)+1中所需硬币最少的组合。</p>
+<pre><code>/**
+* @param {number[]} coins
+* @param {number} amount
+* @return {number}
+*/
+/**322. 零钱兑换 */
+var coinChange = function(coins, amount) {
+    // 因为存在0块钱，所以数组长度是amount + 1
+    let dp = new Array(amount + 1).fill( Infinity );
+    // dp[0] = 0 金额为零时不需要硬币
+    dp[0] = 0;
+    for (let i = 1; i &lt;= amount; i++) {
+        for (let coin of coins) {
+            if (i - coin &gt;= 0) {
+                dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+            }
+        }
+    }
+    return dp[amount] === Infinity ? -1 : dp[amount];
 };</code></pre><h4 id="718-最长重复子数组"><a href="#718-最长重复子数组" class="headerlink" title="718. 最长重复子数组"></a>718. 最长重复子数组</h4><p>给两个整数数组 A 和 B ，返回两个数组中公共的、长度最长的子数组的长度。<br>示例：<br>输入：A: [1,2,3,2,1]，B: [3,2,1,4,7]<br>输出：3<br>解释：长度最长的公共子数组是 [3, 2, 1] 。</p>
 <pre><code>/**
 * @param {number[]} nums1
@@ -2825,7 +2949,7 @@ var findLength = function(nums1, nums2) {
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#leetcode官方题库"><span class="toc-number">1.</span> <span class="toc-text">leetcode官方题库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-两数相加"><span class="toc-number">1.1.</span> <span class="toc-text">2 两数相加</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-最长回文子串"><span class="toc-number">1.2.</span> <span class="toc-text">5. 最长回文子串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-整数反转"><span class="toc-number">1.3.</span> <span class="toc-text">7. 整数反转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-字符串转换整数"><span class="toc-number">1.4.</span> <span class="toc-text">8. 字符串转换整数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-盛最多水的容器"><span class="toc-number">1.5.</span> <span class="toc-text">11. 盛最多水的容器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-最长公共前缀"><span class="toc-number">1.6.</span> <span class="toc-text">14.最长公共前缀</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#17-电话号码的字母组合"><span class="toc-number">1.7.</span> <span class="toc-text">17. 电话号码的字母组合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#19-删除链表倒数第n个节点"><span class="toc-number">1.8.</span> <span class="toc-text">19 删除链表倒数第n个节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15-三数之和"><span class="toc-number">1.9.</span> <span class="toc-text">15. 三数之和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#20-有效的括号"><span class="toc-number">1.10.</span> <span class="toc-text">20. 有效的括号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#21-合并两个有序链表"><span class="toc-number">1.11.</span> <span class="toc-text">21 合并两个有序链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#22-括号生成"><span class="toc-number">1.12.</span> <span class="toc-text">22. 括号生成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#24-两两交换链表中的节点"><span class="toc-number">1.13.</span> <span class="toc-text">24 两两交换链表中的节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#26-删除有序数组中的重复项"><span class="toc-number">1.14.</span> <span class="toc-text">26. 删除有序数组中的重复项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#27-移除元素"><span class="toc-number">1.15.</span> <span class="toc-text">27. 移除元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#34-在排序数组中查找元素的第一个和最后一个位置"><span class="toc-number">1.16.</span> <span class="toc-text">34. 在排序数组中查找元素的第一个和最后一个位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#39-组合总和"><span class="toc-number">1.17.</span> <span class="toc-text">39. 组合总和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#45-跳跃游戏-II"><span class="toc-number">1.18.</span> <span class="toc-text">45. 跳跃游戏 II</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#46-全排列"><span class="toc-number">1.19.</span> <span class="toc-text">46. 全排列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#47-全排列"><span class="toc-number">1.20.</span> <span class="toc-text">47. 全排列 ||</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#48-旋转图像"><span class="toc-number">1.21.</span> <span class="toc-text">48. 旋转图像</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#50-Pow-x-n"><span class="toc-number">1.22.</span> <span class="toc-text">50. Pow(x, n)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#51-翻转字符串里的单词"><span class="toc-number">1.23.</span> <span class="toc-text">51. 翻转字符串里的单词</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#53-最大子序和"><span class="toc-number">1.24.</span> <span class="toc-text">53. 最大子序和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#54-螺旋矩阵"><span class="toc-number">1.25.</span> <span class="toc-text">54. 螺旋矩阵</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#55-跳跃游戏"><span class="toc-number">1.26.</span> <span class="toc-text">55. 跳跃游戏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#56-合并区间"><span class="toc-number">1.27.</span> <span class="toc-text">56. 合并区间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#61-旋转链表"><span class="toc-number">1.28.</span> <span class="toc-text">61 旋转链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#62-不同路径"><span class="toc-number">1.29.</span> <span class="toc-text">62. 不同路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#64-最小路径和"><span class="toc-number">1.30.</span> <span class="toc-text">64. 最小路径和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#82-删除排序链表中的重复元素II"><span class="toc-number">1.31.</span> <span class="toc-text">82 删除排序链表中的重复元素II</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#88-合并两个有序数组"><span class="toc-number">1.32.</span> <span class="toc-text">88. 合并两个有序数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#99-恢复二叉搜索树"><span class="toc-number">1.33.</span> <span class="toc-text">99. 恢复二叉搜索树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#101-对称二叉树"><span class="toc-number">1.34.</span> <span class="toc-text">101 对称二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#102-二叉树的层序遍历"><span class="toc-number">1.35.</span> <span class="toc-text">102 二叉树的层序遍历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#103-二叉树的锯齿形层序遍历"><span class="toc-number">1.36.</span> <span class="toc-text">103. 二叉树的锯齿形层序遍历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#104-二叉树的最大深度"><span class="toc-number">1.37.</span> <span class="toc-text">104. 二叉树的最大深度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#105-从前序与中序遍历序列构造二叉树"><span class="toc-number">1.38.</span> <span class="toc-text">105 从前序与中序遍历序列构造二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#106-从中序与后序遍历序列构造二叉树"><span class="toc-number">1.39.</span> <span class="toc-text">106 从中序与后序遍历序列构造二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#108-将有序数组转换为二叉搜索树"><span class="toc-number">1.40.</span> <span class="toc-text">108 将有序数组转换为二叉搜索树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#112-路径总和"><span class="toc-number">1.41.</span> <span class="toc-text">112 路径总和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#114-二叉树展开为链表"><span class="toc-number">1.42.</span> <span class="toc-text">114. 二叉树展开为链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#116-填充每个节点的下一个右侧节点指针"><span class="toc-number">1.43.</span> <span class="toc-text">116. 填充每个节点的下一个右侧节点指针</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#117-填充每个节点的下一个右侧节点指针-II"><span class="toc-number">1.44.</span> <span class="toc-text">117. 填充每个节点的下一个右侧节点指针 II</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#138-复制带随机指针的链表"><span class="toc-number">1.45.</span> <span class="toc-text">138 复制带随机指针的链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#146-LRU-缓存机制"><span class="toc-number">1.46.</span> <span class="toc-text">146. LRU 缓存机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#162-寻找峰值"><span class="toc-number">1.47.</span> <span class="toc-text">162. 寻找峰值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#199-二叉树的右视图"><span class="toc-number">1.48.</span> <span class="toc-text">199. 二叉树的右视图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#206-反转链表"><span class="toc-number">1.49.</span> <span class="toc-text">206 反转链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#236-二叉树的最近公共祖先"><span class="toc-number">1.50.</span> <span class="toc-text">236. 二叉树的最近公共祖先</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#300-最长递增子序列"><span class="toc-number">1.51.</span> <span class="toc-text">300. 最长递增子序列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#718-最长重复子数组"><span class="toc-number">1.52.</span> <span class="toc-text">718. 最长重复子数组</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#leetcode官方题库"><span class="toc-number">1.</span> <span class="toc-text">leetcode官方题库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-两数相加"><span class="toc-number">1.1.</span> <span class="toc-text">2 两数相加</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-最长回文子串"><span class="toc-number">1.2.</span> <span class="toc-text">5. 最长回文子串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-整数反转"><span class="toc-number">1.3.</span> <span class="toc-text">7. 整数反转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-字符串转换整数"><span class="toc-number">1.4.</span> <span class="toc-text">8. 字符串转换整数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-盛最多水的容器"><span class="toc-number">1.5.</span> <span class="toc-text">11. 盛最多水的容器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-最长公共前缀"><span class="toc-number">1.6.</span> <span class="toc-text">14.最长公共前缀</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#17-电话号码的字母组合"><span class="toc-number">1.7.</span> <span class="toc-text">17. 电话号码的字母组合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#19-删除链表倒数第n个节点"><span class="toc-number">1.8.</span> <span class="toc-text">19 删除链表倒数第n个节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15-三数之和"><span class="toc-number">1.9.</span> <span class="toc-text">15. 三数之和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#20-有效的括号"><span class="toc-number">1.10.</span> <span class="toc-text">20. 有效的括号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#21-合并两个有序链表"><span class="toc-number">1.11.</span> <span class="toc-text">21 合并两个有序链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#22-括号生成"><span class="toc-number">1.12.</span> <span class="toc-text">22. 括号生成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#24-两两交换链表中的节点"><span class="toc-number">1.13.</span> <span class="toc-text">24 两两交换链表中的节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#26-删除有序数组中的重复项"><span class="toc-number">1.14.</span> <span class="toc-text">26. 删除有序数组中的重复项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#27-移除元素"><span class="toc-number">1.15.</span> <span class="toc-text">27. 移除元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#34-在排序数组中查找元素的第一个和最后一个位置"><span class="toc-number">1.16.</span> <span class="toc-text">34. 在排序数组中查找元素的第一个和最后一个位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#39-组合总和"><span class="toc-number">1.17.</span> <span class="toc-text">39. 组合总和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#45-跳跃游戏-II"><span class="toc-number">1.18.</span> <span class="toc-text">45. 跳跃游戏 II</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#46-全排列"><span class="toc-number">1.19.</span> <span class="toc-text">46. 全排列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#47-全排列"><span class="toc-number">1.20.</span> <span class="toc-text">47. 全排列 ||</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#48-旋转图像"><span class="toc-number">1.21.</span> <span class="toc-text">48. 旋转图像</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#50-Pow-x-n"><span class="toc-number">1.22.</span> <span class="toc-text">50. Pow(x, n)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#51-翻转字符串里的单词"><span class="toc-number">1.23.</span> <span class="toc-text">51. 翻转字符串里的单词</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#53-最大子序和"><span class="toc-number">1.24.</span> <span class="toc-text">53. 最大子序和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#54-螺旋矩阵"><span class="toc-number">1.25.</span> <span class="toc-text">54. 螺旋矩阵</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#55-跳跃游戏"><span class="toc-number">1.26.</span> <span class="toc-text">55. 跳跃游戏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#56-合并区间"><span class="toc-number">1.27.</span> <span class="toc-text">56. 合并区间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#61-旋转链表"><span class="toc-number">1.28.</span> <span class="toc-text">61 旋转链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#62-不同路径"><span class="toc-number">1.29.</span> <span class="toc-text">62. 不同路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#64-最小路径和"><span class="toc-number">1.30.</span> <span class="toc-text">64. 最小路径和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#67-二进制求和"><span class="toc-number">1.31.</span> <span class="toc-text">67. 二进制求和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#82-删除排序链表中的重复元素II"><span class="toc-number">1.32.</span> <span class="toc-text">82 删除排序链表中的重复元素II</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#88-合并两个有序数组"><span class="toc-number">1.33.</span> <span class="toc-text">88. 合并两个有序数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#99-恢复二叉搜索树"><span class="toc-number">1.34.</span> <span class="toc-text">99. 恢复二叉搜索树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#101-对称二叉树"><span class="toc-number">1.35.</span> <span class="toc-text">101 对称二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#102-二叉树的层序遍历"><span class="toc-number">1.36.</span> <span class="toc-text">102 二叉树的层序遍历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#103-二叉树的锯齿形层序遍历"><span class="toc-number">1.37.</span> <span class="toc-text">103. 二叉树的锯齿形层序遍历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#104-二叉树的最大深度"><span class="toc-number">1.38.</span> <span class="toc-text">104. 二叉树的最大深度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#105-从前序与中序遍历序列构造二叉树"><span class="toc-number">1.39.</span> <span class="toc-text">105 从前序与中序遍历序列构造二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#106-从中序与后序遍历序列构造二叉树"><span class="toc-number">1.40.</span> <span class="toc-text">106 从中序与后序遍历序列构造二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#108-将有序数组转换为二叉搜索树"><span class="toc-number">1.41.</span> <span class="toc-text">108 将有序数组转换为二叉搜索树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#112-路径总和"><span class="toc-number">1.42.</span> <span class="toc-text">112 路径总和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#114-二叉树展开为链表"><span class="toc-number">1.43.</span> <span class="toc-text">114. 二叉树展开为链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#116-填充每个节点的下一个右侧节点指针"><span class="toc-number">1.44.</span> <span class="toc-text">116. 填充每个节点的下一个右侧节点指针</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#117-填充每个节点的下一个右侧节点指针-II"><span class="toc-number">1.45.</span> <span class="toc-text">117. 填充每个节点的下一个右侧节点指针 II</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#138-复制带随机指针的链表"><span class="toc-number">1.46.</span> <span class="toc-text">138 复制带随机指针的链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#141-环形链表"><span class="toc-number">1.47.</span> <span class="toc-text">141. 环形链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#146-LRU-缓存机制"><span class="toc-number">1.48.</span> <span class="toc-text">146. LRU 缓存机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#162-寻找峰值"><span class="toc-number">1.49.</span> <span class="toc-text">162. 寻找峰值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#198-打家劫舍"><span class="toc-number">1.50.</span> <span class="toc-text">198. 打家劫舍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#199-二叉树的右视图"><span class="toc-number">1.51.</span> <span class="toc-text">199. 二叉树的右视图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#206-反转链表"><span class="toc-number">1.52.</span> <span class="toc-text">206 反转链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#236-二叉树的最近公共祖先"><span class="toc-number">1.53.</span> <span class="toc-text">236. 二叉树的最近公共祖先</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#300-最长递增子序列"><span class="toc-number">1.54.</span> <span class="toc-text">300. 最长递增子序列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#322-零钱兑换"><span class="toc-number">1.55.</span> <span class="toc-text">322. 零钱兑换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#718-最长重复子数组"><span class="toc-number">1.56.</span> <span class="toc-text">718. 最长重复子数组</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
