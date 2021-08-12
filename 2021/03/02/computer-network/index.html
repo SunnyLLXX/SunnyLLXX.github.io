@@ -17,7 +17,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/03/02/computer-network/congestion-control.jpg">
 <meta property="article:published_time" content="2021-03-02T06:32:04.000Z">
-<meta property="article:modified_time" content="2021-08-05T12:58:57.583Z">
+<meta property="article:modified_time" content="2021-08-12T10:56:00.827Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="计算机网络基础">
 <meta name="twitter:card" content="summary">
@@ -215,7 +215,7 @@
 <p>HTTPS 和 HTTP的主要区别：<br>1.HTTPS 协议需要到CA申请证书，一般免费证书较少，因而需要一定费用。<br>2.HTTP 是超文本传输协议，信息是明文传输，数据都是未加密的，安全性较差，HTTPS（SSL+HTTP） 数据传输过程是加密的，安全性较好。<br>3.HTTP 和HTTPS 使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。<br>4.HTTP 的连接很简单，是无状态的；HTTPS 协议是由 SSL/TLS + HTTP 协议构建的可进行加密传输、身份认证的网络协议，比 HTTP 协议安全。<br>5.HTTP 页面响应速度比 HTTPS 快，主要是因为 HTTP 使用 TCP 三次握手建立连接，客户端和服务器需要交换 3 个包，而 HTTPS 除了 TCP 的三个包，还要加上 SSL 握手需要的 9 个包，所以一共是 12 个包。<br>6.HTTPS 其实就是建构在 SSL/TLS 之上的 HTTP 协议，所以，要比较 HTTPS 比 HTTP 要更耗费服务器资源。</p>
 <h4 id="4-TCP与UDP的区别"><a href="#4-TCP与UDP的区别" class="headerlink" title="4 TCP与UDP的区别"></a>4 TCP与UDP的区别</h4><p>1.TCP服务<br>面向连接，客户机/服务器进程间需要建立连接；可靠的传输。<br>流量控制: 发送方不会发送速度过快，超过接收方的处理能力。<br>拥塞控制: 作用于网络，它是防止过多的包被发送到网络中，避免出现网络负载过大，网络拥塞的情况。<br>不提供时间/延迟保障、不提供最小带宽保障。<br>应用场景：效率要求相对低，但对准确性要求相对高的场景。可用于文件传输（ftp）、邮件传输（smtp）、HTTP</p>
 <p>2.UDP服务<br>无连接、不可靠的数据传输<br>不提供：可靠性保障、流量控制、拥塞控制、延迟保障、带宽保障<br>应用场景：效率要求相对高，对准确性要求相对低的场景。可用于一些流媒体，比如：聊天、视频、语音电话。</p>
-<h4 id="5-TCP-的拥塞控制"><a href="#5-TCP-的拥塞控制" class="headerlink" title="5 TCP 的拥塞控制"></a>5 TCP 的拥塞控制</h4><p>Tcp拥塞控制：作用于网络，它是防止过多的包被发送到网络中，避免出现网络负载过大，网络拥塞的情况。</p>
+<h4 id="5-TCP-的拥塞控制"><a href="#5-TCP-的拥塞控制" class="headerlink" title="5 TCP 的拥塞控制"></a>5 TCP 的拥塞控制</h4><p>TCP 拥塞控制：作用于网络，它是防止过多的包被发送到网络中，避免出现网络负载过大，网络拥塞的情况。</p>
 <p>发送方维持一个叫做拥塞窗口的状态变量。拥塞窗口的大小取决于网络的拥塞程度，并且动态地在变化。发送方让自己的发送窗口等于拥塞窗口。<br>发送方控制拥塞窗口的原则：只要网络没有出现拥塞，拥塞窗口就可以再增大一些，以便把更多的分组发送出去，这样就可以提高网络的利用率。但只要网络出现拥塞或可能出现拥塞，就必须把拥塞窗口减小一些，以减少注入到网络中的分组数，以缓解网络出现的拥塞。</p>
 <p>拥塞算法：慢开始、拥塞避免、快重传、快恢复</p>
 <p>慢开始：在开始发送信息时，由于不知道具体的网络环境，为避免大量信息造成的拥塞现象，试探网络的拥塞程度，此时的拥塞窗口cwnd以最小值（即拥塞窗口和接收端窗口中的较小值）进行数据发送，由小到大逐渐增大拥塞窗口的数值，为避免拥塞窗口增长过大引起网络拥塞，设置一个慢开始门限(ssthresh 状态变量)。当cnwd &lt; ssthresh，使用慢开始算法，以最小的拥塞窗口按照指数形式递增；当cnwd = ssthresh，既可使用慢开始算法，也可以使用拥塞避免算法；当cnwd &gt; ssthresh，使用拥塞避免算法。</p>
@@ -728,6 +728,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             </li>
           
             <li class="search-li">
+              <a href="http://smallstars.top/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>SmallStars</a>
+            </li>
+          
+            <li class="search-li">
               <a href="https://blog.tigerxly.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>FANTASY博客</a>
             </li>
           
@@ -817,5 +821,5 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
 
 </div>
   </div>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":100,"height":250,"hOffset":10,"vOffset":40},"mobile":{"show":true},"react":{"opacityDefault":0.7,"opacityOnHover":0.8}});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":100,"height":250,"hOffset":10,"vOffset":40},"mobile":{"show":true},"react":{"opacityDefault":0.7,"opacityOnHover":0.8}});</script></body>
 </html>

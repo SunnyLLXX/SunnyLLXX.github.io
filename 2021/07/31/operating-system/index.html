@@ -16,7 +16,7 @@
 <meta property="og:description" content="有关操作系统的知识">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-31T02:06:28.000Z">
-<meta property="article:modified_time" content="2021-08-07T08:07:58.624Z">
+<meta property="article:modified_time" content="2021-08-12T10:47:29.030Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -202,7 +202,7 @@
       
         <h3 id="有关操作系统的知识"><a href="#有关操作系统的知识" class="headerlink" title="有关操作系统的知识"></a>有关操作系统的知识</h3><a id="more"></a>
 
-<h4 id="1-进程与线程"><a href="#1-进程与线程" class="headerlink" title="1 进程与线程"></a>1 <a href="http://sunnyllxx.github.io/2021/02/27/processes-and-threads/">进程与线程</a></h4><h4 id="2-进程的通信方式"><a href="#2-进程的通信方式" class="headerlink" title="2 进程的通信方式"></a>2 进程的通信方式</h4><p>1.管道︰管道是一种半双工的通信方式，数据只能单向流动，而且只能在具有亲缘关系的进程间使用。进程的亲缘关系通常是指父子进程关系。<br>2.命名管道∶命名管道也是半双工的通信方式，它克服了管道没有名字的限制，并且它允许无亲缘关系进程间的通信。<br>3.信号量︰信号量是一个计数器，可以用来控制多个进程对共享资源的访问。它常作为一种锁机制，防止某进程正在访问共享资源时，其他进程也访问该资源。因此，主要作为进程间以及同一进程内不同线程之间的同步手段。<br>4.消息队列︰消息队列是由消息的链表结构实现，存放在内核中并由消息队列标识符标识。有足够权限的进程可以向队列中添加消息，被赋予读权限的进程则可以读走队列中的消息。消息队列克服了信号传递信息少、管道只能承载无格式字节流以及缓冲区大小受限等缺点。<br>5.信号∶用于通知接收进程某个事件已经发生。除了用于进程通信外，进程还可以发送信号给进程本身。<br>6.共享内存︰共享内存就是映射一段能被其他进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问。<br>7．套接字︰主要用于在客户端和服务器之间通过网络进行通信。</p>
+<h4 id="1-进程与线程"><a href="#1-进程与线程" class="headerlink" title="1 进程与线程"></a>1 <a href="http://sunnyllxx.github.io/2021/02/27/processes-and-threads/">进程与线程</a></h4><h4 id="2-进程的通信方式"><a href="#2-进程的通信方式" class="headerlink" title="2 进程的通信方式"></a>2 进程的通信方式</h4><p>1.管道︰管道是一种半双工的通信方式，数据只能单向流动，而且只能在具有亲缘关系的进程间使用。进程的亲缘关系通常是指父子进程关系。<br>2.命名管道∶命名管道也是半双工的通信方式，它克服了管道没有名字的限制，并且它允许无亲缘关系进程间的通信。<br>3.信号量︰信号量是一个计数器，可以用来控制多个进程对共享资源的访问。它常作为一种锁机制，防止某进程正在访问共享资源时，其他进程也访问该资源。因此，主要作为进程间以及同一进程内不同线程之间的同步手段。<br>4.消息队列︰消息队列是由消息的链表结构实现，存放在内核中并由消息队列标识符标识。有足够权限的进程可以向队列中添加消息，被赋予读权限的进程则可以读走队列中的消息。消息队列克服了信号传递信息少、管道只能承载无格式字节流以及缓冲区大小受限等缺点。<br>5.信号∶用于通知接收进程某个事件已经发生。除了用于进程通信外，进程还可以发送信号给进程本身。<br>6.共享内存︰共享内存就是映射一段能被其他进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问。<br>7.套接字︰主要用于在客户端和服务器之间通过网络进行通信。</p>
 <h4 id="3-死锁"><a href="#3-死锁" class="headerlink" title="3 死锁"></a>3 <a href="http://sunnyllxx.github.io/2021/02/27/deadlock-formation-conditions/">死锁</a></h4><h4 id="4-操作系统的内存管理"><a href="#4-操作系统的内存管理" class="headerlink" title="4 操作系统的内存管理"></a>4 操作系统的内存管理</h4><p>操作系统的内存管理主要负责内存的分配与回收，另外地址转换也就是将逻辑塔换成相应的物理地址等功能也是操作系统内存管理做的事情。<br>简单分为连续分配管理方式和非连续分配管理方式这两种。连续分配管理方式是指为一个用户程序分配一个连续的内存空间，常见块式管理。非连续分配管理方式允许一个程序使用的内存分布在离散或者说不相邻的内存中，常见的页式管理和段式管理:<br>1.块式管理︰将内存分为几个固定大小的块，每个块中只包含一个进程。如果程序运内存的话，操作系统就分配给它一块，如果程序运行只需要很小的空间的话，分配的这块内存很大一部分几乎被浪费了。这些存块中未被利用的空间，称之为碎片。<br>2．页式管理:把主存分为大小相等且固定的一页一页的形式，页较小,相对相比于块式管理的划分力度更大，提高了内存利用率，页式管理通过页表对应逻辑地址和物理地址。<br>3.段式管理∶页式管理虽然提高了内存利用率，但是页式管理其中的页实际并无任何实际意义。段式管理把主存分为一段段的，每一段的空间又要比一页的空间小很多。但是，最重要的是段是有实际意义的。段式管理通过段表对应逻辑地址和物理地址。<br>4.段页式管理机制︰段页式管理机制结合了段式管理和页式管理的优点。简单来说段页式管理机制就是把主存先分成若干段，每个段又分成若干页，也就是说段页式管理机制中段与段之间以及段的内部的都是离散的。</p>
 
       
@@ -690,6 +690,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             </li>
           
             <li class="search-li">
+              <a href="http://smallstars.top/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>SmallStars</a>
+            </li>
+          
+            <li class="search-li">
               <a href="https://blog.tigerxly.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>FANTASY博客</a>
             </li>
           
@@ -779,5 +783,5 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
 
 </div>
   </div>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":100,"height":250,"hOffset":10,"vOffset":40},"mobile":{"show":true},"react":{"opacityDefault":0.7,"opacityOnHover":0.8}});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":100,"height":250,"hOffset":10,"vOffset":40},"mobile":{"show":true},"react":{"opacityDefault":0.7,"opacityOnHover":0.8}});</script></body>
 </html>
