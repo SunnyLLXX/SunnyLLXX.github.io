@@ -16,7 +16,7 @@
 <meta property="og:description" content="学习 js的函数节流与防抖">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-17T07:47:43.000Z">
-<meta property="article:modified_time" content="2021-07-28T14:02:10.669Z">
+<meta property="article:modified_time" content="2021-08-15T12:23:57.499Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta property="article:tag" content="JavaScript">
@@ -228,14 +228,12 @@ document.onclick =  throttle(function(e){console.log(&quot;事件触发啦&quot;
 <pre><code>function debounce(fn,delay){
     //记录上一次的延迟器
     var timer = null
-
     return function(){
         //清除上一次延迟器
         clearTimeout(timer)
         var arg = arguments
         timer = setTimeout(
         function(){
-
             //修改this指向问题
             fn.apply(this, arg)
         },delay)
