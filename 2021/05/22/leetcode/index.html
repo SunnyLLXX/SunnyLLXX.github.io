@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/106buildTree.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/05/22/leetcode/106buildTree3.png">
 <meta property="article:published_time" content="2021-05-22T10:14:32.000Z">
-<meta property="article:modified_time" content="2021-08-14T10:29:08.539Z">
+<meta property="article:modified_time" content="2021-08-26T12:51:03.867Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="LeetCode">
 <meta name="twitter:card" content="summary">
@@ -1466,7 +1466,7 @@ var uniquePaths = function(m, n) {
         return 0;
     }
     let rows = grid.length, columns = grid[0].length;
-    // 状态转移方程，二维数组，dp[i][j]表示从(i, j)点走到(m-1,n1)点的最小路径和
+    // 状态转移方程，二维数组，dp[i][j]表示从(i, j)点走到(m-1,n-1)点的最小路径和
     let dp = [];
     for (let i = 0; i &lt; rows; i++) {
         dp[i] = new Array()
