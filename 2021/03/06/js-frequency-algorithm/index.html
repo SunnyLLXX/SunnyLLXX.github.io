@@ -16,7 +16,7 @@
 <meta property="og:description" content="一些有关JS常见的算法实现题">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-06T03:01:11.000Z">
-<meta property="article:modified_time" content="2021-07-18T13:51:24.523Z">
+<meta property="article:modified_time" content="2021-09-08T11:33:15.688Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="常见题">
 <meta property="article:tag" content="JavaScript">
@@ -322,22 +322,37 @@ console.log(count(&apos;hello world&apos;))</code></pre><h4 id="13-字符串大�
     return result;
 }
 
-console.log(toThousands(12345673456.78))</code></pre><h4 id="16-比较版本号"><a href="#16-比较版本号" class="headerlink" title="16 比较版本号"></a>16 比较版本号</h4><pre><code>function compareVersion(v1,v2){
-    v1 = v1.split(&apos;.&apos;)  //将字符串分割数组
-    v2 = v2.split(&apos;.&apos;)
-    let len1 = v1.length
-    let len2 = v2.length
-    let minLen = Math.min(len1,len2)
-    for(let i = 0; i &lt; minLen; i++){
-        if(parseInt(v1[i])&gt;parseInt(v2[i])){
-            return v1.join(&apos;.&apos;)
-        }else if(parseInt(v1[i]) &lt; parseInt(v2[i])){
-            return v2.join(&apos;.&apos;)
+console.log(toThousands(12345673456.78))</code></pre><h4 id="16-比较版本号"><a href="#16-比较版本号" class="headerlink" title="16 比较版本号"></a>16 比较版本号</h4><pre><code>/**
+* @param {string} version1
+* @param {string} version2
+* @return {number}
+*/
+var compareVersion = function(version1, version2) {
+    let v1 = version1.split(&apos;.&apos;);
+    let v2 = version2.split(&apos;.&apos;);
+    let l1 = v1.length;
+    let l2 = v2.length;
+    let n = Math.max(l1, l2);
+    let n1 = 0, n2 = 0;
+    for (let i = 0; i &lt; n; i++) {
+        if (i &lt; l1) {
+            n1 = parseInt(v1[i])
+        } else {
+            n1 = 0;
+        }
+        if (i &lt; l2) {
+            n2 = parseInt(v2[i]);
+        } else {
+            n2 = 0;
+        }
+        if (n1 &gt; n2) {
+            return 1;
+        } else if (n1 &lt; n2) {
+            return -1;
         }
     }
-
-}
-console.log(compareVersion(&apos;2.4.1.4&apos;,&apos;0.8.7&apos;))</code></pre><h4 id="17-找出数组元素中和为0的所有元素，并且使用过一次的元素不能够再次使用"><a href="#17-找出数组元素中和为0的所有元素，并且使用过一次的元素不能够再次使用" class="headerlink" title="17 找出数组元素中和为0的所有元素，并且使用过一次的元素不能够再次使用"></a>17 找出数组元素中和为0的所有元素，并且使用过一次的元素不能够再次使用</h4><pre><code>function findZero(arr){
+    return 0;
+};</code></pre><h4 id="17-找出数组元素中和为0的所有元素，并且使用过一次的元素不能够再次使用"><a href="#17-找出数组元素中和为0的所有元素，并且使用过一次的元素不能够再次使用" class="headerlink" title="17 找出数组元素中和为0的所有元素，并且使用过一次的元素不能够再次使用"></a>17 找出数组元素中和为0的所有元素，并且使用过一次的元素不能够再次使用</h4><pre><code>function findZero(arr){
     let resArr = []
     for(let i = 0; i &lt; arr.length; i++){
         for(let j = i+1; j &lt; arr.length; j++){
