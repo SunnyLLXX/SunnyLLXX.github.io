@@ -35,9 +35,9 @@
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/10/30/performance-optimization/pic17.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/10/30/performance-optimization/pic12.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/10/30/performance-optimization/pic13.png">
-<meta property="og:image" content="http://sunnyllxx.github.io/2021/10/30/performance-optimization/pic18.png">
+<meta property="og:image" content="http://sunnyllxx.github.io/2021/10/30/performance-optimization/pic19.png">
 <meta property="article:published_time" content="2021-10-30T12:08:36.000Z">
-<meta property="article:modified_time" content="2021-10-30T13:16:30.573Z">
+<meta property="article:modified_time" content="2021-10-30T13:28:52.974Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
@@ -228,8 +228,7 @@
 <p>目前的系统存在的问题：项目打包的时间较长，打包后的体积较大；访问页面发现首次内容绘制时间、首次交互延时、页面完全加载耗时等较长，影响用户的体验。</p>
 <p>预期收益：减少打包时间以及打包后的项目体积，提高页面的访问速度，优化用户的体验。</p>
 <p>（本文所用的代码都是经过脱敏处理的）</p>
-<h3 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h3><p>1.Vue CLI </p>
-<p>在Vue CLI 有这样的描述：</p>
+<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1 准备工作"></a>1 准备工作</h3><h4 id="1-1Vue-CLI"><a href="#1-1Vue-CLI" class="headerlink" title="1.1Vue CLI"></a>1.1Vue CLI</h4><p>在Vue CLI 有这样的描述：</p>
 <p><code>vue-cli-service build</code>在<code>dist/</code>目录中生成一个生产就绪包，缩小 JS/CSS/HTML 和自动供应商块分割以获得更好的缓存。块清单被内联到 HTML 中。</p>
 <ul>
 <li><p><code>--report</code>并将<code>--report-json</code>根据您的构建统计生成报告，帮助您分析包中包含的模块的大小。</p>
@@ -238,19 +237,12 @@
 </ul>
 <p>项目 build 之后可以看到 dist 文件夹下有一个 report.html，打开这个文件，可以清楚地看到每个模块的分析。</p>
 <p><img src="/2021/10/30/performance-optimization/pic01.png" alt="img"></p>
-<p>2.Lighthouse</p>
-<p>我们可以通过在Chrome的Lighthouse中进行性能分析，同时还会提供一些可优化项的tips</p>
+<h4 id="1-2-Lighthouse"><a href="#1-2-Lighthouse" class="headerlink" title="1.2 Lighthouse"></a>1.2 Lighthouse</h4><p>我们可以通过在Chrome的Lighthouse中进行性能分析，同时还会提供一些可优化项的tips</p>
 <p><img src="/2021/10/30/performance-optimization/pic02.png" alt="img"></p>
 <p><img src="/2021/10/30/performance-optimization/pic03.png" alt="img"></p>
-<h3 id="二、优化策略"><a href="#二、优化策略" class="headerlink" title="二、优化策略"></a>二、优化策略</h3><p>该策略主要围绕<code>webpack</code>做相关处理，同时也是接入最普遍的<code>性能优化策略</code>。</p>
+<h3 id="2-优化策略"><a href="#2-优化策略" class="headerlink" title="2 优化策略"></a>2 优化策略</h3><p>该策略主要围绕<code>webpack</code>做相关处理，同时也是接入最普遍的<code>性能优化策略</code>。</p>
 <p><code>性能优化</code>从结果趋势来看，可分为<strong>时间层面</strong>和<strong>体积层面，减小打包时间和打包体积。</strong></p>
-<ol>
-<li><h4 id="减小打包时间"><a href="#减小打包时间" class="headerlink" title="减小打包时间"></a>减小打包时间</h4><ol>
-<li><h5 id="配置resolve"><a href="#配置resolve" class="headerlink" title="配置resolve"></a><strong>配置resolve</strong></h5></li>
-</ol>
-</li>
-</ol>
-<p>配置resolve提高文件的搜索速度，好处是<code>定向指定必须文件路径</code>。若某些第三方库以常规形式引入可能报错或希望程序自动索引特定类型文件都可通过该方式解决。</p>
+<h4 id="2-1-减小打包时间"><a href="#2-1-减小打包时间" class="headerlink" title="2.1 减小打包时间"></a>2.1 减小打包时间</h4><h5 id="2-1-1-配置resolve"><a href="#2-1-1-配置resolve" class="headerlink" title="2.1.1 配置resolve"></a>2.1.1 <strong>配置resolve</strong></h5><p>配置resolve提高文件的搜索速度，好处是<code>定向指定必须文件路径</code>。若某些第三方库以常规形式引入可能报错或希望程序自动索引特定类型文件都可通过该方式解决。</p>
 <p> <code>alias</code>映射模块路径，<code>extensions</code>表明文件后缀，<code>noParse</code>过滤无依赖文件。通常配置<code>alias</code>和<code>extensions</code>就足够。</p>
 <pre><code>module.exports = {
 
@@ -283,10 +275,7 @@
 
     }
 
-}</code></pre><ol start="2">
-<li><h5 id="配置externals"><a href="#配置externals" class="headerlink" title="配置externals"></a><strong>配置externals</strong></h5></li>
-</ol>
-<p>防止将某些 <code>import</code> 的包(package)打包到 bundle 中，而是在运行时(runtime)再去从外部获取 这些扩展依赖。<a href="https://webpack.docschina.org/configuration/externals/" target="_blank" rel="noopener">外部扩展(Externals) | webpack 中文文档</a></p>
+}</code></pre><h4 id="2-1-2-配置externals"><a href="#2-1-2-配置externals" class="headerlink" title="2.1.2 配置externals"></a>2.1.2 <strong>配置externals</strong></h4><p>防止将某些 <code>import</code> 的包(package)打包到 bundle 中，而是在运行时(runtime)再去从外部获取 这些扩展依赖。<a href="https://webpack.docschina.org/configuration/externals/" target="_blank" rel="noopener">外部扩展(Externals) | webpack 中文文档</a></p>
 <pre><code>module.exports = {
 
     configureWebpack: {
@@ -310,13 +299,7 @@
     }
 
 }</code></pre><p>然后我们可以在public/index.html中引入相应的script标签。</p>
-<ol start="2">
-<li><h4 id="减小打包体积"><a href="#减小打包体积" class="headerlink" title="减小打包体积"></a>减小打包体积</h4><ol>
-<li><h5 id="代码分割"><a href="#代码分割" class="headerlink" title="代码分割"></a><strong>代码分割</strong></h5></li>
-</ol>
-</li>
-</ol>
-<p>分割各个模块代码，提取相同部分代码，好处是减少重复代码的出现频率。</p>
+<h4 id="2-2-减小打包体积"><a href="#2-2-减小打包体积" class="headerlink" title="2.2 减小打包体积"></a>2.2 减小打包体积</h4><h5 id="2-2-1-代码分割"><a href="#2-2-1-代码分割" class="headerlink" title="2.2.1 代码分割"></a>2.2.1 <strong>代码分割</strong></h5><p>分割各个模块代码，提取相同部分代码，好处是减少重复代码的出现频率。</p>
 <p><a href="https://webpack.docschina.org/plugins/split-chunks-plugin/" target="_blank" rel="noopener">SplitChunksPlugin | webpack 中文文档</a></p>
 <pre><code>module.exports = {
 
@@ -369,10 +352,7 @@ configureWebpack: {
         }
 }
 
-}</code></pre><ol start="2">
-<li><h5 id="按需加载"><a href="#按需加载" class="headerlink" title="按需加载"></a><strong>按需加载</strong></h5></li>
-</ol>
-<ul>
+}</code></pre><h5 id="2-2-2-按需加载"><a href="#2-2-2-按需加载" class="headerlink" title="2.2.2 按需加载"></a>2.2.2 <strong>按需加载</strong></h5><ul>
 <li><h6 id="Moment的“瘦身”"><a href="#Moment的“瘦身”" class="headerlink" title="Moment的“瘦身”"></a>Moment的“瘦身”</h6></li>
 </ul>
 <p>Moment.js 是一个 JavaScript 日期处理类库，用于解析、检验、操作、以及显示日期。常用的日期处理类库<code>Moment.js</code>居然有<code>669.09KB</code>，见下图：</p>
@@ -445,10 +425,7 @@ Vue.use(Cascader);</code></pre><p>项目打包后 element-ui 文件的体积只�
 <li><h6 id="Eharts的“瘦身”"><a href="#Eharts的“瘦身”" class="headerlink" title="Eharts的“瘦身”"></a>Eharts的“瘦身”</h6></li>
 </ul>
 <p>考虑到项目采用 monorepo 的架构，所引用的 JS 库来源于最外层的 packages，如果因为这个系统去做按需加载而修改公共的文件，会导致其他项目中使用的文件也会发生改变，得不偿失。</p>
-<ol start="3">
-<li><h5 id="采用Gzip压缩"><a href="#采用Gzip压缩" class="headerlink" title="采用Gzip压缩"></a>采用Gzip压缩</h5></li>
-</ol>
-<p>采用Gzip压缩效率非常高，一般可以达到50%的压缩率。</p>
+<h5 id="2-2-3-采用Gzip压缩"><a href="#2-2-3-采用Gzip压缩" class="headerlink" title="2.2.3 采用Gzip压缩"></a>2.2.3 采用Gzip压缩</h5><p>采用Gzip压缩效率非常高，一般可以达到50%的压缩率。</p>
 <pre><code>const CompressionPlugin = require(&quot;compression-webpack-plugin&quot;)
 
 const productionGzipExtensions = [&apos;js&apos;, &apos;css&apos;];
@@ -475,10 +452,7 @@ configureWebpack: {
 
 }</code></pre><p>如下图为部分使用Gzip压缩后的文件信息，一个 3.4MB 大小的文件可以被压缩到 886KB ！！！</p>
 <p><img src="/2021/10/30/performance-optimization/pic08.png" alt="img"></p>
-<ol start="4">
-<li><h5 id="去除-map文件"><a href="#去除-map文件" class="headerlink" title="去除.map文件"></a>去除.map文件</h5></li>
-</ol>
-<p>sourceMap是一个JSON文件，存储着转换后代码和转化前代码的位置对应，以及转换前代码的信息。当执行出错或debugger时，相关工具（比如google的开发者工具）可以根据sourceMap中的信息直接显示原始代码并定位到出错点。</p>
+<h5 id="2-2-4-去除-map文件"><a href="#2-2-4-去除-map文件" class="headerlink" title="2.2.4 去除.map文件"></a>2.2.4 去除.map文件</h5><p>sourceMap是一个JSON文件，存储着转换后代码和转化前代码的位置对应，以及转换前代码的信息。当执行出错或debugger时，相关工具（比如google的开发者工具）可以根据sourceMap中的信息直接显示原始代码并定位到出错点。</p>
 <p>项目开发完成后可去除这些文件，达到减小打包项目体积的目的。</p>
 <p><img src="/2021/10/30/performance-optimization/pic09.png" alt="img"></p>
 <pre><code>module.exports = {
@@ -487,16 +461,11 @@ productionSourceMap: false,
 
 }</code></pre><p>去除.map文件后，项目大小变为了11.6MB，明显减少了23.1MB</p>
 <p><img src="/2021/10/30/performance-optimization/pic10.png" alt="img"></p>
-<p>​         <strong>↓</strong><br>​                                                                          <strong>↓</strong></p>
 <p><img src="/2021/10/30/performance-optimization/pic11.png" alt="img"></p>
 <p>并且打包的时间也会减少，减少了一半。</p>
 <p><img src="/2021/10/30/performance-optimization/pic12.png" alt="img"></p>
-<p>​         <strong>↓</strong><br>​                                                                          <strong>↓</strong></p>
 <p><img src="/2021/10/30/performance-optimization/pic13.png" alt="img"></p>
-<ol start="5">
-<li><h5 id="Tree-Shaking"><a href="#Tree-Shaking" class="headerlink" title="Tree-Shaking"></a>Tree-Shaking</h5></li>
-</ol>
-<p>通常用于描述移除 JavaScript 上下文中的未引用代码(dead-code)。</p>
+<h5 id="2-2-5-Tree-Shaking"><a href="#2-2-5-Tree-Shaking" class="headerlink" title="2.2.5 Tree-Shaking"></a>2.2.5 Tree-Shaking</h5><p>通常用于描述移除 JavaScript 上下文中的未引用代码(dead-code)。</p>
 <p>项目中有时候引用了一些资源，但是后面并没有使用，这些没使用的资源会占用打包的体积。可以使用Tree-Shaking来移除未引用的代码。</p>
 <p><a href="https://www.npmjs.com/package/webpack-deep-scope-plugin" target="_blank" rel="noopener">webpack-deep-scope-plugin</a></p>
 <pre><code>const webpackDeepScopePlugin = require(&apos;webpack-deep-scope-plugin&apos;).default
@@ -511,10 +480,7 @@ plugins: [
 
 ]
 
-}</code></pre><ol start="6">
-<li><h5 id="删除无用的CSS"><a href="#删除无用的CSS" class="headerlink" title="删除无用的CSS"></a>删除无用的CSS</h5></li>
-</ol>
-<p>在我们的项目的CSS文件中可能会有大量的样式未被使用，我们可以使用 PurgeCSS 删除这些样式，减小文件体积。</p>
+}</code></pre><h5 id="2-2-6-删除无用的CSS"><a href="#2-2-6-删除无用的CSS" class="headerlink" title="2.2.6 删除无用的CSS"></a>2.2.6 删除无用的CSS</h5><p>在我们的项目的CSS文件中可能会有大量的样式未被使用，我们可以使用 PurgeCSS 删除这些样式，减小文件体积。</p>
 <p><a href="https://www.purgecss.cn/" target="_blank" rel="noopener">Remove unused CSS - PurgeCSS</a></p>
 <p><a href="https://www.npmjs.com/package/purgecss-webpack-plugin" target="_blank" rel="noopener">purgecss-webpack-plugin</a></p>
 <pre><code>const PurgeCSSPlugin = require(&apos;purgecss-webpack-plugin&apos;)
@@ -541,13 +507,9 @@ plugins: [
 
 }</code></pre><p>通过对比，可以发现 CSS 文件的体积至少减少了50%</p>
 <p><img src="/2021/10/30/performance-optimization/pic14.png" alt="img"></p>
-<p>​         <strong>↓</strong><br>​                                                                          <strong>↓</strong></p>
 <p><img src="/2021/10/30/performance-optimization/pic15.png" alt="img"></p>
 <p><img src="/2021/10/30/performance-optimization/pic16.png" alt="img"></p>
-<ol start="7">
-<li><h5 id="UglifyJsPlugin"><a href="#UglifyJsPlugin" class="headerlink" title="UglifyJsPlugin"></a>UglifyJsPlugin</h5></li>
-</ol>
-<p><code>UglifyJS Webpack Plugin</code>插件用来缩小（压缩优化）js文件</p>
+<h5 id="2-2-7-UglifyJsPlugin"><a href="#2-2-7-UglifyJsPlugin" class="headerlink" title="2.2.7 UglifyJsPlugin"></a>2.2.7 UglifyJsPlugin</h5><p><code>UglifyJS Webpack Plugin</code>插件用来缩小（压缩优化）js文件</p>
 <pre><code>const UglifyJsPlugin = require(&apos;uglifyjs-webpack-plugin&apos;);
 
 module.exports = {
@@ -584,10 +546,7 @@ plugins: [
 
 ]
 
-}</code></pre><ol start="8">
-<li><h5 id="optimize-css-assets-webpack-plugin"><a href="#optimize-css-assets-webpack-plugin" class="headerlink" title="optimize-css-assets-webpack-plugin"></a>optimize-css-assets-webpack-plugin</h5></li>
-</ol>
-<p>它将在 Webpack 构建期间搜索 CSS 资源并优化最小化 CSS</p>
+}</code></pre><h5 id="2-2-8-optimize-css-assets-webpack-plugin"><a href="#2-2-8-optimize-css-assets-webpack-plugin" class="headerlink" title="2.2.8 optimize-css-assets-webpack-plugin"></a>2.2.8 optimize-css-assets-webpack-plugin</h5><p>它将在 Webpack 构建期间搜索 CSS 资源并优化最小化 CSS</p>
 <p><a href="https://www.npmjs.com/package/optimize-css-assets-webpack-plugin" target="_blank" rel="noopener">optimize-css-assets-webpack-plugin</a></p>
 <pre><code>const OptimizeCssAssetsPlugin = require(&apos;optimize-css-assets-webpack-plugin&apos;);
 
@@ -613,12 +572,8 @@ plugins: [
 
 }</code></pre><p>在使用如上两个插件对JS以及CSS进行优化压缩后，项目体积减小</p>
 <p><img src="/2021/10/30/performance-optimization/pic16.png" alt="img"></p>
-<p>​         <strong>↓</strong><br>​                                                                          <strong>↓</strong></p>
 <p><img src="/2021/10/30/performance-optimization/pic17.png" alt="img"></p>
-<h3 id="三、优化结果"><a href="#三、优化结果" class="headerlink" title="三、优化结果"></a>三、优化结果</h3><ol>
-<li><h5 id="打包体积前后对比"><a href="#打包体积前后对比" class="headerlink" title="打包体积前后对比"></a>打包体积前后对比</h5></li>
-</ol>
-<table>
+<h3 id="3-优化结果"><a href="#3-优化结果" class="headerlink" title="3 优化结果"></a>3 优化结果</h3><h5 id="3-1-打包体积前后对比"><a href="#3-1-打包体积前后对比" class="headerlink" title="3.1 打包体积前后对比"></a>3.1 打包体积前后对比</h5><table>
 <thead>
 <tr>
 <th>打包前</th>
@@ -630,10 +585,7 @@ plugins: [
 <td>11.7MB</td>
 </tr>
 </tbody></table>
-<ol start="2">
-<li><h5 id="统计资源前后对比"><a href="#统计资源前后对比" class="headerlink" title="统计资源前后对比"></a>统计资源前后对比</h5></li>
-</ol>
-<table>
+<h5 id="3-2-统计资源前后对比"><a href="#3-2-统计资源前后对比" class="headerlink" title="3.2 统计资源前后对比"></a>3.2 统计资源前后对比</h5><table>
 <thead>
 <tr>
 <th>操作</th>
@@ -671,53 +623,27 @@ plugins: [
 <td></td>
 <td></td>
 </tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
 </tbody></table>
-<ol start="3">
-<li><h5 id="打包时间减少"><a href="#打包时间减少" class="headerlink" title="打包时间减少"></a>打包时间减少</h5></li>
-</ol>
-<p><img src="/2021/10/30/performance-optimization/pic12.png" alt="img"></p>
-<p>​         <strong>↓</strong><br>​                                                                          <strong>↓</strong></p>
+<h5 id="3-3-打包时间减少"><a href="#3-3-打包时间减少" class="headerlink" title="3.3 打包时间减少"></a>3.3 打包时间减少</h5><p><img src="/2021/10/30/performance-optimization/pic12.png" alt="img"></p>
 <p><img src="/2021/10/30/performance-optimization/pic13.png" alt="img"></p>
-<ol start="4">
-<li><h5 id="Slardar对比"><a href="#Slardar对比" class="headerlink" title="Slardar对比"></a>Slardar对比</h5></li>
-</ol>
-<p>Slardar平台是字节跳动移动基础技术团队搭建的性能和体验保障的端监控平台，包含了App端、组件、browser、网络、Hybrid、Electron等端到端的监控能力。</p>
+<h5 id="3-4-Slardar对比"><a href="#3-4-Slardar对比" class="headerlink" title="3.4 Slardar对比"></a>3.4 Slardar对比</h5><p>Slardar平台是字节跳动移动基础技术团队搭建的性能和体验保障的端监控平台，包含了App端、组件、browser、网络、Hybrid、Electron等端到端的监控能力。</p>
 <p>可以明显的看到项目优化后性能的提升，主要体现在页面的FCP、Load、FMP、FP的时间减少。</p>
-<p><img src="/2021/10/30/performance-optimization/pic18.png" alt="img"></p>
-<h3 id="四、其他优化策略"><a href="#四、其他优化策略" class="headerlink" title="四、其他优化策略"></a>四、其他优化策略</h3><ol>
-<li><h5 id="减少网络请求"><a href="#减少网络请求" class="headerlink" title="减少网络请求"></a>减少网络请求</h5></li>
-</ol>
-<ul>
+<p><img src="/2021/10/30/performance-optimization/pic19.png" alt="img"></p>
+<h3 id="4-其他优化策略"><a href="#4-其他优化策略" class="headerlink" title="4 其他优化策略"></a>4 其他优化策略</h3><h5 id="4-1-减少网络请求"><a href="#4-1-减少网络请求" class="headerlink" title="4.1 减少网络请求"></a>4.1 减少网络请求</h5><ul>
 <li><h6 id="CDN-内容分发"><a href="#CDN-内容分发" class="headerlink" title="CDN 内容分发"></a>CDN 内容分发</h6></li>
 <li><h6 id="合理使用缓存"><a href="#合理使用缓存" class="headerlink" title="合理使用缓存"></a>合理使用缓存</h6></li>
 <li><h6 id="SSR、SSG"><a href="#SSR、SSG" class="headerlink" title="SSR、SSG"></a>SSR、SSG</h6></li>
 <li><h6 id="设置节流与防抖"><a href="#设置节流与防抖" class="headerlink" title="设置节流与防抖"></a>设置节流与防抖</h6></li>
 <li><h6 id="HTTP2-0"><a href="#HTTP2-0" class="headerlink" title="HTTP2.0"></a>HTTP2.0</h6></li>
 </ul>
-<ol start="2">
-<li><h5 id="页面渲染方面"><a href="#页面渲染方面" class="headerlink" title="页面渲染方面"></a>页面渲染方面</h5></li>
-</ol>
-<ul>
+<h5 id="4-2-页面渲染方面"><a href="#4-2-页面渲染方面" class="headerlink" title="4.2 页面渲染方面"></a>4.2 页面渲染方面</h5><ul>
 <li><h6 id="减少回流与重绘"><a href="#减少回流与重绘" class="headerlink" title="减少回流与重绘"></a>减少回流与重绘</h6></li>
 <li><h6 id="CSS文件放在-head-中"><a href="#CSS文件放在-head-中" class="headerlink" title="CSS文件放在 head 中"></a>CSS文件放在 head 中</h6></li>
 <li><h6 id="script-标签最好放在页面底部"><a href="#script-标签最好放在页面底部" class="headerlink" title="script 标签最好放在页面底部"></a>script 标签最好放在页面底部</h6></li>
 <li><h6 id="script标签中可使用-async-defer属性"><a href="#script标签中可使用-async-defer属性" class="headerlink" title="script标签中可使用 async defer属性"></a>script标签中可使用 async defer属性</h6></li>
 <li><h6 id="图标采用-icon，减少图片的使用"><a href="#图标采用-icon，减少图片的使用" class="headerlink" title="图标采用 icon，减少图片的使用"></a>图标采用 icon，减少图片的使用</h6></li>
 </ul>
-<ol start="3">
-<li><h5 id="懒加载"><a href="#懒加载" class="headerlink" title="懒加载"></a>懒加载</h5></li>
-</ol>
-<ul>
+<h5 id="4-3-懒加载"><a href="#4-3-懒加载" class="headerlink" title="4.3 懒加载"></a>4.3 懒加载</h5><ul>
 <li><h6 id="路由懒加载"><a href="#路由懒加载" class="headerlink" title="路由懒加载"></a>路由懒加载</h6></li>
 <li><h6 id="图片懒加载"><a href="#图片懒加载" class="headerlink" title="图片懒加载"></a>图片懒加载</h6></li>
 </ul>
@@ -911,7 +837,7 @@ plugins: [
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何实现前端项目的性能优化"><span class="toc-number">1.</span> <span class="toc-text">如何实现前端项目的性能优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一、准备工作"><span class="toc-number">2.</span> <span class="toc-text">一、准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、优化策略"><span class="toc-number">3.</span> <span class="toc-text">二、优化策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#减小打包时间"><span class="toc-number">3.1.</span> <span class="toc-text">减小打包时间</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#配置resolve"><span class="toc-number">3.1.1.</span> <span class="toc-text">配置resolve</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#配置externals"><span class="toc-number">3.1.2.</span> <span class="toc-text">配置externals</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#减小打包体积"><span class="toc-number">3.2.</span> <span class="toc-text">减小打包体积</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#代码分割"><span class="toc-number">3.2.1.</span> <span class="toc-text">代码分割</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#按需加载"><span class="toc-number">3.2.2.</span> <span class="toc-text">按需加载</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Moment的“瘦身”"><span class="toc-number">3.2.2.1.</span> <span class="toc-text">Moment的“瘦身”</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#ElementUI的“瘦身”"><span class="toc-number">3.2.2.2.</span> <span class="toc-text">ElementUI的“瘦身”</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Iview的“瘦身”"><span class="toc-number">3.2.2.3.</span> <span class="toc-text">Iview的“瘦身”</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Eharts的“瘦身”"><span class="toc-number">3.2.2.4.</span> <span class="toc-text">Eharts的“瘦身”</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#采用Gzip压缩"><span class="toc-number">3.2.3.</span> <span class="toc-text">采用Gzip压缩</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#去除-map文件"><span class="toc-number">3.2.4.</span> <span class="toc-text">去除.map文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Tree-Shaking"><span class="toc-number">3.2.5.</span> <span class="toc-text">Tree-Shaking</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#删除无用的CSS"><span class="toc-number">3.2.6.</span> <span class="toc-text">删除无用的CSS</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#UglifyJsPlugin"><span class="toc-number">3.2.7.</span> <span class="toc-text">UglifyJsPlugin</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#optimize-css-assets-webpack-plugin"><span class="toc-number">3.2.8.</span> <span class="toc-text">optimize-css-assets-webpack-plugin</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、优化结果"><span class="toc-number">4.</span> <span class="toc-text">三、优化结果</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#打包体积前后对比"><span class="toc-number">4.0.1.</span> <span class="toc-text">打包体积前后对比</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#统计资源前后对比"><span class="toc-number">4.0.2.</span> <span class="toc-text">统计资源前后对比</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#打包时间减少"><span class="toc-number">4.0.3.</span> <span class="toc-text">打包时间减少</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Slardar对比"><span class="toc-number">4.0.4.</span> <span class="toc-text">Slardar对比</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、其他优化策略"><span class="toc-number">5.</span> <span class="toc-text">四、其他优化策略</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#减少网络请求"><span class="toc-number">5.0.1.</span> <span class="toc-text">减少网络请求</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#CDN-内容分发"><span class="toc-number">5.0.1.1.</span> <span class="toc-text">CDN 内容分发</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#合理使用缓存"><span class="toc-number">5.0.1.2.</span> <span class="toc-text">合理使用缓存</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#SSR、SSG"><span class="toc-number">5.0.1.3.</span> <span class="toc-text">SSR、SSG</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#设置节流与防抖"><span class="toc-number">5.0.1.4.</span> <span class="toc-text">设置节流与防抖</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#HTTP2-0"><span class="toc-number">5.0.1.5.</span> <span class="toc-text">HTTP2.0</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#页面渲染方面"><span class="toc-number">5.0.2.</span> <span class="toc-text">页面渲染方面</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#减少回流与重绘"><span class="toc-number">5.0.2.1.</span> <span class="toc-text">减少回流与重绘</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#CSS文件放在-head-中"><span class="toc-number">5.0.2.2.</span> <span class="toc-text">CSS文件放在 head 中</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#script-标签最好放在页面底部"><span class="toc-number">5.0.2.3.</span> <span class="toc-text">script 标签最好放在页面底部</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#script标签中可使用-async-defer属性"><span class="toc-number">5.0.2.4.</span> <span class="toc-text">script标签中可使用 async defer属性</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#图标采用-icon，减少图片的使用"><span class="toc-number">5.0.2.5.</span> <span class="toc-text">图标采用 icon，减少图片的使用</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#懒加载"><span class="toc-number">5.0.3.</span> <span class="toc-text">懒加载</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#路由懒加载"><span class="toc-number">5.0.3.1.</span> <span class="toc-text">路由懒加载</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#图片懒加载"><span class="toc-number">5.0.3.2.</span> <span class="toc-text">图片懒加载</span></a></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何实现前端项目的性能优化"><span class="toc-number">1.</span> <span class="toc-text">如何实现前端项目的性能优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-准备工作"><span class="toc-number">2.</span> <span class="toc-text">1 准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1Vue-CLI"><span class="toc-number">2.1.</span> <span class="toc-text">1.1Vue CLI</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-Lighthouse"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 Lighthouse</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-优化策略"><span class="toc-number">3.</span> <span class="toc-text">2 优化策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-减小打包时间"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 减小打包时间</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-1-配置resolve"><span class="toc-number">3.1.1.</span> <span class="toc-text">2.1.1 配置resolve</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-配置externals"><span class="toc-number">3.2.</span> <span class="toc-text">2.1.2 配置externals</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-减小打包体积"><span class="toc-number">3.3.</span> <span class="toc-text">2.2 减小打包体积</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-1-代码分割"><span class="toc-number">3.3.1.</span> <span class="toc-text">2.2.1 代码分割</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-2-按需加载"><span class="toc-number">3.3.2.</span> <span class="toc-text">2.2.2 按需加载</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Moment的“瘦身”"><span class="toc-number">3.3.2.1.</span> <span class="toc-text">Moment的“瘦身”</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#ElementUI的“瘦身”"><span class="toc-number">3.3.2.2.</span> <span class="toc-text">ElementUI的“瘦身”</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Iview的“瘦身”"><span class="toc-number">3.3.2.3.</span> <span class="toc-text">Iview的“瘦身”</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Eharts的“瘦身”"><span class="toc-number">3.3.2.4.</span> <span class="toc-text">Eharts的“瘦身”</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-3-采用Gzip压缩"><span class="toc-number">3.3.3.</span> <span class="toc-text">2.2.3 采用Gzip压缩</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-4-去除-map文件"><span class="toc-number">3.3.4.</span> <span class="toc-text">2.2.4 去除.map文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-5-Tree-Shaking"><span class="toc-number">3.3.5.</span> <span class="toc-text">2.2.5 Tree-Shaking</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-6-删除无用的CSS"><span class="toc-number">3.3.6.</span> <span class="toc-text">2.2.6 删除无用的CSS</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-7-UglifyJsPlugin"><span class="toc-number">3.3.7.</span> <span class="toc-text">2.2.7 UglifyJsPlugin</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-8-optimize-css-assets-webpack-plugin"><span class="toc-number">3.3.8.</span> <span class="toc-text">2.2.8 optimize-css-assets-webpack-plugin</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-优化结果"><span class="toc-number">4.</span> <span class="toc-text">3 优化结果</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-打包体积前后对比"><span class="toc-number">4.0.1.</span> <span class="toc-text">3.1 打包体积前后对比</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-统计资源前后对比"><span class="toc-number">4.0.2.</span> <span class="toc-text">3.2 统计资源前后对比</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-打包时间减少"><span class="toc-number">4.0.3.</span> <span class="toc-text">3.3 打包时间减少</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-4-Slardar对比"><span class="toc-number">4.0.4.</span> <span class="toc-text">3.4 Slardar对比</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-其他优化策略"><span class="toc-number">5.</span> <span class="toc-text">4 其他优化策略</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#4-1-减少网络请求"><span class="toc-number">5.0.1.</span> <span class="toc-text">4.1 减少网络请求</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#CDN-内容分发"><span class="toc-number">5.0.1.1.</span> <span class="toc-text">CDN 内容分发</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#合理使用缓存"><span class="toc-number">5.0.1.2.</span> <span class="toc-text">合理使用缓存</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#SSR、SSG"><span class="toc-number">5.0.1.3.</span> <span class="toc-text">SSR、SSG</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#设置节流与防抖"><span class="toc-number">5.0.1.4.</span> <span class="toc-text">设置节流与防抖</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#HTTP2-0"><span class="toc-number">5.0.1.5.</span> <span class="toc-text">HTTP2.0</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-2-页面渲染方面"><span class="toc-number">5.0.2.</span> <span class="toc-text">4.2 页面渲染方面</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#减少回流与重绘"><span class="toc-number">5.0.2.1.</span> <span class="toc-text">减少回流与重绘</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#CSS文件放在-head-中"><span class="toc-number">5.0.2.2.</span> <span class="toc-text">CSS文件放在 head 中</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#script-标签最好放在页面底部"><span class="toc-number">5.0.2.3.</span> <span class="toc-text">script 标签最好放在页面底部</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#script标签中可使用-async-defer属性"><span class="toc-number">5.0.2.4.</span> <span class="toc-text">script标签中可使用 async defer属性</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#图标采用-icon，减少图片的使用"><span class="toc-number">5.0.2.5.</span> <span class="toc-text">图标采用 icon，减少图片的使用</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-3-懒加载"><span class="toc-number">5.0.3.</span> <span class="toc-text">4.3 懒加载</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#路由懒加载"><span class="toc-number">5.0.3.1.</span> <span class="toc-text">路由懒加载</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#图片懒加载"><span class="toc-number">5.0.3.2.</span> <span class="toc-text">图片懒加载</span></a></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
