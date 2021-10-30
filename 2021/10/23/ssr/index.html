@@ -23,7 +23,7 @@
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/10/23/ssr/pic06.png">
 <meta property="og:image" content="http://sunnyllxx.github.io/2021/10/23/ssr/pic07.png">
 <meta property="article:published_time" content="2021-10-23T13:41:18.000Z">
-<meta property="article:modified_time" content="2021-10-23T14:09:23.514Z">
+<meta property="article:modified_time" content="2021-10-30T13:15:47.192Z">
 <meta property="article:author" content="étoile">
 <meta property="article:tag" content="SSR">
 <meta name="twitter:card" content="summary">
@@ -209,30 +209,19 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="一、引言"><a href="#一、引言" class="headerlink" title="一、引言"></a>一、引言</h3><a id="more"></a>
-<ol>
-<li>什么是单页面应用？</li>
-</ol>
+
+<p>1.什么是单页面应用？</p>
 <p>单页应用（single-page application，缩写 SPA）是一种网络应用程序或网站的模型，它通过动态重写当前页面来与用户交互，而非传统的从服务器重新加载整个新页面。这种方法避免了页面之间切换打断用户体验，使应用程序更像一个桌面应用程序。在单页应用中，所有必要的代码（HTML、JavaScript和CSS）都通过单个页面的加载而检索，或者根据需要（通常是为响应用户操作）动态装载适当的资源并添加到页面。</p>
-<ol start="2">
-<li>什么是 SEO？</li>
-</ol>
+<p>2.什么是 SEO？</p>
 <p>搜索引擎优化，又称为 SEO，即 Search Engine Optimization，它是一种通过分析搜索引擎的排名规律，了解各种搜索引擎怎样进行搜索、怎样抓取互联网页面、怎样确定特定关键词的搜索结果排名的技术。搜索引擎采用易于被搜索引用的手段，对网站进行有针对性的优化，提高网站在搜索引擎中的自然排名，吸引更多的用户访问网站，提高网站的访问量，提高网站的销售能力和宣传能力，从而提升网站的品牌效应。 </p>
-<ol start="3">
-<li>什么是客户端渲染？</li>
-</ol>
+<p>3.什么是客户端渲染？</p>
 <p>数据由浏览器通过请求数据动态获得，再通过 JS 将数据填充到 DOM 元素上，最终显示在页面中。</p>
-<ol start="4">
-<li>什么是服务端渲染？</li>
-</ol>
+<p>4.什么是服务端渲染？</p>
 <p>服务端渲染的模式下，当用户第一次请求页面时，由服务器把需要的组件或页面渲染成 HTML 字符串，然后把它返回给客户端。客户端拿到之后可以直接渲染然后呈现给用户的 HTML 内容，不需要为了生成  DOM 内容自己再去跑一遍 JS 代码。</p>
 <p><img src="/2021/10/23/ssr/pic01.png" alt></p>
-<ol start="5">
-<li>流行的框架有什么问题？</li>
-</ol>
+<p>5.流行的框架有什么问题？</p>
 <p>比如 Vue.js、React.js 一般都用来编写单页面应用，由于页面显示过程要进行 JS 文件拉取和框架的代码执行，首屏加载时间会比较慢，也不利于 SEO。</p>
-<ol start="6">
-<li>为什么会有服务端渲染？</li>
-</ol>
+<p>6.为什么会有服务端渲染？</p>
 <ul>
 <li>更好的 SEO</li>
 </ul>
@@ -241,9 +230,7 @@
 <li>更快的内容到达时间 </li>
 </ul>
 <p>特别是对于缓慢的网络情况或运行缓慢的设备。无需等待所有的 JavaScript 都完成下载并执行，才显示服务器渲染的标记，所以用户将会更快速地看到完整渲染的页面，可以产生更好的用户体验，有利于优化首屏的渲染。</p>
-<ol start="7">
-<li>服务端渲染的缺点？</li>
-</ol>
+<p>7.服务端渲染的缺点？</p>
 <ul>
 <li><p>代码复杂度增加。为了实现服务端渲染，应用代码中需要兼容服务端和客户端两种运行情况，而一部分依赖的外部扩展库却只能在客户端运行，需要对其进行特殊处理，才能在服务器渲染应用程序中运行。</p>
 </li>
@@ -252,9 +239,7 @@
 <li><p>涉及构建设置和部署的更多要求。与可以部署在任何静态文件服务器上的完全静态单页面应用程序 (SPA) 不同，服务器渲染应用程序，需要处于 Node.js server 运行环境。</p>
 </li>
 </ul>
-<ol start="8">
-<li>什么样的项目适合服务端渲染？</li>
-</ol>
+<p>8.什么样的项目适合服务端渲染？</p>
 <p>企业或项目在乎在搜索引擎中的排名，或者是一些项目希望能够被搜索到，比如个人博客。</p>
 <h3 id="二、React-服务端渲染的实现"><a href="#二、React-服务端渲染的实现" class="headerlink" title="二、React 服务端渲染的实现"></a>二、React 服务端渲染的实现</h3><p>将使用 React + Webpack + Express 进行搭建项目。</p>
 <p>react-dom/server 包里面有两个方法 renderToString，renderToStaticMarkup，它们的主要作用是将 React Component 转化为 HTML 字符串。</p>
@@ -722,7 +707,7 @@ app.listen(3000, () =&gt; {
 <p>同构的基本流程如下图所示：</p>
 <p><img src="/2021/10/23/ssr/pic07.png" alt></p>
 <p>一般情况下在 <code>react</code>代码中会使用 <code>react-router</code>进行路由的管理，当项目比较大的时候，通常我们会使用 <code>redux</code>来对项目进行数据状态的管理，对 React 同构还需要进行路由同构，数据状态的同构，这里就不叙述了。</p>
-<h3 id="三、Next-js的介绍"><a href="#三、Next-js的介绍" class="headerlink" title="三、Next.js的介绍"></a>三、Next.js的介绍</h3><p><a href="https://bytedance.feishu.cn/docs/doccnJ8gJVQ8l1HWAWfWbMRS1Oc#8yUGQM" target="_blank" rel="noopener">Next.js的使用</a> </p>
+<h3 id="三、Next-js的介绍"><a href="#三、Next-js的介绍" class="headerlink" title="三、Next.js的介绍"></a>三、Next.js的介绍</h3><p><a href>Next.js的使用</a> </p>
 <h3 id="四、Jupiter-VS-Next-js"><a href="#四、Jupiter-VS-Next-js" class="headerlink" title="四、Jupiter VS Next.js"></a>四、Jupiter VS Next.js</h3><p> Jupiter 与 Next.js的 SSR 比较</p>
 <table>
 <thead>
@@ -773,7 +758,7 @@ app.listen(3000, () =&gt; {
 <td>√</td>
 </tr>
 <tr>
-<td>结合SCM、TCC、Metrics、Tea等</td>
+<td>结合内部运维</td>
 <td>√</td>
 <td>×</td>
 </tr>
@@ -931,6 +916,15 @@ app.listen(3000, () =&gt; {
 
   
 <nav id="article-nav">
+  
+    <a href="/2021/10/30/performance-optimization/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          项目实战之性能优化
+        
+      </div>
+    </a>
   
   
     <a href="/2021/08/03/learn-vue3/" id="article-nav-older" class="article-nav-link-wrap">
@@ -1189,6 +1183,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SSR</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Next.js</a>
               </li>
             
             <div class="clearfix"></div>
